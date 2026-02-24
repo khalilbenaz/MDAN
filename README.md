@@ -21,13 +21,13 @@ MDAN v2 a été repensé pour être un véritable collaborateur expert plutôt q
 ### Option 1 : npm (Recommandé)
 
 ```bash
-npm install -g mdan
+npm install -g mdan-cli
 ```
 
 ### Option 2 : npx (Sans installation)
 
 ```bash
-npx mdan init mon-projet
+npx mdan-cli init mon-projet
 ```
 
 ### Option 3 : Script d'installation
