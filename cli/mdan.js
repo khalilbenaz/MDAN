@@ -38,7 +38,7 @@ function showHelp() {
   console.log(`${colors.bold}USAGE${colors.nc}
   mdan <command> [options]
 
-${colors.bold}COMMANDS${colors.nc}
+ ${colors.bold}COMMANDS${colors.nc}
   init [name]              Create a new project
   attach [--rebuild]       Add MDAN to existing project
   status                   Show project status
@@ -48,16 +48,20 @@ ${colors.bold}COMMANDS${colors.nc}
   agent [name]             Show agent prompt
   oc                       Copy orchestrator prompt to clipboard
   skills                   List available skills
+  mcp [action]             MCP config (init|validate|list)
+  prompt [action]          Manage prompts (list|show <name>)
   version                  Show version
 
-${colors.bold}EXAMPLES${colors.nc}
+ ${colors.bold}EXAMPLES${colors.nc}
   mdan init my-app              # New project
   cd my-project && mdan attach  # Existing project
   mdan attach --rebuild         # Rebuild from scratch
+  mdan mcp init                 # Generate .mcp.json
+  mdan prompt list              # List versioned prompts
 
-${colors.bold}AGENTS${colors.nc}
+ ${colors.bold}AGENTS${colors.nc}
   product, architect, ux, dev, test, security, devops, doc
-`);
+ `);
 }
 
 async function cmdInit(initialName) {
@@ -104,7 +108,10 @@ async function cmdInit(initialName) {
     `${name}/.mdan/skills`,
     `${name}/mdan_output`,
     `${name}/.claude/skills`,
-    `${name}/.github`
+    `${name}/.github`,
+    `${name}/tests/scenarios`,
+    `${name}/tests/evaluations`,
+    `${name}/templates/prompts`
   ];
   
   dirs.forEach(dir => fs.mkdirSync(dir, { recursive: true }));
@@ -142,6 +149,23 @@ async function cmdInit(initialName) {
   fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, `${name}/.github/copilot-instructions.md`);
   
   fs.writeFileSync(`${name}/README.md`, `# ${name}\n\n> Built with MDAN (${setupType} profile)\n`);
+  
+  // Copy AGENTS.md and generate .mcp.json
+  if (fs.existsSync(`${MDAN_DIR}/AGENTS.md`)) {
+    fs.copyFileSync(`${MDAN_DIR}/AGENTS.md`, `${name}/AGENTS.md`);
+  }
+  
+  const mcpConfig = {
+    mcpServers: { "mdan-memory": { command: "node", args: ["-e", "console.log('MDAN MCP')"] } },
+    metadata: { version: VERSION, framework: "mdan", generated: new Date().toISOString().split('T')[0] },
+    capabilities: {
+      scenarios: { enabled: true, test_paths: ["tests/scenarios/", "templates/tests/scenarios/"] },
+      evaluations: { enabled: true, eval_paths: ["tests/evaluations/", "templates/tests/evaluations/"] },
+      prompts: { enabled: true, prompt_paths: ["templates/prompts/"], registry: "templates/prompts.json" }
+    },
+    quality_gates: { min_test_coverage: 80, require_evaluations: true, require_scenarios: false }
+  };
+  fs.writeFileSync(`${name}/.mcp.json`, JSON.stringify(mcpConfig, null, 2));
   
   s.stop(pc.green(`Project ${name} initialized successfully!`));
   
@@ -185,6 +209,9 @@ async function cmdAttach(rebuildMode) {
   fs.mkdirSync('.mdan/skills', { recursive: true });
   fs.mkdirSync('.claude/skills', { recursive: true });
   fs.mkdirSync('.github', { recursive: true });
+  fs.mkdirSync('tests/scenarios', { recursive: true });
+  fs.mkdirSync('tests/evaluations', { recursive: true });
+  fs.mkdirSync('templates/prompts', { recursive: true });
   
   fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, '.mdan/orchestrator.md');
   fs.copyFileSync(`${MDAN_DIR}/core/universal-envelope.md`, '.mdan/universal-envelope.md');
@@ -215,6 +242,23 @@ async function cmdAttach(rebuildMode) {
   fs.writeFileSync('.cursorrules', cursorrules);
   fs.copyFileSync('.cursorrules', '.windsurfrules');
   fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, '.github/copilot-instructions.md');
+  
+  // Copy AGENTS.md and generate .mcp.json
+  if (fs.existsSync(`${MDAN_DIR}/AGENTS.md`)) {
+    fs.copyFileSync(`${MDAN_DIR}/AGENTS.md`, 'AGENTS.md');
+  }
+  
+  const mcpConfig = {
+    mcpServers: { "mdan-memory": { command: "node", args: ["-e", "console.log('MDAN MCP')"] } },
+    metadata: { version: VERSION, framework: "mdan", generated: new Date().toISOString().split('T')[0] },
+    capabilities: {
+      scenarios: { enabled: true, test_paths: ["tests/scenarios/", "templates/tests/scenarios/"] },
+      evaluations: { enabled: true, eval_paths: ["tests/evaluations/", "templates/tests/evaluations/"] },
+      prompts: { enabled: true, prompt_paths: ["templates/prompts/"], registry: "templates/prompts.json" }
+    },
+    quality_gates: { min_test_coverage: 80, require_evaluations: true, require_scenarios: false }
+  };
+  fs.writeFileSync('.mcp.json', JSON.stringify(mcpConfig, null, 2));
   
   s.stop(pc.green(`MDAN attached successfully!`));
   
@@ -430,6 +474,79 @@ function cmdSkills() {
   }
 }
 
+function cmdMcp(action) {
+  if (!action || action === 'init') {
+    const mcpConfig = {
+      mcpServers: {
+        "mdan-memory": {
+          command: "node",
+          args: ["-e", "console.log(JSON.stringify({tools: []}))"]
+        }
+      },
+      metadata: {
+        version: VERSION,
+        framework: "mdan",
+        generated: new Date().toISOString().split('T')[0]
+      },
+      capabilities: {
+        scenarios: { enabled: true, test_paths: ["tests/scenarios/", "templates/tests/scenarios/"] },
+        evaluations: { enabled: true, eval_paths: ["tests/evaluations/", "templates/tests/evaluations/"] },
+        prompts: { enabled: true, prompt_paths: ["templates/prompts/"], registry: "templates/prompts.json" }
+      },
+      quality_gates: {
+        min_test_coverage: 80,
+        require_evaluations: true,
+        require_scenarios: false
+      }
+    };
+    fs.writeFileSync('.mcp.json', JSON.stringify(mcpConfig, null, 2));
+    console.log(`${colors.green}✅ .mcp.json created!${colors.nc}`);
+    console.log('  Configure your IDE to use MCP with this file.');
+  } else if (action === 'validate') {
+    if (fs.existsSync('.mcp.json')) {
+      try {
+        JSON.parse(fs.readFileSync('.mcp.json', 'utf8'));
+        console.log(`${colors.green}✅ .mcp.json is valid${colors.nc}`);
+      } catch (e) {
+        console.log(`${colors.red}❌ Invalid JSON: ${e.message}${colors.nc}`);
+      }
+    } else {
+      console.log(`${colors.yellow}⚠️  No .mcp.json found${colors.nc}`);
+    }
+  } else if (action === 'list') {
+    console.log(`${colors.cyan}MCP Tools:${colors.nc}`);
+    console.log('  - mdan-state: Read/write project state');
+    console.log('  - mdan-agents: List MDAN agents');
+    console.log('  - mdan-phases: Get phase information');
+  } else {
+    console.log('Usage: mdan mcp [init|validate|list]');
+  }
+}
+
+function cmdPrompt(action, name) {
+  const promptsDir = `${MDAN_DIR}/templates/prompts`;
+  if (!fs.existsSync(promptsDir)) {
+    console.log(`${colors.yellow}No prompts directory found${colors.nc}`);
+    return;
+  }
+  
+  if (!action || action === 'list') {
+    console.log(`${colors.cyan}Available Prompts:${colors.nc}`);
+    fs.readdirSync(promptsDir).filter(f => f.endsWith('.yaml')).forEach(f => {
+      console.log(`  ${f.replace('.yaml', '')}`);
+    });
+  } else if (action === 'show' && name) {
+    const file = `${promptsDir}/${name}.yaml`;
+    if (fs.existsSync(file)) {
+      console.log(fs.readFileSync(file, 'utf8'));
+    } else {
+      console.log(`${colors.red}Prompt not found: ${name}${colors.nc}`);
+    }
+  } else {
+    console.log('Usage: mdan prompt [list|show <name>]');
+  }
+}
+
 // Main
 const [,, cmd, ...args] = process.argv;
 
@@ -493,6 +610,12 @@ async function main() {
       break;
     case 'skills':
       cmdSkills();
+      break;
+    case 'mcp':
+      cmdMcp(args[0]);
+      break;
+    case 'prompt':
+      cmdPrompt(args[0], args[1]);
       break;
     case 'version':
     case '-v':

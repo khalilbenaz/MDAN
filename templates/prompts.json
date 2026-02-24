@@ -1,0 +1,81 @@
+{
+  "registry_version": "1.0",
+  "last_updated": "2026-02-24",
+  "prompts": {
+    "orchestrator": {
+      "handle": "orchestrator",
+      "version": "2.2.0",
+      "file": "templates/prompts/orchestrator.yaml",
+      "active": true,
+      "model": "openai/gpt-4o",
+      "changelog": [
+        {
+          "version": "2.2.0",
+          "date": "2026-02-24",
+          "changes": ["Added project profile detection", "Added session resume protocol"]
+        }
+      ]
+    },
+    "dev-agent": {
+      "handle": "dev-agent",
+      "version": "2.0.0",
+      "file": "templates/prompts/dev-agent.yaml",
+      "active": true,
+      "model": "openai/gpt-4o",
+      "changelog": [
+        {
+          "version": "2.0.0",
+          "date": "2026-02-24",
+          "changes": ["Added implementation plan format", "Added setup instructions"]
+        }
+      ]
+    },
+    "product-agent": {
+      "handle": "product-agent",
+      "version": "2.0.0",
+      "file": "templates/prompts/product-agent.yaml",
+      "active": true,
+      "model": "openai/gpt-4o",
+      "changelog": [
+        {
+          "version": "2.0.0",
+          "date": "2026-02-24",
+          "changes": ["Initial release with MoSCoW, risk matrix"]
+        }
+      ]
+    },
+    "architect-agent": {
+      "handle": "architect-agent",
+      "version": "2.0.0",
+      "file": "templates/prompts/architect-agent.yaml",
+      "active": true,
+      "model": "openai/gpt-4o",
+      "changelog": [
+        {
+          "version": "2.0.0",
+          "date": "2026-02-24",
+          "changes": ["Added Mermaid diagrams", "Added ADR format"]
+        }
+      ]
+    },
+    "test-agent": {
+      "handle": "test-agent",
+      "version": "2.0.0",
+      "file": "templates/prompts/test-agent.yaml",
+      "active": true,
+      "model": "openai/gpt-4o",
+      "changelog": [
+        {
+          "version": "2.0.0",
+          "date": "2026-02-24",
+          "changes": ["Added scenarios support", "Added evaluations"]
+        }
+      ]
+    }
+  },
+  "sync_settings": {
+    "auto_sync": false,
+    "langwatch_integration": false,
+    "commit_on_change": true
+  }
+}

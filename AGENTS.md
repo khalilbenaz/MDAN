@@ -1,0 +1,246 @@
+# AGENTS.md — MDAN Development Guidelines
+
+> How to develop, test, and maintain MDAN projects
+
+---
+
+## Purpose
+
+This file provides guidelines for developing reliable, testable, production-grade MDAN projects. It ensures every feature is properly tested, evaluated, and that prompts are versioned.
+
+---
+
+## Quick Start
+
+```bash
+# Initialize MDAN project
+mdan init my-project
+cd my-project
+
+# Start development
+mdan phase 1 discover
+
+# Test your changes
+mdan phase 4 verify
+
+# Ship
+mdan phase 5 ship
+```
+
+---
+
+## Development Workflow
+
+### 1. Feature Development
+
+When adding a new feature:
+
+1. **Create user story** in MDAN-STATE.json
+2. **Run DISCOVER phase** to define requirements
+3. **Run DESIGN phase** for architecture
+4. **Implement in BUILD phase**
+5. **Verify in VERIFY phase**
+6. **Ship in SHIP phase**
+
+### 2. Code Standards
+
+- ✅ Use type hints (TypeScript/Python)
+- ✅ Write unit tests (80%+ coverage)
+- ✅ Write integration tests for critical paths
+- ✅ Use environment variables for config
+- ✅ Handle errors explicitly
+- ❌ Never commit secrets
+- ❌ Never expose stack traces
+
+### 3. Testing Requirements
+
+All features MUST have:
+
+- **Unit tests** for business logic
+- **Integration tests** for API/database
+- **E2E scenarios** for user flows
+
+Run tests:
+```bash
+# All tests
+npm test
+
+# With coverage
+npm test -- --coverage
+
+# Specific scenario
+npm test -- tests/scenarios/auth.test.ts
+```
+
+### 4. Evaluation Requirements
+
+For RAG/ML features:
+
+- Create evaluation dataset
+- Run evaluations in VERIFY phase
+- Set pass/fail thresholds
+- Track metrics over time
+
+```bash
+# Run evaluations
+mdan evaluate --dataset customer-support
+```
+
+---
+
+## Prompt Versioning
+
+All agent prompts are versioned in `templates/prompts/`.
+
+### Adding a New Prompt
+
+1. Create YAML file: `templates/prompts/my-agent.yaml`
+2. Add to `templates/prompts.json`
+3. Test the prompt
+4. Commit with version bump
+
+### Updating a Prompt
+
+```bash
+# Show prompt
+mdan prompt show orchestrator
+
+# Compare versions
+mdan prompt diff orchestrator 2.1.0 2.2.0
+```
+
+### Version Rules
+
+| Change Type | Version Bump |
+|-------------|--------------|
+| Bug fix | PATCH (2.2.1) |
+| New feature | MINOR (2.3.0) |
+| Breaking change | MAJOR (3.0.0) |
+
+---
+
+## Quality Gates
+
+Each phase has a quality gate:
+
+### DISCOVER → DESIGN
+- [ ] PRD is complete
+- [ ] User stories have acceptance criteria
+- [ ] Project profile detected
+
+### DESIGN → BUILD
+- [ ] Architecture document complete
+- [ ] ADR decisions documented
+- [ ] UX designs reviewed
+
+### BUILD → VERIFY
+- [ ] All features implemented
+- [ ] Unit tests pass (80%+)
+- [ ] Integration tests pass
+- [ ] No critical bugs
+
+### VERIFY → SHIP
+- [ ] All scenarios pass
+- [ ] All evaluations pass
+- [ ] Security review complete
+- [ ] Performance criteria met
+
+---
+
+## MCP Integration
+
+Configure your IDE with MCP:
+
+```bash
+mdan mcp init
+```
+
+This generates `.mcp.json` with:
+- Available tools
+- Prompt paths
+- Quality gate settings
+
+---
+
+## File Structure
+
+```
+my-project/
+├── .mdan/
+│   ├── orchestrator.md
+│   ├── agents/
+│   │   ├── dev.md
+│   │   ├── test.md
+│   │   └── ...
+│   └── skills/
+├── tests/
+│   ├── scenarios/      # E2E tests
+│   │   └── *.test.md
+│   └── evaluations/    # Component tests
+│       └── *.md
+├── templates/
+│   ├── prompts/        # Versioned prompts
+│   │   └── *.yaml
+│   └── prompts.json   # Prompt registry
+├── .mcp.json          # MCP config
+├── MDAN-STATE.json    # Project state
+└── AGENTS.md          # This file
+```
+
+---
+
+## Troubleshooting
+
+### Tests Failing
+
+1. Check test output for specific failures
+2. Run single test: `npm test -- --testNamePattern="my test"`
+3. Check for environment issues
+
+### Evaluation Thresholds Not Met
+
+1. Review evaluation output
+2. Check dataset quality
+3. Adjust thresholds if needed (document reason)
+
+### Prompt Not Working
+
+1. Validate YAML: `mdan mcp validate`
+2. Check model compatibility
+3. Review changelog for breaking changes
+
+---
+
+## Best Practices
+
+1. **Always use MDAN state** - Keep MDAN-STATE.json updated
+2. **Run quality gates** - Never skip verification
+3. **Version prompts** - Document all changes
+4. **Test locally first** - Before committing
+5. **Monitor metrics** - Track performance over time
+
+---
+
+## Commands Reference
+
+| Command | Description |
+|---------|-------------|
+| `mdan init` | Initialize project |
+| `mdan attach` | Add MDAN to existing project |
+| `mdan phase` | Show/run phase |
+| `mdan mcp init` | Generate MCP config |
+| `mdan prompt list` | List prompts |
+| `mdan test` | Run tests |
+| `mdan evaluate` | Run evaluations |
+
+---
+
+## Resources
+
+- [MDAN Documentation](https://github.com/khalilbenaz/MDAN)
+- [Better Agents](https://langwatch.ai/docs/better-agents)
+- [Agent Skills Standard](https://agentskills.io)
+
+---
+
+*This file is auto-generated by MDAN. Edit with care.*

@@ -1,0 +1,46 @@
+{
+  "mcpServers": {
+    "mdan-memory": {
+      "command": "node",
+      "args": ["-e", "console.log(JSON.stringify({tools: [{name: 'mdan-state', description: 'Read/write MDAN project state', inputSchema: {type: 'object', properties: {action: {type: 'string', enum: ['read', 'write']}, data: {type: 'object'}}}, name: 'mdan-state', description: 'Read or write MDAN project state'}]}))]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    }
+  },
+  "metadata": {
+    "version": "2.2.0",
+    "framework": "mdan",
+    "generated": "2026-02-24"
+  },
+  "capabilities": {
+    "scenarios": {
+      "enabled": true,
+      "test_paths": ["tests/scenarios/", "templates/tests/scenarios/"]
+    },
+    "evaluations": {
+      "enabled": true,
+      "eval_paths": ["tests/evaluations/", "templates/tests/evaluations/"]
+    },
+    "prompts": {
+      "enabled": true,
+      "prompt_paths": ["templates/prompts/"],
+      "registry": "templates/prompts.json"
+    }
+  },
+  "agent_prompts": {
+    "orchestrator": "templates/prompts/orchestrator.yaml",
+    "dev": "templates/prompts/dev-agent.yaml",
+    "product": "templates/prompts/product-agent.yaml",
+    "architect": "templates/prompts/architect-agent.yaml",
+    "test": "templates/prompts/test-agent.yaml",
+    "security": "agents/security.md",
+    "devops": "agents/devops.md"
+  },
+  "quality_gates": {
+    "min_test_coverage": 80,
+    "require_evaluations": true,
+    "require_scenarios": false
+  }
+}

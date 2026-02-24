@@ -39,7 +39,9 @@
     "integrations/",
     "memory/",
     "skills/",
-    "install.sh"
+    "install.sh",
+    ".mcp.json",
+    "AGENTS.md"
   ],
   "dependencies": {
     "@clack/prompts": "^1.0.1",

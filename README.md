@@ -90,6 +90,8 @@ mdan module add [nom]     # Ajouter une extension métier (ex: agile-scrum)
 mdan oc                   # Copier le prompt de l'Orchestrateur dans le presse-papier
 mdan agent [nom]          # Voir le prompt d'un agent
 mdan skills               # Lister les skills
+mdan mcp [action]        # MCP config (init|validate|list)
+mdan prompt [action]     # Gérer les prompts (list|show)
 mdan version              # Version
 ```
 
@@ -167,12 +169,30 @@ projet/
 │   ├── agents/              # Prompts des agents
 │   ├── skills/              # Skills installés
 │   └── STATUS.md            # Progression
+├── tests/
+│   ├── scenarios/           # Tests conversationnels (Better Agents)
+│   └── evaluations/        # Évaluations (RAG, classification)
+├── templates/
+│   ├── prompts/             # Prompts versionnés (YAML)
+│   └── prompts.json         # Registre des prompts
 ├── mdan_output/             # Dossier où les agents génèrent leurs livrables (PRD, Archi...)
 ├── .cursorrules             # Pour Cursor
 ├── .windsurfrules           # Pour Windsurf
 ├── .claude/skills/          # Pour Claude Code
-└── .github/copilot-instructions.md
+├── .github/copilot-instructions.md
+├── .mcp.json               # Configuration MCP
+└── AGENTS.md               # Guidelines de développement
 ```
+
+### Fonctionnalités Better Agents intégrées
+
+| Feature | Description |
+|---------|-------------|
+| **Scenarios** | Tests conversationnels end-to-end dans `tests/scenarios/` |
+| **Evaluations** | Benchmarking structuré (RAG, classification) dans `tests/evaluations/` |
+| **Prompts** | Versionnage des prompts en YAML dans `templates/prompts/` |
+| **MCP** | Configuration pour Cursor/Claude via `.mcp.json` |
+| **AGENTS.md** | Guidelines de développement (copie de Better Agents) |
 
 ---
 
@@ -193,11 +213,14 @@ MDAN se compose de plusieurs composants interconnectés:
 | **CLI** | Interface en ligne de commande (`mdan init`, `mdan attach`) |
 | **Memory** | Système de persistance entre sessions (`MDAN-STATE.json`) |
 | **Skills** | Compétences optionnelles extensibles |
+| **Scenarios** | Tests conversationnels (Better Agents) |
+| **Evaluations** | Benchmarking de composants (Better Agents) |
+| **Prompts** | Versionnage YAML des prompts |
 
 ```
 Utilisateur → CLI → MDAN Core → Agents → Artifacts
-                           ↓
-                       Memory System
+                            ↓
+                        Memory System
 ```
 
 Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour la documentation technique complète.
@@ -221,3 +244,5 @@ Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour la documentation technique complèt
 - [Documentation EN](docs/en/README.md)
 - [Documentation FR](docs/fr/README.md)
 - [GitHub](https://github.com/khalilbenaz/MDAN)
+- [NPM](https://www.npmjs.com/package/mdan-cli)
+- [Better Agents](https://langwatch.ai/docs/better-agents) — Fonctionnalités de test intégrées

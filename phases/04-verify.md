@@ -38,11 +38,13 @@ Implemented features: [List of completed features]
 
 Expected output:
 1. Complete test plan
-2. Unit tests for all features
+2. Unit tests for all features (80%+ coverage)
 3. Integration tests for critical flows
 4. E2E test scenarios
-5. Performance test criteria
-6. Test results summary
+5. Scenario tests (Better Agents format)
+6. Evaluation datasets (if RAG/ML features)
+7. Performance test criteria
+8. Test results summary
 ```
 
 ---
@@ -77,6 +79,8 @@ Testing:
 [ ] Test coverage meets target (e.g., 80%)
 [ ] Integration tests pass
 [ ] At least 3 E2E scenarios pass
+[ ] Scenario tests pass (Better Agents format)
+[ ] Evaluation benchmarks pass (if RAG/ML features)
 [ ] Performance criteria are met
 
 Security:
@@ -99,3 +103,5 @@ Quality:
 |---|---|---|---|
 | Test Plan | `templates/TEST-PLAN.md` | Test Agent | Complete |
 | Security Report | `templates/SECURITY-REVIEW.md` | Security Agent | Signed off |
+| Scenarios | `templates/tests/scenarios/*.test.md` | Test Agent | Pass |
+| Evaluations | `templates/tests/evaluations/*.md` | Test Agent | Pass thresholds |
