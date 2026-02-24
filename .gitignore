@@ -9,7 +9,7 @@ Thumbs.db
 *.swo
 
 # MDAN project artifacts (user-generated)
-.mdan/artifacts/
+mdan/artifacts/
 
 # Node
 node_modules/

@@ -201,7 +201,7 @@ La CLI offre plusieurs implémentations pour la compatibilité :
 **Fichiers générés par `mdan init`:**
 ```
 projet/
-├── .mdan/
+├── mdan/
 │   ├── orchestrator.md      # System prompt
 │   ├── universal-envelope.md
 │   ├── agents/              # Prompts des agents
@@ -258,7 +258,7 @@ skills/
 ```
 
 **Intégration:**
-- Copiés dans `.mdan/skills/` lors de `mdan init`
+- Copiés dans `mdan/skills/` lors de `mdan init`
 - Copiés dans `.claude/skills/` pour Claude Code
 - Référencés par le Learn Agent
 
@@ -392,7 +392,7 @@ Options: [1] Keep v1.0.0  [2] Upgrade to v2.0.0
 | Windsurf | `.windsurfrules` | orchestrator.md + instructions |
 | Claude Code | `.claude/skills/` | Skills copiés |
 | GitHub Copilot | `.github/copilot-instructions.md` | orchestrator.md |
-| Claude Web | Copie manuelle | `.mdan/orchestrator.md` |
+| Claude Web | Copie manuelle | `mdan/orchestrator.md` |
 
 ---
 

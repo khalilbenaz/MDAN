@@ -156,7 +156,7 @@ pour tout réécrire from scratch.
 - **Windsurf** — `.windsurfrules` auto-généré
 - **Claude Code** — `.claude/skills/` auto-généré
 - **GitHub Copilot** — `.github/copilot-instructions.md` auto-généré
-- **Claude Web** — Copier `.mdan/orchestrator.md`
+- **Claude Web** — Copier `mdan/orchestrator.md`
 
 ---
 
@@ -164,7 +164,7 @@ pour tout réécrire from scratch.
 
 ```
 projet/
-├── .mdan/
+├── mdan/
 │   ├── orchestrator.md      # System prompt
 │   ├── agents/              # Prompts des agents
 │   ├── skills/              # Skills installés

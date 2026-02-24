@@ -166,7 +166,7 @@ This generates `.mcp.json` with:
 
 ```
 my-project/
-├── .mdan/
+├── mdan/
 │   ├── orchestrator.md
 │   ├── agents/
 │   │   ├── dev.md

@@ -251,14 +251,14 @@ opencode
 opencode "I want to build [your project idea]"
 
 # Reference agent prompts
-opencode "@file .mdan/agents/dev.md Implement the user authentication feature"
+opencode "@file mdan/agents/dev.md Implement the user authentication feature"
 ```
 
 ## Notes for Opencode
 
 - Opencode excels in the BUILD phase — it can directly edit files
 - Use MDAN feature briefs as opencode tasks
-- Place agent files in `.mdan/agents/` for easy reference
+- Place agent files in `mdan/agents/` for easy reference
 
 ---
 

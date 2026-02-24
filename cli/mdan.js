@@ -6,7 +6,7 @@ const { execSync } = require('child_process');
 const { intro, text, select, isCancel, cancel, outro, spinner } = require('@clack/prompts');
 const pc = require('picocolors');
 
-const VERSION = '2.3.0';
+const VERSION = '2.4.0';
 const MDAN_DIR = path.resolve(__dirname, '..');
 
 // Colors
@@ -104,8 +104,8 @@ async function cmdInit(initialName) {
   s.start(`Creating ${name} project structure...`);
   
   const dirs = [
-    `${name}/.mdan/agents`,
-    `${name}/.mdan/skills`,
+    `${name}/mdan/agents`,
+    `${name}/mdan/skills`,
     `${name}/mdan_output`,
     `${name}/.claude/skills`,
     `${name}/.github`,
@@ -116,11 +116,11 @@ async function cmdInit(initialName) {
   
   dirs.forEach(dir => fs.mkdirSync(dir, { recursive: true }));
   
-  fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, `${name}/.mdan/orchestrator.md`);
-  fs.copyFileSync(`${MDAN_DIR}/core/universal-envelope.md`, `${name}/.mdan/universal-envelope.md`);
+  fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, `${name}/mdan/orchestrator.md`);
+  fs.copyFileSync(`${MDAN_DIR}/core/universal-envelope.md`, `${name}/mdan/universal-envelope.md`);
   
   fs.readdirSync(`${MDAN_DIR}/agents`).filter(f => f.endsWith('.md')).forEach(f => {
-    fs.copyFileSync(`${MDAN_DIR}/agents/${f}`, `${name}/.mdan/agents/${f}`);
+    fs.copyFileSync(`${MDAN_DIR}/agents/${f}`, `${name}/mdan/agents/${f}`);
   });
   
   fs.readdirSync(`${MDAN_DIR}/templates`).filter(f => f.endsWith('.md')).forEach(f => {
@@ -132,7 +132,7 @@ async function cmdInit(initialName) {
   if (fs.existsSync(skillsDir)) {
     fs.readdirSync(skillsDir).forEach(skill => {
       const src = `${skillsDir}/${skill}`;
-      const dest1 = `${name}/.mdan/skills/${skill}`;
+      const dest1 = `${name}/mdan/skills/${skill}`;
       const dest2 = `${name}/.claude/skills/${skill}`;
       if (fs.statSync(src).isDirectory()) {
         fs.cpSync(src, dest1, { recursive: true });
@@ -143,7 +143,7 @@ async function cmdInit(initialName) {
   
   // Create .cursorrules
   let cursorrules = fs.readFileSync(`${MDAN_DIR}/core/orchestrator.md`, 'utf8');
-  cursorrules += '\n\n## CURSOR INSTRUCTIONS\nAgent files are in .mdan/agents/\nSkills are in .mdan/skills/';
+  cursorrules += '\n\n## CURSOR INSTRUCTIONS\nAgent files are in mdan/agents/\nSkills are in mdan/skills/';
   fs.writeFileSync(`${name}/.cursorrules`, cursorrules);
   fs.copyFileSync(`${name}/.cursorrules`, `${name}/.windsurfrules`);
   fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, `${name}/.github/copilot-instructions.md`);
@@ -205,19 +205,19 @@ async function cmdAttach(rebuildMode) {
     ? `Preparing REBUILD environment for ${projectName}...` 
     : `Attaching MDAN to ${projectName}...`);
   
-  fs.mkdirSync('.mdan/agents', { recursive: true });
-  fs.mkdirSync('.mdan/skills', { recursive: true });
+  fs.mkdirSync('mdan/agents', { recursive: true });
+  fs.mkdirSync('mdan/skills', { recursive: true });
   fs.mkdirSync('.claude/skills', { recursive: true });
   fs.mkdirSync('.github', { recursive: true });
   fs.mkdirSync('tests/scenarios', { recursive: true });
   fs.mkdirSync('tests/evaluations', { recursive: true });
   fs.mkdirSync('templates/prompts', { recursive: true });
   
-  fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, '.mdan/orchestrator.md');
-  fs.copyFileSync(`${MDAN_DIR}/core/universal-envelope.md`, '.mdan/universal-envelope.md');
+  fs.copyFileSync(`${MDAN_DIR}/core/orchestrator.md`, 'mdan/orchestrator.md');
+  fs.copyFileSync(`${MDAN_DIR}/core/universal-envelope.md`, 'mdan/universal-envelope.md');
   
   fs.readdirSync(`${MDAN_DIR}/agents`).filter(f => f.endsWith('.md')).forEach(f => {
-    fs.copyFileSync(`${MDAN_DIR}/agents/${f}`, `.mdan/agents/${f}`);
+    fs.copyFileSync(`${MDAN_DIR}/agents/${f}`, `mdan/agents/${f}`);
   });
   
   // Copy skills
@@ -226,7 +226,7 @@ async function cmdAttach(rebuildMode) {
     fs.readdirSync(skillsDir).forEach(skill => {
       const src = `${skillsDir}/${skill}`;
       if (fs.statSync(src).isDirectory()) {
-        fs.cpSync(src, `.mdan/skills/${skill}`, { recursive: true });
+        fs.cpSync(src, `mdan/skills/${skill}`, { recursive: true });
         fs.cpSync(src, `.claude/skills/${skill}`, { recursive: true });
       }
     });
@@ -273,7 +273,7 @@ async function cmdAttach(rebuildMode) {
 }
 
 function cmdOc() {
-  let orchFile = '.mdan/orchestrator.md';
+  let orchFile = 'mdan/orchestrator.md';
   if (!fs.existsSync(orchFile)) {
     orchFile = `${MDAN_DIR}/core/orchestrator.md`;
   }
@@ -306,10 +306,10 @@ function cmdOc() {
 }
 
 function cmdStatus() {
-  if (fs.existsSync('.mdan/orchestrator.md')) {
+  if (fs.existsSync('mdan/orchestrator.md')) {
     console.log(`${colors.green}✅ MDAN is active in this project${colors.nc}`);
-    if (fs.existsSync('.mdan/STATUS.md')) {
-      console.log(fs.readFileSync('.mdan/STATUS.md', 'utf8'));
+    if (fs.existsSync('mdan/STATUS.md')) {
+      console.log(fs.readFileSync('mdan/STATUS.md', 'utf8'));
     }
   } else {
     console.log(`${colors.yellow}No MDAN project here.${colors.nc}`);
@@ -394,15 +394,15 @@ function cmdModule(action, name) {
 
   console.log(`${colors.cyan}📦 Installing module: ${colors.bold}${name}${colors.nc}`);
   
-  if (!fs.existsSync('.mdan')) {
-    console.log(`${colors.yellow}⚠️  No .mdan folder found. Are you in an MDAN project?${colors.nc}`);
+  if (!fs.existsSync('mdan')) {
+    console.log(`${colors.yellow}⚠️  No mdan folder found. Are you in an MDAN project?${colors.nc}`);
     return;
   }
 
   // Copy agents
   if (fs.existsSync(`${moduleDir}/agents`)) {
     fs.readdirSync(`${moduleDir}/agents`).forEach(f => {
-      fs.copyFileSync(`${moduleDir}/agents/${f}`, `.mdan/agents/${f}`);
+      fs.copyFileSync(`${moduleDir}/agents/${f}`, `mdan/agents/${f}`);
       console.log(`${colors.green}  Added agent:${colors.nc} ${f}`);
     });
   }

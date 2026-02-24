@@ -1,6 +1,6 @@
 {
-  "name": "mdan-cli",
-  "version": "2.4.0",
+  "name": "mdan",
+  "version": "2.2.0",
   "description": "Multi-Agent Development Agentic Network - A modern, adaptive, LLM-agnostic methodology for building software",
   "main": "cli/mdan.js",
   "bin": {
@@ -39,9 +39,7 @@
     "integrations/",
     "memory/",
     "skills/",
-    "install.sh",
-    ".mcp.json",
-    "AGENTS.md"
+    "install.sh"
   ],
   "dependencies": {
     "@clack/prompts": "^1.0.1",

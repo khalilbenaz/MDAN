@@ -5,7 +5,7 @@
 # Multi-Agent Development Agentic Network
 # ============================================================
 
-VERSION="2.2.0"
+VERSION="2.4.0"
 MDAN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 # Colors
@@ -110,7 +110,7 @@ cmd_learn() {
             echo "---"
             ;;
         --list)
-            KNOWLEDGE_FILE=".mdan/MDAN-KNOWLEDGE.md"
+            KNOWLEDGE_FILE="mdan/MDAN-KNOWLEDGE.md"
             if [[ -f "${KNOWLEDGE_FILE}" ]]; then
                 cat "${KNOWLEDGE_FILE}"
             else
@@ -120,7 +120,7 @@ cmd_learn() {
         --capsule)
             AGENT="${1}"
             echo -e "${CYAN}Capsule for agent: ${BOLD}${AGENT}${NC}"
-            KNOWLEDGE_FILE=".mdan/MDAN-KNOWLEDGE.md"
+            KNOWLEDGE_FILE="mdan/MDAN-KNOWLEDGE.md"
             if [[ -f "${KNOWLEDGE_FILE}" ]]; then
                 grep -A 20 "### ${AGENT^} Agent" "${KNOWLEDGE_FILE}" | head -25
             else
@@ -215,41 +215,41 @@ cmd_attach() {
         echo ""
     fi
     
-    # Check if .mdan already exists
-    if [[ -d ".mdan" ]]; then
-        echo -e "${YELLOW}⚠️  .mdan folder already exists.${NC}"
+    # Check if mdan already exists
+    if [[ -d "mdan" ]]; then
+        echo -e "${YELLOW}⚠️  mdan folder already exists.${NC}"
         read -p "   Overwrite? (y/n) " -n 1 -r
         echo
         if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-            echo "   Keeping existing .mdan folder."
+            echo "   Keeping existing mdan folder."
         else
-            rm -rf .mdan
+            rm -rf mdan
         fi
     fi
     
-    # Create .mdan directory structure
-    mkdir -p .mdan/agents
-    mkdir -p .mdan/artifacts
-    mkdir -p .mdan/skills
+    # Create mdan directory structure
+    mkdir -p mdan/agents
+    mkdir -p mdan/artifacts
+    mkdir -p mdan/skills
     
     # Copy core files
-    cp "${MDAN_DIR}/core/orchestrator.md" .mdan/orchestrator.md
-    cp "${MDAN_DIR}/core/universal-envelope.md" .mdan/universal-envelope.md
+    cp "${MDAN_DIR}/core/orchestrator.md" mdan/orchestrator.md
+    cp "${MDAN_DIR}/core/universal-envelope.md" mdan/universal-envelope.md
     
     # Copy all agents
-    cp "${MDAN_DIR}/agents/"*.md .mdan/agents/
+    cp "${MDAN_DIR}/agents/"*.md mdan/agents/
     
     # Copy skills if available
     if [[ -d "${MDAN_DIR}/skills" ]]; then
-        cp -r "${MDAN_DIR}/skills/"* .mdan/skills/ 2>/dev/null
+        cp -r "${MDAN_DIR}/skills/"* mdan/skills/ 2>/dev/null
     fi
     
     # Create .cursorrules
     cat "${MDAN_DIR}/core/orchestrator.md" > .cursorrules
     echo "" >> .cursorrules
     echo "## CURSOR INSTRUCTIONS" >> .cursorrules
-    echo "Agent files are in .mdan/agents/. Reference them with @file when activating agents." >> .cursorrules
-    echo "Skills are in .mdan/skills/. Reference them for extended capabilities." >> .cursorrules
+    echo "Agent files are in mdan/agents/. Reference them with @file when activating agents." >> .cursorrules
+    echo "Skills are in mdan/skills/. Reference them for extended capabilities." >> .cursorrules
     echo "" >> .cursorrules
     
     if [[ "$REBUILD_MODE" == true ]]; then
@@ -283,7 +283,7 @@ cmd_attach() {
     
     # Create MDAN-STATE.json
     if [[ "$REBUILD_MODE" == true ]]; then
-        cat > .mdan/MDAN-STATE.json << EOF
+        cat > mdan/MDAN-STATE.json << EOF
 {
   "user": {
     "name": null
@@ -313,7 +313,7 @@ cmd_attach() {
 }
 EOF
     else
-        cat > .mdan/MDAN-STATE.json << EOF
+        cat > mdan/MDAN-STATE.json << EOF
 {
   "user": {
     "name": null
@@ -345,7 +345,7 @@ EOF
     
     # Create STATUS.md
     if [[ "$REBUILD_MODE" == true ]]; then
-        cat > .mdan/STATUS.md << EOF
+        cat > mdan/STATUS.md << EOF
 # MDAN Project Status — REBUILD MODE
 
 **Project:** ${PROJECT_NAME}
@@ -375,7 +375,7 @@ Rewrite the entire project from scratch with a modern architecture.
 2. Start with: "MDAN REBUILD: Begin DISCOVER phase. Analyze this entire codebase."
 EOF
     else
-        cat > .mdan/STATUS.md << EOF
+        cat > mdan/STATUS.md << EOF
 # MDAN Project Status
 
 **Project:** ${PROJECT_NAME} (existing)
@@ -396,17 +396,17 @@ EOF
 
 ## Commands to Start
 1. Open Claude/Cursor with this project
-2. Paste .mdan/orchestrator.md as system prompt
+2. Paste mdan/orchestrator.md as system prompt
 3. Start with: "MDAN: Analyze this existing project and help me [goal]"
 EOF
     fi
     
     echo -e "${GREEN}✅ MDAN attached to ${PROJECT_NAME}!${NC}"
     echo ""
-    echo -e "  ${BOLD}MDAN files:${NC} .mdan/"
-    echo -e "  ${BOLD}Agents:${NC} .mdan/agents/"
-    echo -e "  ${BOLD}Skills:${NC} .mdan/skills/"
-    echo -e "  ${BOLD}State:${NC} .mdan/MDAN-STATE.json"
+    echo -e "  ${BOLD}MDAN files:${NC} mdan/"
+    echo -e "  ${BOLD}Agents:${NC} mdan/agents/"
+    echo -e "  ${BOLD}Skills:${NC} mdan/skills/"
+    echo -e "  ${BOLD}State:${NC} mdan/MDAN-STATE.json"
     echo ""
     
     if [[ "$REBUILD_MODE" == true ]]; then
@@ -445,33 +445,33 @@ cmd_init() {
     echo -e "${CYAN}🚀 Initializing MDAN project: ${BOLD}${PROJECT_NAME}${NC}"
     echo ""
     
-    # Create .mdan directory structure
-    mkdir -p "${PROJECT_NAME}/.mdan/agents"
-    mkdir -p "${PROJECT_NAME}/.mdan/artifacts"
-    mkdir -p "${PROJECT_NAME}/.mdan/skills"
+    # Create mdan directory structure
+    mkdir -p "${PROJECT_NAME}/mdan/agents"
+    mkdir -p "${PROJECT_NAME}/mdan/artifacts"
+    mkdir -p "${PROJECT_NAME}/mdan/skills"
     mkdir -p "${PROJECT_NAME}/mdan_output"
     
     # Copy core files
-    cp "${MDAN_DIR}/core/orchestrator.md" "${PROJECT_NAME}/.mdan/orchestrator.md"
-    cp "${MDAN_DIR}/core/universal-envelope.md" "${PROJECT_NAME}/.mdan/universal-envelope.md"
+    cp "${MDAN_DIR}/core/orchestrator.md" "${PROJECT_NAME}/mdan/orchestrator.md"
+    cp "${MDAN_DIR}/core/universal-envelope.md" "${PROJECT_NAME}/mdan/universal-envelope.md"
     
     # Copy all agents
-    cp "${MDAN_DIR}/agents/"*.md "${PROJECT_NAME}/.mdan/agents/"
+    cp "${MDAN_DIR}/agents/"*.md "${PROJECT_NAME}/mdan/agents/"
     
     # Copy templates
     cp "${MDAN_DIR}/templates/"*.md "${PROJECT_NAME}/mdan_output/"
     
     # Copy skills if available
     if [[ -d "${MDAN_DIR}/skills" ]]; then
-        cp -r "${MDAN_DIR}/skills/"* "${PROJECT_NAME}/.mdan/skills/" 2>/dev/null
+        cp -r "${MDAN_DIR}/skills/"* "${PROJECT_NAME}/mdan/skills/" 2>/dev/null
     fi
     
     # Create .cursorrules
     cat "${MDAN_DIR}/core/orchestrator.md" > "${PROJECT_NAME}/.cursorrules"
     echo "" >> "${PROJECT_NAME}/.cursorrules"
     echo "## CURSOR INSTRUCTIONS" >> "${PROJECT_NAME}/.cursorrules"
-    echo "Agent files are in .mdan/agents/. Reference them with @file when activating agents." >> "${PROJECT_NAME}/.cursorrules"
-    echo "Skills are in .mdan/skills/. Reference them for extended capabilities." >> "${PROJECT_NAME}/.cursorrules"
+    echo "Agent files are in mdan/agents/. Reference them with @file when activating agents." >> "${PROJECT_NAME}/.cursorrules"
+    echo "Skills are in mdan/skills/. Reference them for extended capabilities." >> "${PROJECT_NAME}/.cursorrules"
     
     # Create .windsurfrules
     cp "${PROJECT_NAME}/.cursorrules" "${PROJECT_NAME}/.windsurfrules"
@@ -487,7 +487,7 @@ cmd_init() {
     cp "${MDAN_DIR}/core/orchestrator.md" "${PROJECT_NAME}/.github/copilot-instructions.md"
     
     # Create STATUS.md
-    cat > "${PROJECT_NAME}/.mdan/STATUS.md" << EOF
+    cat > "${PROJECT_NAME}/mdan/STATUS.md" << EOF
 # MDAN Project Status
 
 **Project:** ${PROJECT_NAME}
@@ -520,13 +520,13 @@ EOF
     echo -e "${GREEN}✅ MDAN project initialized successfully!${NC}"
     echo ""
     echo -e "  ${BOLD}Project:${NC} ${PROJECT_NAME}/"
-    echo -e "  ${BOLD}MDAN files:${NC} ${PROJECT_NAME}/.mdan/"
+    echo -e "  ${BOLD}MDAN files:${NC} ${PROJECT_NAME}/mdan/"
     echo -e "  ${BOLD}Templates:${NC} ${PROJECT_NAME}/mdan_output/"
-    echo -e "  ${BOLD}Skills:${NC} ${PROJECT_NAME}/.mdan/skills/"
+    echo -e "  ${BOLD}Skills:${NC} ${PROJECT_NAME}/mdan/skills/"
     echo ""
     echo -e "${YELLOW}Next steps:${NC}"
     echo "  1. Open your chosen LLM"
-    echo "  2. Paste .mdan/orchestrator.md as your system prompt"
+    echo "  2. Paste mdan/orchestrator.md as your system prompt"
     echo "  3. Start with: 'MDAN: I want to build ${PROJECT_NAME}'"
     echo ""
     echo -e "  Or for Cursor/Windsurf: open the ${PROJECT_NAME}/ folder — .cursorrules is ready"
@@ -654,9 +654,9 @@ cmd_prompt() {
 # STATUS
 # ============================================================
 
-# ============================================================n# OC (Orchestrator)n# ============================================================nncmd_oc() {n    ORCH_FILE=".mdan/orchestrator.md"n    if [[ ! -f "$ORCH_FILE" ]]; thenn        ORCH_FILE="${MDAN_DIR}/core/orchestrator.md"n    fin    n    if [[ -f "$ORCH_FILE" ]]; thenn        if command -v pbcopy &> /dev/null; thenn            cat "$ORCH_FILE" | pbcopyn            echo -e "${GREEN}✅ Orchestrator prompt copied to clipboard!${NC}"n            echo "   Paste it into Claude, ChatGPT, or your favorite LLM."n        elif command -v xclip &> /dev/null; thenn            cat "$ORCH_FILE" | xclip -selection clipboardn            echo -e "${GREEN}✅ Orchestrator prompt copied to clipboard!${NC}"n            echo "   Paste it into Claude, ChatGPT, or your favorite LLM."n        elif command -v wl-copy &> /dev/null; thenn            cat "$ORCH_FILE" | wl-copyn            echo -e "${GREEN}✅ Orchestrator prompt copied to clipboard!${NC}"n            echo "   Paste it into Claude, ChatGPT, or your favorite LLM."n        elsen            cat "$ORCH_FILE"n            echo -e "\n${YELLOW}⚠️  Could not copy to clipboard automatically. Please copy the text above.${NC}"n        fin    elsen        echo -e "${RED}Orchestrator file not found.${NC}"n    fin}nn
+# ============================================================n# OC (Orchestrator)n# ============================================================nncmd_oc() {n    ORCH_FILE="mdan/orchestrator.md"n    if [[ ! -f "$ORCH_FILE" ]]; thenn        ORCH_FILE="${MDAN_DIR}/core/orchestrator.md"n    fin    n    if [[ -f "$ORCH_FILE" ]]; thenn        if command -v pbcopy &> /dev/null; thenn            cat "$ORCH_FILE" | pbcopyn            echo -e "${GREEN}✅ Orchestrator prompt copied to clipboard!${NC}"n            echo "   Paste it into Claude, ChatGPT, or your favorite LLM."n        elif command -v xclip &> /dev/null; thenn            cat "$ORCH_FILE" | xclip -selection clipboardn            echo -e "${GREEN}✅ Orchestrator prompt copied to clipboard!${NC}"n            echo "   Paste it into Claude, ChatGPT, or your favorite LLM."n        elif command -v wl-copy &> /dev/null; thenn            cat "$ORCH_FILE" | wl-copyn            echo -e "${GREEN}✅ Orchestrator prompt copied to clipboard!${NC}"n            echo "   Paste it into Claude, ChatGPT, or your favorite LLM."n        elsen            cat "$ORCH_FILE"n            echo -e "\n${YELLOW}⚠️  Could not copy to clipboard automatically. Please copy the text above.${NC}"n        fin    elsen        echo -e "${RED}Orchestrator file not found.${NC}"n    fin}nn
 cmd_status() {
-    STATUS_FILE=".mdan/STATUS.md"
+    STATUS_FILE="mdan/STATUS.md"
     if [[ -f "${STATUS_FILE}" ]]; then
         cat "${STATUS_FILE}"
     else

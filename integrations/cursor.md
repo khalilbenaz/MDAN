@@ -20,21 +20,21 @@ You are operating inside Cursor IDE. In addition to your MDAN orchestration role
 - When the Doc Agent produces documentation, write it to the mdan_output/ folder
 
 ### Agent File References
-- Product Agent: @file .mdan/agents/product.md
-- Architect Agent: @file .mdan/agents/architect.md
-- UX Agent: @file .mdan/agents/ux.md
-- Dev Agent: @file .mdan/agents/dev.md
-- Test Agent: @file .mdan/agents/test.md
-- Security Agent: @file .mdan/agents/security.md
-- DevOps Agent: @file .mdan/agents/devops.md
-- Doc Agent: @file .mdan/agents/doc.md
+- Product Agent: @file mdan/agents/product.md
+- Architect Agent: @file mdan/agents/architect.md
+- UX Agent: @file mdan/agents/ux.md
+- Dev Agent: @file mdan/agents/dev.md
+- Test Agent: @file mdan/agents/test.md
+- Security Agent: @file mdan/agents/security.md
+- DevOps Agent: @file mdan/agents/devops.md
+- Doc Agent: @file mdan/agents/doc.md
 ```
 
 ### Step 2: Copy agents to project
 
 ```bash
-mkdir -p .mdan/agents
-cp agents/*.md .mdan/agents/
+mkdir -p mdan/agents
+cp agents/*.md mdan/agents/
 ```
 
 ### Step 3: Start using MDAN in Cursor
@@ -61,7 +61,7 @@ Enable Agent mode for autonomous implementation. MDAN Core will orchestrate, and
 
 ```
 .cursorrules          ← MDAN Core orchestrator prompt
-.mdan/
+mdan/
   agents/
     product.md
     architect.md
