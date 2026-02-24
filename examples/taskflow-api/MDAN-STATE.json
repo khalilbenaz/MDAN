@@ -1,0 +1,151 @@
+{
+  "mdan_version": "2.0.0",
+  "user": {
+    "name": "Alice"
+  },
+  "project": {
+    "name": "taskflow-api",
+    "type": "api-only",
+    "detected_profile": "STANDARD",
+    "created_at": "2025-01-15",
+    "last_updated": "2025-01-20"
+  },
+  "current_phase": "SHIP",
+  "phase_history": [
+    {
+      "phase": "DISCOVER",
+      "started_at": "2025-01-15",
+      "completed_at": "2025-01-15",
+      "status": "VALIDATED",
+      "artifacts": ["mdan_output/PRD.md"]
+    },
+    {
+      "phase": "DESIGN",
+      "started_at": "2025-01-16",
+      "completed_at": "2025-01-17",
+      "status": "VALIDATED",
+      "artifacts": ["mdan_output/ARCHITECTURE.md"]
+    },
+    {
+      "phase": "BUILD",
+      "started_at": "2025-01-18",
+      "completed_at": "2025-01-19",
+      "status": "VALIDATED",
+      "artifacts": ["src/modules/tasks", "src/modules/sprints", "src/middleware/auth.ts"]
+    },
+    {
+      "phase": "VERIFY",
+      "started_at": "2025-01-19",
+      "completed_at": "2025-01-20",
+      "status": "VALIDATED",
+      "artifacts": ["mdan_output/TEST-PLAN.md", "mdan_output/SECURITY-REVIEW.md"]
+    },
+    {
+      "phase": "SHIP",
+      "started_at": "2025-01-20",
+      "completed_at": "2025-01-20",
+      "status": "VALIDATED",
+      "artifacts": ["Dockerfile", "docker-compose.yml", ".github/workflows/ci.yml", "mdan_output/README.md"]
+    }
+  ],
+  "agents_used": {
+    "product": "2.0.0",
+    "architect": "2.0.0",
+    "ux": "SKIPPED (api-only profile)",
+    "dev": "2.0.0",
+    "test": "2.0.0",
+    "security": "2.0.0",
+    "devops": "2.0.0",
+    "doc": "2.0.0"
+  },
+  "features": [
+    {
+      "id": "US-001",
+      "title": "Create Task",
+      "status": "DONE",
+      "implemented_at": "2025-01-18",
+      "files": ["src/modules/tasks/tasks.service.ts", "src/modules/tasks/tasks.controller.ts", "src/modules/tasks/tasks.schema.ts"],
+      "tests": "PASSING",
+      "security_review": "APPROVED (1 medium fixed)"
+    },
+    {
+      "id": "US-002",
+      "title": "List Tasks with filters",
+      "status": "DONE",
+      "implemented_at": "2025-01-18",
+      "files": ["src/modules/tasks/tasks.service.ts"],
+      "tests": "PASSING",
+      "security_review": "APPROVED"
+    },
+    {
+      "id": "US-003",
+      "title": "Update Task Status",
+      "status": "DONE",
+      "implemented_at": "2025-01-18",
+      "files": ["src/modules/tasks/tasks.service.ts"],
+      "tests": "PASSING",
+      "security_review": "APPROVED"
+    },
+    {
+      "id": "US-004",
+      "title": "Sprint Management",
+      "status": "DONE",
+      "implemented_at": "2025-01-19",
+      "files": ["src/modules/sprints/sprints.service.ts", "src/modules/sprints/sprints.controller.ts"],
+      "tests": "PASSING",
+      "security_review": "APPROVED"
+    },
+    {
+      "id": "US-005",
+      "title": "API Token Authentication",
+      "status": "DONE",
+      "implemented_at": "2025-01-18",
+      "files": ["src/middleware/auth.ts", "src/modules/users/users.service.ts"],
+      "tests": "PASSING",
+      "security_review": "APPROVED"
+    }
+  ],
+  "decisions": [
+    {
+      "id": "ADR-001",
+      "title": "Fastify over Express",
+      "made_at": "2025-01-16",
+      "rationale": "3x faster, native schema validation, better TypeScript support"
+    },
+    {
+      "id": "ADR-002",
+      "title": "Prisma over raw SQL",
+      "made_at": "2025-01-16",
+      "rationale": "Type-safe queries, migration system, better DX"
+    },
+    {
+      "id": "ADR-003",
+      "title": "Monolith over microservices",
+      "made_at": "2025-01-16",
+      "rationale": "Team of 5, clear scope, over-engineering risk high with microservices"
+    }
+  ],
+  "open_issues": [],
+  "tech_stack": {
+    "runtime": "Node.js 20 LTS",
+    "language": "TypeScript 5.x",
+    "framework": "Fastify",
+    "database": "PostgreSQL 16",
+    "orm": "Prisma",
+    "auth": "JWT + API tokens",
+    "testing": "Vitest + Supertest",
+    "hosting": "Self-hosted Docker"
+  },
+  "test_results": {
+    "total": 32,
+    "passing": 32,
+    "failing": 0,
+    "coverage": "84%",
+    "performance": "p95 = 67ms @ 50 rps"
+  },
+  "llm_history": [
+    { "session": 1, "llm": "Claude Opus", "phase": "DISCOVER + DESIGN", "date": "2025-01-15" },
+    { "session": 2, "llm": "Cursor (Claude Sonnet)", "phase": "BUILD", "date": "2025-01-18" },
+    { "session": 3, "llm": "Claude Opus", "phase": "VERIFY + SHIP", "date": "2025-01-20" }
+  ]
+}

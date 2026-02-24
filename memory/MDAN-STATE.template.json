@@ -1,0 +1,44 @@
+{
+  "mdan_version": "2.0.0",
+  "user": {
+    "name": null
+  },
+  "project": {
+    "name": "{{PROJECT_NAME}}",
+    "type": null,
+    "detected_profile": null,
+    "created_at": "{{DATE}}",
+    "last_updated": "{{DATE}}"
+  },
+  "current_phase": "DISCOVER",
+  "phase_history": [
+    {
+      "phase": "DISCOVER",
+      "started_at": "{{DATE}}",
+      "completed_at": null,
+      "status": "IN_PROGRESS",
+      "artifacts": []
+    }
+  ],
+  "agents_used": {
+    "learn": null,
+    "product": null,
+    "architect": null,
+    "ux": null,
+    "dev": null,
+    "test": null,
+    "security": null,
+    "devops": null,
+    "doc": null
+  },
+  "features": [],
+  "decisions": [],
+  "open_issues": [],
+  "tech_stack": {},
+  "learned_knowledge": {
+    "skills": [],
+    "mcp_servers": [],
+    "rulesets": []
+  },
+  "llm_history": []
+}

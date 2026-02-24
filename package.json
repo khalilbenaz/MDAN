@@ -1,0 +1,48 @@
+{
+  "name": "mdan",
+  "version": "2.2.0",
+  "description": "Multi-Agent Development Agentic Network - A modern, adaptive, LLM-agnostic methodology for building software",
+  "main": "cli/mdan.js",
+  "bin": {
+    "mdan": "cli/mdan.js"
+  },
+  "scripts": {
+    "postinstall": "node cli/postinstall.js"
+  },
+  "keywords": [
+    "ai",
+    "agents",
+    "llm",
+    "development",
+    "methodology",
+    "cursor",
+    "claude",
+    "windsurf",
+    "copilot"
+  ],
+  "author": "khalilbenaz",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalilbenaz/MDAN.git"
+  },
+  "homepage": "https://github.com/khalilbenaz/MDAN#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "files": [
+    "cli/",
+    "core/",
+    "agents/",
+    "phases/",
+    "templates/",
+    "integrations/",
+    "memory/",
+    "skills/",
+    "install.sh"
+  ],
+  "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "picocolors": "^1.1.1"
+  }
+}
