@@ -506,25 +506,21 @@ def status(project_path):
     # Check integrations
     click.echo(f"\n{BOLD}Integrations:{NC}")
 
-    try:
-        from integrations.crewai.tools.serper_tool import SerperTool
+    import importlib.util
 
+    if importlib.util.find_spec("integrations.crewai.tools.serper_tool") is not None:
         click.echo(f"  {GREEN}✅{NC} Serper Tool: Available")
-    except ImportError:
+    else:
         click.echo(f"  {RED}❌{NC} Serper Tool: Not available")
 
-    try:
-        from integrations.crewai.tools.sql_tool import SQLTool
-
+    if importlib.util.find_spec("integrations.crewai.tools.sql_tool") is not None:
         click.echo(f"  {GREEN}✅{NC} SQL Tool: Available")
-    except ImportError:
+    else:
         click.echo(f"  {RED}❌{NC} SQL Tool: Not available")
 
-    try:
-        from integrations.crewai.tools.file_tool import FileTool
-
+    if importlib.util.find_spec("integrations.crewai.tools.file_tool") is not None:
         click.echo(f"  {GREEN}✅{NC} File Tool: Available")
-    except ImportError:
+    else:
         click.echo(f"  {RED}❌{NC} File Tool: Not available")
 
     # List agents
