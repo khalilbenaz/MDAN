@@ -27,16 +27,21 @@ Les outils IA traditionnels font le travail à votre place, produisant des résu
 
 ---
 
-## 🚀 Nouveautés dans MDAN v2.4
+## 🚀 Nouveautés dans MDAN v2.5
 
 **MDAN évolue rapidement avec des optimisations incluant :**
 
+- **MDAN-AUTO v1.0** — Mode de développement autonome sans intervention humaine
+- **Context Save/Resume** — Sauvegarde et reprise automatique du contexte à 80% des tokens
+- **Multi-Agent Debates** — Débats entre agents pour les décisions complexes
 - **Cross Platform Agent Team** — Agents multi-plateformes (Cursor, Windsurf, Claude Code, VS Code)
 - **Sub Agent Inclusion** — Sous-agents spécialisés pour des tâches ciblées
 - **Skills Architecture** — Architecture de skills extensible et modulable
 - **MDAN Builder v1** — Créez vos propres agents et workflows
 - **Dev Loop Automation** — Automatisation complète du cycle de développement
 - **Better Agents Integration** — Scenarios et evaluations intégrés
+- **Templates Génériques** — Templates services externes, .NET Blazor, SQL Server
+- **Architecture Modulaire** — Skills extensibles et modules spécialisés
 
 ---
 
@@ -119,8 +124,12 @@ MDAN s'étend avec des modules officiels pour domaines spécialisés :
 | Module | Description |
 |--------|-------------|
 | **MDAN Core** | Framework principal avec 5 phases |
+| **MDAN-AUTO** | Mode de développement autonome (8 phases) |
+| **External Services** | Templates d'intégration services externes génériques |
+| **.NET Blazor** | Templates projets .NET 8.0 Blazor Server |
+| **SQL Server** | Templates SQL Server (schema, stored procedures, functions) |
+| **Azure DevOps** | Skills pour Azure DevOps Services |
 | **Agile Scrum** | Workflows Agile/Scrum (Sprint, backlog, retrospectives) |
-| **Skills** | Compétences additionnelles |
 
 ```bash
 # Ajouter un module
@@ -129,7 +138,82 @@ mdan module add agile-scrum
 
 ---
 
+## 📋 Templates Disponibles
+
+MDAN fournit des templates génériques et réutilisables pour accélérer le développement :
+
+### External Services
+
+Templates d'intégration de services externes (APIs, microservices) :
+
+- `IService.cs` — Interface de base pour les services
+- `ServiceBase.cs` — Classe de base avec logging et gestion d'erreurs
+- `ServiceProvider.cs` — Gestionnaire de dépendances
+- `ExampleService.cs` — Exemple d'implémentation
+
+```bash
+# Utiliser le template
+cp templates/external-services/IService.cs src/Services/
+```
+
+### .NET Blazor
+
+Templates pour projets .NET 8.0 Blazor Server :
+
+- Structure de projet standard
+- Configuration de base
+- Exemples de composants
+
+```bash
+# Initialiser un projet Blazor
+mdan init mon-projet --template dotnet-blazor
+```
+
+### SQL Server
+
+Templates SQL Server pour bases de données :
+
+- `schema.sql` — Schéma de base de données
+- `stored-procedures.sql` — Procédures stockées
+- `functions.sql` — Fonctions SQL
+
+```bash
+# Utiliser les templates SQL
+cp templates/sql-server/schema.sql database/
+```
+
+---
+
 ## 🔧 Fonctionnalités Avancées
+
+### MDAN-AUTO v1.0 — Mode Autonome
+
+Développement entièrement autonome sans intervention humaine :
+
+```bash
+# Démarrer le mode autonome
+mdan auto
+
+# Reprendre depuis une sauvegarde
+mdan resume /tmp/mdan-save-1234567890.json
+```
+
+**Phases Autonomes** :
+1. **LOAD** — Chargement du contexte et des exigences
+2. **DISCOVER** — Analyse des exigences et user stories
+3. **PLAN** — Plan d'implémentation détaillé (#PHASE1, #PHASE2...)
+4. **ARCHITECT** — Conception de l'architecture système
+5. **IMPLEMENT** — Exécution de l'implémentation
+6. **TEST** — Tests complets (unitaires, intégration, E2E)
+7. **DEPLOY** — Déploiement en production
+8. **DOC** — Génération de la documentation
+
+**Fonctionnalités Clés** :
+- 🔄 Sauvegarde automatique à 80% des tokens
+- 🎯 Débats multi-agents pour décisions complexes
+- ⚡ Exécution séquentielle sans pause
+- 🚨 Fail-fast sur erreurs critiques
+- 📊 Signaux de progression (PHASE X COMPLETE ✅)
 
 ### Scenarios (Better Agents)
 
@@ -187,6 +271,8 @@ mdan module add [nom]    # Installer un module
 mdan oc                  # Copier l'orchestrateur
 mdan agent [nom]         # Voir un agent
 mdan skills              # Lister les skills
+mdan auto                # Démarrer le mode autonome
+mdan resume <save-file>  # Reprendre depuis une sauvegarde
 mdan mcp [action]        # Config MCP
 mdan prompt [action]     # Gérer les prompts
 ```
@@ -219,8 +305,20 @@ projet/
 │   ├── scenarios/           # Tests conversationnels
 │   └── evaluations/        # Évaluations benchmarks
 ├── templates/
-│   ├── prompts/            # Prompts versionnés (YAML)
-│   └── prompts.json        # Registre des prompts
+│   ├── external-services/   # Templates services externes génériques
+│   ├── dotnet-blazor/       # Templates .NET 8.0 Blazor Server
+│   ├── sql-server/          # Templates SQL Server
+│   ├── prompts/             # Prompts versionnés (YAML)
+│   └── prompts.json         # Registre des prompts
+├── phases/
+│   ├── auto-01-load.md      # Phase LOAD (autonome)
+│   ├── auto-02-discover.md  # Phase DISCOVER (autonome)
+│   ├── auto-03-plan.md      # Phase PLAN (autonome)
+│   ├── auto-04-architect.md # Phase ARCHITECT (autonome)
+│   ├── auto-05-implement.md # Phase IMPLEMENT (autonome)
+│   ├── auto-06-test.md      # Phase TEST (autonome)
+│   ├── auto-07-deploy.md    # Phase DEPLOY (autonome)
+│   └── auto-08-doc.md       # Phase DOC (autonome)
 ├── mdan_output/            # Artifacts générés par les agents
 ├── .cursorrules            # Pour Cursor
 ├── .windsurfrules         # Pour Windsurf
@@ -247,6 +345,55 @@ MDAN se compose de plusieurs composants interconnectés :
 | **Scenarios** | Tests conversationnels |
 | **Evaluations** | Benchmarking de composants |
 | **Prompts** | Versionnage YAML |
+
+---
+
+## 🧪 Tests et Qualité
+
+MDAN inclut une suite de tests complète pour garantir la qualité du code :
+
+### Framework de Tests
+
+- **pytest** — Framework de tests Python
+- **pytest-cov** — Couverture de code
+- **pytest-mock** — Mocking pour tests
+
+### Types de Tests
+
+| Type | Description | Emplacement |
+|------|-------------|-------------|
+| **Tests CLI** | Commandes CLI (init, attach, auto, etc.) | `tests/test_cli.py` |
+| **Tests Templates** | Validation des templates | `tests/test_templates.py` |
+| **Tests Services** | Patterns services externes | `tests/test_external_services.py` |
+| **Tests Installation** | Vérification installation | `tests/test_installation.py` |
+| **Tests Régression** | Pas de références wallet | `tests/test_regression.py` |
+
+### Exécuter les Tests
+
+```bash
+# Tous les tests
+pytest tests/ -v
+
+# Avec couverture
+pytest tests/ --cov=cli --cov-report=html
+
+# Tests spécifiques
+pytest tests/test_cli.py -v
+```
+
+### CI/CD
+
+GitHub Actions configurés pour :
+
+- **Tests automatiques** à chaque push
+- **Linting** avec ruff et mypy
+- **Couverture de code** minimale 80%
+
+```bash
+# Workflows CI/CD
+.github/workflows/test.yml
+.github/workflows/lint.yml
+```
 
 ---
 

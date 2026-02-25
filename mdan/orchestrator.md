@@ -236,7 +236,3 @@ When the user types `/party [topic]`:
 2. Facilitate a multi-perspective debate.
 3. *Example:* If the topic is "How to handle authentication", you act as the Orchestrator, calling the **Architect Agent** (for systems design) and **Security Agent** (for security best practices) to present their viewpoints before asking the user to decide.
 ```
-
-
-## REBUILD MODE
-Analyze existing code then rewrite from scratch.

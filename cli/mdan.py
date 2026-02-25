@@ -44,13 +44,19 @@ def show_help():
     print("  agent [name]             Show agent prompt")
     print("  oc                       Copy orchestrator prompt to clipboard")
     print("  skills                   List available skills")
+    print("  auto                     Start autonomous development mode")
+    print("  resume <save-file>       Resume from saved context")
     print("  version                  Show version\n")
     print(f"{BOLD}EXAMPLES{NC}")
     print("  mdan init my-app              # New project")
     print("  cd my-project && mdan attach  # Existing project")
-    print("  mdan attach --rebuild         # Rebuild from scratch\n")
+    print("  mdan attach --rebuild         # Rebuild from scratch")
+    print("  mdan auto                     # Start autonomous mode")
+    print("  mdan resume /tmp/mdan-save-*.json  # Resume execution\n")
     print(f"{BOLD}AGENTS{NC}")
-    print("  product, architect, ux, dev, test, security, devops, doc")
+    print(
+        "  product, architect, ux, dev, test, security, devops, doc, auto-orchestrator"
+    )
 
 
 def cmd_init(name="my-project"):
@@ -284,6 +290,68 @@ def cmd_skills():
         print("  No skills installed")
 
 
+def cmd_auto():
+    print(f"{CYAN}🚀 MDAN-AUTO v1.0 - Autonomous Development Mode{NC}\n")
+    print(f"{BOLD}Starting autonomous execution...{NC}\n")
+    print(f"{YELLOW}This will execute all phases without human intervention.{NC}")
+    print(f"{YELLOW}Context will be saved at 80% token limit.{NC}\n")
+    print(f"{BOLD}Phases:{NC}")
+    print("  1. LOAD      - Load project context")
+    print("  2. DISCOVER  - Analyze requirements")
+    print("  3. PLAN      - Create implementation plan")
+    print("  4. ARCHITECT - Design system architecture")
+    print("  5. IMPLEMENT - Execute implementation")
+    print("  6. TEST      - Run comprehensive tests")
+    print("  7. DEPLOY    - Deploy to production")
+    print("  8. DOC       - Generate documentation\n")
+    print(f"{GREEN}✅ MDAN-AUTO initialized{NC}")
+    print(
+        f"  {BOLD}Next:{NC} Load the Auto Orchestrator prompt from agents/auto-orchestrator.md"
+    )
+
+
+def cmd_resume(save_file=None):
+    if not save_file:
+        print(f"{RED}Error: Save file required{NC}")
+        print(f"  Usage: mdan resume <save-file>")
+        return
+
+    save_path = Path(save_file)
+    if not save_path.exists():
+        print(f"{RED}Error: Save file not found: {save_file}{NC}")
+        return
+
+    print(f"{CYAN}🔄 Resuming from: {BOLD}{save_file}{NC}\n")
+
+    try:
+        with open(save_path, "r") as f:
+            state = json.load(f)
+
+        print(f"{BOLD}Project:{NC} {state.get('project', {}).get('name', 'Unknown')}")
+        print(
+            f"{BOLD}Current Phase:{NC} {state.get('phases', {}).get('current', 'Unknown')}"
+        )
+        print(
+            f"{BOLD}Completed Phases:{NC} {', '.join(state.get('phases', {}).get('completed', []))}"
+        )
+        print(
+            f"{BOLD}Token Usage:{NC} {state.get('context', {}).get('token_usage', {}).get('total', 0)} / {state.get('context', {}).get('token_usage', {}).get('limit', 128000)} ({state.get('context', {}).get('token_usage', {}).get('percentage', 0) * 100:.1f}%)\n"
+        )
+
+        print(f"{GREEN}✅ Context loaded{NC}")
+        print(
+            f"  {BOLD}Next:{NC} Continue from {state.get('phases', {}).get('current', 'Unknown')} phase"
+        )
+        print(
+            f"  {BOLD}Tip:{NC} Load the Auto Orchestrator prompt with the restored context"
+        )
+
+    except json.JSONDecodeError:
+        print(f"{RED}Error: Invalid save file format{NC}")
+    except Exception as e:
+        print(f"{RED}Error: {e}{NC}")
+
+
 def main():
     args = sys.argv[1:]
     cmd = args[0] if args else "help"
@@ -306,6 +374,10 @@ def main():
         cmd_agent(args[1] if len(args) > 1 else None)
     elif cmd == "skills":
         cmd_skills()
+    elif cmd == "auto":
+        cmd_auto()
+    elif cmd == "resume":
+        cmd_resume(args[1] if len(args) > 1 else None)
     elif cmd in ["version", "-v"]:
         print(f"MDAN v{VERSION}")
     else:

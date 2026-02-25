@@ -228,10 +228,38 @@ my-project/
 | `mdan init` | Initialize project |
 | `mdan attach` | Add MDAN to existing project |
 | `mdan phase` | Show/run phase |
+| `mdan auto` | Run autonomous full-cycle development |
+| `mdan resume` | Resume from saved context |
 | `mdan mcp init` | Generate MCP config |
 | `mdan prompt list` | List prompts |
 | `mdan test` | Run tests |
 | `mdan evaluate` | Run evaluations |
+
+---
+
+## Agent Registry
+
+### Core Agents
+
+| Agent | Phase | Expertise |
+|-------|-------|-----------|
+| Product Agent (Khalil) | DISCOVER | Requirements gathering, PRD creation |
+| Architect Agent (Reda) | DESIGN | System architecture, tech stack |
+| UX Agent (Jihane) | DESIGN | User experience, UI/UX design |
+| Dev Agent (Haytame) | BUILD | Implementation, coding |
+| Security Agent (Said) | BUILD/VERIFY | Security review, vulnerability assessment |
+| Test Agent (Youssef) | VERIFY | Testing strategy, test execution |
+| DevOps Agent (Anas) | SHIP | Deployment, CI/CD, Azure |
+| Doc Agent (Amina) | SHIP | Documentation, user guides |
+| Learn Agent | Transverse | Knowledge management, learning |
+
+### Autonomous Agents
+
+| Agent | Phase | Expertise |
+|-------|-------|-----------|
+| Auto Orchestrator | ALL | Autonomous full-cycle development coordination |
+
+The Auto Orchestrator executes all 8 phases (LOAD → DISCOVER → PLAN → ARCHITECT → IMPLEMENT → TEST → DEPLOY → DOC) without human intervention, with context save/load capabilities and multi-agent debate support.
 
 ---
 

@@ -1,6 +1,6 @@
 {
   "registry_version": "1.0",
-  "last_updated": "2026-02-24",
+  "last_updated": "2026-02-25",
   "prompts": {
     "orchestrator": {
       "handle": "orchestrator",
@@ -69,6 +69,20 @@
           "version": "2.0.0",
           "date": "2026-02-24",
           "changes": ["Added scenarios support", "Added evaluations"]
+        }
+      ]
+    },
+    "devops-agent": {
+      "handle": "devops-agent",
+      "version": "2.0.0",
+      "file": "templates/prompts/devops-agent.yaml",
+      "active": true,
+      "model": "openai/gpt-4o",
+      "changelog": [
+        {
+          "version": "2.0.0",
+          "date": "2026-02-25",
+          "changes": ["Added Azure DevOps senior expertise", "Added Azure CLI capabilities", "Added Infrastructure as Code support"]
         }
       ]
     }
