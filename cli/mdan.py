@@ -6,7 +6,7 @@ import shutil
 import json
 from pathlib import Path
 
-VERSION = "2.5.1"
+VERSION = "2.7.0"
 MDAN_DIR = Path(__file__).parent.parent
 
 # Check CrewAI availability

@@ -55,7 +55,7 @@ class TestPackageJson:
         content = package_json.read_text()
         data = json.loads(content)
         assert "version" in data
-        assert data["version"] == "2.6.0"
+        assert data["version"] == "2.7.0"
 
     def test_package_json_has_bin(self):
         """Test that package.json has bin configuration."""
@@ -106,7 +106,7 @@ class TestCLIExecutable:
         """Test that Python CLI has version constant."""
         cli_py = Path(__file__).parent.parent / "cli" / "mdan.py"
         content = cli_py.read_text()
-        assert 'VERSION = "2.5.1"' in content
+        assert 'VERSION = "2.7.0"' in content
 
     def test_cli_python_has_main_function(self):
         """Test that Python CLI has main function."""
