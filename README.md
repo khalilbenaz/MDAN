@@ -275,6 +275,32 @@ mdan auto                # Démarrer le mode autonome
 mdan resume <save-file>  # Reprendre depuis une sauvegarde
 mdan mcp [action]        # Config MCP
 mdan prompt [action]     # Gérer les prompts
+mdan crewai <command>    # CrewAI integration commands
+```
+
+### CrewAI CLI Commands
+
+```bash
+# Initialize CrewAI in a project
+mdan crewai init
+
+# Run autonomous mode
+mdan crewai auto "Build a todo app"
+
+# Start multi-agent debate
+mdan crewai debate "Best architecture for a microservices app"
+
+# Execute task with specific agent
+mdan crewai agent dev "Implement user authentication"
+
+# Execute specific flow
+mdan crewai flow discovery "Analyze requirements"
+
+# List available skills
+mdan crewai skills
+
+# Show CrewAI status
+mdan crewai status
 ```
 
 ---
@@ -301,6 +327,13 @@ projet/
 │   │   ├── test.md
 │   │   └── ...
 │   └── skills/              # Skills installés
+├── integrations/
+│   └── crewai/              # CrewAI integration
+│       ├── agents/          # 8 CrewAI agents
+│       ├── flows/           # 4 CrewAI flows
+│       ├── tools/           # Custom tools (Serper, SQL, File)
+│       ├── skills/          # Skill router
+│       └── orchestrator.py  # Main orchestrator
 ├── tests/
 │   ├── scenarios/           # Tests conversationnels
 │   └── evaluations/        # Évaluations benchmarks
@@ -326,6 +359,7 @@ projet/
 ├── .github/               # Pour Copilot
 ├── .mcp.json             # Configuration MCP
 ├── AGENTS.md              # Guidelines de développement
+├── requirements_crewai.txt # CrewAI dependencies
 └── MDAN-STATE.json        # État de la session
 ```
 
@@ -397,6 +431,94 @@ GitHub Actions configurés pour :
 
 ---
 
+## 🤖 CrewAI Integration
+
+MDANV2 includes a comprehensive CrewAI integration for intelligent multi-agent orchestration.
+
+### Installation
+
+```bash
+# Note: CrewAI requires Python 3.10-3.13
+pip install -r requirements_crewai.txt
+```
+
+### Environment Variables
+
+```bash
+export SERPER_API_KEY="your-serper-api-key"
+export OPENAI_API_KEY="your-openai-api-key"
+```
+
+### Usage
+
+```python
+import asyncio
+from integrations.crewai import CrewAIOrchestrator
+
+async def main():
+    orchestrator = CrewAIOrchestrator(
+        project_path="/path/to/project",
+        llm=your_llm_instance,
+        auto_mode=True
+    )
+
+    # Run autonomous mode
+    result = await orchestrator.run_auto_mode("Build a todo app")
+
+asyncio.run(main())
+```
+
+### Components
+
+- **8 CrewAI Agents**: Product, Architect, UX, Dev, Test, Security, DevOps, Doc
+- **4 CrewAI Flows**: Auto, Discovery, Build, Debate
+- **3 Custom Tools**: Serper (web search), SQL (async database), File (file operations)
+- **Skill Router**: Intelligent skill detection and routing (50+ skills)
+
+### Example Scripts
+
+See the `examples/` directory for complete examples:
+
+- `examples/crewai_auto_mode.py` — Autonomous mode example
+- `examples/crewai_debate.py` — Multi-agent debate example
+- `examples/crewai_custom_crew.py` — Custom crew creation example
+- `examples/crewai_with_sql.py` — SQL integration example (in-memory SQLite)
+- `examples/crewai_with_serper.py` — Web search example
+
+### Troubleshooting
+
+**Python Version Issue**: CrewAI requires Python 3.10-3.13. If you're using Python 3.14, you'll need to use a different Python version.
+
+```bash
+# Check Python version
+python --version
+
+# Create a virtual environment with Python 3.13
+python3.13 -m venv venv
+source venv/bin/activate
+pip install -r requirements_crewai.txt
+```
+
+**Import Errors**: Make sure you're running from the project root directory.
+
+```bash
+# Run from project root
+cd /path/to/MDANV2
+python examples/crewai_auto_mode.py
+```
+
+**Missing API Keys**: Ensure your environment variables are set.
+
+```bash
+# Check if keys are set
+echo $OPENAI_API_KEY
+echo $SERPER_API_KEY
+```
+
+### Documentation
+
+See `core/crewai_orchestrator.md` for complete documentation.
+
 ## 📚 Documentation
 
 | Document | Description |
@@ -404,6 +526,7 @@ GitHub Actions configurés pour :
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Architecture technique |
 | [MDAN.md](MDAN.md) | Spécification complète |
 | [AGENTS.md](AGENTS.md) | Guidelines de développement |
+| [core/crewai_orchestrator.md](core/crewai_orchestrator.md) | CrewAI integration documentation |
 | [docs/fr/](docs/fr/) | Documentation en français |
 
 ---

@@ -8,8 +8,12 @@ from pathlib import Path
 from unittest.mock import Mock, patch
 import pytest
 
+# Add project root to path for integrations module
+PROJECT_ROOT = Path(__file__).parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
+
 # Add CLI directory to path
-CLI_DIR = Path(__file__).parent.parent / "cli"
+CLI_DIR = PROJECT_ROOT / "cli"
 sys.path.insert(0, str(CLI_DIR))
 
 

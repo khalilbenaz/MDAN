@@ -55,7 +55,7 @@ class TestPackageJson:
         content = package_json.read_text()
         data = json.loads(content)
         assert "version" in data
-        assert data["version"] == "2.5.1"
+        assert data["version"] == "2.6.0"
 
     def test_package_json_has_bin(self):
         """Test that package.json has bin configuration."""

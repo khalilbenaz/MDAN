@@ -9,6 +9,14 @@ from pathlib import Path
 VERSION = "2.5.1"
 MDAN_DIR = Path(__file__).parent.parent
 
+# Import CrewAI CLI
+try:
+    from cli.mdan_crewai import crewai_cli
+
+    CREWAI_AVAILABLE = True
+except ImportError:
+    CREWAI_AVAILABLE = False
+
 # Colors
 RED = "\033[0;31m"
 GREEN = "\033[0;32m"
@@ -34,7 +42,7 @@ def banner():
 def show_help():
     banner()
     print(f"{BOLD}USAGE{NC}")
-    print("  mdan <command> [options]\n")
+    print("  mdan <command> [options]\\n")
     print(f"{BOLD}COMMANDS{NC}")
     print("  init [name]              Create a new project")
     print("  attach [--rebuild]       Add MDAN to existing project")
@@ -45,13 +53,24 @@ def show_help():
     print("  skills                   List available skills")
     print("  auto                     Start autonomous development mode")
     print("  resume <save-file>       Resume from saved context")
-    print("  version                  Show version\n")
+    print("  crewai <command>         CrewAI integration commands")
+    print("  version                  Show version\\n")
+    print(f"{BOLD}CREWAI COMMANDS{NC}")
+    print("  crewai init              Initialize CrewAI in project")
+    print("  crewai auto <task>       Run autonomous mode")
+    print("  crewai debate <topic>    Start multi-agent debate")
+    print("  crewai agent <name> <task>  Execute task with agent")
+    print("  crewai flow <name> <task>   Execute specific flow")
+    print("  crewai skills            List available skills")
+    print("  crewai status            Show CrewAI status\\n")
     print(f"{BOLD}EXAMPLES{NC}")
     print("  mdan init my-app              # New project")
     print("  cd my-project && mdan attach  # Existing project")
     print("  mdan attach --rebuild         # Rebuild from scratch")
     print("  mdan auto                     # Start autonomous mode")
-    print("  mdan resume /tmp/mdan-save-*.json  # Resume execution\n")
+    print("  mdan crewai init              # Initialize CrewAI")
+    print('  mdan crewai auto "Build app"  # Run CrewAI auto mode')
+    print("  mdan resume /tmp/mdan-save-*.json  # Resume execution\\n")
     print(f"{BOLD}AGENTS{NC}")
     print(
         "  product, architect, ux, dev, test, security, devops, doc, auto-orchestrator"
@@ -351,6 +370,19 @@ def cmd_resume(save_file=None):
         print(f"{RED}Error: {e}{NC}")
 
 
+def cmd_crewai():
+    """Handle CrewAI subcommands."""
+    if not CREWAI_AVAILABLE:
+        print(f"{RED}❌ CrewAI integration not available{NC}")
+        print(f"  Install with: {CYAN}pip install -r requirements_crewai.txt{NC}")
+        sys.exit(1)
+
+    # Pass control to CrewAI CLI
+    from cli.mdan_crewai import crewai_cli
+
+    crewai_cli()
+
+
 def main():
     args = sys.argv[1:]
     cmd = args[0] if args else "help"
@@ -377,6 +409,8 @@ def main():
         cmd_auto()
     elif cmd == "resume":
         cmd_resume(args[1] if len(args) > 1 else None)
+    elif cmd == "crewai":
+        cmd_crewai()
     elif cmd in ["version", "-v"]:
         print(f"MDAN v{VERSION}")
     else:
