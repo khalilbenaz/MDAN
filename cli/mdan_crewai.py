@@ -6,7 +6,6 @@ import json
 import os
 import sys
 from pathlib import Path
-from typing import Optional
 
 try:
     import click
@@ -161,8 +160,8 @@ DB_PASSWORD=your-db-password
     click.echo(f"  {BOLD}Config file:{NC} {config_file}")
     click.echo(f"  {BOLD}Env example:{NC} {env_example}")
     click.echo(f"\n  {BOLD}Next:{NC}")
-    click.echo(f"  1. Copy .env.example to .env and fill in your API keys")
-    click.echo(f"  2. Customize crewai_config.yaml if needed")
+    click.echo("  1. Copy .env.example to .env and fill in your API keys")
+    click.echo("  2. Customize crewai_config.yaml if needed")
     click.echo(f"  3. Run: {CYAN}mdan crewai status{NC}")
 
 

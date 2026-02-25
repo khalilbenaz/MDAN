@@ -9,11 +9,11 @@ from pathlib import Path
 VERSION = "2.5.1"
 MDAN_DIR = Path(__file__).parent.parent
 
-# Import CrewAI CLI
+# Check CrewAI availability
 try:
-    from cli.mdan_crewai import crewai_cli
+    import importlib.util
 
-    CREWAI_AVAILABLE = True
+    CREWAI_AVAILABLE = importlib.util.find_spec("cli.mdan_crewai") is not None
 except ImportError:
     CREWAI_AVAILABLE = False
 
