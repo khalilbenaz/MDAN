@@ -6,6 +6,13 @@ from pathlib import Path
 import tempfile
 import json
 import asyncio
+import importlib.util
+
+# Skip all tests if CrewAI is not installed
+pytestmark = pytest.mark.skipif(
+    importlib.util.find_spec("crewai") is None,
+    reason="CrewAI not installed - optional integration",
+)
 
 
 class TestCrewAIOrchestrator:
