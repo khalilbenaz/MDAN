@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 """MDAN CLI - Multi-Agent Development Agentic Network"""
 
-import os
 import sys
 import shutil
 import json
@@ -313,7 +312,7 @@ def cmd_auto():
 def cmd_resume(save_file=None):
     if not save_file:
         print(f"{RED}Error: Save file required{NC}")
-        print(f"  Usage: mdan resume <save-file>")
+        print("  Usage: mdan resume <save-file>")
         return
 
     save_path = Path(save_file)
