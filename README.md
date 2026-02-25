@@ -1,18 +1,42 @@
 # MDAN — Multi-Agent Development Agentic Network
 
-> Une méthode agentique moderne pour construire n'importe quel logiciel avec l'IA.
+![MDAN Banner](banner-mdan.png)
+
+[![Version](https://img.shields.io/npm/v/mdan-cli?color=blue&label=version)](https://www.npmjs.com/package/mdan-cli)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Node.js Version](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen)](https://nodejs.org)
+[![Discord](https://img.shields.io/badge/Discord-Join%20Community-7289da?logo=discord&logoColor=white)](https://discord.gg/mdan)
+
+**Multi-Agent Development Agentic Network** — Une méthode agentique moderne et adaptative pour construire n'importe quel logiciel avec l'IA. MDAN est votre collaborateur expert qui guide le développement de l'analyse jusqu'au déploiement.
+
+**100% gratuit et open source.** Pas de paywall. Pas de contenu bloqué. Nous croyons en l'accessibilité pour tous.
 
 ---
 
-## 🌟 Pourquoi MDAN v2 ?
+## Pourquoi MDAN ?
 
-MDAN v2 a été repensé pour être un véritable collaborateur expert plutôt qu'un simple outil de génération de code.
+Les outils IA traditionnels font le travail à votre place, produisant des résultats médiocres. Les agents MDAN et ses workflows structurés agissent comme des collaborateurs experts qui vous guident à travers un processus structuré pour exploiter au maximum votre potentiel en partenariat avec l'IA.
 
 - **🤖 Aide Intelligente IA** — Tapez `/mdan-help` à tout moment pour savoir quoi faire ensuite
-- **⚖️ Auto-adaptatif (Scale-Domain)** — Ajuste automatiquement la profondeur de la planification selon la taille de votre projet (du script solo à l'application d'entreprise)
-- **🎉 Party Mode** — Invoquez plusieurs agents avec `/party` pour débattre et collaborer sur des choix d'architecture ou de design
-- **🧠 Workflow Structuré** — 5 phases claires et éprouvées (Discover, Design, Build, Verify, Ship)
-- **🔌 Mémoire Persistante** — Avec le fichier `MDAN-STATE.json` qui vous permet de reprendre votre travail d'une session à l'autre
+- **⚖️ Auto-adaptatif (Scale-Domain)** — Ajuste automatiquement la profondeur de la planification selon la taille du projet (du script solo à l'application d'entreprise)
+- **🎉 Party Mode** — Invokequez plusieurs agents avec `/party` pour débattre et collaborer sur des choix d'architecture
+- **🧠 Workflow Structuré** — 5 phases claires et éprouvées (DISCOVER, DESIGN, BUILD, VERIFY, SHIP)
+- **🔌 Mémoire Persistante** — Reprenez votre travail d'une session à l'autre avec `MDAN-STATE.json`
+- **👥 Agents Personnalisés** — Chaque agent a un nom et une personnalité unique (Khalil, Reda, Jihane, Haytame, etc.)
+- **✅ Quality Gates** — Portes de qualité adaptatives selon le profil du projet
+
+---
+
+## 🚀 Nouveautés dans MDAN v2.4
+
+**MDAN évolue rapidement avec des optimisations incluant :**
+
+- **Cross Platform Agent Team** — Agents multi-plateformes (Cursor, Windsurf, Claude Code, VS Code)
+- **Sub Agent Inclusion** — Sous-agents spécialisés pour des tâches ciblées
+- **Skills Architecture** — Architecture de skills extensible et modulable
+- **MDAN Builder v1** — Créez vos propres agents et workflows
+- **Dev Loop Automation** — Automatisation complète du cycle de développement
+- **Better Agents Integration** — Scenarios et evaluations intégrés
 
 ---
 
@@ -36,116 +60,135 @@ npx mdan-cli init mon-projet
 curl -fsSL https://raw.githubusercontent.com/khalilbenaz/MDAN/main/install.sh | bash
 ```
 
-### Option 4 : Manuel
+Suivez les instructions de l'installeur, puis ouvrez votre IDE IA (Claude Code, Cursor, etc.) dans votre dossier de projet.
+
+---
+
+## 🚀 Démarrage Rapide
 
 ```bash
-git clone https://github.com/khalilbenaz/MDAN.git
-cd MDAN && bash install.sh
+# Créer un nouveau projet
+mdan init mon-projet
+
+# Ou attacher à un projet existant
+cd mon-projet
+mdan attach
+
+# Ouvrir dans votre IDE
+cursor .
+```
+
+**Pas sûr de quoi faire ?** Tapez `/mdan-help` — cela vous dit exactement quoi faire ensuite.
+
+---
+
+## 🎯 Phases de Développement
+
+| Phase | Agent | Résultat |
+|-------|-------|----------|
+| **1. DISCOVER** | Product Agent (Khalil) | PRD validé, user stories |
+| **2. DESIGN** | Architect (Reda) + UX (Jihane) | Architecture + Specs |
+| **3. BUILD** | Dev (Haytame) + Security (Said) | Code implémenté |
+| **4. VERIFY** | Test (Youssef) + Security (Said) | Tests passants, sécurité |
+| **5. SHIP** | DevOps (Anas) + Doc (Amina) | Déployé + Documenté |
+
+---
+
+## 🤖 Agents Spécialisés
+
+MDAN dispose de 9 agents spécialisés avec personnalité :
+
+| Agent | Nom | Phase | Rôle |
+|-------|-----|-------|------|
+| Product | Khalil | DISCOVER | PRD, user stories, priorisation |
+| Architect | Reda | DESIGN | Architecture, stack, ADR |
+| UX | Jihane | DESIGN | Flows, design system, accessibilité |
+| Dev | Haytame | BUILD | Code, tests, refactoring |
+| Test | Youssef | VERIFY | Tests unitaires, E2E, scénarios |
+| Security | Said | BUILD+VERIFY | Vulnérabilités, audit |
+| DevOps | Anas | SHIP | CI/CD, déploiement,监控 |
+| Doc | Amina | SHIP | Documentation, API docs |
+| Learn | - | Toutes | Skills, rules, MCP |
+
+---
+
+## 📦 Modules
+
+MDAN s'étend avec des modules officiels pour domaines spécialisés :
+
+| Module | Description |
+|--------|-------------|
+| **MDAN Core** | Framework principal avec 5 phases |
+| **Agile Scrum** | Workflows Agile/Scrum (Sprint, backlog, retrospectives) |
+| **Skills** | Compétences additionnelles |
+
+```bash
+# Ajouter un module
+mdan module add agile-scrum
 ```
 
 ---
 
-## 🚀 Utilisation
+## 🔧 Fonctionnalités Avancées
 
-### Nouveau projet
+### Scenarios (Better Agents)
+
+Tests conversationnels end-to-end pour valider le comportement des agents.
 
 ```bash
-mdan init mon-projet
-cursor mon-projet
+# Créer un scenario
+tests/scenarios/auth.test.md
+
+# Exécuter
+npm test -- tests/scenarios/
 ```
 
-### Projet existant
+### Evaluations
+
+Benchmarking structuré pour les composants RAG/ML.
 
 ```bash
-cd votre-projet
-mdan attach
-cursor .
+# Évaluer la qualité RAG
+langwatch evaluate --dataset customer-support
 ```
 
-### Rebuild from scratch
+### Prompts Versionnés
+
+Tous les prompts sont versionnés en YAML avec historique.
 
 ```bash
-cd votre-projet
-mdan attach --rebuild
-cursor .
+# Lister les prompts
+mdan prompt list
+
+# Voir un prompt
+mdan prompt show orchestrator
+```
+
+### MCP Integration
+
+Configuration automatique pour Cursor, Claude Code, Windsurf.
+
+```bash
+# Générer la config MCP
+mdan mcp init
 ```
 
 ---
 
 ## 📖 Commandes
 
-MDAN v2 propose un installeur **interactif** : tapez simplement `mdan` pour être guidé ! 
-
-Vous pouvez aussi utiliser les commandes directes :
-
 ```bash
-mdan init                 # Lancer l'assistant de création (Wizard)
-mdan init [nom]           # Créer un nouveau projet directement
-mdan attach               # Ajouter MDAN au projet courant
-mdan attach --rebuild     # Préparer pour un rebuild complet
+mdan init [nom]           # Créer un nouveau projet
+mdan attach [--rebuild]   # Ajouter MDAN à un projet existant
 mdan status               # Voir le statut du projet
-mdan phase [1-5|nom]      # Voir le guide d'une phase (ex: mdan phase discover)
-mdan workflow [nom]       # Voir une micro-procédure (ex: bug-fix, refactoring)
-mdan module add [nom]     # Ajouter une extension métier (ex: agile-scrum)
-mdan oc                   # Copier le prompt de l'Orchestrateur dans le presse-papier
-mdan agent [nom]          # Voir le prompt d'un agent
-mdan skills               # Lister les skills
-mdan mcp [action]        # MCP config (init|validate|list)
-mdan prompt [action]     # Gérer les prompts (list|show)
-mdan version              # Version
-```
-
-*Astuce : Vous pouvez ajouter `copy` ou `-c` à la fin des commandes `phase` ou `workflow` pour copier le contenu directement dans votre presse-papier (ex: `mdan phase 1 copy`).*
-
----
-
-## 🎯 Workflow
-
-| Phase | Agent | Résultat |
-|-------|-------|----------|
-| **1. DISCOVER** | Product Agent | PRD validé |
-| **2. DESIGN** | Architect + UX | Architecture + Specs |
-| **3. BUILD** | Dev + Security | Code implémenté |
-| **4. VERIFY** | Test + Security | Tests passants |
-| **5. SHIP** | DevOps + Doc | Déployé + Documenté |
-
----
-
-## 🤖 Agents
-
-| Agent | Phase | Rôle |
-|-------|-------|------|
-| Learn Agent | Toutes | Skills, rules, MCP |
-| Product Agent | DISCOVER | PRD, user stories |
-| Architect Agent | DESIGN | Architecture, stack |
-| UX Agent | DESIGN | Flows, design system |
-| Dev Agent | BUILD | Code, tests unitaires |
-| Security Agent | BUILD+VERIFY | Vulnérabilités |
-| Test Agent | VERIFY | Tests E2E, perf |
-| DevOps Agent | SHIP | CI/CD, infra |
-| Doc Agent | SHIP | Documentation |
-
----
-
-## 💡 Exemples de prompts
-
-### Nouveau projet
-```
-MDAN: Je veux créer une app de gestion de tâches avec auth, 
-dashboard et notifications. Commence par DISCOVER.
-```
-
-### Projet existant
-```
-MDAN: Analyse ce projet et propose des améliorations.
-Identifie la dette technique et suggère des optimizations.
-```
-
-### Rebuild complet
-```
-MDAN REBUILD: Analyse tout le code existant, documente 
-chaque feature, et propose une architecture moderne 
-pour tout réécrire from scratch.
+mdan phase [1-5]         # Afficher le guide d'une phase
+mdan workflow [nom]      # Afficher un workflow détaillé
+mdan module add [nom]    # Installer un module
+mdan oc                  # Copier l'orchestrateur
+mdan agent [nom]         # Voir un agent
+mdan skills              # Lister les skills
+mdan mcp [action]        # Config MCP
+mdan prompt [action]     # Gérer les prompts
 ```
 
 ---
@@ -155,75 +198,55 @@ pour tout réécrire from scratch.
 - **Cursor** — `.cursorrules` auto-généré
 - **Windsurf** — `.windsurfrules` auto-généré
 - **Claude Code** — `.claude/skills/` auto-généré
-- **GitHub Copilot** — `.github/copilot-instructions.md` auto-généré
-- **Claude Web** — Copier `mdan/orchestrator.md`
+- **VS Code** — Via MCP
+- **GitHub Copilot** — `.github/copilot-instructions.md`
 
 ---
 
-## 📁 Structure créée
+## 📁 Structure du Projet
 
 ```
 projet/
 ├── mdan/
-│   ├── orchestrator.md      # System prompt
+│   ├── orchestrator.md      # System prompt principal
+│   ├── universal-envelope.md
 │   ├── agents/              # Prompts des agents
-│   ├── skills/              # Skills installés
-│   └── STATUS.md            # Progression
+│   │   ├── dev.md
+│   │   ├── test.md
+│   │   └── ...
+│   └── skills/              # Skills installés
 ├── tests/
-│   ├── scenarios/           # Tests conversationnels (Better Agents)
-│   └── evaluations/        # Évaluations (RAG, classification)
+│   ├── scenarios/           # Tests conversationnels
+│   └── evaluations/        # Évaluations benchmarks
 ├── templates/
-│   ├── prompts/             # Prompts versionnés (YAML)
-│   └── prompts.json         # Registre des prompts
-├── mdan_output/             # Dossier où les agents génèrent leurs livrables (PRD, Archi...)
-├── .cursorrules             # Pour Cursor
-├── .windsurfrules           # Pour Windsurf
-├── .claude/skills/          # Pour Claude Code
-├── .github/copilot-instructions.md
-├── .mcp.json               # Configuration MCP
-└── AGENTS.md               # Guidelines de développement
+│   ├── prompts/            # Prompts versionnés (YAML)
+│   └── prompts.json        # Registre des prompts
+├── mdan_output/            # Artifacts générés par les agents
+├── .cursorrules            # Pour Cursor
+├── .windsurfrules         # Pour Windsurf
+├── .claude/skills/        # Pour Claude Code
+├── .github/               # Pour Copilot
+├── .mcp.json             # Configuration MCP
+├── AGENTS.md              # Guidelines de développement
+└── MDAN-STATE.json        # État de la session
 ```
 
-### Fonctionnalités Better Agents intégrées
-
-| Feature | Description |
-|---------|-------------|
-| **Scenarios** | Tests conversationnels end-to-end dans `tests/scenarios/` |
-| **Evaluations** | Benchmarking structuré (RAG, classification) dans `tests/evaluations/` |
-| **Prompts** | Versionnage des prompts en YAML dans `templates/prompts/` |
-| **MCP** | Configuration pour Cursor/Claude via `.mcp.json` |
-| **AGENTS.md** | Guidelines de développement (copie de Better Agents) |
-
 ---
 
-## 📄 Licence
+## 🏗️ Architecture Technique
 
-MIT — Libre d'utilisation.
-
----
-
-## 🏗️ Architecture
-
-MDAN se compose de plusieurs composants interconnectés:
+MDAN se compose de plusieurs composants interconnectés :
 
 | Composant | Rôle |
 |-----------|------|
 | **MDAN Core** | Orchestrateur central qui coordonne les agents |
-| **Agents** | 9 agents spécialisés (Product, Architect, UX, Dev, etc.) |
-| **CLI** | Interface en ligne de commande (`mdan init`, `mdan attach`) |
-| **Memory** | Système de persistance entre sessions (`MDAN-STATE.json`) |
+| **Agents** | 9 agents spécialisés avec personnalité |
+| **CLI** | Interface en ligne de commande |
+| **Memory** | Persistance entre sessions |
 | **Skills** | Compétences optionnelles extensibles |
-| **Scenarios** | Tests conversationnels (Better Agents) |
-| **Evaluations** | Benchmarking de composants (Better Agents) |
-| **Prompts** | Versionnage YAML des prompts |
-
-```
-Utilisateur → CLI → MDAN Core → Agents → Artifacts
-                            ↓
-                        Memory System
-```
-
-Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour la documentation technique complète.
+| **Scenarios** | Tests conversationnels |
+| **Evaluations** | Benchmarking de composants |
+| **Prompts** | Versionnage YAML |
 
 ---
 
@@ -231,18 +254,24 @@ Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour la documentation technique complèt
 
 | Document | Description |
 |----------|-------------|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Architecture technique du projet |
-| [MDAN.md](MDAN.md) | Spécification complète de la méthode |
-| [CLI-REFERENCE.md](docs/fr/CLI-REFERENCE.md) | Référence des commandes CLI |
-| [CONTRIBUTING-DEV.md](docs/fr/CONTRIBUTING-DEV.md) | Guide du contributeur développeur |
-| [Exemple complet](examples/taskflow-api/EXAMPLE.md) | Projet exemple TaskFlow API |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Architecture technique |
+| [MDAN.md](MDAN.md) | Spécification complète |
+| [AGENTS.md](AGENTS.md) | Guidelines de développement |
+| [docs/fr/](docs/fr/) | Documentation en français |
 
 ---
 
 ## 🔗 Liens
 
-- [Documentation EN](docs/en/README.md)
-- [Documentation FR](docs/fr/README.md)
 - [GitHub](https://github.com/khalilbenaz/MDAN)
 - [NPM](https://www.npmjs.com/package/mdan-cli)
-- [Better Agents](https://langwatch.ai/docs/better-agents) — Fonctionnalités de test intégrées
+- [Documentation](https://github.com/khalilbenaz/MDAN#readme)
+- [Discord](https://discord.gg/mdan)
+
+---
+
+## 📄 Licence
+
+MIT License — voir [LICENSE](LICENSE) pour les détails.
+
+---

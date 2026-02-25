@@ -6,7 +6,7 @@ const { execSync } = require('child_process');
 const { intro, text, select, isCancel, cancel, outro, spinner } = require('@clack/prompts');
 const pc = require('picocolors');
 
-const VERSION = '2.4.3';
+const VERSION = '2.5.0';
 const MDAN_DIR = path.resolve(__dirname, '..');
 
 // Colors
@@ -35,29 +35,29 @@ ${colors.nc}
 
 function showHelp() {
   banner();
-  console.log(`${colors.bold}USAGE${colors.nc}
+  console.log(`${colors.bold}UTILISATION${colors.nc}
   mdan <command> [options]
 
- ${colors.bold}COMMANDS${colors.nc}
-  init [name]              Create a new project
-  attach [--rebuild]       Add MDAN to existing project
-  status                   Show project status
-  phase [1-5]              Show phase guide
-  workflow [name]          Show granular workflow
-  module add [name]        Install a domain module (e.g., agile-scrum)
-  agent [name]             Show agent prompt
-  oc                       Copy orchestrator prompt to clipboard
-  skills                   List available skills
-  mcp [action]             MCP config (init|validate|list)
-  prompt [action]          Manage prompts (list|show <name>)
-  version                  Show version
+ ${colors.bold}COMMANDES${colors.nc}
+  init [nom]              Creer un nouveau projet
+  attach [--rebuild]       Ajouter MDAN a un projet existant
+  status                   Afficher le statut du projet
+  phase [1-5]              Afficher le guide d'une phase
+  workflow [nom]           Afficher un workflow detaille
+  module add [nom]        Installer un module (ex: agile-scrum)
+  agent [nom]             Afficher le prompt d'un agent
+  oc                       Copier le prompt de l'orchestrateur
+  skills                   Lister les skills disponibles
+  mcp [action]            Config MCP (init|validate|list)
+  prompt [action]         Gerer les prompts (list|show <nom>)
+  version                  Afficher la version
 
- ${colors.bold}EXAMPLES${colors.nc}
-  mdan init my-app              # New project
-  cd my-project && mdan attach  # Existing project
-  mdan attach --rebuild         # Rebuild from scratch
-  mdan mcp init                 # Generate .mcp.json
-  mdan prompt list              # List versioned prompts
+ ${colors.bold}EXEMPLES${colors.nc}
+  mdan init mon-projet           # Nouveau projet
+  cd mon-projet && mdan attach   # Projet existant
+  mdan attach --rebuild          # Rebuild complet
+  mdan mcp init                  # Generer .mcp.json
+  mdan prompt list               # Lister les prompts
 
  ${colors.bold}AGENTS${colors.nc}
   product, architect, ux, dev, test, security, devops, doc
@@ -65,43 +65,43 @@ function showHelp() {
 }
 
 async function cmdInit(initialName) {
-  intro(pc.bgCyan(pc.black(' MDAN v' + VERSION + ' - Initialization Wizard ')));
+  intro(pc.bgCyan(pc.black(' MDAN v' + VERSION + ' - Assistant de creation ')));
 
   let name = initialName;
   
   if (!name) {
     const namePrompt = await text({
-      message: 'What is your project name?',
-      initialValue: 'my-project',
+      message: 'Quel est le nom de votre projet ?',
+      initialValue: 'mon-projet',
       validate(value) {
-        if (value.length === 0) return 'Name is required!';
+        if (value.length === 0) return 'Le nom est requis !';
       }
     });
 
     if (isCancel(namePrompt)) {
-      cancel('Operation cancelled.');
+      cancel('Operation annulee.');
       return process.exit(0);
     }
     name = namePrompt;
   }
   
   const setupType = await select({
-    message: 'What kind of project are you building?',
+    message: 'Quel type de projet construisez-vous ?',
     options: [
-      { value: 'standard', label: 'Standard Web/Mobile App', hint: 'Default 5-phase workflow' },
-      { value: 'micro', label: 'Micro Project', hint: 'Solo dev, single feature, simple' },
-      { value: 'api', label: 'API / SDK', hint: 'No UI, dev-focused' },
-      { value: 'product', label: 'Scale-up Product', hint: 'Multi-month, stakeholders' }
+      { value: 'standard', label: 'Application Web/Mobile standard', hint: 'Workflow 5 phases par defaut' },
+      { value: 'micro', label: 'Micro projet', hint: 'Dev solo, une seule feature' },
+      { value: 'api', label: 'API / SDK', hint: 'Pas de UI, oriente dev' },
+      { value: 'product', label: 'Produit Scale-up', hint: 'Multi-mois, stakeholders' }
     ]
   });
 
   if (isCancel(setupType)) {
-    cancel('Operation cancelled.');
+    cancel('Operation annulee.');
     return process.exit(0);
   }
 
   const s = spinner();
-  s.start(`Creating ${name} project structure...`);
+  s.start(`Creation de la structure du projet ${name}...`);
   
   const dirs = [
     `${name}/mdan/agents`,
@@ -167,33 +167,33 @@ async function cmdInit(initialName) {
   };
   fs.writeFileSync(`${name}/.mcp.json`, JSON.stringify(mcpConfig, null, 2));
   
-  s.stop(pc.green(`Project ${name} initialized successfully!`));
+  s.stop(pc.green(`Projet ${name} initialise avec succes !`));
   
   outro(
-    pc.bold('Next steps:\n') +
+    pc.bold('Prochaines etapes:\n') +
     `1. ${pc.cyan(`cd ${name}`)}\n` +
-    `2. Open the folder in your IDE (Cursor, Windsurf, etc.)\n` +
-    `3. Or run ${pc.cyan('mdan oc')} and paste into your favorite LLM chat.`
+    `2. Ouvrez le dossier dans votre IDE (Cursor, Windsurf, etc.)\n` +
+    `3. Ou executez ${pc.cyan('mdan oc')} et collez dans votre LLM prefere.`
   );
 }
 
 async function cmdAttach(rebuildMode) {
-  intro(pc.bgMagenta(pc.black(' MDAN v' + VERSION + ' - Attach Wizard ')));
+  intro(pc.bgMagenta(pc.black(' MDAN v' + VERSION + ' - Assistant d\'attachement ')));
 
   const projectName = path.basename(process.cwd());
   let isRebuild = rebuildMode === '--rebuild';
 
   if (!rebuildMode) {
     const action = await select({
-      message: `How do you want to attach MDAN to ${pc.bold(projectName)}?`,
+      message: `Comment voulez-vous attacher MDAN a ${pc.bold(projectName)} ?`,
       options: [
-        { value: 'attach', label: 'Attach normally', hint: 'Analyze existing codebase and add features' },
-        { value: 'rebuild', label: 'Rebuild Mode', hint: 'Analyze then rewrite EVERYTHING from scratch' }
+        { value: 'attach', label: 'Attacher normalement', hint: 'Analyser le code existant et ajouter des features' },
+        { value: 'rebuild', label: 'Mode Rebuild', hint: 'Analyser et tout reecrire from scratch' }
       ]
     });
 
     if (isCancel(action)) {
-      cancel('Operation cancelled.');
+      cancel('Operation annulee.');
       return process.exit(0);
     }
     
@@ -202,8 +202,8 @@ async function cmdAttach(rebuildMode) {
   
   const s = spinner();
   s.start(isRebuild 
-    ? `Preparing REBUILD environment for ${projectName}...` 
-    : `Attaching MDAN to ${projectName}...`);
+    ? `Preparation de l'environnement REBUILD pour ${projectName}...` 
+    : `Attachement de MDAN a ${projectName}...`);
   
   fs.mkdirSync('mdan/agents', { recursive: true });
   fs.mkdirSync('mdan/skills', { recursive: true });
@@ -260,15 +260,15 @@ async function cmdAttach(rebuildMode) {
   };
   fs.writeFileSync('.mcp.json', JSON.stringify(mcpConfig, null, 2));
   
-  s.stop(pc.green(`MDAN attached successfully!`));
+  s.stop(pc.green(`MDAN attache avec succes !`));
   
   outro(
-    pc.bold('Next steps:\n') +
-    `1. Open this folder in your IDE (Cursor, Windsurf, etc.)\n` +
-    `2. Or run ${pc.cyan('mdan oc')} and paste the prompt into Claude/ChatGPT\n\n` +
+    pc.bold('Prochaines etapes:\n') +
+    `1. Ouvrez ce dossier dans votre IDE (Cursor, Windsurf, etc.)\n` +
+    `2. Ou executez ${pc.cyan('mdan oc')} et collez le prompt dans Claude/ChatGPT\n\n` +
     (isRebuild 
-      ? pc.magenta(`Start prompt: "MDAN REBUILD: Analyze and rewrite this project"`)
-      : pc.cyan(`Start prompt: "MDAN: Analyze this project and help me [your goal]"`))
+      ? pc.magenta(`Prompt de demarrage: "MDAN REBUILD: Analyze and rewrite this project"`)
+      : pc.cyan(`Prompt de demarrage: "MDAN: Analyze this project and help me [votre objectif]"`))
   );
 }
 
@@ -294,26 +294,26 @@ function cmdOc() {
       } else {
         throw new Error('Unsupported platform');
       }
-      console.log(`${colors.green}✅ Orchestrator prompt copied to clipboard!${colors.nc}`);
-      console.log('   Paste it into Claude, ChatGPT, or your favorite LLM.');
+      console.log(`${colors.green}✅ Prompt de l'orchestrateur copie dans le presse-papier !${colors.nc}`);
+      console.log('   Collez-le dans Claude, ChatGPT, ou votre LLM prefere.');
     } catch (e) {
       console.log(content);
-      console.log(`\n${colors.yellow}⚠️  Could not copy to clipboard automatically. Please copy the text above.${colors.nc}`);
+      console.log(`\n${colors.yellow}⚠️  Impossible de copier automatiquement. Veuillez copier le texte ci-dessus.${colors.nc}`);
     }
   } else {
-    console.log(`${colors.red}Orchestrator file not found.${colors.nc}`);
+    console.log(`${colors.red}Fichier orchestrateur introuvable.${colors.nc}`);
   }
 }
 
 function cmdStatus() {
   if (fs.existsSync('mdan/orchestrator.md')) {
-    console.log(`${colors.green}✅ MDAN is active in this project${colors.nc}`);
+    console.log(`${colors.green}✅ MDAN est actif dans ce projet${colors.nc}`);
     if (fs.existsSync('mdan/STATUS.md')) {
       console.log(fs.readFileSync('mdan/STATUS.md', 'utf8'));
     }
   } else {
-    console.log(`${colors.yellow}No MDAN project here.${colors.nc}`);
-    console.log('  Run: mdan init [name]  or  mdan attach');
+    console.log(`${colors.yellow}Pas de projet MDAN ici.${colors.nc}`);
+    console.log('  Executer: mdan init [nom]  ou  mdan attach');
   }
 }
 
@@ -332,7 +332,7 @@ function cmdPhase(num, action) {
   };
   
   if (!phases[num]) {
-    console.log('Usage: mdan phase [1-5|name] [copy]');
+    console.log('Utilisation: mdan phase [1-5|nom] [copy]');
     return;
   }
   
@@ -357,26 +357,26 @@ function cmdPhase(num, action) {
         } else {
           throw new Error('Unsupported platform');
         }
-        console.log(`${colors.green}✅ Phase ${name} prompt copied to clipboard!${colors.nc}`);
-        console.log('   Paste it into your LLM to start the phase.');
+        console.log(`${colors.green}✅ Prompt de la phase ${name} copie dans le presse-papier !${colors.nc}`);
+        console.log('   Collez-le dans votre LLM pour demarrer la phase.');
       } catch (e) {
         console.log(content);
-        console.log(`\n${colors.yellow}⚠️  Could not copy automatically. Please copy the text above.${colors.nc}`);
+        console.log(`\n${colors.yellow}⚠️  Impossible de copier automatiquement. Veuillez copier le texte ci-dessus.${colors.nc}`);
       }
     } else {
       console.log(`${colors.cyan}${colors.bold}Phase ${name}${colors.nc}`);
       console.log(content);
-      console.log(`\n${colors.yellow}Tip: Run '${colors.cyan}mdan phase ${num} copy${colors.yellow}' to copy this content to clipboard.${colors.nc}`);
+      console.log(`\n${colors.yellow}Astuce: Executez '${colors.cyan}mdan phase ${num} copy${colors.yellow}' pour copier ce contenu.${colors.nc}`);
     }
   } else {
-    console.log(`${colors.red}Phase file not found: ${file}${colors.nc}`);
+    console.log(`${colors.red}Fichier de phase introuvable: ${file}${colors.nc}`);
   }
 }
 
 function cmdModule(action, name) {
   if (action !== 'add' || !name) {
-    console.log('Usage: mdan module add [name]');
-    console.log('Available modules:');
+    console.log('Utilisation: mdan module add [nom]');
+    console.log('Modules disponibles:');
     if (fs.existsSync(`${MDAN_DIR}/modules`)) {
       fs.readdirSync(`${MDAN_DIR}/modules`).forEach(m => {
         const stat = fs.statSync(`${MDAN_DIR}/modules/${m}`);
@@ -388,14 +388,14 @@ function cmdModule(action, name) {
 
   const moduleDir = `${MDAN_DIR}/modules/${name}`;
   if (!fs.existsSync(moduleDir)) {
-    console.log(`${colors.red}Module not found: ${name}${colors.nc}`);
+    console.log(`${colors.red}Module introuvable: ${name}${colors.nc}`);
     return;
   }
 
-  console.log(`${colors.cyan}📦 Installing module: ${colors.bold}${name}${colors.nc}`);
+  console.log(`${colors.cyan}📦 Installation du module: ${colors.bold}${name}${colors.nc}`);
   
   if (!fs.existsSync('mdan')) {
-    console.log(`${colors.yellow}⚠️  No mdan folder found. Are you in an MDAN project?${colors.nc}`);
+    console.log(`${colors.yellow}⚠️  Pas de dossier mdan trouve. Etes-vous dans un projet MDAN ?${colors.nc}`);
     return;
   }
 
@@ -403,17 +403,17 @@ function cmdModule(action, name) {
   if (fs.existsSync(`${moduleDir}/agents`)) {
     fs.readdirSync(`${moduleDir}/agents`).forEach(f => {
       fs.copyFileSync(`${moduleDir}/agents/${f}`, `mdan/agents/${f}`);
-      console.log(`${colors.green}  Added agent:${colors.nc} ${f}`);
+      console.log(`${colors.green}  Agent ajoute:${colors.nc} ${f}`);
     });
   }
 
-  console.log(`\n${colors.green}✅ Module ${name} installed!${colors.nc}`);
+  console.log(`\n${colors.green}✅ Module ${name} installe !${colors.nc}`);
 }
 
 function cmdWorkflow(name, action) {
   if (!name) {
-    console.log('Usage: mdan workflow [name] [copy]');
-    console.log('Available workflows:');
+    console.log('Utilisation: mdan workflow [nom] [copy]');
+    console.log('Workflows disponibles:');
     if (fs.existsSync(`${MDAN_DIR}/workflows`)) {
       fs.readdirSync(`${MDAN_DIR}/workflows`).forEach(f => {
         if (f.endsWith('.md')) console.log(`  ${f.replace('.md', '')}`);
@@ -440,18 +440,18 @@ function cmdWorkflow(name, action) {
             execSync('wl-copy', { input: content });
           }
         }
-        console.log(`${colors.green}✅ Workflow ${name} prompt copied to clipboard!${colors.nc}`);
+        console.log(`${colors.green}✅ Prompt du workflow ${name} copie dans le presse-papier !${colors.nc}`);
       } catch (e) {
         console.log(content);
-        console.log(`\n${colors.yellow}⚠️  Could not copy automatically. Please copy the text above.${colors.nc}`);
+        console.log(`\n${colors.yellow}⚠️  Impossible de copier automatiquement. Veuillez copier le texte ci-dessus.${colors.nc}`);
       }
     } else {
       console.log(`${colors.cyan}${colors.bold}Workflow: ${name}${colors.nc}`);
       console.log(content);
-      console.log(`\n${colors.yellow}Tip: Run '${colors.cyan}mdan workflow ${name} copy${colors.yellow}' to copy this content to clipboard.${colors.nc}`);
+      console.log(`\n${colors.yellow}Astuce: Executez '${colors.cyan}mdan workflow ${name} copy${colors.yellow}' pour copier ce contenu.${colors.nc}`);
     }
   } else {
-    console.log(`${colors.red}Workflow not found: ${name}${colors.nc}`);
+    console.log(`${colors.red}Workflow introuvable: ${name}${colors.nc}`);
   }
 }
 
@@ -470,7 +470,7 @@ function cmdSkills() {
   if (fs.existsSync(skillsDir)) {
     fs.readdirSync(skillsDir).forEach(s => console.log(`  ${s}`));
   } else {
-    console.log('  No skills installed');
+    console.log('  Aucun skill installe');
   }
 }
 
@@ -500,38 +500,38 @@ function cmdMcp(action) {
       }
     };
     fs.writeFileSync('.mcp.json', JSON.stringify(mcpConfig, null, 2));
-    console.log(`${colors.green}✅ .mcp.json created!${colors.nc}`);
-    console.log('  Configure your IDE to use MCP with this file.');
+    console.log(`${colors.green}✅ .mcp.json cree !${colors.nc}`);
+    console.log('  Configurez votre IDE pour utiliser MCP avec ce fichier.');
   } else if (action === 'validate') {
     if (fs.existsSync('.mcp.json')) {
       try {
         JSON.parse(fs.readFileSync('.mcp.json', 'utf8'));
-        console.log(`${colors.green}✅ .mcp.json is valid${colors.nc}`);
+        console.log(`${colors.green}✅ .mcp.json est valide${colors.nc}`);
       } catch (e) {
-        console.log(`${colors.red}❌ Invalid JSON: ${e.message}${colors.nc}`);
+        console.log(`${colors.red}❌ JSON invalide: ${e.message}${colors.nc}`);
       }
     } else {
-      console.log(`${colors.yellow}⚠️  No .mcp.json found${colors.nc}`);
+      console.log(`${colors.yellow}⚠️  Pas de .mcp.json trouve${colors.nc}`);
     }
   } else if (action === 'list') {
-    console.log(`${colors.cyan}MCP Tools:${colors.nc}`);
-    console.log('  - mdan-state: Read/write project state');
-    console.log('  - mdan-agents: List MDAN agents');
-    console.log('  - mdan-phases: Get phase information');
+    console.log(`${colors.cyan}Outils MCP:${colors.nc}`);
+    console.log('  - mdan-state: Lire/ecrire l\'etat du projet');
+    console.log('  - mdan-agents: Lister les agents MDAN');
+    console.log('  - mdan-phases: Obtenir les informations des phases');
   } else {
-    console.log('Usage: mdan mcp [init|validate|list]');
+    console.log('Utilisation: mdan mcp [init|validate|list]');
   }
 }
 
 function cmdPrompt(action, name) {
   const promptsDir = `${MDAN_DIR}/templates/prompts`;
   if (!fs.existsSync(promptsDir)) {
-    console.log(`${colors.yellow}No prompts directory found${colors.nc}`);
+    console.log(`${colors.yellow}Pas de dossier de prompts trouve${colors.nc}`);
     return;
   }
   
   if (!action || action === 'list') {
-    console.log(`${colors.cyan}Available Prompts:${colors.nc}`);
+    console.log(`${colors.cyan}Prompts disponibles:${colors.nc}`);
     fs.readdirSync(promptsDir).filter(f => f.endsWith('.yaml')).forEach(f => {
       console.log(`  ${f.replace('.yaml', '')}`);
     });
@@ -540,10 +540,10 @@ function cmdPrompt(action, name) {
     if (fs.existsSync(file)) {
       console.log(fs.readFileSync(file, 'utf8'));
     } else {
-      console.log(`${colors.red}Prompt not found: ${name}${colors.nc}`);
+      console.log(`${colors.red}Prompt introuvable: ${name}${colors.nc}`);
     }
   } else {
-    console.log('Usage: mdan prompt [list|show <name>]');
+    console.log('Utilisation: mdan prompt [list|show <nom>]');
   }
 }
 
@@ -556,16 +556,16 @@ async function main() {
       // Interactive Wizard Default
       intro(pc.bgCyan(pc.black(' MDAN v' + VERSION + ' ')));
       const action = await select({
-        message: 'What would you like to do?',
+        message: 'Que souhaitez-vous faire ?',
         options: [
-          { value: 'init', label: 'Create a new project', hint: 'Start fresh' },
-          { value: 'attach', label: 'Attach to existing project', hint: 'Add MDAN to this folder' },
-          { value: 'help', label: 'Show Help', hint: 'See all commands' }
+          { value: 'init', label: 'Creer un nouveau projet', hint: 'Commencer a zero' },
+          { value: 'attach', label: 'Attacher a un projet existant', hint: 'Ajouter MDAN a ce dossier' },
+          { value: 'help', label: 'Afficher l\'aide', hint: 'Voir toutes les commandes' }
         ]
       });
 
       if (isCancel(action)) {
-        cancel('Operation cancelled.');
+        cancel('Operation annulee.');
         return process.exit(0);
       }
 

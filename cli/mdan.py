@@ -7,7 +7,7 @@ import shutil
 import json
 from pathlib import Path
 
-VERSION = "2.4.3"
+VERSION = "2.5.0"
 MDAN_DIR = Path(__file__).parent.parent
 
 # Colors
