@@ -1,6 +1,6 @@
 # MDAN — Multi-Agent Development Agentic Network
 
-![MDAN Banner](banner-mdan.png)
+![MDAN Banner](https://i.imgur.com/YwfB0Gx.jpeg)
 
 [![Version](https://img.shields.io/npm/v/mdan-cli?color=blue&label=version)](https://www.npmjs.com/package/mdan-cli)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
