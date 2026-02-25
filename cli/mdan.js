@@ -6,7 +6,7 @@ const { execSync } = require('child_process');
 const { intro, text, select, isCancel, cancel, outro, spinner } = require('@clack/prompts');
 const pc = require('picocolors');
 
-const VERSION = '2.5.0';
+const VERSION = '2.5.1';
 const MDAN_DIR = path.resolve(__dirname, '..');
 
 // Colors
