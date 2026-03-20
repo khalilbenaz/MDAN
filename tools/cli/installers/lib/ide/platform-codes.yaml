@@ -78,7 +78,7 @@ platforms:
 
   cursor:
     name: "Cursor"
-    preferred: true
+    preferred: false
     category: ide
     description: "AI-first code editor"
     installer:
@@ -87,7 +87,7 @@ platforms:
 
   gemini:
     name: "Gemini CLI"
-    preferred: false
+    preferred: true
     category: cli
     description: "Google's CLI for Gemini"
     installer:
@@ -128,7 +128,7 @@ platforms:
 
   opencode:
     name: "OpenCode"
-    preferred: false
+    preferred: true
     category: ide
     description: "OpenCode terminal coding assistant"
     installer:
@@ -145,7 +145,7 @@ platforms:
 
   qwen:
     name: "QwenCoder"
-    preferred: false
+    preferred: true
     category: ide
     description: "Qwen AI coding assistant"
     installer:

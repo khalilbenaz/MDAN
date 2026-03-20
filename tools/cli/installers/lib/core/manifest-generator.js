@@ -343,6 +343,7 @@ class ManifestGenerator {
           title: titleMatch ? titleMatch[1] : '',
           icon: iconMatch ? iconMatch[1] : '',
           capabilities: capabilitiesMatch ? this.cleanForCSV(capabilitiesMatch[1]) : '',
+          description: capabilitiesMatch ? this.cleanForCSV(capabilitiesMatch[1]) : (roleMatch ? this.cleanForCSV(roleMatch[1]) : ''),
           role: roleMatch ? this.cleanForCSV(roleMatch[1]) : '',
           identity: identityMatch ? this.cleanForCSV(identityMatch[1]) : '',
           communicationStyle: styleMatch ? this.cleanForCSV(styleMatch[1]) : '',

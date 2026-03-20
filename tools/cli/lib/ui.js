@@ -547,14 +547,7 @@ class UI {
         };
       }
     } else if (!options.yes) {
-      const wantsCustomContent = await prompts.confirm({
-        message: 'Add custom modules, agents, or workflows from your computer?',
-        default: false,
-      });
-
-      if (wantsCustomContent) {
-        customContentConfig = await this.promptCustomContentSource();
-      }
+      // Skip custom modules prompt - not needed for standard installations
     }
 
     // Add custom content modules if any were selected
@@ -655,7 +648,7 @@ class UI {
         const isConfigured = configuredIdes.includes(ide.value);
         const isPreferred = preferredIdes.some((p) => p.value === ide.value);
         let label = ide.name;
-        if (isPreferred) label += ' ⭐';
+        // No star markers for preferred tools
         if (isConfigured) label += ' ✅';
         return { label, value: ide.value };
       });
@@ -700,7 +693,7 @@ class UI {
     const allToolOptions = allTools.map((ide) => {
       const isPreferred = preferredIdes.some((p) => p.value === ide.value);
       let label = ide.name;
-      if (isPreferred) label += ' ⭐';
+      // No star markers for preferred tools
       return {
         label,
         value: ide.value,
@@ -1926,7 +1919,7 @@ class UI {
     const toolLines = selectedIdes.map((ideValue) => {
       const tool = allTools.find((t) => t.value === ideValue);
       const name = tool?.name || ideValue;
-      const marker = preferredValues.has(ideValue) ? ' \u2B50' : '';
+      const marker = '';
       return `  \u2022 ${name}${marker}`;
     });
     await prompts.log.message('Selected tools:\n' + toolLines.join('\n'));
