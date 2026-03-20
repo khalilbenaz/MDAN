@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/mdan-method.svg)](https://www.npmjs.com/package/mdan-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Wizards](https://img.shields.io/badge/wizards-16-purple)]()
-[![Agents](https://img.shields.io/badge/agents-18-blue)]()
+[![Agents](https://img.shields.io/badge/agents-19-blue)]()
 [![Packs](https://img.shields.io/badge/packs-3-orange)]()
 
 **MDAN** est un framework de développement piloté par l'IA avec des agents spécialisés, des wizards interactifs step-by-step, un système de mémoire persistante, et un protocole de débat structuré.
@@ -99,6 +99,7 @@ Les agents sont des personnalités IA spécialisées que vous pouvez invoquer di
 | `/mdan-agent-ux-designer` | Jihane | **UX Designer** — Design UX/UI, wireframes, prototypes |
 | `/mdan-agent-tech-writer` | Youssef | **Technical Writer** — Documentation technique, guides, API docs |
 | `/mdan-agent-sm` | Nadia | **Scrum Master** — Gestion agile, sprints, rétrospectives |
+| `/mdan-agent-security` | Yassir | **Security Engineer** — Audit de sécurité, threat modeling (STRIDE), OWASP Top 10, audit de dépendances, hardening |
 | `/mdan-agent-quick-flow-solo-dev` | — | **Solo Dev** — Mode rapide tout-en-un pour développeurs solo |
 
 ### Pack FinTech
@@ -185,6 +186,6 @@ MIT
 ---
 
 <p align="center">
-  <strong>16 wizards · 18 agents · 3 packs · Mémoire persistante · Debate Protocol</strong><br>
+  <strong>16 wizards · 19 agents · 3 packs · Mémoire persistante · Debate Protocol</strong><br>
   Construit par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
