@@ -53,7 +53,7 @@ Available module IDs for the `--modules` flag:
 - `bmm` — MDAN Method Master
 - `bmb` — MDAN Builder
 
-Check the [MDAN registry](https://github.com/mdan-code-org) for available external modules.
+Check the [MDAN registry](https://github.com/khalilbenaz) for available external modules.
 
 ## Tool/IDE IDs
 
@@ -61,16 +61,16 @@ Available tool IDs for the `--tools` flag:
 
 **Preferred:** `claude-code`, `cursor`
 
-Run `npx mdan install` interactively once to see the full current list of supported tools, or check the [platform codes configuration](https://github.com/mdan-code-org/MDAN/blob/main/tools/cli/installers/lib/ide/platform-codes.yaml).
+Run `npx mdan-method install` interactively once to see the full current list of supported tools, or check the [platform codes configuration](https://github.com/khalilbenaz/MDAN/blob/main/tools/cli/installers/lib/ide/platform-codes.yaml).
 
 ## Installation Modes
 
 | Mode | Description | Example |
 |------|-------------|---------|
-| Fully non-interactive | Provide all flags to skip all prompts | `npx mdan install --directory . --modules bmm --tools claude-code --yes` |
-| Semi-interactive | Provide some flags; MDAN prompts for the rest | `npx mdan install --directory . --modules bmm` |
-| Defaults only | Accept all defaults with `-y` | `npx mdan install --yes` |
-| Without tools | Skip tool/IDE configuration | `npx mdan install --modules bmm --tools none` |
+| Fully non-interactive | Provide all flags to skip all prompts | `npx mdan-method install --directory . --modules bmm --tools claude-code --yes` |
+| Semi-interactive | Provide some flags; MDAN prompts for the rest | `npx mdan-method install --directory . --modules bmm` |
+| Defaults only | Accept all defaults with `-y` | `npx mdan-method install --yes` |
+| Without tools | Skip tool/IDE configuration | `npx mdan-method install --modules bmm --tools none` |
 
 ## Examples
 
@@ -80,7 +80,7 @@ Run `npx mdan install` interactively once to see the full current list of suppor
 #!/bin/bash
 # install-mdan.sh
 
-npx mdan install \
+npx mdan-method install \
   --directory "${GITHUB_WORKSPACE}" \
   --modules bmm \
   --tools claude-code \
@@ -94,7 +94,7 @@ npx mdan install \
 ### Update Existing Installation
 
 ```bash
-npx mdan install \
+npx mdan-method install \
   --directory ~/projects/myapp \
   --action update \
   --modules bmm,bmb,custom-module
@@ -103,7 +103,7 @@ npx mdan install \
 ### Quick Update (Preserve Settings)
 
 ```bash
-npx mdan install \
+npx mdan-method install \
   --directory ~/projects/myapp \
   --action quick-update
 ```
@@ -111,7 +111,7 @@ npx mdan install \
 ### Installation with Custom Content
 
 ```bash
-npx mdan install \
+npx mdan-method install \
   --directory ~/projects/myapp \
   --modules bmm \
   --custom-content ~/my-custom-module,~/another-module \
@@ -167,5 +167,5 @@ Ensure each custom content path:
 - Has a `code` field in the `module.yaml`
 
 :::note[Still stuck?]
-Run with `--debug` for detailed output, try interactive mode to isolate the issue, or report at <https://github.com/mdan-code-org/MDAN/issues>.
+Run with `--debug` for detailed output, try interactive mode to isolate the issue, or report at <https://github.com/khalilbenaz/MDAN/issues>.
 :::

@@ -131,7 +131,7 @@ prompts:
 After editing, recompile the agent to apply changes:
 
 ```bash
-npx mdan install
+npx mdan-method install
 ```
 
 The installer detects the existing installation and offers these options:
@@ -148,7 +148,7 @@ For customization-only changes, **Recompile Agents** is the fastest option.
 
 **Changes not appearing?**
 
-- Run `npx mdan install` and select **Recompile Agents** to apply changes
+- Run `npx mdan-method install` and select **Recompile Agents** to apply changes
 - Check that your YAML syntax is valid (indentation matters)
 - Verify you edited the correct `.customize.yaml` file for the agent
 
@@ -161,7 +161,7 @@ For customization-only changes, **Recompile Agents** is the fastest option.
 **Need to reset an agent?**
 
 - Clear or delete the agent's `.customize.yaml` file
-- Run `npx mdan install` and select **Recompile Agents** to restore defaults
+- Run `npx mdan-method install` and select **Recompile Agents** to restore defaults
 
 ## Workflow Customization
 

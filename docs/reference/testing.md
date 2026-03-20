@@ -12,7 +12,7 @@ MDAN provides two testing paths: a built-in QA agent for fast test generation an
 | Factor | Quinn (Built-in QA) | TEA Module |
 | --- | --- | --- |
 | **Best for** | Small-medium projects, quick coverage | Large projects, regulated or complex domains |
-| **Setup** | Nothing to install -- included in BMM | Install separately via `npx mdan install` |
+| **Setup** | Nothing to install -- included in BMM | Install separately via `npx mdan-method install` |
 | **Approach** | Generate tests fast, iterate later | Plan first, then generate with traceability |
 | **Test types** | API and E2E tests | API, E2E, ATDD, NFR, and more |
 | **Strategy** | Happy path + critical edge cases | Risk-based prioritization (P0-P3) |
@@ -65,8 +65,8 @@ Quinn generates tests only. For code review and story validation, use the Code R
 
 TEA is a standalone module that provides an expert agent (Murat) and nine structured workflows for enterprise-grade testing. It goes beyond test generation into test strategy, risk-based planning, quality gates, and requirements traceability.
 
-- **Documentation:** [TEA Module Docs](https://mdan-code-org.github.io/mdan-test-architecture-enterprise/)
-- **Install:** `npx mdan install` and select the TEA module
+- **Documentation:** [TEA Module Docs](https://github.com/khalilbenaz/MDAN)
+- **Install:** `npx mdan-method install` and select the TEA module
 - **npm:** [`mdan-test-architecture-enterprise`](https://www.npmjs.com/package/mdan-test-architecture-enterprise)
 
 ### What TEA Provides

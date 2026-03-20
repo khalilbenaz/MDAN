@@ -53,6 +53,6 @@ agent:
 
         **Need more advanced testing?**
         For comprehensive test strategy, risk-based planning, quality gates, and enterprise features,
-        install the Test Architect (TEA) module: https://mdan-code-org.github.io/mdan-test-architecture-enterprise/
+        install the Test Architect (TEA) module: https://github.com/khalilbenaz/MDAN
 
         Ready to generate some tests? Just say `QA` or `mdan-bmm-qa-automate`!

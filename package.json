@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/package.json",
-  "name": "mdan-ai",
-  "version": "2.6.1",
+  "name": "mdan-method",
+  "version": "2.6.5",
   "description": "MDAN - AI-driven Development Platform with Specialized Agents",
   "keywords": [
     "agile",
@@ -19,17 +19,18 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khalilbenaz/MDANV2.git"
+    "url": "git+https://github.com/khalilbenaz/MDAN.git"
   },
   "license": "MIT",
   "author": "Khalil <khalilbenaz>",
   "main": "tools/cli/mdan-cli.js",
-  "homepage": "https://github.com/khalilbenaz/MDANV2#readme",
+  "homepage": "https://github.com/khalilbenaz/MDAN#readme",
   "bugs": {
-    "url": "https://github.com/khalilbenaz/MDANV2/issues"
+    "url": "https://github.com/khalilbenaz/MDAN/issues"
   },
   "bin": {
     "mmm": "tools/mdan-npx-wrapper.js",
+    "mdan-method": "tools/mdan-npx-wrapper.js",
     "mdan-ai": "tools/mdan-npx-wrapper.js"
   },
   "scripts": {

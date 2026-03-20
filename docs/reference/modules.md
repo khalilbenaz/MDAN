@@ -8,7 +8,7 @@ sidebar:
 MDAN extends through official modules that you select during installation. These add-on modules provide specialized agents, workflows, and tasks for specific domains beyond the built-in core and BMM (Agile suite).
 
 :::tip[Installing Modules]
-Run `npx mdan install` and select the modules you want. The installer handles downloading, configuration, and IDE integration automatically.
+Run `npx mdan-method install` and select the modules you want. The installer handles downloading, configuration, and IDE integration automatically.
 :::
 
 ## MDAN Builder
@@ -17,7 +17,7 @@ Create custom agents, workflows, and domain-specific modules with guided assista
 
 - **Code:** `bmb`
 - **npm:** [`mdan-builder`](https://www.npmjs.com/package/mdan-builder)
-- **GitHub:** [mdan-code-org/mdan-builder](https://github.com/mdan-code-org/mdan-builder)
+- **GitHub:** [khalilbenaz/MDAN](https://github.com/khalilbenaz/mdan-builder)
 
 **Provides:**
 
@@ -32,7 +32,7 @@ AI-powered tools for structured creativity, ideation, and innovation during earl
 
 - **Code:** `cis`
 - **npm:** [`mdan-creative-intelligence-suite`](https://www.npmjs.com/package/mdan-creative-intelligence-suite)
-- **GitHub:** [mdan-code-org/mdan-module-creative-intelligence-suite](https://github.com/mdan-code-org/mdan-module-creative-intelligence-suite)
+- **GitHub:** [khalilbenaz/MDAN](https://github.com/khalilbenaz/mdan-module-creative-intelligence-suite)
 
 **Provides:**
 
@@ -47,7 +47,7 @@ Structured game development workflows adapted for Unity, Unreal, Godot, and cust
 
 - **Code:** `gds`
 - **npm:** [`mdan-game-dev-studio`](https://www.npmjs.com/package/mdan-game-dev-studio)
-- **GitHub:** [mdan-code-org/mdan-module-game-dev-studio](https://github.com/mdan-code-org/mdan-module-game-dev-studio)
+- **GitHub:** [khalilbenaz/MDAN](https://github.com/khalilbenaz/mdan-module-game-dev-studio)
 
 **Provides:**
 
@@ -62,7 +62,7 @@ Enterprise-grade test strategy, automation guidance, and release gate decisions 
 
 - **Code:** `tea`
 - **npm:** [`mdan-test-architecture-enterprise`](https://www.npmjs.com/package/mdan-test-architecture-enterprise)
-- **GitHub:** [mdan-code-org/mdan-test-architecture-enterprise](https://github.com/mdan-code-org/mdan-test-architecture-enterprise)
+- **GitHub:** [khalilbenaz/MDAN](https://github.com/khalilbenaz/mdan-test-architecture-enterprise)
 
 **Provides:**
 
@@ -73,4 +73,4 @@ Enterprise-grade test strategy, automation guidance, and release gate decisions 
 
 ## Community Modules
 
-Community modules and a module marketplace are coming. Check the [MDAN GitHub organization](https://github.com/mdan-code-org) for updates.
+Community modules and a module marketplace are coming. Check the [MDAN GitHub organization](https://github.com/khalilbenaz) for updates.

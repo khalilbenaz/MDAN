@@ -20,7 +20,7 @@ Agent menu triggers require an active agent session. Use slash commands when you
 
 ## How Commands Are Generated
 
-When you run `npx mdan install`, the installer reads the manifests for every selected module and writes one command file per agent, workflow, task, and tool. Each file is a short markdown prompt that instructs the AI to load the corresponding source file and follow its instructions.
+When you run `npx mdan-method install`, the installer reads the manifests for every selected module and writes one command file per agent, workflow, task, and tool. Each file is a short markdown prompt that instructs the AI to load the corresponding source file and follow its instructions.
 
 The installer uses templates for each command type:
 
@@ -146,6 +146,6 @@ Module codes: `bmm` (Agile suite), `bmb` (Builder), `tea` (Test Architect), `cis
 
 **Commands not appearing after install.** Restart your IDE or reload the window. Some IDEs cache the command list and require a refresh to pick up new files.
 
-**Expected commands are missing.** The installer only generates commands for modules you selected. Run `npx mdan install` again and verify your module selection. Check that the command files exist in the expected directory.
+**Expected commands are missing.** The installer only generates commands for modules you selected. Run `npx mdan-method install` again and verify your module selection. Check that the command files exist in the expected directory.
 
 **Commands from a removed module still appear.** The installer does not delete old command files automatically. Remove the stale files from your IDE's command directory, or delete the entire command directory and re-run the installer for a clean set.
