@@ -111,7 +111,7 @@ npm link
 When prompted to select modules, choose **MDAN Method**.
 
 The installer creates two folders:
-- `_mdan/` — agents, workflows, tasks, and configuration
+- `_.mdan/` — agents, workflows, tasks, and configuration
 - `_mdan-output/` — empty for now, but this is where your artifacts will be saved
 
 :::tip[Your Next Step]
@@ -218,7 +218,7 @@ Your project now has:
 
 ```text
 your-project/
-├── _mdan/                                   # MDAN configuration
+├── _.mdan/                                   # MDAN configuration
 ├── _mdan-output/
 │   ├── planning-artifacts/
 │   │   ├── PRD.md                           # Your requirements document
@@ -272,7 +272,7 @@ MDAN-Help inspects your project, detects what you've completed, and tells you ex
 :::
 
 - **During workflows** — Agents guide you with questions and explanations
-- **Community** — [Discord](https://discord.gg/gk8jAdXWmj) (#mdan-method-help, #report-bugs-and-issues)
+- **Community** — [Discord](https://discord.gg/gk8jAdXWmj) (#mdan-help, #report-bugs-and-issues)
 
 ## Key Takeaways
 

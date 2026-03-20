@@ -9,7 +9,7 @@ Use the MDAN installer to upgrade from v4 to v6, which includes automatic detect
 
 ## When to Use This
 
-- You have MDAN v4 installed (`.mdan-method` folder)
+- You have MDAN v4 installed (`.mdan` folder)
 - You want to migrate to the new v6 architecture
 - You have existing planning artifacts to preserve
 
@@ -28,7 +28,7 @@ Follow the [Installer Instructions](./install-mdan.md).
 
 When v4 is detected, you can:
 
-- Allow the installer to back up and remove `.mdan-method`
+- Allow the installer to back up and remove `.mdan`
 - Exit and handle cleanup manually
 
 If you named your mdan method folder something else - you will need to manually remove the folder yourself.
@@ -67,7 +67,7 @@ If you have stories created or implemented:
 
 ```text
 your-project/
-├── _mdan/               # Single installation folder
+├── _.mdan/               # Single installation folder
 │   ├── _config/         # Your customizations
 │   │   └── agents/      # Agent customization files
 │   ├── core/            # Universal core framework
@@ -91,7 +91,7 @@ your-project/
 
 | Concept       | v4                                    | v6                                   |
 | ------------- | ------------------------------------- | ------------------------------------ |
-| **Core**      | `_mdan-core` was actually MDAN Method | `_mdan/core/` is universal framework |
-| **Method**    | `_mdan-method`                        | `_mdan/mdan/`                         |
+| **Core**      | `_mdan-core` was actually MDAN Method | `_.mdan/core/` is universal framework |
+| **Method**    | `_mdan`                        | `_.mdan/mdan/`                         |
 | **Config**    | Modified files directly               | `config.yaml` per module             |
 | **Documents** | Sharded or unsharded required setup   | Fully flexible, auto-scanned         |

@@ -3,12 +3,12 @@ name: 'step-10-nonfunctional'
 description: 'Define quality attributes that matter for this specific product'
 
 # File References
-nextStepFile: '{project-root}/_mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-11-polish.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-11-polish.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Task References
-advancedElicitationTask: '{project-root}/_mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_mdan/core/workflows/party-mode/workflow.md'
+advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
+partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
 ---
 
 # Step 10: Non-Functional Requirements

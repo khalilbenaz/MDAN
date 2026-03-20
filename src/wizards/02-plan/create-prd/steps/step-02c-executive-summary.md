@@ -3,12 +3,12 @@ name: 'step-02c-executive-summary'
 description: 'Generate and append the Executive Summary section to the PRD document'
 
 # File References
-nextStepFile: '{project-root}/_mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-03-success.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-03-success.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Task References
-advancedElicitationTask: '{project-root}/_mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_mdan/core/workflows/party-mode/workflow.md'
+advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
+partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
 ---
 
 # Step 2c: Executive Summary Generation

@@ -34,9 +34,9 @@ class AgentCommandGenerator {
       let agentRelPath = agent.path || '';
       // Normalize path separators for cross-platform compatibility
       agentRelPath = agentRelPath.replaceAll('\\', '/');
-      // Remove _mdan/ prefix if present to get relative path from project root
-      // Handle both absolute paths (/path/to/_mdan/...) and relative paths (_mdan/...)
-      if (agentRelPath.includes('_mdan/')) {
+      // Remove _.mdan/ prefix if present to get relative path from project root
+      // Handle both absolute paths (/path/to/_.mdan/...) and relative paths (_.mdan/...)
+      if (agentRelPath.includes('_.mdan/')) {
         const parts = agentRelPath.split(/_mdan\//);
         if (parts.length > 1) {
           agentRelPath = parts.slice(1).join('/');

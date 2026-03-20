@@ -32,22 +32,22 @@ modules:
     type: mdan-org
     npmPackage: mdan-game-dev-studio
 
-  mdan-method-test-architecture-enterprise:
-    url: https://github.com/mdan-code-org/mdan-method-test-architecture-enterprise
+  mdan-test-architecture-enterprise:
+    url: https://github.com/mdan-code-org/mdan-test-architecture-enterprise
     module-definition: src/module.yaml
     code: tea
     name: "Test Architect"
     description: "Master Test Architect for quality strategy, test automation, and release gates"
     defaultSelected: false
     type: mdan-org
-    npmPackage: mdan-method-test-architecture-enterprise
+    npmPackage: mdan-test-architecture-enterprise
 
   # whiteport-design-system:
-  #   url: https://github.com/mdan-code-org/mdan-method-wds-expansion
+  #   url: https://github.com/mdan-code-org/mdan-wds-expansion
   #   module-definition: src/module.yaml
   #   code: wds
   #   name: "Whiteport UX Design System"
   #   description: "UX design framework with Figma integration"
   #   defaultSelected: false
   #   type: community
-  #   npmPackage: mdan-method-wds-expansion
+  #   npmPackage: mdan-wds-expansion

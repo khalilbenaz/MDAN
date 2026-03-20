@@ -135,7 +135,7 @@ class Detector {
   }
 
   /**
-   * Detect legacy installation (_mdan-method, .mdan, .cis)
+   * Detect legacy installation (_mdan, .mdan, .cis)
    * @param {string} projectDir - Project directory to check
    * @returns {Object} Legacy installation details
    */
@@ -147,8 +147,8 @@ class Detector {
       paths: [],
     };
 
-    // Check for legacy core (_mdan-method)
-    const legacyCorePath = path.join(projectDir, '_mdan-method');
+    // Check for legacy core (_mdan)
+    const legacyCorePath = path.join(projectDir, '_mdan');
     if (await fs.pathExists(legacyCorePath)) {
       result.hasLegacy = true;
       result.legacyCore = true;
@@ -161,7 +161,7 @@ class Detector {
       if (
         entry.isDirectory() &&
         entry.name.startsWith('.') &&
-        entry.name !== '_mdan-method' &&
+        entry.name !== '_mdan' &&
         !entry.name.startsWith('.git') &&
         !entry.name.startsWith('.vscode') &&
         !entry.name.startsWith('.idea')
@@ -203,15 +203,15 @@ class Detector {
   }
 
   /**
-   * Detect legacy MDAN v4 .mdan-method folder
+   * Detect legacy MDAN v4 .mdan folder
    * @param {string} projectDir - Project directory to check
    * @returns {{ hasLegacyV4: boolean, offenders: string[] }}
    */
   async detectLegacyV4(projectDir) {
     const offenders = [];
 
-    // Check for .mdan-method folder
-    const mdanMethodPath = path.join(projectDir, '.mdan-method');
+    // Check for .mdan folder
+    const mdanMethodPath = path.join(projectDir, '.mdan');
     if (await fs.pathExists(mdanMethodPath)) {
       offenders.push(mdanMethodPath);
     }

@@ -82,7 +82,7 @@ Update the main workflow status file:
 
 ### 3. Suggest Next Steps
 
-UX Design complete. Read fully and follow: `{project-root}/_mdan/core/tasks/help.md`
+UX Design complete. Read fully and follow: `{project-root}/_.mdan/core/tasks/help.md`
 
 ### 5. Final Completion Confirmation
 

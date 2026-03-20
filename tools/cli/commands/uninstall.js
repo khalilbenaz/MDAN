@@ -133,7 +133,7 @@ module.exports = {
         s.stop('User artifacts removed');
       }
 
-      // Phase 3: MDAN modules & data (last — other phases may need _mdan/)
+      // Phase 3: MDAN modules & data (last — other phases may need _.mdan/)
       if (removeModules) {
         const s = await prompts.spinner();
         s.start(`Removing MDAN modules & data (${installer.mdanFolderName}/)...`);
@@ -148,7 +148,7 @@ module.exports = {
       if (!removeOutputFolder) summary.push(`User artifacts preserved in ${outputFolder}/`);
 
       await prompts.note(summary.join('\n'), 'Summary');
-      await prompts.outro('To reinstall, run: npx mdan-method install');
+      await prompts.outro('To reinstall, run: npx mdan install');
 
       process.exit(0);
     } catch (error) {

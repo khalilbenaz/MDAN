@@ -838,7 +838,7 @@ class Manifest {
     const os = require('node:os');
     const yaml = require('yaml');
 
-    // Built-in modules use MDAN version (only core and mdan are in MDAN-METHOD repo)
+    // Built-in modules use MDAN version (only core and mdan are in MDAN repo)
     if (['core', 'mdan'].includes(moduleName)) {
       const mdanVersion = require(path.join(getProjectRoot(), 'package.json')).version;
       return {

@@ -511,7 +511,7 @@ class YamlXmlBuilder {
     const customizeHash = customizeYamlPath ? await this.calculateFileHash(customizeYamlPath) : null;
 
     // Extract module from path (e.g., /path/to/modules/mdan/agents/pm.yaml -> mdan)
-    // or /path/to/mdan/mdan/agents/pm.yaml -> mdan
+    // or /path/to/.mdan/mdan/agents/pm.yaml -> mdan
     // or /path/to/src/mdan/agents/pm.yaml -> mdan
     let module = 'core'; // default to core
     const pathParts = agentYamlPath.split(path.sep);
@@ -525,7 +525,7 @@ class YamlXmlBuilder {
       // Path contains /modules/{module}/
       module = pathParts[modulesIndex + 1];
     } else if (mdanIndex !== -1 && pathParts[mdanIndex + 1]) {
-      // Path contains /mdan/{module}/
+      // Path contains /.mdan/{module}/
       const potentialModule = pathParts[mdanIndex + 1];
       // Check if it's a known module, not 'agents' or '_config'
       if (['mdan', 'bmb', 'cis', 'core'].includes(potentialModule)) {

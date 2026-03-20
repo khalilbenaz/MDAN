@@ -40,7 +40,7 @@
 * Fix step file path references in check-implementation-readiness workflow (#1709, #1716)
 * Fix 3 broken file references and enable strict file reference validation in CI (#1717)
 * Fix Rovo Dev integration with custom installer that generates prompts.yml manifest (#1701)
-* Fix 104 relative step file references to use standardized `{project-root}/_mdan/` paths across 68 files (#1722)
+* Fix 104 relative step file references to use standardized `{project-root}/_.mdan/` paths across 68 files (#1722)
 * Fix code fence imbalance in step-03-starter.md that caused rendering issues (#1724)
 * Remove Windsurf from recommended/preferred IDEs list (#1727)
 * Fix default Codex install location from global to project for better defaults (#1698)
@@ -225,7 +225,7 @@ V6 Stable Release! The End of Beta!
 ### 🐛 Bug Fixes
 
 * **Fix npm install peer dependency issues** — Add `.npmrc` with `legacy-peer-deps=true`, update Starlight to 0.37.5, and add `--legacy-peer-deps` flag to module installer (PR #1476)
-* **Fix leaked source paths in PRD validation report** — Replace absolute `/src/core/` paths with `{project-root}/_mdan/core/` (#1481)
+* **Fix leaked source paths in PRD validation report** — Replace absolute `/src/core/` paths with `{project-root}/_.mdan/core/` (#1481)
 * **Fix orphaned market research customer analysis** — Connect step-01-init to step-02-customer-behavior to complete workflow sharding (#1486)
 * **Fix duplicate 2-letter brainstorming code** — Change BS to BSP to resolve conflict with cis Brainstorming module
 * **Fix tech writer sidecar functionality** — Enable proper sidecar operation (#1487)
@@ -297,7 +297,7 @@ V6 Stable Release! The End of Beta!
 ### 🎉 Beta Release
 
 - **Transition from Alpha to Beta**: MDAN Method is now in Beta! This marks a significant milestone in the framework's development
-- **NPM Default Tag**: Beta versions are now published with the `latest` tag, making `npx mdan-method` serve the beta version by default
+- **NPM Default Tag**: Beta versions are now published with the `latest` tag, making `npx mdan` serve the beta version by default
 
 ### 🌟 Key Highlights
 
@@ -470,7 +470,7 @@ More documentation updates coming soon.
 
 - **From Rules to Commands**: Complete refactor from rules-based to command-based system
 - **Command Generation**: Automatic generation of task and tool commands
-- **Commands Directory**: New `.cursor/commands/mdan/` structure for generated commands
+- **Commands Directory**: New `.cursor/commands/.mdan/` structure for generated commands
 - **Cleanup Integration**: Automatic cleanup of old MDAN commands alongside rules
 - **Enhanced Logging**: Better feedback on agents, tasks, tools, and workflow commands generated
 
@@ -1051,11 +1051,11 @@ Located in `src/modules/bmb/workflows/agent/data/`:
 - **Dot-Folder to Underscore Migration**: Critical change from `.mdan` to `_mdan` ensures LLMs (Codex, Claude, and others) can no longer ignore or skip MDAN content - dot folders are commonly filtered out by AI systems
 - **Universal Content Visibility**: Underscore folders are treated as regular content, ensuring full AI agent access to all MDAN resources and configurations
 - **Agent Memory Architecture**: Rolled out comprehensive agent memory support for installed agents with `-sidecar` folders
-- **Persistent Agent Learning**: Sidecar content installs to `_mdan/_memory`, giving each agent the ability to learn and remember important information specific to its role
+- **Persistent Agent Learning**: Sidecar content installs to `_.mdan/_memory`, giving each agent the ability to learn and remember important information specific to its role
 
 **Content Location Strategy:**
 
-- **Standardized Memory Location**: All sidecar content now uses `_mdan/_memory` as the unified location for agent memories
+- **Standardized Memory Location**: All sidecar content now uses `_.mdan/_memory` as the unified location for agent memories
 - **Segregated Output System**: New architecture supports differentiating between ephemeral Phase 4 artifacts and long-term documentation
 - **Forward Compatibility**: Existing installations continue working with content in docs folder, with optimization coming in next release
 - **Configuration Cleanup**: Renamed `_cfg` to `_config` for clearer naming conventions
@@ -1114,7 +1114,7 @@ Located in `src/modules/bmb/workflows/agent/data/`:
 1. **Installer Revolution**: The installation system has been completely overhauled for better user experience, reliability, and speed
 2. **Custom Content Freedom**: Users can now easily create, share, and install custom content through the streamlined installer
 3. **AI Visibility Breakthrough**: Migration from `.mdan` to `_mdan` ensures LLMs can access all MDAN content (dot folders are commonly ignored by AI systems)
-4. **Agent Memory System**: Rolled out persistent agent memory support - agents with `-sidecar` folders can now learn and remember important information in `_mdan/_memory`
+4. **Agent Memory System**: Rolled out persistent agent memory support - agents with `-sidecar` folders can now learn and remember important information in `_.mdan/_memory`
 5. **Quick Default Selection**: Installation is now faster with smart default selections for popular configurations
 6. **Future-Ready Architecture**: Infrastructure in place for segregating ephemeral artifacts from permanent documentation (full optimization coming in next release)
 
@@ -1348,7 +1348,7 @@ Located in `src/modules/bmb/workflows/agent/data/`:
 
 ### 🐛 Bug Fixes
 
-- Added missing `yaml` dependency to fix `MODULE_NOT_FOUND` error when running `npx mdan-method install`
+- Added missing `yaml` dependency to fix `MODULE_NOT_FOUND` error when running `npx mdan install`
 
 ## [6.0.0-alpha.11]
 
@@ -1467,7 +1467,7 @@ Located in `src/modules/bmb/workflows/agent/data/`:
 - **CIS**: Creative Intelligence Suite for ideation and creative workflows
 - **Game Development**: Full subclass of game-specific development patterns**Note**: Version 5.0.0 was skipped due to NPX registry issues that corrupted the version. Development continues with v6.0.0-alpha.0.
 
-## [v4.43.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v4.43.0)
+## [v4.43.0](https://github.com/mdan-code-org/MDAN/releases/tag/v4.43.0)
 
 **Release: August-September 2025 (v4.31.0 - v4.43.1)**
 
@@ -1498,7 +1498,7 @@ Focus on stability, ecosystem growth, and professional tooling.
 - **PR Validation Workflow**: Automated contribution checks
 - **Fork-Friendly CI/CD**: Opt-in mechanism for forks
 - **Code Formatting**: Prettier integration with pre-commit hooks
-- **Update Checker**: `npx mdan-method update-check` command
+- **Update Checker**: `npx mdan update-check` command
 
 ### Flattener Improvements
 
@@ -1521,9 +1521,9 @@ Focus on stability, ecosystem growth, and professional tooling.
 - Automatic release notes generation
 - Changelog file path configuration
 
-[View v4.43.1 tag](https://github.com/mdan-code-org/MDAN-METHOD/tree/v4.43.1)
+[View v4.43.1 tag](https://github.com/mdan-code-org/MDAN/tree/v4.43.1)
 
-## [v4.30.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v4.30.0)
+## [v4.30.0](https://github.com/mdan-code-org/MDAN/releases/tag/v4.30.0)
 
 **Release: July 2025 (v4.21.0 - v4.30.4)**
 
@@ -1562,9 +1562,9 @@ Introduction of advanced IDE integrations and command systems.
 - Improved expansion pack documentation
 - Better isolated expansion pack installations
 
-[View v4.30.4 tag](https://github.com/mdan-code-org/MDAN-METHOD/tree/v4.30.4)
+[View v4.30.4 tag](https://github.com/mdan-code-org/MDAN/tree/v4.30.4)
 
-## [v4.20.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v4.20.0)
+## [v4.20.0](https://github.com/mdan-code-org/MDAN/releases/tag/v4.20.0)
 
 **Release: June 2025 (v4.11.0 - v4.20.0)**
 
@@ -1604,9 +1604,9 @@ Major focus on documentation quality and expanding QA agent capabilities.
 - Common files moved to shared locations
 - Hardcoded dependencies removed from installer
 
-[View v4.20.0 tag](https://github.com/mdan-code-org/MDAN-METHOD/tree/v4.20.0)
+[View v4.20.0 tag](https://github.com/mdan-code-org/MDAN/tree/v4.20.0)
 
-## [v4.10.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v4.10.0)
+## [v4.10.0](https://github.com/mdan-code-org/MDAN/releases/tag/v4.10.0)
 
 **Release: June 2025 (v4.3.0 - v4.10.3)**
 
@@ -1640,9 +1640,9 @@ This release focused on making MDAN more configurable and adaptable to different
 - Bundle build improvements
 - Template formatting fixes
 
-[View v4.10.3 tag](https://github.com/mdan-code-org/MDAN-METHOD/tree/v4.10.3)
+[View v4.10.3 tag](https://github.com/mdan-code-org/MDAN/tree/v4.10.3)
 
-## [v4.0.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v4.0.0)
+## [v4.0.0](https://github.com/mdan-code-org/MDAN/releases/tag/v4.0.0)
 
 **Release: June 20, 2025 (v4.0.0 - v4.2.0)**
 
@@ -1650,7 +1650,7 @@ Version 4 represented a complete architectural overhaul, transforming MDAN from 
 
 ### Framework Transformation
 
-- **NPM Package**: Professional distribution and simple installation via `npx mdan-method install`
+- **NPM Package**: Professional distribution and simple installation via `npx mdan install`
 - **Modular Architecture**: Move to `.mdan-core` hidden folder structure
 - **Multi-IDE Support**: Unified support for Claude Code, Cursor, Roo, Windsurf, and many more
 - **Schema Standardization**: YAML-based agent and team definitions
@@ -1678,9 +1678,9 @@ Version 4 represented a complete architectural overhaul, transforming MDAN from 
 - VSCode settings and markdown linting
 - Comprehensive documentation restructure
 
-[View v4.2.0 tag](https://github.com/mdan-code-org/MDAN-METHOD/tree/v4.2.0)
+[View v4.2.0 tag](https://github.com/mdan-code-org/MDAN/tree/v4.2.0)
 
-## [v3.0.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v3.0.0)
+## [v3.0.0](https://github.com/mdan-code-org/MDAN/releases/tag/v3.0.0)
 
 **Release: May 20, 2025**
 
@@ -1707,9 +1707,9 @@ Version 3 introduced the revolutionary orchestrator concept, creating a unified 
 - Integrated method explanation within the agent itself
 - Cross-platform consistency (Gemini Gems, Custom GPTs)
 
-[View V3 Branch](https://github.com/mdan-code-org/MDAN-METHOD/tree/V3)
+[View V3 Branch](https://github.com/mdan-code-org/MDAN/tree/V3)
 
-## [v2.0.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v2.0.0)
+## [v2.0.0](https://github.com/mdan-code-org/MDAN/releases/tag/v2.0.0)
 
 **Release: April 17, 2025**
 
@@ -1736,9 +1736,9 @@ Version 2 addressed the major shortcomings of V1 by introducing separation of co
 - Manual export/import workflow between agents
 - Creating each web agent separately was tedious
 
-[View V2 Branch](https://github.com/mdan-code-org/MDAN-METHOD/tree/V2)
+[View V2 Branch](https://github.com/mdan-code-org/MDAN/tree/V2)
 
-## [v1.0.0](https://github.com/mdan-code-org/MDAN-METHOD/releases/tag/v1.0.0)
+## [v1.0.0](https://github.com/mdan-code-org/MDAN/releases/tag/v1.0.0)
 
 **Initial Release: April 6, 2025**
 
@@ -1759,12 +1759,12 @@ The original MDAN Method was a tech demo showcasing how different custom agile p
 - Rigid scope and purpose with templates coupled to agents
 - Not optimized for IDE integration
 
-[View V1 Branch](https://github.com/mdan-code-org/MDAN-METHOD/tree/V1)
+[View V1 Branch](https://github.com/mdan-code-org/MDAN/tree/V1)
 
 ## Installation
 
 ```bash
-npx mdan-method
+npx mdan
 ```
 
-For detailed release notes, see the [GitHub releases page](https://github.com/mdan-code-org/MDAN-METHOD/releases).
+For detailed release notes, see the [GitHub releases page](https://github.com/mdan-code-org/MDAN/releases).

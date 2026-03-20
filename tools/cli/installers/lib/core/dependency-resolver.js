@@ -258,7 +258,7 @@ class DependencyResolver {
       let execPath = match[1];
       if (execPath && execPath !== '*') {
         // Remove {project-root} prefix to get the actual path
-        // Usage is like {project-root}/mdan/core/tasks/foo.md
+        // Usage is like {project-root}/.mdan/core/tasks/foo.md
         if (execPath.includes('{project-root}')) {
           execPath = execPath.replace('{project-root}', '');
         }
@@ -272,7 +272,7 @@ class DependencyResolver {
       let tmplPath = match[1];
       if (tmplPath && tmplPath !== '*') {
         // Remove {project-root} prefix to get the actual path
-        // Usage is like {project-root}/mdan/core/tasks/foo.md
+        // Usage is like {project-root}/.mdan/core/tasks/foo.md
         if (tmplPath.includes('{project-root}')) {
           tmplPath = tmplPath.replace('{project-root}', '');
         }
@@ -396,13 +396,13 @@ class DependencyResolver {
         break;
       }
       case 'mdan-path': {
-        // Resolve mdan/ paths (from {project-root}/mdan/... references)
+        // Resolve mdan/ paths (from {project-root}/.mdan/... references)
         // These are paths relative to the src directory structure
         const mdanPath = dep.dependency.replace(/^mdan\//, '');
 
         // Try to resolve as if it's in src structure
         // mdan/core/tasks/foo.md -> src/core/tasks/foo.md
-        // mdan/mdan/tasks/bar.md -> src/mdan/tasks/bar.md (mdan is directly under src/)
+        // mdan/core/tasks/bar.md -> src/mdan/tasks/bar.md (mdan is directly under src/)
         // mdan/cis/agents/bar.md -> src/modules/cis/agents/bar.md
 
         if (mdanPath.startsWith('core/')) {

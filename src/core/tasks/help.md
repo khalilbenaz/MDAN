@@ -53,9 +53,9 @@ Determine what was just completed:
 
 ## EXECUTION
 
-1. **Load catalog** — Load `{project-root}/_mdan/_config/mdan-help.csv`
+1. **Load catalog** — Load `{project-root}/_.mdan/_config/mdan-help.csv`
 
-2. **Resolve output locations and config** — Scan each folder under `{project-root}/_mdan/` (except `_config`) for `config.yaml`. For each workflow row, resolve its `output-location` variables against that module's config so artifact paths can be searched. Also extract `communication_language` and `project_knowledge` from each scanned module's config.
+2. **Resolve output locations and config** — Scan each folder under `{project-root}/_.mdan/` (except `_config`) for `config.yaml`. For each workflow row, resolve its `output-location` variables against that module's config so artifact paths can be searched. Also extract `communication_language` and `project_knowledge` from each scanned module's config.
 
 3. **Ground in project knowledge** — If `project_knowledge` resolves to an existing path, read available documentation files (architecture docs, project overview, tech stack references) for grounding context. Use discovered project facts when composing any project-specific output. Never fabricate project-specific details — if documentation is unavailable, state so.
 

@@ -3,12 +3,12 @@ name: 'step-09-functional'
 description: 'Synthesize all discovery into comprehensive functional requirements'
 
 # File References
-nextStepFile: '{project-root}/_mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-10-nonfunctional.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-10-nonfunctional.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Task References
-advancedElicitationTask: '{project-root}/_mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_mdan/core/workflows/party-mode/workflow.md'
+advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
+partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
 ---
 
 # Step 9: Functional Requirements Synthesis

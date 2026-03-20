@@ -1378,9 +1378,9 @@ class Installer {
     lines.push(
       '',
       '  Next steps:',
-      `    Read our new Docs Site: ${color.dim('https://docs.mdan-method.org/')}`,
+      `    Read our new Docs Site: ${color.dim('https://docs.mdan.org/')}`,
       `    Join our Discord: ${color.dim('https://discord.gg/gk8jAdXWmj')}`,
-      `    Star us on GitHub: ${color.dim('https://github.com/mdan-code-org/MDAN-METHOD/')}`,
+      `    Star us on GitHub: ${color.dim('https://github.com/mdan-code-org/MDAN/')}`,
       `    Subscribe on YouTube: ${color.dim('https://www.youtube.com/@MDANCode')}`,
       `    Run ${color.cyan('/mdan-help')} with your IDE Agent and ask it how to get started`,
     );
@@ -1537,7 +1537,7 @@ class Installer {
    * Uninstall MDAN with selective removal options
    * @param {string} directory - Project directory
    * @param {Object} options - Uninstall options
-   * @param {boolean} [options.removeModules=true] - Remove _mdan/ directory
+   * @param {boolean} [options.removeModules=true] - Remove _.mdan/ directory
    * @param {boolean} [options.removeIdeConfigs=true] - Remove IDE configurations
    * @param {boolean} [options.removeOutputFolder=false] - Remove user artifacts output folder
    * @returns {Object} Result with success status and removed components
@@ -1556,7 +1556,7 @@ class Installer {
 
     const removed = { modules: false, ideConfigs: false, outputFolder: false };
 
-    // 2. IDE CLEANUP (before _mdan/ deletion so configs are accessible)
+    // 2. IDE CLEANUP (before _.mdan/ deletion so configs are accessible)
     if (options.removeIdeConfigs !== false) {
       await this.uninstallIdeConfigs(projectDir, existingInstall, { silent: options.silent });
       removed.ideConfigs = true;
@@ -1613,7 +1613,7 @@ class Installer {
   }
 
   /**
-   * Remove the _mdan/ directory
+   * Remove the _.mdan/ directory
    * @param {string} projectDir - Project directory
    * @returns {Promise<boolean>} Whether the directory was removed
    */
@@ -1694,7 +1694,7 @@ class Installer {
    * Merge all module-help.csv files into a single mdan-help.csv
    * Scans all installed modules for module-help.csv and merges them
    * Enriches agent info from agent-manifest.csv
-   * Output is written to _mdan/_config/mdan-help.csv
+   * Output is written to _.mdan/_config/mdan-help.csv
    * @param {string} mdanDir - MDAN installation directory
    */
   async mergeModuleHelpCatalogs(mdanDir) {
@@ -2719,10 +2719,10 @@ class Installer {
    */
   async handleLegacyV4Migration(_projectDir, _legacyV4) {
     await prompts.note(
-      'Found .mdan-method folder from MDAN v4 installation.\n\n' +
+      'Found .mdan folder from MDAN v4 installation.\n\n' +
         'Before continuing with installation, we recommend:\n' +
-        '  1. Remove the .mdan-method folder, OR\n' +
-        '  2. Back it up by renaming it to another name (e.g., mdan-method-backup)\n\n' +
+        '  1. Remove the .mdan folder, OR\n' +
+        '  2. Back it up by renaming it to another name (e.g., mdan-backup)\n\n' +
         'If your v4 installation set up rules or commands, you should remove those as well.',
       'Legacy MDAN v4 detected',
     );
@@ -2745,7 +2745,7 @@ class Installer {
     });
 
     if (proceed === 'exit') {
-      await prompts.log.info('Please remove the .mdan-method folder and any v4 rules/commands, then run the installer again.');
+      await prompts.log.info('Please remove the .mdan folder and any v4 rules/commands, then run the installer again.');
       // Allow event loop to flush pending I/O before exit
       setImmediate(() => process.exit(0));
       return;
@@ -2820,7 +2820,7 @@ class Installer {
     const customFiles = [];
     const modifiedFiles = [];
 
-    // Memory is always in _mdan/_memory
+    // Memory is always in _.mdan/_memory
     const mdanMemoryPath = '_memory';
 
     // Check if the manifest has hashes - if not, we can't detect modifications

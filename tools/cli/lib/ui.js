@@ -63,9 +63,9 @@ class UI {
 
     // Check for legacy folders and prompt for rename before showing any menus
     let hasLegacyCfg = false;
-    let hasLegacyMdanFolder = false;
+    let hasLegacyFolder = false;
     let mdanDir = null;
-    let legacyMdanPath = null;
+    let legacyPath = null;
 
     // First check for legacy .mdan folder (instead of _mdan)
     // Only check if directory exists
@@ -73,12 +73,12 @@ class UI {
       const entries = await fs.readdir(confirmedDirectory, { withFileTypes: true });
       for (const entry of entries) {
         if (entry.isDirectory() && (entry.name === '.mdan' || entry.name === 'mdan')) {
-          hasLegacyMdanFolder = true;
-          legacyMdanPath = path.join(confirmedDirectory, entry.name);
-          mdanDir = legacyMdanPath;
+          hasLegacyFolder = true;
+          legacyPath = path.join(confirmedDirectory, entry.name);
+          mdanDir = legacyPath;
 
           // Check if it has _cfg folder
-          const cfgPath = path.join(legacyMdanPath, '_cfg');
+          const cfgPath = path.join(legacyPath, '_cfg');
           if (await fs.pathExists(cfgPath)) {
             hasLegacyCfg = true;
           }
@@ -88,7 +88,7 @@ class UI {
     }
 
     // If no .mdan or mdan found, check for current installations _mdan
-    if (!hasLegacyMdanFolder) {
+    if (!hasLegacyFolder) {
       const mdanResult = await installer.findMdanDir(confirmedDirectory);
       mdanDir = mdanResult.mdanDir;
       hasLegacyCfg = mdanResult.hasLegacyCfg;
@@ -96,7 +96,7 @@ class UI {
 
     // Handle legacy .mdan or _cfg folder - these are very old (v4 or alpha)
     // Show version warning instead of offering conversion
-    if (hasLegacyMdanFolder || hasLegacyCfg) {
+    if (hasLegacyFolder || hasLegacyCfg) {
       await prompts.log.warn('LEGACY INSTALLATION DETECTED');
       await prompts.note(
         'Found a ".mdan"/"mdan" folder, or a legacy "_cfg" folder under the mdan folder -\n' +
@@ -147,11 +147,11 @@ class UI {
       s.start('Updating folder structure...');
       try {
         // Handle .mdan folder
-        if (hasLegacyMdanFolder) {
+        if (hasLegacyFolder) {
           const newMdanPath = path.join(confirmedDirectory, '_mdan');
-          await fs.move(legacyMdanPath, newMdanPath);
+          await fs.move(legacyPath, newMdanPath);
           mdanDir = newMdanPath;
-          s.stop(`Renamed "${path.basename(legacyMdanPath)}" to "_mdan"`);
+          s.stop(`Renamed "${path.basename(legacyPath)}" to "_mdan"`);
         }
 
         // Handle _cfg folder (either from .mdan or standalone)

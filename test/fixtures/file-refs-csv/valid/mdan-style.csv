@@ -1,3 +1,3 @@
 module,phase,name,code,sequence,workflow-file,command,required,agent,options,description,output-location,outputs,
-mdan,anytime,Document Project,DP,,_mdan/mdan/workflows/document-project/workflow.yaml,mdan-mdan-document-project,false,analyst,Create Mode,"Analyze project",project-knowledge,*,
-mdan,1-analysis,Brainstorm Project,BP,10,_mdan/core/workflows/brainstorming/workflow.md,mdan-brainstorming,false,analyst,data=template.md,"Brainstorming",planning_artifacts,"session",
+mdan,anytime,Document Project,DP,,_.mdan/mdan/workflows/document-project/workflow.yaml,mdan-mdan-document-project,false,analyst,Create Mode,"Analyze project",project-knowledge,*,
+mdan,1-analysis,Brainstorm Project,BP,10,_.mdan/core/workflows/brainstorming/workflow.md,mdan-brainstorming,false,analyst,data=template.md,"Brainstorming",planning_artifacts,"session",

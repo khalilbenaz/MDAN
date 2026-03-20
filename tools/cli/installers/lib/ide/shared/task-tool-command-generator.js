@@ -11,7 +11,7 @@ class TaskToolCommandGenerator {
    * @param {string} mdanFolderName - Name of the MDAN folder for template rendering (default: '_mdan')
    * Note: This parameter is accepted for API consistency with AgentCommandGenerator and
    * WorkflowCommandGenerator, but is not used for path stripping. The manifest always stores
-   * filesystem paths with '_mdan/' prefix (the actual folder name), while mdanFolderName is
+   * filesystem paths with '_.mdan/' prefix (the actual folder name), while mdanFolderName is
    * used for template placeholder rendering ({{mdanFolderName}}).
    */
   constructor(mdanFolderName = MDAN_FOLDER_NAME) {
@@ -38,7 +38,7 @@ class TaskToolCommandGenerator {
       if (path.isAbsolute(taskPath)) {
         taskPath = path.relative(mdanDir, taskPath).replaceAll('\\', '/');
       }
-      // Remove _mdan/ prefix if present to get relative path within mdan folder
+      // Remove _.mdan/ prefix if present to get relative path within mdan folder
       if (taskPath.startsWith(mdanPrefix)) {
         taskPath = taskPath.slice(mdanPrefix.length);
       }
@@ -63,7 +63,7 @@ class TaskToolCommandGenerator {
       if (path.isAbsolute(toolPath)) {
         toolPath = path.relative(mdanDir, toolPath).replaceAll('\\', '/');
       }
-      // Remove _mdan/ prefix if present to get relative path within mdan folder
+      // Remove _.mdan/ prefix if present to get relative path within mdan folder
       if (toolPath.startsWith(mdanPrefix)) {
         toolPath = toolPath.slice(mdanPrefix.length);
       }
@@ -154,16 +154,16 @@ class TaskToolCommandGenerator {
       itemPath = itemPath.replaceAll('\\', '/');
 
       // Extract relative path from absolute paths (Windows or Unix)
-      // Look for _mdan/ or mdan/ in the path and extract everything after it
-      // Match patterns like: /_mdan/core/tasks/... or /mdan/core/tasks/...
+      // Look for _.mdan/ or mdan/ in the path and extract everything after it
+      // Match patterns like: /_.mdan/core/tasks/... or /.mdan/core/tasks/...
       // Use [/\\] to handle both Unix forward slashes and Windows backslashes,
-      // and also paths without a leading separator (e.g., C:/_mdan/...)
+      // and also paths without a leading separator (e.g., C:/_.mdan/...)
       const mdanMatch = itemPath.match(/[/\\]_mdan[/\\](.+)$/) || itemPath.match(/[/\\]mdan[/\\](.+)$/);
       if (mdanMatch) {
-        // Found /_mdan/ or /mdan/ - use relative path after it
+        // Found /_.mdan/ or /.mdan/ - use relative path after it
         itemPath = `{project-root}/${this.mdanFolderName}/${mdanMatch[1]}`;
       } else if (itemPath.startsWith(`${MDAN_FOLDER_NAME}/`)) {
-        // Relative path starting with _mdan/
+        // Relative path starting with _.mdan/
         itemPath = `{project-root}/${this.mdanFolderName}/${itemPath.slice(MDAN_FOLDER_NAME.length + 1)}`;
       } else if (itemPath.startsWith('mdan/')) {
         // Relative path starting with mdan/

@@ -89,10 +89,10 @@ class ModuleManager {
   }
 
   /**
-   * Copy sidecar directory to _mdan/_memory location with update-safe handling
+   * Copy sidecar directory to _.mdan/_memory location with update-safe handling
    * @param {string} sourceSidecarPath - Source sidecar directory path
    * @param {string} agentName - Name of the agent (for naming)
-   * @param {string} mdanMemoryPath - This should ALWAYS be _mdan/_memory
+   * @param {string} mdanMemoryPath - This should ALWAYS be _.mdan/_memory
    * @param {boolean} isUpdate - Whether this is an update (default: false)
    * @param {string} mdanDir - MDAN installation directory
    * @param {Object} installer - Installer instance for file tracking
@@ -1001,7 +1001,7 @@ class ModuleManager {
 
           // Check if sidecar directory exists
           if (await fs.pathExists(sourceSidecarPath)) {
-            // Memory is always in _mdan/_memory
+            // Memory is always in _.mdan/_memory
             const mdanMemoryPath = path.join(mdanDir, '_memory');
 
             // Determine if this is an update (by checking if agent already exists)
@@ -1170,8 +1170,8 @@ class ModuleManager {
 
         // Parse SOURCE workflow path
         // Handle both _mdan placeholder and hardcoded 'mdan'
-        // Example: {project-root}/_mdan/mdan/workflows/4-implementation/create-story/workflow.yaml
-        // Or: {project-root}/mdan/mdan/workflows/4-implementation/create-story/workflow.yaml
+        // Example: {project-root}/_.mdan/mdan/workflows/4-implementation/create-story/workflow.yaml
+        // Or: {project-root}/.mdan/mdan/workflows/4-implementation/create-story/workflow.yaml
         const sourceMatch = sourceWorkflowPath.match(/\{project-root\}\/(?:_mdan)\/([^/]+)\/workflows\/(.+)/);
         if (!sourceMatch) {
           await prompts.log.warn(`      Could not parse workflow path: ${sourceWorkflowPath}`);
@@ -1182,7 +1182,7 @@ class ModuleManager {
 
         // Parse INSTALL workflow path
         // Handle_mdan
-        // Example: {project-root}/_mdan/bmgd/workflows/4-production/create-story/workflow.yaml
+        // Example: {project-root}/_.mdan/bmgd/workflows/4-production/create-story/workflow.yaml
         const installMatch = installWorkflowPath.match(/\{project-root\}\/(_mdan)\/([^/]+)\/workflows\/(.+)/);
         if (!installMatch) {
           await prompts.log.warn(`      Could not parse workflow-install path: ${installWorkflowPath}`);
@@ -1232,8 +1232,8 @@ class ModuleManager {
   async updateWorkflowConfigSource(workflowYamlPath, newModuleName) {
     let yamlContent = await fs.readFile(workflowYamlPath, 'utf8');
 
-    // Replace config_source: "{project-root}/_mdan/OLD_MODULE/config.yaml"
-    // with config_source: "{project-root}/_mdan/NEW_MODULE/config.yaml"
+    // Replace config_source: "{project-root}/_.mdan/OLD_MODULE/config.yaml"
+    // with config_source: "{project-root}/_.mdan/NEW_MODULE/config.yaml"
     // Note: At this point _mdan has already been replaced with actual folder name
     const configSourcePattern = /config_source:\s*["']?\{project-root\}\/[^/]+\/[^/]+\/config\.yaml["']?/g;
     const newConfigSource = `config_source: "{project-root}/${this.mdanFolderName}/${newModuleName}/config.yaml"`;

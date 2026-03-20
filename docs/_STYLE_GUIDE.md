@@ -75,7 +75,7 @@ Show in "What You've Accomplished" sections:
 ````md
 ```
 your-project/
-├── _mdan/                                   # MDAN configuration
+├── _.mdan/                                   # MDAN configuration
 ├── _mdan-output/
 │   ├── planning-artifacts/
 │   │   └── PRD.md                           # Your requirements document

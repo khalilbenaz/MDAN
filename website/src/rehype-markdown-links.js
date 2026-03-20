@@ -17,7 +17,7 @@ import path from 'node:path';
 
 /**
  * @param {Object} options
- * @param {string} options.base - Site base path (e.g., '/MDAN-METHOD/')
+ * @param {string} options.base - Site base path (e.g., '/MDAN/')
  * @param {string} [options.contentDir] - Absolute path to content root; auto-detected if omitted
  */
 export default function rehypeMarkdownLinks(options = {}) {

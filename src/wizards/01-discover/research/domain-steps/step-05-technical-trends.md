@@ -174,7 +174,7 @@ Show the generated technical analysis and present complete option:
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5]`
-- Load: `{project-root}/_mdan/mdan/workflows/1-analysis/research/domain-steps/step-06-research-synthesis.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-06-research-synthesis.md`
 
 ## APPEND TO DOCUMENT:
 

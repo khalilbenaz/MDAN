@@ -8,7 +8,7 @@ sidebar:
 MDAN extends through official modules that you select during installation. These add-on modules provide specialized agents, workflows, and tasks for specific domains beyond the built-in core and MDAN (Agile suite).
 
 :::tip[Installing Modules]
-Run `npx mdan-method install` and select the modules you want. The installer handles downloading, configuration, and IDE integration automatically.
+Run `npx mdan install` and select the modules you want. The installer handles downloading, configuration, and IDE integration automatically.
 :::
 
 ## MDAN Builder
@@ -61,8 +61,8 @@ Structured game development workflows adapted for Unity, Unreal, Godot, and cust
 Enterprise-grade test strategy, automation guidance, and release gate decisions through an expert agent and nine structured workflows. TEA goes well beyond the built-in QA agent with risk-based prioritization and requirements traceability.
 
 - **Code:** `tea`
-- **npm:** [`mdan-method-test-architecture-enterprise`](https://www.npmjs.com/package/mdan-method-test-architecture-enterprise)
-- **GitHub:** [mdan-code-org/mdan-method-test-architecture-enterprise](https://github.com/mdan-code-org/mdan-method-test-architecture-enterprise)
+- **npm:** [`mdan-test-architecture-enterprise`](https://www.npmjs.com/package/mdan-test-architecture-enterprise)
+- **GitHub:** [mdan-code-org/mdan-test-architecture-enterprise](https://github.com/mdan-code-org/mdan-test-architecture-enterprise)
 
 **Provides:**
 

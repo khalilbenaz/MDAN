@@ -3,15 +3,15 @@ name: 'step-07-project-type'
 description: 'Conduct project-type specific discovery using CSV-driven guidance'
 
 # File References
-nextStepFile: '{project-root}/_mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-08-scoping.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-08-scoping.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Data Files
 projectTypesCSV: '../data/project-types.csv'
 
 # Task References
-advancedElicitationTask: '{project-root}/_mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_mdan/core/workflows/party-mode/workflow.md'
+advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
+partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
 ---
 
 # Step 7: Project-Type Deep Dive

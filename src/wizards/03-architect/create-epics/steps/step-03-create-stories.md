@@ -3,7 +3,7 @@ name: 'step-03-create-stories'
 description: 'Generate all epics with their stories following the template structure'
 
 # Path Definitions
-workflow_path: '{project-root}/_mdan/mdan/workflows/3-solutioning/create-epics-and-stories'
+workflow_path: '{project-root}/_.mdan/mdan/workflows/3-solutioning/create-epics-and-stories'
 
 # File References
 thisStepFile: './step-03-create-stories.md'
@@ -12,8 +12,8 @@ workflowFile: '{workflow_path}/workflow.md'
 outputFile: '{planning_artifacts}/epics.md'
 
 # Task References
-advancedElicitationTask: '{project-root}/_mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_mdan/core/workflows/party-mode/workflow.md'
+advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
+partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
 
 # Template References
 epicsTemplate: '{workflow_path}/templates/epics-template.md'

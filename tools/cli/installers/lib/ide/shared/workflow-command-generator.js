@@ -71,9 +71,9 @@ class WorkflowCommandGenerator {
       let workflowRelPath = workflow.path || '';
       // Normalize path separators for cross-platform compatibility
       workflowRelPath = workflowRelPath.replaceAll('\\', '/');
-      // Remove _mdan/ prefix if present to get relative path from project root
-      // Handle both absolute paths (/path/to/_mdan/...) and relative paths (_mdan/...)
-      if (workflowRelPath.includes('_mdan/')) {
+      // Remove _.mdan/ prefix if present to get relative path from project root
+      // Handle both absolute paths (/path/to/_.mdan/...) and relative paths (_.mdan/...)
+      if (workflowRelPath.includes('_.mdan/')) {
         const parts = workflowRelPath.split(/_mdan\//);
         if (parts.length > 1) {
           workflowRelPath = parts.slice(1).join('/');
@@ -134,7 +134,7 @@ class WorkflowCommandGenerator {
 
     // Convert source path to installed path
     // From: /Users/.../src/mdan/workflows/.../workflow.yaml
-    // To: {project-root}/_mdan/mdan/workflows/.../workflow.yaml
+    // To: {project-root}/_.mdan/mdan/workflows/.../workflow.yaml
     let workflowPath = workflow.path;
 
     // Extract the relative path from source

@@ -3,15 +3,15 @@ name: 'step-06-innovation'
 description: 'Detect and explore innovative aspects of the product (optional step)'
 
 # File References
-nextStepFile: '{project-root}/_mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-07-project-type.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-07-project-type.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Data Files
-projectTypesCSV: '{project-root}/_mdan/mdan/workflows/2-plan-workflows/create-prd/data/project-types.csv'
+projectTypesCSV: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/data/project-types.csv'
 
 # Task References
-advancedElicitationTask: '{project-root}/_mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_mdan/core/workflows/party-mode/workflow.md'
+advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
+partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
 ---
 
 # Step 6: Innovation Discovery
