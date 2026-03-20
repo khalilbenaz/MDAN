@@ -1,0 +1,24 @@
+# Test: Valid module agent with correct module field
+# Expected: PASS
+# Path context: src/mdan/agents/module-agent-correct.agent.yaml
+
+agent:
+  metadata:
+    id: mdan-test
+    name: MDAN Test Agent
+    title: MDAN Test
+    icon: 🧪
+    module: mdan
+    hasSidecar: false
+
+  persona:
+    role: Test module agent
+    identity: I am a module-scoped test agent.
+    communication_style: Professional
+    principles:
+      - Test module validation
+
+  menu:
+    - trigger: help
+      description: Show help
+      action: display_help

@@ -1,0 +1,37 @@
+# CrewAI Integration Requirements
+# Install with: pip install -r requirements_crewai.txt
+# Note: CrewAI requires Python 3.10-3.13. Python 3.14 is not yet supported.
+
+# Core CrewAI
+crewai>=0.11.0,<0.12.0
+crewai-tools>=0.0.1
+
+# Async database drivers
+asyncpg>=0.29.0          # PostgreSQL
+aiomysql>=0.2.0          # MySQL
+aioodbc>=0.5.0           # SQL Server (ODBC)
+aiosqlite>=0.19.0        # SQLite
+
+# Web search
+google-search-results>=2.4.2  # SerperDev
+
+# File operations
+aiofiles>=23.2.1
+
+# Async support
+asyncio>=3.4.3
+
+# JSON handling
+orjson>=3.9.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Logging
+loguru>=0.7.0
+
+# Type hints
+typing-extensions>=4.8.0
+
+# Optional: For better async performance
+uvloop>=0.19.0; sys_platform != "win32"

@@ -1,0 +1,3 @@
+module,phase,name,workflow-file,description
+mdan,anytime,Document,,Analyze project
+mdan,1-analysis,Brainstorm,,Brainstorm ideas

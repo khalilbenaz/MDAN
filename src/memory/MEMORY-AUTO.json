@@ -1,0 +1,66 @@
+{
+  "version": "1.0",
+  "mode": "auto",
+  "timestamp": "",
+  "project": {
+    "name": "",
+    "description": "",
+    "tech_stack": {
+      "language": "csharp",
+      "framework": "dotnet",
+      "ui": "blazor",
+      "database": "sqlserver",
+      "cloud": "azure"
+    }
+  },
+  "phases": {
+    "current": "LOAD",
+    "completed": [],
+    "status": {
+      "LOAD": "pending",
+      "DISCOVER": "pending",
+      "PLAN": "pending",
+      "ARCHITECT": "pending",
+      "IMPLEMENT": "pending",
+      "TEST": "pending",
+      "DEPLOY": "pending",
+      "DOC": "pending"
+    }
+  },
+  "context": {
+    "token_usage": {
+      "total": 0,
+      "limit": 128000,
+      "percentage": 0.0
+    },
+    "conversation_history": [],
+    "artifacts": {},
+    "decisions": []
+  },
+  "debates": [],
+  "errors": [],
+  "quality_gates": {
+    "LOAD": false,
+    "DISCOVER": false,
+    "PLAN": false,
+    "ARCHITECT": false,
+    "IMPLEMENT": false,
+    "TEST": false,
+    "DEPLOY": false,
+    "DOC": false
+  },
+  "configuration": {
+    "token_limit": 128000,
+    "save_threshold": 0.8,
+    "output_dir": "./mdan-auto-output",
+    "log_level": "INFO",
+    "fail_fast": true,
+    "debate_enabled": true
+  },
+  "metadata": {
+    "created_at": "",
+    "updated_at": "",
+    "save_count": 0,
+    "resume_count": 0
+  }
+}
