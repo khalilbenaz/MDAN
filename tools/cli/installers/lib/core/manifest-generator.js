@@ -161,6 +161,7 @@ class ManifestGenerator {
         } else if (
           entry.name === 'workflow.yaml' ||
           entry.name === 'workflow.md' ||
+          entry.name === 'wizard.md' ||
           (entry.name.startsWith('workflow-') && entry.name.endsWith('.md'))
         ) {
           // Parse workflow file (both YAML and MD formats)

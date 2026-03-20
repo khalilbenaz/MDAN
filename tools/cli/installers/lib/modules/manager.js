@@ -80,7 +80,10 @@ class ModuleManager {
       const sourcePath = path.join(sourceDir, entry.name);
       const targetPath = path.join(targetDir, entry.name);
 
-      if (entry.isDirectory()) {
+      // Follow symlinks
+      const isDir = entry.isDirectory() || (entry.isSymbolicLink() && (await fs.stat(sourcePath)).isDirectory());
+
+      if (isDir) {
         await this.copyDirectoryWithPlaceholderReplacement(sourcePath, targetPath, overwrite);
       } else {
         await this.copyFileWithPlaceholderReplacement(sourcePath, targetPath, overwrite);
@@ -1505,7 +1508,10 @@ class ModuleManager {
     for (const entry of entries) {
       const fullPath = path.join(dir, entry.name);
 
-      if (entry.isDirectory()) {
+      // Follow symlinks: check if entry is a directory or a symlink to a directory
+      const isDir = entry.isDirectory() || (entry.isSymbolicLink() && (await fs.stat(fullPath)).isDirectory());
+
+      if (isDir) {
         const subFiles = await this.getFileList(fullPath, baseDir);
         files.push(...subFiles);
       } else {
