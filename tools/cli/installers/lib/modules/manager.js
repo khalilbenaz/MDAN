@@ -187,8 +187,9 @@ class ModuleManager {
 
   /**
    * List all available modules (excluding core which is always installed)
-   * bmm is the only built-in module, directly under src/bmm
-   * All other modules come from external-official-modules.yaml
+   * bmm is the built-in core module, directly under src/bmm
+   * Packs are built-in modules under src/packs/
+   * Additional modules come from external-official-modules.yaml
    * @returns {Object} Object with modules array and customModules array
    */
   async listAvailable() {
@@ -201,6 +202,21 @@ class ModuleManager {
       const bmmInfo = await this.getModuleInfo(bmmPath, 'bmm', 'src/bmm');
       if (bmmInfo) {
         modules.push(bmmInfo);
+      }
+    }
+
+    // Add built-in packs (under src/packs/)
+    const packsPath = getSourcePath('packs');
+    if (await fs.pathExists(packsPath)) {
+      const packEntries = await fs.readdir(packsPath, { withFileTypes: true });
+      for (const entry of packEntries) {
+        if (entry.isDirectory()) {
+          const packPath = path.join(packsPath, entry.name);
+          const packInfo = await this.getModuleInfo(packPath, entry.name, 'src/packs');
+          if (packInfo && !modules.some((m) => m.id === packInfo.id)) {
+            modules.push(packInfo);
+          }
+        }
       }
     }
 
@@ -306,6 +322,12 @@ class ModuleManager {
       if (await fs.pathExists(bmmPath)) {
         return bmmPath;
       }
+    }
+
+    // Check for built-in packs (under src/packs/)
+    const packPath = getSourcePath('packs', moduleCode);
+    if (await fs.pathExists(packPath)) {
+      return packPath;
     }
 
     // Check external official modules

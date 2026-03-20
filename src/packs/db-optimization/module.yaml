@@ -1,0 +1,4 @@
+code: db-optimization
+name: "Database Optimization"
+description: "Agents query optimizer, indexing specialist et performance analyst pour optimiser vos bases de données SQL et NoSQL"
+default_selected: false
