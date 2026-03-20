@@ -17,7 +17,7 @@
 
 ## MDAN vs MDAN — Ce qui nous différencie
 
-| Fonctionnalité | MDAN | MDAN |
+| Fonctionnalité | MDAN V0 | MDAN |
 |---|---|---|
 | Wizards step-by-step | ✅ | ✅ Même qualité + améliorations |
 | **Mémoire persistante** | ❌ | ✅ MDAN-STATE cross-wizard et cross-session |
