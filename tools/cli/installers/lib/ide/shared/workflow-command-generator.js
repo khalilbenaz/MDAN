@@ -125,7 +125,7 @@ class WorkflowCommandGenerator {
    */
   async generateCommandContent(workflow, mdanDir) {
     // Determine template based on workflow file type
-    const isMarkdownWorkflow = workflow.path.endsWith('workflow.md');
+    const isMarkdownWorkflow = workflow.path.endsWith('workflow.md') || workflow.path.endsWith('wizard.md');
     const templateName = isMarkdownWorkflow ? 'workflow-commander.md' : 'workflow-command-template.md';
     const templatePath = path.join(path.dirname(this.templatePath), templateName);
 
