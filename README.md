@@ -15,9 +15,9 @@
 
 ---
 
-## MDAN vs BMAD — Ce qui nous différencie
+## MDAN vs MDAN — Ce qui nous différencie
 
-| Fonctionnalité | BMAD | MDAN |
+| Fonctionnalité | MDAN | MDAN |
 |---|---|---|
 | Wizards step-by-step | ✅ | ✅ Même qualité + améliorations |
 | **Mémoire persistante** | ❌ | ✅ MDAN-STATE cross-wizard et cross-session |

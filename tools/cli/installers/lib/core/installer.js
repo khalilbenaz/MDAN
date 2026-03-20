@@ -15,7 +15,7 @@ const { ManifestGenerator } = require('./manifest-generator');
 const { IdeConfigManager } = require('./ide-config-manager');
 const { CustomHandler } = require('../custom/handler');
 const prompts = require('../../../lib/prompts');
-const { BMAD_FOLDER_NAME } = require('../ide/shared/path-utils');
+const { MDAN_FOLDER_NAME } = require('../ide/shared/path-utils');
 
 class Installer {
   constructor() {
@@ -30,44 +30,44 @@ class Installer {
     this.configCollector = new ConfigCollector();
     this.ideConfigManager = new IdeConfigManager();
     this.installedFiles = new Set(); // Track all installed files
-    this.bmadFolderName = BMAD_FOLDER_NAME;
+    this.mdanFolderName = MDAN_FOLDER_NAME;
   }
 
   /**
-   * Find the bmad installation directory in a project
-   * Always uses the standard _bmad folder name
+   * Find the mdan installation directory in a project
+   * Always uses the standard _mdan folder name
    * Also checks for legacy _cfg folder for migration
    * @param {string} projectDir - Project directory
-   * @returns {Promise<Object>} { bmadDir: string, hasLegacyCfg: boolean }
+   * @returns {Promise<Object>} { mdanDir: string, hasLegacyCfg: boolean }
    */
-  async findBmadDir(projectDir) {
-    const bmadDir = path.join(projectDir, BMAD_FOLDER_NAME);
+  async findMdanDir(projectDir) {
+    const mdanDir = path.join(projectDir, MDAN_FOLDER_NAME);
 
     // Check if project directory exists
     if (!(await fs.pathExists(projectDir))) {
       // Project doesn't exist yet, return default
-      return { bmadDir, hasLegacyCfg: false };
+      return { mdanDir, hasLegacyCfg: false };
     }
 
-    // Check for legacy _cfg folder if bmad directory exists
+    // Check for legacy _cfg folder if mdan directory exists
     let hasLegacyCfg = false;
-    if (await fs.pathExists(bmadDir)) {
-      const legacyCfgPath = path.join(bmadDir, '_cfg');
+    if (await fs.pathExists(mdanDir)) {
+      const legacyCfgPath = path.join(mdanDir, '_cfg');
       if (await fs.pathExists(legacyCfgPath)) {
         hasLegacyCfg = true;
       }
     }
 
-    return { bmadDir, hasLegacyCfg };
+    return { mdanDir, hasLegacyCfg };
   }
 
   /**
    * @function copyFileWithPlaceholderReplacement
-   * @intent Copy files from BMAD source to installation directory with dynamic content transformation
-   * @why Enables installation-time customization: _bmad replacement
-   * @param {string} sourcePath - Absolute path to source file in BMAD repository
+   * @intent Copy files from MDAN source to installation directory with dynamic content transformation
+   * @why Enables installation-time customization: _mdan replacement
+   * @param {string} sourcePath - Absolute path to source file in MDAN repository
    * @param {string} targetPath - Absolute path to destination file in user's project
-   * @param {string} bmadFolderName - User's chosen bmad folder name (default: 'bmad')
+   * @param {string} mdanFolderName - User's chosen mdan folder name (default: 'mdan')
    * @returns {Promise<void>} Resolves when file copy and transformation complete
    * @sideeffects Writes transformed file to targetPath, creates parent directories if needed
    * @edgecases Binary files bypass transformation, falls back to raw copy if UTF-8 read fails
@@ -138,21 +138,21 @@ class Installer {
     // Check for already configured IDEs
     const { Detector } = require('./detector');
     const detector = new Detector();
-    const bmadDir = path.join(projectDir, BMAD_FOLDER_NAME);
+    const mdanDir = path.join(projectDir, MDAN_FOLDER_NAME);
 
-    // During full reinstall, use the saved previous IDEs since bmad dir was deleted
+    // During full reinstall, use the saved previous IDEs since mdan dir was deleted
     // Otherwise detect from existing installation
     let previouslyConfiguredIdes;
     if (isFullReinstall) {
       // During reinstall, treat all IDEs as new (need configuration)
       previouslyConfiguredIdes = [];
     } else {
-      const existingInstall = await detector.detect(bmadDir);
+      const existingInstall = await detector.detect(mdanDir);
       previouslyConfiguredIdes = existingInstall.ides || [];
     }
 
     // Load saved IDE configurations for already-configured IDEs
-    const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(bmadDir);
+    const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(mdanDir);
 
     // Collect IDE-specific configurations if any were selected
     const ideConfigurations = {};
@@ -189,7 +189,7 @@ class Installer {
               ideConfigurations[ide] = await handler.collectConfiguration({
                 selectedModules: selectedModules || [],
                 projectDir,
-                bmadDir,
+                mdanDir,
                 skipPrompts,
               });
             } else {
@@ -235,18 +235,18 @@ class Installer {
 
     // Only display logo if core config wasn't already collected (meaning we're not continuing from UI)
     if (!hasCoreConfig) {
-      // Display BMAD logo
+      // Display MDAN logo
       await CLIUtils.displayLogo();
 
       // Display welcome message
-      await CLIUtils.displaySection('BMad™  Installation', 'Version ' + require(path.join(getProjectRoot(), 'package.json')).version);
+      await CLIUtils.displaySection('MDAN™  Installation', 'Version ' + require(path.join(getProjectRoot(), 'package.json')).version);
     }
 
     // Note: Legacy V4 detection now happens earlier in UI.promptInstall()
     // before any config collection, so we don't need to check again here
 
     const projectDir = path.resolve(config.directory);
-    const bmadDir = path.join(projectDir, BMAD_FOLDER_NAME);
+    const mdanDir = path.join(projectDir, MDAN_FOLDER_NAME);
 
     // If core config was pre-collected (from interactive mode), use it
     if (config.coreConfig && Object.keys(config.coreConfig).length > 0) {
@@ -282,11 +282,11 @@ class Installer {
           // Check if sourcePath is a cache-relative path (starts with _config)
           if (absoluteSourcePath && absoluteSourcePath.startsWith('_config')) {
             // Convert cache-relative path to absolute path
-            absoluteSourcePath = path.join(bmadDir, absoluteSourcePath);
+            absoluteSourcePath = path.join(mdanDir, absoluteSourcePath);
           }
           // If no sourcePath but we have relativePath, convert it
           else if (!absoluteSourcePath && customModule.relativePath) {
-            // relativePath is relative to the project root (parent of bmad dir)
+            // relativePath is relative to the project root (parent of mdan dir)
             absoluteSourcePath = path.resolve(projectDir, customModule.relativePath);
           }
           // Ensure sourcePath is absolute for anything else
@@ -372,11 +372,11 @@ class Installer {
       }
     }
 
-    // Set bmad folder name on module manager and IDE manager for placeholder replacement
-    this.moduleManager.setBmadFolderName(BMAD_FOLDER_NAME);
+    // Set mdan folder name on module manager and IDE manager for placeholder replacement
+    this.moduleManager.setMdanFolderName(MDAN_FOLDER_NAME);
     this.moduleManager.setCoreConfig(moduleConfigs.core || {});
     this.moduleManager.setCustomModulePaths(customModulePaths);
-    this.ideManager.setBmadFolderName(BMAD_FOLDER_NAME);
+    this.ideManager.setMdanFolderName(MDAN_FOLDER_NAME);
 
     // Tool selection will be collected after we determine if it's a reinstall/update/new install
 
@@ -406,7 +406,7 @@ class Installer {
 
       // Check existing installation
       spinner.message('Checking for existing installation...');
-      const existingInstall = await this.detector.detect(bmadDir);
+      const existingInstall = await this.detector.detect(mdanDir);
 
       if (existingInstall.installed && !config.force && !config._quickUpdate) {
         spinner.stop('Existing installation detected');
@@ -420,8 +420,8 @@ class Installer {
           action = 'update';
         } else {
           // Fallback: Ask the user (backwards compatibility for other code paths)
-          await prompts.log.warn('Existing BMAD installation detected');
-          await prompts.log.message(`  Location: ${bmadDir}`);
+          await prompts.log.warn('Existing MDAN installation detected');
+          await prompts.log.message(`  Location: ${mdanDir}`);
           await prompts.log.message(`  Version: ${existingInstall.version}`);
 
           const promptResult = await this.promptUpdateAction();
@@ -459,19 +459,19 @@ class Installer {
               for (const moduleId of modulesToRemove) {
                 const moduleInfo = existingInstall.modules.find((m) => m.id === moduleId);
                 const displayName = moduleInfo?.name || moduleId;
-                const modulePath = path.join(bmadDir, moduleId);
+                const modulePath = path.join(mdanDir, moduleId);
                 await prompts.log.error(`  - ${displayName} (${modulePath})`);
               }
 
               const confirmRemoval = await prompts.confirm({
-                message: `Remove ${modulesToRemove.length} module(s) from BMAD installation?`,
+                message: `Remove ${modulesToRemove.length} module(s) from MDAN installation?`,
                 default: false,
               });
 
               if (confirmRemoval) {
                 // Remove module folders
                 for (const moduleId of modulesToRemove) {
-                  const modulePath = path.join(bmadDir, moduleId);
+                  const modulePath = path.join(mdanDir, moduleId);
                   try {
                     if (await fs.pathExists(modulePath)) {
                       await fs.remove(modulePath);
@@ -496,15 +496,15 @@ class Installer {
           }
 
           // Detect custom and modified files BEFORE updating (compare current files vs files-manifest.csv)
-          const existingFilesManifest = await this.readFilesManifest(bmadDir);
-          const { customFiles, modifiedFiles } = await this.detectCustomFiles(bmadDir, existingFilesManifest);
+          const existingFilesManifest = await this.readFilesManifest(mdanDir);
+          const { customFiles, modifiedFiles } = await this.detectCustomFiles(mdanDir, existingFilesManifest);
 
           config._customFiles = customFiles;
           config._modifiedFiles = modifiedFiles;
 
           // Preserve existing core configuration during updates
           // Read the current core config.yaml to maintain user's settings
-          const coreConfigPath = path.join(bmadDir, 'core', 'config.yaml');
+          const coreConfigPath = path.join(mdanDir, 'core', 'config.yaml');
           if ((await fs.pathExists(coreConfigPath)) && (!config.coreConfig || Object.keys(config.coreConfig).length === 0)) {
             try {
               const yaml = require('yaml');
@@ -522,7 +522,7 @@ class Installer {
           }
 
           // Also check cache directory for custom modules (like quick update does)
-          const cacheDir = path.join(bmadDir, '_config', 'custom');
+          const cacheDir = path.join(mdanDir, '_config', 'custom');
           if (await fs.pathExists(cacheDir)) {
             const cachedModules = await fs.readdir(cacheDir, { withFileTypes: true });
 
@@ -560,12 +560,12 @@ class Installer {
 
           // If there are custom files, back them up temporarily
           if (customFiles.length > 0) {
-            const tempBackupDir = path.join(projectDir, '_bmad-custom-backup-temp');
+            const tempBackupDir = path.join(projectDir, '_mdan-custom-backup-temp');
             await fs.ensureDir(tempBackupDir);
 
             spinner.start(`Backing up ${customFiles.length} custom files...`);
             for (const customFile of customFiles) {
-              const relativePath = path.relative(bmadDir, customFile);
+              const relativePath = path.relative(mdanDir, customFile);
               const backupPath = path.join(tempBackupDir, relativePath);
               await fs.ensureDir(path.dirname(backupPath));
               await fs.copy(customFile, backupPath);
@@ -577,12 +577,12 @@ class Installer {
 
           // For modified files, back them up to temp directory (will be restored as .bak files after install)
           if (modifiedFiles.length > 0) {
-            const tempModifiedBackupDir = path.join(projectDir, '_bmad-modified-backup-temp');
+            const tempModifiedBackupDir = path.join(projectDir, '_mdan-modified-backup-temp');
             await fs.ensureDir(tempModifiedBackupDir);
 
             spinner.start(`Backing up ${modifiedFiles.length} modified files...`);
             for (const modifiedFile of modifiedFiles) {
-              const relativePath = path.relative(bmadDir, modifiedFile.path);
+              const relativePath = path.relative(mdanDir, modifiedFile.path);
               const tempBackupPath = path.join(tempModifiedBackupDir, relativePath);
               await fs.ensureDir(path.dirname(tempBackupPath));
               await fs.copy(modifiedFile.path, tempBackupPath, { overwrite: true });
@@ -599,14 +599,14 @@ class Installer {
         config._existingInstall = existingInstall;
 
         // Detect custom and modified files BEFORE updating
-        const existingFilesManifest = await this.readFilesManifest(bmadDir);
-        const { customFiles, modifiedFiles } = await this.detectCustomFiles(bmadDir, existingFilesManifest);
+        const existingFilesManifest = await this.readFilesManifest(mdanDir);
+        const { customFiles, modifiedFiles } = await this.detectCustomFiles(mdanDir, existingFilesManifest);
 
         config._customFiles = customFiles;
         config._modifiedFiles = modifiedFiles;
 
         // Also check cache directory for custom modules (like quick update does)
-        const cacheDir = path.join(bmadDir, '_config', 'custom');
+        const cacheDir = path.join(mdanDir, '_config', 'custom');
         if (await fs.pathExists(cacheDir)) {
           const cachedModules = await fs.readdir(cacheDir, { withFileTypes: true });
 
@@ -644,12 +644,12 @@ class Installer {
 
         // Back up custom files
         if (customFiles.length > 0) {
-          const tempBackupDir = path.join(projectDir, '_bmad-custom-backup-temp');
+          const tempBackupDir = path.join(projectDir, '_mdan-custom-backup-temp');
           await fs.ensureDir(tempBackupDir);
 
           spinner.start(`Backing up ${customFiles.length} custom files...`);
           for (const customFile of customFiles) {
-            const relativePath = path.relative(bmadDir, customFile);
+            const relativePath = path.relative(mdanDir, customFile);
             const backupPath = path.join(tempBackupDir, relativePath);
             await fs.ensureDir(path.dirname(backupPath));
             await fs.copy(customFile, backupPath);
@@ -660,12 +660,12 @@ class Installer {
 
         // Back up modified files
         if (modifiedFiles.length > 0) {
-          const tempModifiedBackupDir = path.join(projectDir, '_bmad-modified-backup-temp');
+          const tempModifiedBackupDir = path.join(projectDir, '_mdan-modified-backup-temp');
           await fs.ensureDir(tempModifiedBackupDir);
 
           spinner.start(`Backing up ${modifiedFiles.length} modified files...`);
           for (const modifiedFile of modifiedFiles) {
-            const relativePath = path.relative(bmadDir, modifiedFile.path);
+            const relativePath = path.relative(mdanDir, modifiedFile.path);
             const tempBackupPath = path.join(tempModifiedBackupDir, relativePath);
             await fs.ensureDir(path.dirname(tempBackupPath));
             await fs.copy(modifiedFile.path, tempBackupPath, { overwrite: true });
@@ -728,7 +728,7 @@ class Installer {
           if (config.skipPrompts) {
             // Non-interactive mode: silently preserve existing IDE configs
             if (!config.ides) config.ides = [];
-            const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(bmadDir);
+            const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(mdanDir);
             for (const ide of idesToRemove) {
               config.ides.push(ide);
               if (savedIdeConfigs[ide] && !ideConfigurations[ide]) {
@@ -746,7 +746,7 @@ class Installer {
             }
 
             const confirmRemoval = await prompts.confirm({
-              message: `Remove BMAD configuration for ${idesToRemove.length} IDE(s)?`,
+              message: `Remove MDAN configuration for ${idesToRemove.length} IDE(s)?`,
               default: false,
             });
 
@@ -758,7 +758,7 @@ class Installer {
                   if (handler) {
                     await handler.cleanup(projectDir);
                   }
-                  await this.ideConfigManager.deleteIdeConfig(bmadDir, ide);
+                  await this.ideConfigManager.deleteIdeConfig(mdanDir, ide);
                   await prompts.log.message(`  Removed: ${ide}`);
                 } catch (error) {
                   await prompts.log.warn(`  Warning: Failed to remove ${ide}: ${error.message}`);
@@ -769,7 +769,7 @@ class Installer {
               await prompts.log.message('  IDE removal cancelled');
               // Add IDEs back to selection and restore their saved configurations
               if (!config.ides) config.ides = [];
-              const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(bmadDir);
+              const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(mdanDir);
               for (const ide of idesToRemove) {
                 config.ides.push(ide);
                 if (savedIdeConfigs[ide] && !ideConfigurations[ide]) {
@@ -793,15 +793,15 @@ class Installer {
         spinner.start('Preparing installation...');
       }
 
-      // Create bmad directory structure
+      // Create mdan directory structure
       spinner.message('Creating directory structure...');
-      await this.createDirectoryStructure(bmadDir);
+      await this.createDirectoryStructure(mdanDir);
 
       // Cache custom modules if any
       if (customModulePaths && customModulePaths.size > 0) {
         spinner.message('Caching custom modules...');
         const { CustomModuleCache } = require('./custom-module-cache');
-        const customCache = new CustomModuleCache(bmadDir);
+        const customCache = new CustomModuleCache(mdanDir);
 
         for (const [moduleId, sourcePath] of customModulePaths) {
           const cachedInfo = await customCache.cacheModule(moduleId, sourcePath, {
@@ -862,7 +862,7 @@ class Installer {
       }
 
       // For dependency resolution, we only need regular modules (not custom modules)
-      // Custom modules are already installed in _bmad and don't need dependency resolution from source
+      // Custom modules are already installed in _mdan and don't need dependency resolution from source
       const regularModulesForResolution = allModules.filter((module) => {
         // Check if this is a custom module
         const isCustom =
@@ -895,11 +895,11 @@ class Installer {
       // Core installation task
       if (config.installCore) {
         installTasks.push({
-          title: isQuickUpdate ? 'Updating BMAD core' : 'Installing BMAD core',
+          title: isQuickUpdate ? 'Updating MDAN core' : 'Installing MDAN core',
           task: async (message) => {
-            await this.installCoreWithDependencies(bmadDir, { core: {} });
+            await this.installCoreWithDependencies(mdanDir, { core: {} });
             addResult('Core', 'ok', isQuickUpdate ? 'updated' : 'installed');
-            await this.generateModuleConfigs(bmadDir, { core: config.coreConfig || {} });
+            await this.generateModuleConfigs(mdanDir, { core: config.coreConfig || {} });
             return isQuickUpdate ? 'Core updated' : 'Core installed';
           },
         });
@@ -911,7 +911,7 @@ class Installer {
         task: async (message) => {
           // Create a temporary module manager that knows about custom content locations
           const tempModuleManager = new ModuleManager({
-            bmadDir: bmadDir,
+            mdanDir: mdanDir,
           });
 
           taskResolution = await this.dependencyResolver.resolve(projectRoot, regularModulesForResolution, {
@@ -956,7 +956,7 @@ class Installer {
                 if (customInfo.sourcePath && !customInfo.path) {
                   customInfo.path = path.isAbsolute(customInfo.sourcePath)
                     ? customInfo.sourcePath
-                    : path.join(bmadDir, customInfo.sourcePath);
+                    : path.join(mdanDir, customInfo.sourcePath);
                 }
               }
 
@@ -982,7 +982,7 @@ class Installer {
                 const collectedModuleConfig = moduleConfigs[moduleName] || {};
                 await this.moduleManager.install(
                   moduleName,
-                  bmadDir,
+                  mdanDir,
                   (filePath) => {
                     this.installedFiles.add(filePath);
                   },
@@ -994,7 +994,7 @@ class Installer {
                     silent: true,
                   },
                 );
-                await this.generateModuleConfigs(bmadDir, {
+                await this.generateModuleConfigs(mdanDir, {
                   [moduleName]: { ...config.coreConfig, ...customInfo.config, ...collectedModuleConfig },
                 });
               } else {
@@ -1003,9 +1003,9 @@ class Installer {
                   continue;
                 }
                 if (moduleName === 'core') {
-                  await this.installCoreWithDependencies(bmadDir, resolution.byModule[moduleName]);
+                  await this.installCoreWithDependencies(mdanDir, resolution.byModule[moduleName]);
                 } else {
-                  await this.installModuleWithDependencies(moduleName, bmadDir, resolution.byModule[moduleName]);
+                  await this.installModuleWithDependencies(moduleName, mdanDir, resolution.byModule[moduleName]);
                 }
               }
 
@@ -1027,7 +1027,7 @@ class Installer {
                   files.other.length;
                 if (totalFiles > 0) {
                   message(`Installing ${module} dependencies...`);
-                  await this.installPartialModule(module, bmadDir, files);
+                  await this.installPartialModule(module, mdanDir, files);
                 }
               }
             }
@@ -1046,7 +1046,7 @@ class Installer {
             addResult('Module directories', 'warn', 'no resolution data');
             return 'Module directories skipped (no resolution data)';
           }
-          const verboseMode = process.env.BMAD_VERBOSE_INSTALL === 'true' || config.verbose;
+          const verboseMode = process.env.MDAN_VERBOSE_INSTALL === 'true' || config.verbose;
           const moduleLogger = {
             log: async (msg) => (verboseMode ? await prompts.log.message(msg) : undefined),
             error: async (msg) => await prompts.log.error(msg),
@@ -1055,7 +1055,7 @@ class Installer {
 
           // Core module directories
           if (config.installCore || resolution.byModule.core) {
-            const result = await this.moduleManager.createModuleDirectories('core', bmadDir, {
+            const result = await this.moduleManager.createModuleDirectories('core', mdanDir, {
               installedIDEs: config.ides || [],
               moduleConfig: moduleConfigs.core || {},
               existingModuleConfig: this.configCollector.existingConfig?.core || {},
@@ -1074,7 +1074,7 @@ class Installer {
           if (config.modules && config.modules.length > 0) {
             for (const moduleName of config.modules) {
               message(`Setting up ${moduleName}...`);
-              const result = await this.moduleManager.createModuleDirectories(moduleName, bmadDir, {
+              const result = await this.moduleManager.createModuleDirectories(moduleName, mdanDir, {
                 installedIDEs: config.ides || [],
                 moduleConfig: moduleConfigs[moduleName] || {},
                 existingModuleConfig: this.configCollector.existingConfig?.[moduleName] || {},
@@ -1100,11 +1100,11 @@ class Installer {
         title: 'Generating configurations',
         task: async (message) => {
           // Generate clean config.yaml files for each installed module
-          await this.generateModuleConfigs(bmadDir, moduleConfigs);
+          await this.generateModuleConfigs(mdanDir, moduleConfigs);
           addResult('Configurations', 'ok', 'generated');
 
           // Pre-register manifest files
-          const cfgDir = path.join(bmadDir, '_config');
+          const cfgDir = path.join(mdanDir, '_config');
           this.installedFiles.add(path.join(cfgDir, 'manifest.yaml'));
           this.installedFiles.add(path.join(cfgDir, 'workflow-manifest.csv'));
           this.installedFiles.add(path.join(cfgDir, 'agent-manifest.csv'));
@@ -1128,7 +1128,7 @@ class Installer {
             modulesForCsvPreserve = config._preserveModules ? [...allModules, ...config._preserveModules] : allModules;
           }
 
-          const manifestStats = await manifestGen.generateManifests(bmadDir, allModulesForManifest, [...this.installedFiles], {
+          const manifestStats = await manifestGen.generateManifests(mdanDir, allModulesForManifest, [...this.installedFiles], {
             ides: config.ides || [],
             preservedModules: modulesForCsvPreserve,
           });
@@ -1141,7 +1141,7 @@ class Installer {
 
           // Merge help catalogs
           message('Generating help catalog...');
-          await this.mergeModuleHelpCatalogs(bmadDir);
+          await this.mergeModuleHelpCatalogs(mdanDir);
           addResult('Help catalog', 'ok');
 
           return 'Configurations generated';
@@ -1205,7 +1205,7 @@ class Installer {
                 console.log = () => {};
               }
               try {
-                const setupResult = await this.ideManager.setup(ide, projectDir, bmadDir, {
+                const setupResult = await this.ideManager.setup(ide, projectDir, mdanDir, {
                   selectedModules: allModules || [],
                   preCollectedConfig: ideConfigurations[ide] || null,
                   verbose: config.verbose,
@@ -1213,7 +1213,7 @@ class Installer {
                 });
 
                 if (ideConfigurations[ide] && !ideConfigurations[ide]._alreadyConfigured) {
-                  await this.ideConfigManager.saveIdeConfig(bmadDir, ide, ideConfigurations[ide]);
+                  await this.ideConfigManager.saveIdeConfig(mdanDir, ide, ideConfigurations[ide]);
                 }
 
                 if (setupResult.success) {
@@ -1257,7 +1257,7 @@ class Installer {
               message(`Restoring ${config._customFiles.length} custom files...`);
 
               for (const originalPath of config._customFiles) {
-                const relativePath = path.relative(bmadDir, originalPath);
+                const relativePath = path.relative(mdanDir, originalPath);
                 const backupPath = path.join(config._tempBackupDir, relativePath);
 
                 if (await fs.pathExists(backupPath)) {
@@ -1280,7 +1280,7 @@ class Installer {
                 message(`Restoring ${modifiedFiles.length} modified files as .bak...`);
 
                 for (const modifiedFile of modifiedFiles) {
-                  const relativePath = path.relative(bmadDir, modifiedFile.path);
+                  const relativePath = path.relative(mdanDir, modifiedFile.path);
                   const tempBackupPath = path.join(config._tempModifiedBackupDir, relativePath);
                   const bakPath = modifiedFile.path + '.bak';
 
@@ -1311,7 +1311,7 @@ class Installer {
 
       // Render consolidated summary
       await this.renderInstallSummary(results, {
-        bmadDir,
+        mdanDir,
         modules: config.modules,
         ides: config.ides,
         customFiles: customFiles.length > 0 ? customFiles : undefined,
@@ -1320,7 +1320,7 @@ class Installer {
 
       return {
         success: true,
-        path: bmadDir,
+        path: mdanDir,
         modules: config.modules,
         ides: config.ides,
         projectDir: projectDir,
@@ -1342,7 +1342,7 @@ class Installer {
   /**
    * Render a consolidated install summary using prompts.note()
    * @param {Array} results - Array of {step, status: 'ok'|'error'|'warn', detail}
-   * @param {Object} context - {bmadDir, modules, ides, customFiles, modifiedFiles}
+   * @param {Object} context - {mdanDir, modules, ides, customFiles, modifiedFiles}
    */
   async renderInstallSummary(results, context = {}) {
     const color = await prompts.getColor();
@@ -1364,8 +1364,8 @@ class Installer {
 
     // Context and warnings
     lines.push('');
-    if (context.bmadDir) {
-      lines.push(`  Installed to: ${color.dim(context.bmadDir)}`);
+    if (context.mdanDir) {
+      lines.push(`  Installed to: ${color.dim(context.mdanDir)}`);
     }
     if (context.customFiles && context.customFiles.length > 0) {
       lines.push(`  ${color.cyan(`Custom files preserved: ${context.customFiles.length}`)}`);
@@ -1378,14 +1378,14 @@ class Installer {
     lines.push(
       '',
       '  Next steps:',
-      `    Read our new Docs Site: ${color.dim('https://docs.bmad-method.org/')}`,
+      `    Read our new Docs Site: ${color.dim('https://docs.mdan.org/')}`,
       `    Join our Discord: ${color.dim('https://discord.gg/gk8jAdXWmj')}`,
-      `    Star us on GitHub: ${color.dim('https://github.com/bmad-code-org/BMAD-METHOD/')}`,
-      `    Subscribe on YouTube: ${color.dim('https://www.youtube.com/@BMadCode')}`,
-      `    Run ${color.cyan('/bmad-help')} with your IDE Agent and ask it how to get started`,
+      `    Star us on GitHub: ${color.dim('https://github.com/mdan-code-org/MDAN/')}`,
+      `    Subscribe on YouTube: ${color.dim('https://www.youtube.com/@MDANCode')}`,
+      `    Run ${color.cyan('/mdan-help')} with your IDE Agent and ask it how to get started`,
     );
 
-    await prompts.note(lines.join('\n'), 'BMAD is ready to use!');
+    await prompts.note(lines.join('\n'), 'MDAN is ready to use!');
   }
 
   /**
@@ -1397,12 +1397,12 @@ class Installer {
 
     try {
       const projectDir = path.resolve(config.directory);
-      const { bmadDir } = await this.findBmadDir(projectDir);
-      const existingInstall = await this.detector.detect(bmadDir);
+      const { mdanDir } = await this.findMdanDir(projectDir);
+      const existingInstall = await this.detector.detect(mdanDir);
 
       if (!existingInstall.installed) {
-        spinner.stop('No BMAD installation found');
-        throw new Error(`No BMAD installation found at ${bmadDir}`);
+        spinner.stop('No MDAN installation found');
+        throw new Error(`No MDAN installation found at ${mdanDir}`);
       }
 
       spinner.message('Analyzing update requirements...');
@@ -1422,7 +1422,7 @@ class Installer {
       }
 
       // Also check cache directory
-      const cacheDir = path.join(bmadDir, '_config', 'custom');
+      const cacheDir = path.join(mdanDir, '_config', 'custom');
       if (await fs.pathExists(cacheDir)) {
         const cachedModules = await fs.readdir(cacheDir, { withFileTypes: true });
 
@@ -1465,7 +1465,7 @@ class Installer {
         const projectRoot = getProjectRoot();
         await this.handleMissingCustomSources(
           customModuleSources,
-          bmadDir,
+          mdanDir,
           projectRoot,
           'update',
           existingInstall.modules.map((m) => m.id),
@@ -1494,17 +1494,17 @@ class Installer {
       // Perform actual update
       if (existingInstall.hasCore) {
         spinner.message('Updating core...');
-        await this.updateCore(bmadDir, config.force);
+        await this.updateCore(mdanDir, config.force);
       }
 
       for (const module of existingInstall.modules) {
         spinner.message(`Updating module: ${module.id}...`);
-        await this.moduleManager.update(module.id, bmadDir, config.force, { installer: this });
+        await this.moduleManager.update(module.id, mdanDir, config.force, { installer: this });
       }
 
       // Update manifest
       spinner.message('Updating manifest...');
-      await this.manifest.update(bmadDir, {
+      await this.manifest.update(mdanDir, {
         version: newVersion,
         updateDate: new Date().toISOString(),
       });
@@ -1522,8 +1522,8 @@ class Installer {
    */
   async getStatus(directory) {
     const projectDir = path.resolve(directory);
-    const { bmadDir } = await this.findBmadDir(projectDir);
-    return await this.detector.detect(bmadDir);
+    const { mdanDir } = await this.findMdanDir(projectDir);
+    return await this.detector.detect(mdanDir);
   }
 
   /**
@@ -1534,29 +1534,29 @@ class Installer {
   }
 
   /**
-   * Uninstall BMAD with selective removal options
+   * Uninstall MDAN with selective removal options
    * @param {string} directory - Project directory
    * @param {Object} options - Uninstall options
-   * @param {boolean} [options.removeModules=true] - Remove _bmad/ directory
+   * @param {boolean} [options.removeModules=true] - Remove _.mdan/ directory
    * @param {boolean} [options.removeIdeConfigs=true] - Remove IDE configurations
    * @param {boolean} [options.removeOutputFolder=false] - Remove user artifacts output folder
    * @returns {Object} Result with success status and removed components
    */
   async uninstall(directory, options = {}) {
     const projectDir = path.resolve(directory);
-    const { bmadDir } = await this.findBmadDir(projectDir);
+    const { mdanDir } = await this.findMdanDir(projectDir);
 
-    if (!(await fs.pathExists(bmadDir))) {
+    if (!(await fs.pathExists(mdanDir))) {
       return { success: false, reason: 'not-installed' };
     }
 
     // 1. DETECT: Read state BEFORE deleting anything
-    const existingInstall = await this.detector.detect(bmadDir);
-    const outputFolder = await this._readOutputFolder(bmadDir);
+    const existingInstall = await this.detector.detect(mdanDir);
+    const outputFolder = await this._readOutputFolder(mdanDir);
 
     const removed = { modules: false, ideConfigs: false, outputFolder: false };
 
-    // 2. IDE CLEANUP (before _bmad/ deletion so configs are accessible)
+    // 2. IDE CLEANUP (before _.mdan/ deletion so configs are accessible)
     if (options.removeIdeConfigs !== false) {
       await this.uninstallIdeConfigs(projectDir, existingInstall, { silent: options.silent });
       removed.ideConfigs = true;
@@ -1567,7 +1567,7 @@ class Installer {
       removed.outputFolder = await this.uninstallOutputFolder(projectDir, outputFolder);
     }
 
-    // 4. BMAD DIRECTORY (last, after everything that needs it)
+    // 4. MDAN DIRECTORY (last, after everything that needs it)
     if (options.removeModules !== false) {
       removed.modules = await this.uninstallModules(projectDir);
     }
@@ -1613,14 +1613,14 @@ class Installer {
   }
 
   /**
-   * Remove the _bmad/ directory
+   * Remove the _.mdan/ directory
    * @param {string} projectDir - Project directory
    * @returns {Promise<boolean>} Whether the directory was removed
    */
   async uninstallModules(projectDir) {
-    const { bmadDir } = await this.findBmadDir(projectDir);
-    if (await fs.pathExists(bmadDir)) {
-      await fs.remove(bmadDir);
+    const { mdanDir } = await this.findMdanDir(projectDir);
+    if (await fs.pathExists(mdanDir)) {
+      await fs.remove(mdanDir);
       return true;
     }
     return false;
@@ -1628,26 +1628,26 @@ class Installer {
 
   /**
    * Get the configured output folder name for a project
-   * Resolves bmadDir internally from projectDir
+   * Resolves mdanDir internally from projectDir
    * @param {string} projectDir - Project directory
-   * @returns {string} Output folder name (relative, default: '_bmad-output')
+   * @returns {string} Output folder name (relative, default: '_mdan-output')
    */
   async getOutputFolder(projectDir) {
-    const { bmadDir } = await this.findBmadDir(projectDir);
-    return this._readOutputFolder(bmadDir);
+    const { mdanDir } = await this.findMdanDir(projectDir);
+    return this._readOutputFolder(mdanDir);
   }
 
   /**
    * Read the output_folder setting from module config files
    * Checks bmm/config.yaml first, then other module configs
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @returns {string} Output folder path or default
    */
-  async _readOutputFolder(bmadDir) {
+  async _readOutputFolder(mdanDir) {
     const yaml = require('yaml');
 
     // Check bmm/config.yaml first (most common)
-    const bmmConfigPath = path.join(bmadDir, 'bmm', 'config.yaml');
+    const bmmConfigPath = path.join(mdanDir, 'bmm', 'config.yaml');
     if (await fs.pathExists(bmmConfigPath)) {
       try {
         const content = await fs.readFile(bmmConfigPath, 'utf8');
@@ -1663,10 +1663,10 @@ class Installer {
 
     // Scan other module config.yaml files
     try {
-      const entries = await fs.readdir(bmadDir, { withFileTypes: true });
+      const entries = await fs.readdir(mdanDir, { withFileTypes: true });
       for (const entry of entries) {
         if (!entry.isDirectory() || entry.name === 'bmm' || entry.name.startsWith('_')) continue;
-        const configPath = path.join(bmadDir, entry.name, 'config.yaml');
+        const configPath = path.join(mdanDir, entry.name, 'config.yaml');
         if (await fs.pathExists(configPath)) {
           try {
             const content = await fs.readFile(configPath, 'utf8');
@@ -1684,26 +1684,26 @@ class Installer {
     }
 
     // Default fallback
-    return '_bmad-output';
+    return '_mdan-output';
   }
 
   /**
    * Private: Create directory structure
    */
   /**
-   * Merge all module-help.csv files into a single bmad-help.csv
+   * Merge all module-help.csv files into a single mdan-help.csv
    * Scans all installed modules for module-help.csv and merges them
    * Enriches agent info from agent-manifest.csv
-   * Output is written to _bmad/_config/bmad-help.csv
-   * @param {string} bmadDir - BMAD installation directory
+   * Output is written to _.mdan/_config/mdan-help.csv
+   * @param {string} mdanDir - MDAN installation directory
    */
-  async mergeModuleHelpCatalogs(bmadDir) {
+  async mergeModuleHelpCatalogs(mdanDir) {
     const allRows = [];
     const headerRow =
       'module,phase,name,code,sequence,workflow-file,command,required,agent-name,agent-command,agent-display-name,agent-title,options,description,output-location,outputs';
 
     // Load agent manifest for agent info lookup
-    const agentManifestPath = path.join(bmadDir, '_config', 'agent-manifest.csv');
+    const agentManifestPath = path.join(mdanDir, '_config', 'agent-manifest.csv');
     const agentInfo = new Map(); // agent-name -> {command, displayName, title+icon}
 
     if (await fs.pathExists(agentManifestPath)) {
@@ -1721,8 +1721,8 @@ class Installer {
           const icon = cols[3].replaceAll('"', '').trim();
           const module = cols[10] ? cols[10].replaceAll('"', '').trim() : '';
 
-          // Build agent command: bmad:module:agent:name
-          const agentCommand = module ? `bmad:${module}:agent:${agentName}` : `bmad:agent:${agentName}`;
+          // Build agent command: mdan:module:agent:name
+          const agentCommand = module ? `mdan:${module}:agent:${agentName}` : `mdan:agent:${agentName}`;
 
           agentInfo.set(agentName, {
             command: agentCommand,
@@ -1734,7 +1734,7 @@ class Installer {
     }
 
     // Get all installed module directories
-    const entries = await fs.readdir(bmadDir, { withFileTypes: true });
+    const entries = await fs.readdir(mdanDir, { withFileTypes: true });
     const installedModules = entries
       .filter((entry) => entry.isDirectory() && entry.name !== '_config' && entry.name !== 'docs' && entry.name !== '_memory')
       .map((entry) => entry.name);
@@ -1750,7 +1750,7 @@ class Installer {
 
     // Map installed module paths
     for (const moduleName of installedModules) {
-      const modulePath = path.join(bmadDir, moduleName);
+      const modulePath = path.join(mdanDir, moduleName);
       modulePaths.set(moduleName, modulePath);
     }
 
@@ -1823,7 +1823,7 @@ class Installer {
             }
           }
 
-          if (process.env.BMAD_VERBOSE_INSTALL === 'true') {
+          if (process.env.MDAN_VERBOSE_INSTALL === 'true') {
             await prompts.log.message(`  Merged module-help from: ${moduleName}`);
           }
         } catch (error) {
@@ -1858,9 +1858,9 @@ class Installer {
     });
 
     // Write merged catalog
-    const outputDir = path.join(bmadDir, '_config');
+    const outputDir = path.join(mdanDir, '_config');
     await fs.ensureDir(outputDir);
-    const outputPath = path.join(outputDir, 'bmad-help.csv');
+    const outputPath = path.join(outputDir, 'mdan-help.csv');
 
     const mergedContent = [headerRow, ...allRows].join('\n');
     await fs.writeFile(outputPath, mergedContent, 'utf8');
@@ -1868,8 +1868,8 @@ class Installer {
     // Track the installed file
     this.installedFiles.add(outputPath);
 
-    if (process.env.BMAD_VERBOSE_INSTALL === 'true') {
-      await prompts.log.message(`  Generated bmad-help.csv: ${allRows.length} workflows`);
+    if (process.env.MDAN_VERBOSE_INSTALL === 'true') {
+      await prompts.log.message(`  Generated mdan-help.csv: ${allRows.length} workflows`);
     }
   }
 
@@ -1924,33 +1924,33 @@ class Installer {
     return str;
   }
 
-  async createDirectoryStructure(bmadDir) {
-    await fs.ensureDir(bmadDir);
-    await fs.ensureDir(path.join(bmadDir, '_config'));
-    await fs.ensureDir(path.join(bmadDir, '_config', 'agents'));
-    await fs.ensureDir(path.join(bmadDir, '_config', 'custom'));
+  async createDirectoryStructure(mdanDir) {
+    await fs.ensureDir(mdanDir);
+    await fs.ensureDir(path.join(mdanDir, '_config'));
+    await fs.ensureDir(path.join(mdanDir, '_config', 'agents'));
+    await fs.ensureDir(path.join(mdanDir, '_config', 'custom'));
   }
 
   /**
    * Generate clean config.yaml files for each installed module
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} moduleConfigs - Collected configuration values
    */
-  async generateModuleConfigs(bmadDir, moduleConfigs) {
+  async generateModuleConfigs(mdanDir, moduleConfigs) {
     const yaml = require('yaml');
 
     // Extract core config values to share with other modules
     const coreConfig = moduleConfigs.core || {};
 
     // Get all installed module directories
-    const entries = await fs.readdir(bmadDir, { withFileTypes: true });
+    const entries = await fs.readdir(mdanDir, { withFileTypes: true });
     const installedModules = entries
       .filter((entry) => entry.isDirectory() && entry.name !== '_config' && entry.name !== 'docs')
       .map((entry) => entry.name);
 
     // Generate config.yaml for each installed module
     for (const moduleName of installedModules) {
-      const modulePath = path.join(bmadDir, moduleName);
+      const modulePath = path.join(mdanDir, moduleName);
 
       // Get module-specific config or use empty object if none
       const config = moduleConfigs[moduleName] || {};
@@ -1961,7 +1961,7 @@ class Installer {
         // Create header
         const packageJson = require(path.join(getProjectRoot(), 'package.json'));
         const header = `# ${moduleName.toUpperCase()} Module Configuration
-# Generated by BMAD installer
+# Generated by MDAN installer
 # Version: ${packageJson.version}
 # Date: ${new Date().toISOString()}
 
@@ -2029,22 +2029,22 @@ class Installer {
 
   /**
    * Install core with resolved dependencies
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} coreFiles - Core files to install
    */
-  async installCoreWithDependencies(bmadDir, coreFiles) {
+  async installCoreWithDependencies(mdanDir, coreFiles) {
     const sourcePath = getModulePath('core');
-    const targetPath = path.join(bmadDir, 'core');
-    await this.installCore(bmadDir);
+    const targetPath = path.join(mdanDir, 'core');
+    await this.installCore(mdanDir);
   }
 
   /**
    * Install module with resolved dependencies
    * @param {string} moduleName - Module name
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} moduleFiles - Module files to install
    */
-  async installModuleWithDependencies(moduleName, bmadDir, moduleFiles) {
+  async installModuleWithDependencies(moduleName, mdanDir, moduleFiles) {
     // Get module configuration for conditional installation
     const moduleConfig = this.configCollector.collectedConfig[moduleName] || {};
 
@@ -2052,7 +2052,7 @@ class Installer {
     // Note: Module-specific installers are called separately after IDE setup
     await this.moduleManager.install(
       moduleName,
-      bmadDir,
+      mdanDir,
       (filePath) => {
         this.installedFiles.add(filePath);
       },
@@ -2065,7 +2065,7 @@ class Installer {
     );
 
     // Process agent files to build YAML agents and create customize templates
-    const modulePath = path.join(bmadDir, moduleName);
+    const modulePath = path.join(mdanDir, moduleName);
     await this.processAgentFiles(modulePath, moduleName);
 
     // Dependencies are already included in full module install
@@ -2074,9 +2074,9 @@ class Installer {
   /**
    * Install partial module (only dependencies needed by other modules)
    */
-  async installPartialModule(moduleName, bmadDir, files) {
+  async installPartialModule(moduleName, mdanDir, files) {
     const sourceBase = getModulePath(moduleName);
-    const targetBase = path.join(bmadDir, moduleName);
+    const targetBase = path.join(mdanDir, moduleName);
 
     // Create module directory
     await fs.ensureDir(targetBase);
@@ -2171,11 +2171,11 @@ class Installer {
 
   /**
    * Private: Install core
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    */
-  async installCore(bmadDir) {
+  async installCore(mdanDir) {
     const sourcePath = getModulePath('core');
-    const targetPath = path.join(bmadDir, 'core');
+    const targetPath = path.join(mdanDir, 'core');
 
     // Copy core files (skip .agent.yaml files like modules do)
     await this.copyCoreFiles(sourcePath, targetPath);
@@ -2183,7 +2183,7 @@ class Installer {
     // Compile agents using the same compiler as modules
     const { ModuleManager } = require('../modules/manager');
     const moduleManager = new ModuleManager();
-    await moduleManager.compileModuleAgents(sourcePath, targetPath, 'core', bmadDir, this);
+    await moduleManager.compileModuleAgents(sourcePath, targetPath, 'core', mdanDir, this);
 
     // Process agent files to inject activation block
     await this.processAgentFiles(targetPath, 'core');
@@ -2280,7 +2280,7 @@ class Installer {
 
   /**
    * Process agent files to build YAML agents and inject activation blocks
-   * @param {string} modulePath - Path to module in bmad/ installation
+   * @param {string} modulePath - Path to module in mdan/ installation
    * @param {string} moduleName - Module name
    */
   async processAgentFiles(modulePath, moduleName) {
@@ -2291,9 +2291,9 @@ class Installer {
       return; // No agents to process
     }
 
-    // Determine project directory (parent of bmad/ directory)
-    const bmadDir = path.dirname(modulePath);
-    const cfgAgentsDir = path.join(bmadDir, '_config', 'agents');
+    // Determine project directory (parent of mdan/ directory)
+    const mdanDir = path.dirname(modulePath);
+    const cfgAgentsDir = path.join(mdanDir, '_config', 'agents');
 
     // Ensure _config/agents directory exists
     await fs.ensureDir(cfgAgentsDir);
@@ -2322,7 +2322,7 @@ class Installer {
         const genericTemplatePath = getSourcePath('utility', 'agent-components', 'agent.customize.template.yaml');
         if (await fs.pathExists(genericTemplatePath)) {
           await this.copyFileWithPlaceholderReplacement(genericTemplatePath, customizePath);
-          if (process.env.BMAD_VERBOSE_INSTALL === 'true') {
+          if (process.env.MDAN_VERBOSE_INSTALL === 'true') {
             await prompts.log.message(`  Created customize: ${moduleName}-${agentName}.customize.yaml`);
           }
         }
@@ -2333,13 +2333,13 @@ class Installer {
   /**
    * Private: Update core
    */
-  async updateCore(bmadDir, force = false) {
+  async updateCore(mdanDir, force = false) {
     const sourcePath = getModulePath('core');
-    const targetPath = path.join(bmadDir, 'core');
+    const targetPath = path.join(mdanDir, 'core');
 
     if (force) {
       await fs.remove(targetPath);
-      await this.installCore(bmadDir);
+      await this.installCore(mdanDir);
     } else {
       // Selective update - preserve user modifications
       await this.fileOps.syncDirectory(sourcePath, targetPath);
@@ -2347,7 +2347,7 @@ class Installer {
       // Recompile agents (#1133)
       const { ModuleManager } = require('../modules/manager');
       const moduleManager = new ModuleManager();
-      await moduleManager.compileModuleAgents(sourcePath, targetPath, 'core', bmadDir, this);
+      await moduleManager.compileModuleAgents(sourcePath, targetPath, 'core', mdanDir, this);
       await this.processAgentFiles(targetPath, 'core');
     }
   }
@@ -2363,21 +2363,21 @@ class Installer {
 
     try {
       const projectDir = path.resolve(config.directory);
-      const { bmadDir } = await this.findBmadDir(projectDir);
+      const { mdanDir } = await this.findMdanDir(projectDir);
 
-      // Check if bmad directory exists
-      if (!(await fs.pathExists(bmadDir))) {
-        spinner.stop('No BMAD installation found');
-        throw new Error(`BMAD not installed at ${bmadDir}. Use regular install for first-time setup.`);
+      // Check if mdan directory exists
+      if (!(await fs.pathExists(mdanDir))) {
+        spinner.stop('No MDAN installation found');
+        throw new Error(`MDAN not installed at ${mdanDir}. Use regular install for first-time setup.`);
       }
 
       spinner.message('Detecting installed modules and configuration...');
 
       // Detect existing installation
-      const existingInstall = await this.detector.detect(bmadDir);
+      const existingInstall = await this.detector.detect(mdanDir);
       const installedModules = existingInstall.modules.map((m) => m.id);
       const configuredIdes = existingInstall.ides || [];
-      const projectRoot = path.dirname(bmadDir);
+      const projectRoot = path.dirname(mdanDir);
 
       // Get custom module sources: first from --custom-content (re-cache from source), then from cache
       const customModuleSources = new Map();
@@ -2393,7 +2393,7 @@ class Installer {
           }
         }
       }
-      const cacheDir = path.join(bmadDir, '_config', 'custom');
+      const cacheDir = path.join(mdanDir, '_config', 'custom');
       if (await fs.pathExists(cacheDir)) {
         const cachedModules = await fs.readdir(cacheDir, { withFileTypes: true });
 
@@ -2436,7 +2436,7 @@ class Installer {
       }
 
       // Load saved IDE configurations
-      const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(bmadDir);
+      const savedIdeConfigs = await this.ideConfigManager.loadAllIdeConfigs(mdanDir);
 
       // Get available modules (what we have source for)
       const availableModulesData = await this.moduleManager.listAvailable();
@@ -2483,7 +2483,7 @@ class Installer {
       // Handle missing custom module sources using shared method
       const customModuleResult = await this.handleMissingCustomSources(
         customModuleSources,
-        bmadDir,
+        mdanDir,
         projectRoot,
         'update',
         installedModules,
@@ -2608,27 +2608,27 @@ class Installer {
 
     try {
       const projectDir = path.resolve(config.directory);
-      const { bmadDir } = await this.findBmadDir(projectDir);
+      const { mdanDir } = await this.findMdanDir(projectDir);
 
-      // Check if bmad directory exists
-      if (!(await fs.pathExists(bmadDir))) {
-        spinner.stop('No BMAD installation found');
-        throw new Error(`BMAD not installed at ${bmadDir}. Use regular install for first-time setup.`);
+      // Check if mdan directory exists
+      if (!(await fs.pathExists(mdanDir))) {
+        spinner.stop('No MDAN installation found');
+        throw new Error(`MDAN not installed at ${mdanDir}. Use regular install for first-time setup.`);
       }
 
       // Detect existing installation
-      const existingInstall = await this.detector.detect(bmadDir);
+      const existingInstall = await this.detector.detect(mdanDir);
       const installedModules = existingInstall.modules.map((m) => m.id);
 
       // Initialize module manager
       const moduleManager = new ModuleManager();
-      moduleManager.setBmadFolderName(path.basename(bmadDir));
+      moduleManager.setMdanFolderName(path.basename(mdanDir));
 
       let totalAgentCount = 0;
 
       // Get custom module sources from cache
       const customModuleSources = new Map();
-      const cacheDir = path.join(bmadDir, '_config', 'custom');
+      const cacheDir = path.join(mdanDir, '_config', 'custom');
       if (await fs.pathExists(cacheDir)) {
         const cachedModules = await fs.readdir(cacheDir, { withFileTypes: true });
 
@@ -2674,10 +2674,10 @@ class Installer {
           continue;
         }
 
-        const targetPath = path.join(bmadDir, moduleId);
+        const targetPath = path.join(mdanDir, moduleId);
 
         // Compile agents for this module
-        await moduleManager.compileModuleAgents(sourcePath, targetPath, moduleId, bmadDir, this);
+        await moduleManager.compileModuleAgents(sourcePath, targetPath, moduleId, mdanDir, this);
 
         // Count agents (rough estimate based on files)
         const agentsPath = path.join(targetPath, 'agents');
@@ -2713,18 +2713,18 @@ class Installer {
   }
 
   /**
-   * Handle legacy BMAD v4 detection with simple warning
+   * Handle legacy MDAN v4 detection with simple warning
    * @param {string} _projectDir - Project directory (unused in simplified version)
    * @param {Object} _legacyV4 - Legacy V4 detection result (unused in simplified version)
    */
   async handleLegacyV4Migration(_projectDir, _legacyV4) {
     await prompts.note(
-      'Found .bmad-method folder from BMAD v4 installation.\n\n' +
+      'Found .mdan folder from MDAN v4 installation.\n\n' +
         'Before continuing with installation, we recommend:\n' +
-        '  1. Remove the .bmad-method folder, OR\n' +
-        '  2. Back it up by renaming it to another name (e.g., bmad-method-backup)\n\n' +
+        '  1. Remove the .mdan folder, OR\n' +
+        '  2. Back it up by renaming it to another name (e.g., mdan-backup)\n\n' +
         'If your v4 installation set up rules or commands, you should remove those as well.',
-      'Legacy BMAD v4 detected',
+      'Legacy MDAN v4 detected',
     );
 
     const proceed = await prompts.select({
@@ -2745,7 +2745,7 @@ class Installer {
     });
 
     if (proceed === 'exit') {
-      await prompts.log.info('Please remove the .bmad-method folder and any v4 rules/commands, then run the installer again.');
+      await prompts.log.info('Please remove the .mdan folder and any v4 rules/commands, then run the installer again.');
       // Allow event loop to flush pending I/O before exit
       setImmediate(() => process.exit(0));
       return;
@@ -2756,11 +2756,11 @@ class Installer {
 
   /**
    * Read files-manifest.csv
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @returns {Array} Array of file entries from files-manifest.csv
    */
-  async readFilesManifest(bmadDir) {
-    const filesManifestPath = path.join(bmadDir, '_config', 'files-manifest.csv');
+  async readFilesManifest(mdanDir) {
+    const filesManifestPath = path.join(mdanDir, '_config', 'files-manifest.csv');
     if (!(await fs.pathExists(filesManifestPath))) {
       return [];
     }
@@ -2812,16 +2812,16 @@ class Installer {
 
   /**
    * Detect custom and modified files
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Array} existingFilesManifest - Previous files from files-manifest.csv
    * @returns {Object} Object with customFiles and modifiedFiles arrays
    */
-  async detectCustomFiles(bmadDir, existingFilesManifest) {
+  async detectCustomFiles(mdanDir, existingFilesManifest) {
     const customFiles = [];
     const modifiedFiles = [];
 
-    // Memory is always in _bmad/_memory
-    const bmadMemoryPath = '_memory';
+    // Memory is always in _.mdan/_memory
+    const mdanMemoryPath = '_memory';
 
     // Check if the manifest has hashes - if not, we can't detect modifications
     let manifestHasHashes = false;
@@ -2833,7 +2833,7 @@ class Installer {
     const installedFilesMap = new Map();
     for (const fileEntry of existingFilesManifest) {
       if (fileEntry.path) {
-        const absolutePath = path.join(bmadDir, fileEntry.path);
+        const absolutePath = path.join(mdanDir, fileEntry.path);
         installedFilesMap.set(path.normalize(absolutePath), {
           hash: fileEntry.hash,
           relativePath: fileEntry.path,
@@ -2841,7 +2841,7 @@ class Installer {
       }
     }
 
-    // Recursively scan bmadDir for all files
+    // Recursively scan mdanDir for all files
     const scanDirectory = async (dir) => {
       try {
         const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -2859,7 +2859,7 @@ class Installer {
             const fileInfo = installedFilesMap.get(normalizedPath);
 
             // Skip certain system files that are auto-generated
-            const relativePath = path.relative(bmadDir, fullPath);
+            const relativePath = path.relative(mdanDir, fullPath);
             const fileName = path.basename(fullPath);
 
             // Skip _config directory EXCEPT for modified agent customizations
@@ -2867,7 +2867,7 @@ class Installer {
               // Special handling for .customize.yaml files - only preserve if modified
               if (relativePath.includes('/agents/') && fileName.endsWith('.customize.yaml')) {
                 // Check if the customization file has been modified from manifest
-                const manifestPath = path.join(bmadDir, '_config', 'manifest.yaml');
+                const manifestPath = path.join(mdanDir, '_config', 'manifest.yaml');
                 if (await fs.pathExists(manifestPath)) {
                   const crypto = require('node:crypto');
                   const currentContent = await fs.readFile(fullPath, 'utf8');
@@ -2887,7 +2887,7 @@ class Installer {
               continue;
             }
 
-            if (relativePath.startsWith(bmadMemoryPath + '/') && path.dirname(relativePath).includes('-sidecar')) {
+            if (relativePath.startsWith(mdanMemoryPath + '/') && path.dirname(relativePath).includes('-sidecar')) {
               continue;
             }
 
@@ -2921,21 +2921,21 @@ class Installer {
       }
     };
 
-    await scanDirectory(bmadDir);
+    await scanDirectory(mdanDir);
     return { customFiles, modifiedFiles };
   }
 
   /**
    * Handle missing custom module sources interactively
    * @param {Map} customModuleSources - Map of custom module ID to info
-   * @param {string} bmadDir - BMAD directory
+   * @param {string} mdanDir - MDAN directory
    * @param {string} projectRoot - Project root directory
    * @param {string} operation - Current operation ('update', 'compile', etc.)
    * @param {Array} installedModules - Array of installed module IDs (will be modified)
    * @param {boolean} [skipPrompts=false] - Skip interactive prompts and keep all modules with missing sources
    * @returns {Object} Object with validCustomModules array and keptModulesWithoutSources array
    */
-  async handleMissingCustomSources(customModuleSources, bmadDir, projectRoot, operation, installedModules, skipPrompts = false) {
+  async handleMissingCustomSources(customModuleSources, mdanDir, projectRoot, operation, installedModules, skipPrompts = false) {
     const validCustomModules = [];
     const keptModulesWithoutSources = []; // Track modules kept without sources
     const customModulesWithMissingSources = [];
@@ -3062,7 +3062,7 @@ class Installer {
           missing.info.sourcePath = resolvedPath;
           // Remove relativePath - we only store absolute sourcePath now
           delete missing.info.relativePath;
-          await this.manifest.addCustomModule(bmadDir, missing.info);
+          await this.manifest.addCustomModule(mdanDir, missing.info);
 
           validCustomModules.push({
             id: missing.id,
@@ -3079,7 +3079,7 @@ class Installer {
         case 'remove': {
           // Extra confirmation for destructive remove
           await prompts.log.error(
-            `WARNING: This will PERMANENTLY DELETE "${missing.name}" and all its files!\n  Module location: ${path.join(bmadDir, missing.id)}`,
+            `WARNING: This will PERMANENTLY DELETE "${missing.name}" and all its files!\n  Module location: ${path.join(mdanDir, missing.id)}`,
           );
 
           const confirmDelete = await prompts.confirm({
@@ -3100,15 +3100,15 @@ class Installer {
 
             if (typedConfirm === 'DELETE') {
               // Remove the module from filesystem and manifest
-              const modulePath = path.join(bmadDir, missing.id);
+              const modulePath = path.join(mdanDir, missing.id);
               if (await fs.pathExists(modulePath)) {
                 const fsExtra = require('fs-extra');
                 await fsExtra.remove(modulePath);
                 await prompts.log.warn(`Deleted module directory: ${path.relative(projectRoot, modulePath)}`);
               }
 
-              await this.manifest.removeModule(bmadDir, missing.id);
-              await this.manifest.removeCustomModule(bmadDir, missing.id);
+              await this.manifest.removeModule(mdanDir, missing.id);
+              await this.manifest.removeCustomModule(mdanDir, missing.id);
               await prompts.log.warn('Removed from manifest');
 
               // Also remove from installedModules list

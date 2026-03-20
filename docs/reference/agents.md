@@ -7,7 +7,7 @@ sidebar:
 
 ## Default Agents
 
-This page lists the default BMM (Agile suite) agents that install with BMad Method, along with their menu triggers and primary workflows.
+This page lists the default BMM (Agile suite) agents that install with MDAN Method, along with their menu triggers and primary workflows.
 
 ## Notes
 

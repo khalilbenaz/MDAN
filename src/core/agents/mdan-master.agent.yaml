@@ -1,5 +1,5 @@
 # MDAN Master Agent — Orchestrateur Principal
-# Différence avec BMAD: mémoire persistante, scale-adaptive, debate-aware
+# Différence avec MDAN: mémoire persistante, scale-adaptive, debate-aware
 
 agent:
   metadata:

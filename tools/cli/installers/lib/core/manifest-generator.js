@@ -36,20 +36,20 @@ class ManifestGenerator {
 
   /**
    * Generate all manifests for the installation
-   * @param {string} bmadDir - _bmad
+   * @param {string} mdanDir - _mdan
    * @param {Array} selectedModules - Selected modules for installation
    * @param {Array} installedFiles - All installed files (optional, for hash tracking)
    */
-  async generateManifests(bmadDir, selectedModules, installedFiles = [], options = {}) {
+  async generateManifests(mdanDir, selectedModules, installedFiles = [], options = {}) {
     // Create _config directory if it doesn't exist
-    const cfgDir = path.join(bmadDir, '_config');
+    const cfgDir = path.join(mdanDir, '_config');
     await fs.ensureDir(cfgDir);
 
     // Store modules list (all modules including preserved ones)
     const preservedModules = options.preservedModules || [];
 
-    // Scan the bmad directory to find all actually installed modules
-    const installedModules = await this.scanInstalledModules(bmadDir);
+    // Scan the mdan directory to find all actually installed modules
+    const installedModules = await this.scanInstalledModules(mdanDir);
 
     // Since custom modules are now installed the same way as regular modules,
     // we don't need to exclude them from manifest generation
@@ -62,8 +62,8 @@ class ManifestGenerator {
     // preservedModules controls which modules stay as-is in the CSV (don't get rescanned)
     // But all modules should be included in the final manifest
     this.preservedModules = allModules; // Include ALL modules (including custom)
-    this.bmadDir = bmadDir;
-    this.bmadFolderName = path.basename(bmadDir); // Get the actual folder name (e.g., '_bmad' or 'bmad')
+    this.mdanDir = mdanDir;
+    this.mdanFolderName = path.basename(mdanDir); // Get the actual folder name (e.g., '_mdan' or 'mdan')
     this.allInstalledFiles = installedFiles;
 
     if (!Object.prototype.hasOwnProperty.call(options, 'ides')) {
@@ -112,14 +112,14 @@ class ManifestGenerator {
 
   /**
    * Collect all workflows from core and selected modules
-   * Scans the INSTALLED bmad directory, not the source
+   * Scans the INSTALLED mdan directory, not the source
    */
   async collectWorkflows(selectedModules) {
     this.workflows = [];
 
     // Use updatedModules which already includes deduplicated 'core' + selectedModules
     for (const moduleName of this.updatedModules) {
-      const modulePath = path.join(this.bmadDir, moduleName);
+      const modulePath = path.join(this.mdanDir, moduleName);
 
       if (await fs.pathExists(modulePath)) {
         const moduleWorkflows = await this.getWorkflowsFromPath(modulePath, moduleName);
@@ -134,7 +134,7 @@ class ManifestGenerator {
   async getWorkflowsFromPath(basePath, moduleName) {
     const workflows = [];
     const workflowsPath = path.join(basePath, 'workflows');
-    const debug = process.env.BMAD_DEBUG_MANIFEST === 'true';
+    const debug = process.env.MDAN_DEBUG_MANIFEST === 'true';
 
     if (debug) {
       console.log(`[DEBUG] Scanning workflows in: ${workflowsPath}`);
@@ -212,8 +212,8 @@ class ManifestGenerator {
               // Build relative path for installation
               const installPath =
                 moduleName === 'core'
-                  ? `${this.bmadFolderName}/core/workflows/${relativePath}/${entry.name}`
-                  : `${this.bmadFolderName}/${moduleName}/workflows/${relativePath}/${entry.name}`;
+                  ? `${this.mdanFolderName}/core/workflows/${relativePath}/${entry.name}`
+                  : `${this.mdanFolderName}/${moduleName}/workflows/${relativePath}/${entry.name}`;
 
               // Workflows with standalone: false are filtered out above
               workflows.push({
@@ -257,14 +257,14 @@ class ManifestGenerator {
 
   /**
    * Collect all agents from core and selected modules
-   * Scans the INSTALLED bmad directory, not the source
+   * Scans the INSTALLED mdan directory, not the source
    */
   async collectAgents(selectedModules) {
     this.agents = [];
 
     // Use updatedModules which already includes deduplicated 'core' + selectedModules
     for (const moduleName of this.updatedModules) {
-      const agentsPath = path.join(this.bmadDir, moduleName, 'agents');
+      const agentsPath = path.join(this.mdanDir, moduleName, 'agents');
 
       if (await fs.pathExists(agentsPath)) {
         const moduleAgents = await this.getAgentsFromDir(agentsPath, moduleName);
@@ -272,8 +272,8 @@ class ManifestGenerator {
       }
     }
 
-    // Get standalone agents from bmad/agents/ directory
-    const standaloneAgentsDir = path.join(this.bmadDir, 'agents');
+    // Get standalone agents from mdan/agents/ directory
+    const standaloneAgentsDir = path.join(this.mdanDir, 'agents');
     if (await fs.pathExists(standaloneAgentsDir)) {
       const agentDirs = await fs.readdir(standaloneAgentsDir, { withFileTypes: true });
 
@@ -332,8 +332,8 @@ class ManifestGenerator {
         const fileRelativePath = relativePath ? `${relativePath}/${entry.name}` : entry.name;
         const installPath =
           moduleName === 'core'
-            ? `${this.bmadFolderName}/core/agents/${fileRelativePath}`
-            : `${this.bmadFolderName}/${moduleName}/agents/${fileRelativePath}`;
+            ? `${this.mdanFolderName}/core/agents/${fileRelativePath}`
+            : `${this.mdanFolderName}/${moduleName}/agents/${fileRelativePath}`;
 
         const agentName = entry.name.replace('.md', '');
 
@@ -366,14 +366,14 @@ class ManifestGenerator {
 
   /**
    * Collect all tasks from core and selected modules
-   * Scans the INSTALLED bmad directory, not the source
+   * Scans the INSTALLED mdan directory, not the source
    */
   async collectTasks(selectedModules) {
     this.tasks = [];
 
     // Use updatedModules which already includes deduplicated 'core' + selectedModules
     for (const moduleName of this.updatedModules) {
-      const tasksPath = path.join(this.bmadDir, moduleName, 'tasks');
+      const tasksPath = path.join(this.mdanDir, moduleName, 'tasks');
 
       if (await fs.pathExists(tasksPath)) {
         const moduleTasks = await this.getTasksFromDir(tasksPath, moduleName);
@@ -438,7 +438,7 @@ class ManifestGenerator {
 
         // Build relative path for installation
         const installPath =
-          moduleName === 'core' ? `${this.bmadFolderName}/core/tasks/${file}` : `${this.bmadFolderName}/${moduleName}/tasks/${file}`;
+          moduleName === 'core' ? `${this.mdanFolderName}/core/tasks/${file}` : `${this.mdanFolderName}/${moduleName}/tasks/${file}`;
 
         tasks.push({
           name: name,
@@ -464,14 +464,14 @@ class ManifestGenerator {
 
   /**
    * Collect all tools from core and selected modules
-   * Scans the INSTALLED bmad directory, not the source
+   * Scans the INSTALLED mdan directory, not the source
    */
   async collectTools(selectedModules) {
     this.tools = [];
 
     // Use updatedModules which already includes deduplicated 'core' + selectedModules
     for (const moduleName of this.updatedModules) {
-      const toolsPath = path.join(this.bmadDir, moduleName, 'tools');
+      const toolsPath = path.join(this.mdanDir, moduleName, 'tools');
 
       if (await fs.pathExists(toolsPath)) {
         const moduleTools = await this.getToolsFromDir(toolsPath, moduleName);
@@ -536,7 +536,7 @@ class ManifestGenerator {
 
         // Build relative path for installation
         const installPath =
-          moduleName === 'core' ? `${this.bmadFolderName}/core/tools/${file}` : `${this.bmadFolderName}/${moduleName}/tools/${file}`;
+          moduleName === 'core' ? `${this.mdanFolderName}/core/tools/${file}` : `${this.mdanFolderName}/${moduleName}/tools/${file}`;
 
         tools.push({
           name: name,
@@ -604,7 +604,7 @@ class ManifestGenerator {
 
     for (const moduleName of this.modules) {
       // Get fresh version info from source
-      const versionInfo = await manifestObj.getModuleVersionInfo(moduleName, this.bmadDir);
+      const versionInfo = await manifestObj.getModuleVersionInfo(moduleName, this.mdanDir);
 
       // Get existing install date if available
       const existing = existingModulesMap.get(moduleName);
@@ -990,8 +990,8 @@ class ManifestGenerator {
     if (this.allInstalledFiles && this.allInstalledFiles.length > 0) {
       // Process all installed files
       for (const filePath of this.allInstalledFiles) {
-        // Store paths relative to bmadDir (no folder prefix)
-        const relativePath = filePath.replace(this.bmadDir, '').replaceAll('\\', '/').replace(/^\//, '');
+        // Store paths relative to mdanDir (no folder prefix)
+        const relativePath = filePath.replace(this.mdanDir, '').replaceAll('\\', '/').replace(/^\//, '');
         const ext = path.extname(filePath).toLowerCase();
         const fileName = path.basename(filePath, ext);
 
@@ -1014,8 +1014,8 @@ class ManifestGenerator {
       // Fallback: use the collected workflows/agents/tasks
       for (const file of this.files) {
         // Strip the folder prefix if present (for consistency)
-        const relPath = file.path.replace(this.bmadFolderName + '/', '');
-        const filePath = path.join(this.bmadDir, relPath);
+        const relPath = file.path.replace(this.mdanFolderName + '/', '');
+        const filePath = path.join(this.mdanDir, relPath);
         const hash = await this.calculateFileHash(filePath);
         allFiles.push({
           ...file,
@@ -1042,15 +1042,15 @@ class ManifestGenerator {
   }
 
   /**
-   * Scan the bmad directory to find all installed modules
-   * @param {string} bmadDir - Path to bmad directory
+   * Scan the mdan directory to find all installed modules
+   * @param {string} mdanDir - Path to mdan directory
    * @returns {Array} List of module names
    */
-  async scanInstalledModules(bmadDir) {
+  async scanInstalledModules(mdanDir) {
     const modules = [];
 
     try {
-      const entries = await fs.readdir(bmadDir, { withFileTypes: true });
+      const entries = await fs.readdir(mdanDir, { withFileTypes: true });
 
       for (const entry of entries) {
         // Skip if not a directory or is a special directory
@@ -1059,7 +1059,7 @@ class ManifestGenerator {
         }
 
         // Check if this looks like a module (has agents, workflows, or tasks directory)
-        const modulePath = path.join(bmadDir, entry.name);
+        const modulePath = path.join(mdanDir, entry.name);
         const hasAgents = await fs.pathExists(path.join(modulePath, 'agents'));
         const hasWorkflows = await fs.pathExists(path.join(modulePath, 'workflows'));
         const hasTasks = await fs.pathExists(path.join(modulePath, 'tasks'));

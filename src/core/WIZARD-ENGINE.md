@@ -1,6 +1,6 @@
 # MDAN Wizard Engine v3.0
 
-Le moteur de wizards est le cœur de MDAN. Il orchestre les workflows step-by-step avec des capacités que BMAD n'a pas.
+Le moteur de wizards est le cœur de MDAN. Il orchestre les workflows step-by-step avec des capacités que MDAN n'a pas.
 
 ## Architecture
 
@@ -16,13 +16,13 @@ wizard.md          → Définition du wizard (goal, role, init)
 
 ## Principes fondamentaux
 
-### 1. Step-File Architecture (comme BMAD)
+### 1. Step-File Architecture (comme MDAN)
 - Chaque étape = 1 fichier isolé chargé en Just-In-Time
 - Exécution séquentielle stricte, jamais de skip
 - État suivi dans le frontmatter du document de sortie
 
 ### 2. Mémoire Cross-Wizard (MDAN exclusif)
-Contrairement à BMAD où chaque wizard est isolé, MDAN maintient un état global :
+Contrairement à MDAN où chaque wizard est isolé, MDAN maintient un état global :
 - `MDAN-STATE.json` persiste entre les wizards ET entre les sessions
 - Les décisions de l'architecte sont automatiquement disponibles pour le dev
 - Le context summary est mis à jour à chaque fin de wizard

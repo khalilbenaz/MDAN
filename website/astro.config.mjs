@@ -38,13 +38,13 @@ export default defineConfig({
   integrations: [
     sitemap(),
     starlight({
-      title: 'BMAD Method',
+      title: 'MDAN Method',
       tagline: 'AI-driven agile development with specialized agents and workflows that scale from bug fixes to enterprise platforms.',
 
       logo: {
-        light: './public/img/bmad-light.png',
-        dark: './public/img/bmad-dark.png',
-        alt: 'BMAD Method',
+        light: './public/img/mdan-light.png',
+        dark: './public/img/mdan-dark.png',
+        alt: 'MDAN Method',
         replacesTitle: true,
       },
       favicon: '/favicon.ico',
@@ -52,8 +52,8 @@ export default defineConfig({
       // Social links
       social: [
         { icon: 'discord', label: 'Discord', href: 'https://discord.gg/gk8jAdXWmj' },
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/bmad-code-org/BMAD-METHOD' },
-        { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@BMadCode' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/mdan-code-org/MDAN' },
+        { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@MDANCode' },
       ],
 
       // Show last updated timestamps
@@ -65,7 +65,7 @@ export default defineConfig({
           tag: 'meta',
           attrs: {
             name: 'ai-terms',
-            content: `AI-optimized documentation: ${siteUrl}/llms-full.txt (plain text, ~100k tokens, complete BMAD reference). Index: ${siteUrl}/llms.txt`,
+            content: `AI-optimized documentation: ${siteUrl}/llms-full.txt (plain text, ~100k tokens, complete MDAN reference). Index: ${siteUrl}/llms.txt`,
           },
         },
         {

@@ -62,17 +62,17 @@ class AgentBuilderAgent:
             {
                 "cmd": "CA",
                 "label": "Create a new MDAN agent",
-                "description": "Create a new BMAD agent with best practices and compliance",
+                "description": "Create a new MDAN agent with best practices and compliance",
             },
             {
                 "cmd": "EA",
                 "label": "Edit existing MDAN agents",
-                "description": "Edit existing BMAD agents while maintaining compliance",
+                "description": "Edit existing MDAN agents while maintaining compliance",
             },
             {
                 "cmd": "VA",
                 "label": "Validate existing MDAN agents",
-                "description": "Validate existing BMAD agents and offer to improve deficiencies",
+                "description": "Validate existing MDAN agents and offer to improve deficiencies",
             },
             {
                 "cmd": "DA",

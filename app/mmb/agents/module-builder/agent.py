@@ -68,17 +68,17 @@ class ModuleBuilderAgent:
             {
                 "cmd": "CM",
                 "label": "Create a complete MDAN module",
-                "description": "Create a complete BMAD module with agents, workflows, and infrastructure",
+                "description": "Create a complete MDAN module with agents, workflows, and infrastructure",
             },
             {
                 "cmd": "EM",
                 "label": "Edit existing MDAN modules",
-                "description": "Edit existing BMAD modules while maintaining coherence",
+                "description": "Edit existing MDAN modules while maintaining coherence",
             },
             {
                 "cmd": "VM",
                 "label": "Run compliance check",
-                "description": "Run compliance check on BMAD modules against best practices",
+                "description": "Run compliance check on MDAN modules against best practices",
             },
             {
                 "cmd": "DA",

@@ -1,5 +1,5 @@
-# BMAD Platform Codes Configuration
-# Central configuration for all platform/IDE codes used in the BMAD system
+# MDAN Platform Codes Configuration
+# Central configuration for all platform/IDE codes used in the MDAN system
 #
 # This file defines:
 # 1. Platform metadata (name, preferred status, category, description)
@@ -203,7 +203,7 @@ platforms:
 #       artifact_types: [agents, workflows, tasks, tools]
 #   artifact_types: array (optional)      # Filter which artifacts to install (default: all)
 #   skip_existing: boolean (optional)     # Skip files that already exist (default: false)
-#   ancestor_conflict_check: boolean (optional) # Refuse install when ancestor dir has BMAD files
+#   ancestor_conflict_check: boolean (optional) # Refuse install when ancestor dir has MDAN files
 #                                                # in the same target_dir (for IDEs that inherit
 #                                                # commands from parent directories)
 

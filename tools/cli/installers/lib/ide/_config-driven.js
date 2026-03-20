@@ -9,7 +9,7 @@ const { TaskToolCommandGenerator } = require('./shared/task-tool-command-generat
 /**
  * Config-driven IDE setup handler
  *
- * This class provides a standardized way to install BMAD artifacts to IDEs
+ * This class provides a standardized way to install MDAN artifacts to IDEs
  * based on configuration in platform-codes.yaml. It eliminates the need for
  * individual installer files for each IDE.
  *
@@ -29,20 +29,20 @@ class ConfigDrivenIdeSetup extends BaseIdeSetup {
   /**
    * Main setup method - called by IdeManager
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} options - Setup options
    * @returns {Promise<Object>} Setup result
    */
-  async setup(projectDir, bmadDir, options = {}) {
-    // Check for BMAD files in ancestor directories that would cause duplicates
+  async setup(projectDir, mdanDir, options = {}) {
+    // Check for MDAN files in ancestor directories that would cause duplicates
     if (this.installerConfig?.ancestor_conflict_check) {
       const conflict = await this.findAncestorConflict(projectDir);
       if (conflict) {
         await prompts.log.error(
-          `Found existing BMAD commands in ancestor installation: ${conflict}\n` +
+          `Found existing MDAN commands in ancestor installation: ${conflict}\n` +
             `  ${this.name} inherits commands from parent directories, so this would cause duplicates.\n` +
-            `  Please remove the BMAD files from that directory first:\n` +
-            `    rm -rf "${conflict}"/bmad*`,
+            `  Please remove the MDAN files from that directory first:\n` +
+            `    rm -rf "${conflict}"/mdan*`,
         );
         return {
           success: false,
@@ -55,7 +55,7 @@ class ConfigDrivenIdeSetup extends BaseIdeSetup {
 
     if (!options.silent) await prompts.log.info(`Setting up ${this.name}...`);
 
-    // Clean up any old BMAD installation first
+    // Clean up any old MDAN installation first
     await this.cleanup(projectDir, options);
 
     if (!this.installerConfig) {
@@ -64,12 +64,12 @@ class ConfigDrivenIdeSetup extends BaseIdeSetup {
 
     // Handle multi-target installations (e.g., GitHub Copilot)
     if (this.installerConfig.targets) {
-      return this.installToMultipleTargets(projectDir, bmadDir, this.installerConfig.targets, options);
+      return this.installToMultipleTargets(projectDir, mdanDir, this.installerConfig.targets, options);
     }
 
     // Handle single-target installations
     if (this.installerConfig.target_dir) {
-      return this.installToTarget(projectDir, bmadDir, this.installerConfig, options);
+      return this.installToTarget(projectDir, mdanDir, this.installerConfig, options);
     }
 
     return { success: false, reason: 'invalid-config' };
@@ -78,12 +78,12 @@ class ConfigDrivenIdeSetup extends BaseIdeSetup {
   /**
    * Install to a single target directory
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} config - Installation configuration
    * @param {Object} options - Setup options
    * @returns {Promise<Object>} Installation result
    */
-  async installToTarget(projectDir, bmadDir, config, options) {
+  async installToTarget(projectDir, mdanDir, config, options) {
     const { target_dir, template_type, artifact_types } = config;
 
     // Skip targets with explicitly empty artifact_types array
@@ -100,22 +100,22 @@ class ConfigDrivenIdeSetup extends BaseIdeSetup {
 
     // Install agents
     if (!artifact_types || artifact_types.includes('agents')) {
-      const agentGen = new AgentCommandGenerator(this.bmadFolderName);
-      const { artifacts } = await agentGen.collectAgentArtifacts(bmadDir, selectedModules);
+      const agentGen = new AgentCommandGenerator(this.mdanFolderName);
+      const { artifacts } = await agentGen.collectAgentArtifacts(mdanDir, selectedModules);
       results.agents = await this.writeAgentArtifacts(targetPath, artifacts, template_type, config);
     }
 
     // Install workflows
     if (!artifact_types || artifact_types.includes('workflows')) {
-      const workflowGen = new WorkflowCommandGenerator(this.bmadFolderName);
-      const { artifacts } = await workflowGen.collectWorkflowArtifacts(bmadDir);
+      const workflowGen = new WorkflowCommandGenerator(this.mdanFolderName);
+      const { artifacts } = await workflowGen.collectWorkflowArtifacts(mdanDir);
       results.workflows = await this.writeWorkflowArtifacts(targetPath, artifacts, template_type, config);
     }
 
     // Install tasks and tools using template system (supports TOML for Gemini, MD for others)
     if (!artifact_types || artifact_types.includes('tasks') || artifact_types.includes('tools')) {
-      const taskToolGen = new TaskToolCommandGenerator(this.bmadFolderName);
-      const { artifacts } = await taskToolGen.collectTaskToolArtifacts(bmadDir);
+      const taskToolGen = new TaskToolCommandGenerator(this.mdanFolderName);
+      const { artifacts } = await taskToolGen.collectTaskToolArtifacts(mdanDir);
       const taskToolResult = await this.writeTaskToolArtifacts(targetPath, artifacts, template_type, config);
       results.tasks = taskToolResult.tasks || 0;
       results.tools = taskToolResult.tools || 0;
@@ -128,16 +128,16 @@ class ConfigDrivenIdeSetup extends BaseIdeSetup {
   /**
    * Install to multiple target directories
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Array} targets - Array of target configurations
    * @param {Object} options - Setup options
    * @returns {Promise<Object>} Installation result
    */
-  async installToMultipleTargets(projectDir, bmadDir, targets, options) {
+  async installToMultipleTargets(projectDir, mdanDir, targets, options) {
     const allResults = { agents: 0, workflows: 0, tasks: 0, tools: 0 };
 
     for (const target of targets) {
-      const result = await this.installToTarget(projectDir, bmadDir, target, options);
+      const result = await this.installToTarget(projectDir, mdanDir, target, options);
       if (result.success) {
         allResults.agents += result.results.agents || 0;
         allResults.workflows += result.results.workflows || 0;
@@ -363,7 +363,7 @@ disable-model-invocation: true
 You must fully embody this agent's persona and follow all activation instructions exactly as specified.
 
 <agent-activation CRITICAL="TRUE">
-1. LOAD the FULL agent file from {project-root}/{{bmadFolderName}}/{{path}}
+1. LOAD the FULL agent file from {project-root}/{{mdanFolderName}}/{{path}}
 2. READ its entire contents - this contains the complete agent persona, menu, and instructions
 3. FOLLOW every step in the <activation> section precisely
 </agent-activation>
@@ -376,7 +376,7 @@ description: '{{description}}'
 
 # {{name}}
 
-LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
+LOAD and execute from: {project-root}/{{mdanFolderName}}/{{path}}
 `;
   }
 
@@ -416,11 +416,11 @@ LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
       .replaceAll('{{description}}', artifact.description || `${artifact.name} ${artifact.type || ''}`)
       .replaceAll('{{workflow_path}}', pathToUse);
 
-    // Replace _bmad placeholder with actual folder name
-    rendered = rendered.replaceAll('_bmad', this.bmadFolderName);
+    // Replace _mdan placeholder with actual folder name
+    rendered = rendered.replaceAll('_mdan', this.mdanFolderName);
 
-    // Replace {{bmadFolderName}} placeholder if present
-    rendered = rendered.replaceAll('{{bmadFolderName}}', this.bmadFolderName);
+    // Replace {{mdanFolderName}} placeholder if present
+    rendered = rendered.replaceAll('{{mdanFolderName}}', this.mdanFolderName);
 
     return rendered;
   }
@@ -442,7 +442,7 @@ LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
     // This handles any extensions that might slip through toDashPath()
     const baseName = standardName.replace(/\.(md|yaml|yml|json|xml|toml)\.md$/i, '.md');
 
-    // If using default markdown, preserve the bmad-agent- prefix for agents
+    // If using default markdown, preserve the mdan-agent- prefix for agents
     if (extension === '.md') {
       return baseName;
     }
@@ -513,7 +513,7 @@ LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
       return;
     }
 
-    // Remove all bmad* files
+    // Remove all mdan* files
     let entries;
     try {
       entries = await fs.readdir(targetPath);
@@ -532,7 +532,7 @@ LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
       if (!entry || typeof entry !== 'string') {
         continue;
       }
-      if (entry.startsWith('bmad')) {
+      if (entry.startsWith('mdan')) {
         const entryPath = path.join(targetPath, entry);
         try {
           await fs.remove(entryPath);
@@ -544,7 +544,7 @@ LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
     }
 
     if (removedCount > 0 && !options.silent) {
-      await prompts.log.message(`  Cleaned ${removedCount} BMAD files from ${targetDir}`);
+      await prompts.log.message(`  Cleaned ${removedCount} MDAN files from ${targetDir}`);
     }
 
     // Remove empty directory after cleanup
@@ -560,7 +560,7 @@ LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
     }
   }
   /**
-   * Check ancestor directories for existing BMAD files in the same target_dir.
+   * Check ancestor directories for existing MDAN files in the same target_dir.
    * IDEs like Claude Code inherit commands from parent directories, so an existing
    * installation in an ancestor would cause duplicate commands.
    * @param {string} projectDir - Project directory being installed to
@@ -579,8 +579,8 @@ LOAD and execute from: {project-root}/{{bmadFolderName}}/{{path}}
       try {
         if (await fs.pathExists(candidatePath)) {
           const entries = await fs.readdir(candidatePath);
-          const hasBmad = entries.some((e) => typeof e === 'string' && e.toLowerCase().startsWith('bmad'));
-          if (hasBmad) {
+          const hasMdan = entries.some((e) => typeof e === 'string' && e.toLowerCase().startsWith('mdan'));
+          if (hasMdan) {
             return candidatePath;
           }
         }

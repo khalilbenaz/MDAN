@@ -6,7 +6,7 @@ const { BaseIdeSetup } = require('./_base-ide');
 const { WorkflowCommandGenerator } = require('./shared/workflow-command-generator');
 const { AgentCommandGenerator } = require('./shared/agent-command-generator');
 const { TaskToolCommandGenerator } = require('./shared/task-tool-command-generator');
-const { getTasksFromBmad } = require('./shared/bmad-artifacts');
+const { getTasksFromMdan } = require('./shared/mdan-artifacts');
 const { toDashPath, customAgentDashName } = require('./shared/path-utils');
 const prompts = require('../../../lib/prompts');
 
@@ -21,35 +21,35 @@ class CodexSetup extends BaseIdeSetup {
   /**
    * Setup Codex configuration
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} options - Setup options
    */
-  async setup(projectDir, bmadDir, options = {}) {
+  async setup(projectDir, mdanDir, options = {}) {
     if (!options.silent) await prompts.log.info(`Setting up ${this.name}...`);
 
     // Always use CLI mode
     const mode = 'cli';
 
-    const { artifacts, counts } = await this.collectClaudeArtifacts(projectDir, bmadDir, options);
+    const { artifacts, counts } = await this.collectClaudeArtifacts(projectDir, mdanDir, options);
 
     // Clean up old .codex/prompts locations (both global and project)
     const oldGlobalDir = this.getOldCodexPromptDir(null, 'global');
-    await this.clearOldBmadFiles(oldGlobalDir, options);
+    await this.clearOldMdanFiles(oldGlobalDir, options);
     const oldProjectDir = this.getOldCodexPromptDir(projectDir, 'project');
-    await this.clearOldBmadFiles(oldProjectDir, options);
+    await this.clearOldMdanFiles(oldProjectDir, options);
 
     // Install to .agents/skills
     const destDir = this.getCodexSkillsDir(projectDir);
     await fs.ensureDir(destDir);
-    await this.clearOldBmadSkills(destDir, options);
+    await this.clearOldMdanSkills(destDir, options);
 
     // Collect and write agent skills
-    const agentGen = new AgentCommandGenerator(this.bmadFolderName);
-    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(bmadDir, options.selectedModules || []);
+    const agentGen = new AgentCommandGenerator(this.mdanFolderName);
+    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(mdanDir, options.selectedModules || []);
     const agentCount = await this.writeSkillArtifacts(destDir, agentArtifacts, 'agent-launcher');
 
     // Collect and write task skills
-    const tasks = await getTasksFromBmad(bmadDir, options.selectedModules || []);
+    const tasks = await getTasksFromMdan(mdanDir, options.selectedModules || []);
     const taskArtifacts = [];
     for (const task of tasks) {
       const content = await this.readAndProcessWithProject(
@@ -72,7 +72,7 @@ class CodexSetup extends BaseIdeSetup {
       });
     }
 
-    const ttGen = new TaskToolCommandGenerator(this.bmadFolderName);
+    const ttGen = new TaskToolCommandGenerator(this.mdanFolderName);
     const taskSkillArtifacts = taskArtifacts.map((artifact) => ({
       ...artifact,
       content: ttGen.generateCommandContent(artifact, artifact.type),
@@ -80,8 +80,8 @@ class CodexSetup extends BaseIdeSetup {
     const tasksWritten = await this.writeSkillArtifacts(destDir, taskSkillArtifacts, 'task');
 
     // Collect and write workflow skills
-    const workflowGenerator = new WorkflowCommandGenerator(this.bmadFolderName);
-    const { artifacts: workflowArtifacts } = await workflowGenerator.collectWorkflowArtifacts(bmadDir);
+    const workflowGenerator = new WorkflowCommandGenerator(this.mdanFolderName);
+    const { artifacts: workflowArtifacts } = await workflowGenerator.collectWorkflowArtifacts(mdanDir);
     const workflowCount = await this.writeSkillArtifacts(destDir, workflowArtifacts, 'workflow-command');
 
     const written = agentCount + workflowCount + tasksWritten;
@@ -103,7 +103,7 @@ class CodexSetup extends BaseIdeSetup {
   }
 
   /**
-   * Detect Codex installation by checking for BMAD skills
+   * Detect Codex installation by checking for MDAN skills
    */
   async detect(projectDir) {
     const dir = this.getCodexSkillsDir(projectDir || process.cwd());
@@ -111,7 +111,7 @@ class CodexSetup extends BaseIdeSetup {
     if (await fs.pathExists(dir)) {
       try {
         const entries = await fs.readdir(dir);
-        if (entries && entries.some((entry) => entry && typeof entry === 'string' && entry.startsWith('bmad'))) {
+        if (entries && entries.some((entry) => entry && typeof entry === 'string' && entry.startsWith('mdan'))) {
           return true;
         }
       } catch {
@@ -126,13 +126,13 @@ class CodexSetup extends BaseIdeSetup {
    * Collect Claude-style artifacts for Codex export.
    * Returns the normalized artifact list for further processing.
    */
-  async collectClaudeArtifacts(projectDir, bmadDir, options = {}) {
+  async collectClaudeArtifacts(projectDir, mdanDir, options = {}) {
     const selectedModules = options.selectedModules || [];
     const artifacts = [];
 
     // Generate agent launchers
-    const agentGen = new AgentCommandGenerator(this.bmadFolderName);
-    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(bmadDir, selectedModules);
+    const agentGen = new AgentCommandGenerator(this.mdanFolderName);
+    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(mdanDir, selectedModules);
 
     for (const artifact of agentArtifacts) {
       artifacts.push({
@@ -144,7 +144,7 @@ class CodexSetup extends BaseIdeSetup {
       });
     }
 
-    const tasks = await getTasksFromBmad(bmadDir, selectedModules);
+    const tasks = await getTasksFromMdan(mdanDir, selectedModules);
     for (const task of tasks) {
       const content = await this.readAndProcessWithProject(
         task.path,
@@ -167,8 +167,8 @@ class CodexSetup extends BaseIdeSetup {
       });
     }
 
-    const workflowGenerator = new WorkflowCommandGenerator(this.bmadFolderName);
-    const { artifacts: workflowArtifacts, counts: workflowCounts } = await workflowGenerator.collectWorkflowArtifacts(bmadDir);
+    const workflowGenerator = new WorkflowCommandGenerator(this.mdanFolderName);
+    const { artifacts: workflowArtifacts, counts: workflowCounts } = await workflowGenerator.collectWorkflowArtifacts(mdanDir);
     artifacts.push(...workflowArtifacts);
 
     return {
@@ -216,7 +216,7 @@ class CodexSetup extends BaseIdeSetup {
         continue;
       }
 
-      // Get the dash-format name (e.g., bmad-bmm-create-prd.md) and remove .md
+      // Get the dash-format name (e.g., mdan-bmm-create-prd.md) and remove .md
       const flatName = toDashPath(artifact.relativePath);
       const skillName = flatName.replace(/\.md$/, '');
 
@@ -273,9 +273,9 @@ class CodexSetup extends BaseIdeSetup {
   }
 
   /**
-   * Remove existing BMAD skill directories from the skills directory.
+   * Remove existing MDAN skill directories from the skills directory.
    */
-  async clearOldBmadSkills(destDir, options = {}) {
+  async clearOldMdanSkills(destDir, options = {}) {
     if (!(await fs.pathExists(destDir))) {
       return;
     }
@@ -296,7 +296,7 @@ class CodexSetup extends BaseIdeSetup {
       if (!entry || typeof entry !== 'string') {
         continue;
       }
-      if (!entry.startsWith('bmad')) {
+      if (!entry.startsWith('mdan')) {
         continue;
       }
 
@@ -312,9 +312,9 @@ class CodexSetup extends BaseIdeSetup {
   }
 
   /**
-   * Clean old BMAD files from legacy .codex/prompts directories.
+   * Clean old MDAN files from legacy .codex/prompts directories.
    */
-  async clearOldBmadFiles(destDir, options = {}) {
+  async clearOldMdanFiles(destDir, options = {}) {
     if (!(await fs.pathExists(destDir))) {
       return;
     }
@@ -337,7 +337,7 @@ class CodexSetup extends BaseIdeSetup {
       if (!entry || typeof entry !== 'string') {
         continue;
       }
-      if (!entry.startsWith('bmad')) {
+      if (!entry.startsWith('mdan')) {
         continue;
       }
 
@@ -383,15 +383,15 @@ class CodexSetup extends BaseIdeSetup {
   async cleanup(projectDir = null) {
     // Clean old .codex/prompts locations
     const oldGlobalDir = this.getOldCodexPromptDir(null, 'global');
-    await this.clearOldBmadFiles(oldGlobalDir);
+    await this.clearOldMdanFiles(oldGlobalDir);
 
     if (projectDir) {
       const oldProjectDir = this.getOldCodexPromptDir(projectDir, 'project');
-      await this.clearOldBmadFiles(oldProjectDir);
+      await this.clearOldMdanFiles(oldProjectDir);
 
       // Clean new .agents/skills location
       const destDir = this.getCodexSkillsDir(projectDir);
-      await this.clearOldBmadSkills(destDir);
+      await this.clearOldMdanSkills(destDir);
     }
   }
 

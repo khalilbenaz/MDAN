@@ -1,26 +1,26 @@
 ---
 title: Commands
-description: Reference for BMad slash commands — what they are, how they work, and where to find them.
+description: Reference for MDAN slash commands — what they are, how they work, and where to find them.
 sidebar:
   order: 3
 ---
 
-Slash commands are pre-built prompts that load agents, run workflows, or execute tasks inside your IDE. The BMad installer generates them from your installed modules at install time. If you later add, remove, or change modules, re-run the installer to keep commands in sync (see [Troubleshooting](#troubleshooting)).
+Slash commands are pre-built prompts that load agents, run workflows, or execute tasks inside your IDE. The MDAN installer generates them from your installed modules at install time. If you later add, remove, or change modules, re-run the installer to keep commands in sync (see [Troubleshooting](#troubleshooting)).
 
 ## Commands vs. Agent Menu Triggers
 
-BMad offers two ways to start work, and they serve different purposes.
+MDAN offers two ways to start work, and they serve different purposes.
 
 | Mechanism | How you invoke it | What happens |
 | --- | --- | --- |
-| **Slash command** | Type `/bmad-...` in your IDE | Directly loads an agent, runs a workflow, or executes a task |
+| **Slash command** | Type `/mdan-...` in your IDE | Directly loads an agent, runs a workflow, or executes a task |
 | **Agent menu trigger** | Load an agent first, then type a short code (e.g. `DS`) | The agent interprets the code and starts the matching workflow while staying in character |
 
 Agent menu triggers require an active agent session. Use slash commands when you know which workflow you want. Use triggers when you are already working with an agent and want to switch tasks without leaving the conversation.
 
 ## How Commands Are Generated
 
-When you run `npx bmad-method install`, the installer reads the manifests for every selected module and writes one command file per agent, workflow, task, and tool. Each file is a short markdown prompt that instructs the AI to load the corresponding source file and follow its instructions.
+When you run `npx mdan install`, the installer reads the manifests for every selected module and writes one command file per agent, workflow, task, and tool. Each file is a short markdown prompt that instructs the AI to load the corresponding source file and follow its instructions.
 
 The installer uses templates for each command type:
 
@@ -50,21 +50,21 @@ All IDEs receive a flat set of command files in their command directory. For exa
 
 ```text
 .claude/commands/
-├── bmad-agent-bmm-dev.md
-├── bmad-agent-bmm-pm.md
-├── bmad-bmm-create-prd.md
-├── bmad-editorial-review-prose.md
-├── bmad-help.md
+├── mdan-agent-bmm-dev.md
+├── mdan-agent-bmm-pm.md
+├── mdan-bmm-create-prd.md
+├── mdan-editorial-review-prose.md
+├── mdan-help.md
 └── ...
 ```
 
-The filename determines the slash command name in your IDE. For example, the file `bmad-agent-bmm-dev.md` registers the command `/bmad-agent-bmm-dev`.
+The filename determines the slash command name in your IDE. For example, the file `mdan-agent-bmm-dev.md` registers the command `/mdan-agent-bmm-dev`.
 
 ## How to Discover Your Commands
 
-Type `/bmad` in your IDE and use autocomplete to browse available commands.
+Type `/mdan` in your IDE and use autocomplete to browse available commands.
 
-Run `/bmad-help` for context-aware guidance on your next step.
+Run `/mdan-help` for context-aware guidance on your next step.
 
 :::tip[Quick discovery]
 The generated command folders in your project are the canonical list. Open them in your file explorer to see every command with its description.
@@ -78,10 +78,10 @@ Agent commands load a specialized AI persona with a defined role, communication 
 
 | Example command | Agent | Role |
 | --- | --- | --- |
-| `/bmad-agent-bmm-dev` | Amelia (Developer) | Implements stories with strict adherence to specs |
-| `/bmad-agent-bmm-pm` | John (Product Manager) | Creates and validates PRDs |
-| `/bmad-agent-bmm-architect` | Winston (Architect) | Designs system architecture |
-| `/bmad-agent-bmm-sm` | Bob (Scrum Master) | Manages sprints and stories |
+| `/mdan-agent-bmm-dev` | Amelia (Developer) | Implements stories with strict adherence to specs |
+| `/mdan-agent-bmm-pm` | John (Product Manager) | Creates and validates PRDs |
+| `/mdan-agent-bmm-architect` | Winston (Architect) | Designs system architecture |
+| `/mdan-agent-bmm-sm` | Bob (Scrum Master) | Manages sprints and stories |
 
 See [Agents](./agents.md) for the full list of default agents and their triggers.
 
@@ -91,11 +91,11 @@ Workflow commands run a structured, multi-step process without loading an agent 
 
 | Example command | Purpose |
 | --- | --- |
-| `/bmad-bmm-create-prd` | Create a Product Requirements Document |
-| `/bmad-bmm-create-architecture` | Design system architecture |
-| `/bmad-bmm-dev-story` | Implement a story |
-| `/bmad-bmm-code-review` | Run a code review |
-| `/bmad-bmm-quick-spec` | Define an ad-hoc change (Quick Flow) |
+| `/mdan-bmm-create-prd` | Create a Product Requirements Document |
+| `/mdan-bmm-create-architecture` | Design system architecture |
+| `/mdan-bmm-dev-story` | Implement a story |
+| `/mdan-bmm-code-review` | Run a code review |
+| `/mdan-bmm-quick-spec` | Define an ad-hoc change (Quick Flow) |
 
 See [Workflow Map](./workflow-map.md) for the complete workflow reference organized by phase.
 
@@ -103,9 +103,9 @@ See [Workflow Map](./workflow-map.md) for the complete workflow reference organi
 
 Tasks and tools are standalone operations that do not require an agent or workflow context.
 
-#### BMad-Help: Your Intelligent Guide
+#### MDAN-Help: Your Intelligent Guide
 
-**`/bmad-help`** is your primary interface for discovering what to do next. It's not just a lookup tool — it's an intelligent assistant that:
+**`/mdan-help`** is your primary interface for discovering what to do next. It's not just a lookup tool — it's an intelligent assistant that:
 
 - **Inspects your project** to see what's already been done
 - **Understands natural language queries** — ask questions in plain English
@@ -116,19 +116,19 @@ Tasks and tools are standalone operations that do not require an agent or workfl
 **Examples:**
 
 ```
-/bmad-help
-/bmad-help I have a SaaS idea and know all the features. Where do I start?
-/bmad-help What are my options for UX design?
-/bmad-help I'm stuck on the PRD workflow
+/mdan-help
+/mdan-help I have a SaaS idea and know all the features. Where do I start?
+/mdan-help What are my options for UX design?
+/mdan-help I'm stuck on the PRD workflow
 ```
 
 #### Other Tasks and Tools
 
 | Example command | Purpose |
 | --- | --- |
-| `/bmad-shard-doc` | Split a large markdown file into smaller sections |
-| `/bmad-index-docs` | Index project documentation |
-| `/bmad-editorial-review-prose` | Review document prose quality |
+| `/mdan-shard-doc` | Split a large markdown file into smaller sections |
+| `/mdan-index-docs` | Index project documentation |
+| `/mdan-editorial-review-prose` | Review document prose quality |
 
 ## Naming Convention
 
@@ -136,9 +136,9 @@ Command names follow a predictable pattern.
 
 | Pattern | Meaning | Example |
 | --- | --- | --- |
-| `bmad-agent-<module>-<name>` | Agent launcher | `bmad-agent-bmm-dev` |
-| `bmad-<module>-<workflow>` | Workflow command | `bmad-bmm-create-prd` |
-| `bmad-<name>` | Core task or tool | `bmad-help` |
+| `mdan-agent-<module>-<name>` | Agent launcher | `mdan-agent-bmm-dev` |
+| `mdan-<module>-<workflow>` | Workflow command | `mdan-bmm-create-prd` |
+| `mdan-<name>` | Core task or tool | `mdan-help` |
 
 Module codes: `bmm` (Agile suite), `bmb` (Builder), `tea` (Test Architect), `cis` (Creative Intelligence), `gds` (Game Dev Studio). See [Modules](./modules.md) for descriptions.
 
@@ -146,6 +146,6 @@ Module codes: `bmm` (Agile suite), `bmb` (Builder), `tea` (Test Architect), `cis
 
 **Commands not appearing after install.** Restart your IDE or reload the window. Some IDEs cache the command list and require a refresh to pick up new files.
 
-**Expected commands are missing.** The installer only generates commands for modules you selected. Run `npx bmad-method install` again and verify your module selection. Check that the command files exist in the expected directory.
+**Expected commands are missing.** The installer only generates commands for modules you selected. Run `npx mdan install` again and verify your module selection. Check that the command files exist in the expected directory.
 
 **Commands from a removed module still appear.** The installer does not delete old command files automatically. Remove the stale files from your IDE's command directory, or delete the entire command directory and re-run the installer for a clean set.

@@ -5,14 +5,14 @@ const { Manifest } = require('./manifest');
 
 class Detector {
   /**
-   * Detect existing BMAD installation
-   * @param {string} bmadDir - Path to bmad directory
+   * Detect existing MDAN installation
+   * @param {string} mdanDir - Path to mdan directory
    * @returns {Object} Installation status and details
    */
-  async detect(bmadDir) {
+  async detect(mdanDir) {
     const result = {
       installed: false,
-      path: bmadDir,
+      path: mdanDir,
       version: null,
       hasCore: false,
       modules: [],
@@ -21,14 +21,14 @@ class Detector {
       manifest: null,
     };
 
-    // Check if bmad directory exists
-    if (!(await fs.pathExists(bmadDir))) {
+    // Check if mdan directory exists
+    if (!(await fs.pathExists(mdanDir))) {
       return result;
     }
 
     // Check for manifest using the Manifest class
     const manifest = new Manifest();
-    const manifestData = await manifest.read(bmadDir);
+    const manifestData = await manifest.read(mdanDir);
     if (manifestData) {
       result.manifest = manifestData;
       result.version = manifestData.version;
@@ -40,7 +40,7 @@ class Detector {
     }
 
     // Check for core
-    const corePath = path.join(bmadDir, 'core');
+    const corePath = path.join(mdanDir, 'core');
     if (await fs.pathExists(corePath)) {
       result.hasCore = true;
 
@@ -65,7 +65,7 @@ class Detector {
     if (manifestData && manifestData.modules && manifestData.modules.length > 0) {
       // Use manifest module list - these are officially installed modules
       for (const moduleId of manifestData.modules) {
-        const modulePath = path.join(bmadDir, moduleId);
+        const modulePath = path.join(mdanDir, moduleId);
         const moduleConfigPath = path.join(modulePath, 'config.yaml');
 
         const moduleInfo = {
@@ -90,10 +90,10 @@ class Detector {
       }
     } else {
       // Fallback: scan directory for modules (legacy installations without manifest)
-      const entries = await fs.readdir(bmadDir, { withFileTypes: true });
+      const entries = await fs.readdir(mdanDir, { withFileTypes: true });
       for (const entry of entries) {
         if (entry.isDirectory() && entry.name !== 'core' && entry.name !== '_config') {
-          const modulePath = path.join(bmadDir, entry.name);
+          const modulePath = path.join(mdanDir, entry.name);
           const moduleConfigPath = path.join(modulePath, 'config.yaml');
 
           // Only treat it as a module if it has a config.yaml
@@ -135,7 +135,7 @@ class Detector {
   }
 
   /**
-   * Detect legacy installation (_bmad-method, .bmm, .cis)
+   * Detect legacy installation (_mdan, .bmm, .cis)
    * @param {string} projectDir - Project directory to check
    * @returns {Object} Legacy installation details
    */
@@ -147,8 +147,8 @@ class Detector {
       paths: [],
     };
 
-    // Check for legacy core (_bmad-method)
-    const legacyCorePath = path.join(projectDir, '_bmad-method');
+    // Check for legacy core (_mdan)
+    const legacyCorePath = path.join(projectDir, '_mdan');
     if (await fs.pathExists(legacyCorePath)) {
       result.hasLegacy = true;
       result.legacyCore = true;
@@ -161,7 +161,7 @@ class Detector {
       if (
         entry.isDirectory() &&
         entry.name.startsWith('.') &&
-        entry.name !== '_bmad-method' &&
+        entry.name !== '_mdan' &&
         !entry.name.startsWith('.git') &&
         !entry.name.startsWith('.vscode') &&
         !entry.name.startsWith('.idea')
@@ -169,7 +169,7 @@ class Detector {
         const modulePath = path.join(projectDir, entry.name);
         const moduleManifestPath = path.join(modulePath, 'install-manifest.yaml');
 
-        // Check if it's likely a BMAD module
+        // Check if it's likely a MDAN module
         if ((await fs.pathExists(moduleManifestPath)) || (await fs.pathExists(path.join(modulePath, 'config.yaml')))) {
           result.hasLegacy = true;
           result.legacyModules.push({
@@ -190,8 +190,8 @@ class Detector {
    * @returns {Object} Migration requirements
    */
   async checkMigrationNeeded(projectDir) {
-    const bmadDir = path.join(projectDir, 'bmad');
-    const current = await this.detect(bmadDir);
+    const mdanDir = path.join(projectDir, 'mdan');
+    const current = await this.detect(mdanDir);
     const legacy = await this.detectLegacy(projectDir);
 
     return {
@@ -203,17 +203,17 @@ class Detector {
   }
 
   /**
-   * Detect legacy BMAD v4 .bmad-method folder
+   * Detect legacy MDAN v4 .mdan folder
    * @param {string} projectDir - Project directory to check
    * @returns {{ hasLegacyV4: boolean, offenders: string[] }}
    */
   async detectLegacyV4(projectDir) {
     const offenders = [];
 
-    // Check for .bmad-method folder
-    const bmadMethodPath = path.join(projectDir, '.bmad-method');
-    if (await fs.pathExists(bmadMethodPath)) {
-      offenders.push(bmadMethodPath);
+    // Check for .mdan folder
+    const mdanMethodPath = path.join(projectDir, '.mdan');
+    if (await fs.pathExists(mdanMethodPath)) {
+      offenders.push(mdanMethodPath);
     }
 
     return { hasLegacyV4: offenders.length > 0, offenders };

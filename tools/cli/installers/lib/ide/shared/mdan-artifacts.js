@@ -2,21 +2,21 @@ const path = require('node:path');
 const fs = require('fs-extra');
 
 /**
- * Helpers for gathering BMAD agents/tasks from the installed tree.
+ * Helpers for gathering MDAN agents/tasks from the installed tree.
  * Shared by installers that need Claude-style exports.
  */
-async function getAgentsFromBmad(bmadDir, selectedModules = []) {
+async function getAgentsFromMdan(mdanDir, selectedModules = []) {
   const agents = [];
 
   // Get core agents
-  if (await fs.pathExists(path.join(bmadDir, 'core', 'agents'))) {
-    const coreAgents = await getAgentsFromDir(path.join(bmadDir, 'core', 'agents'), 'core');
+  if (await fs.pathExists(path.join(mdanDir, 'core', 'agents'))) {
+    const coreAgents = await getAgentsFromDir(path.join(mdanDir, 'core', 'agents'), 'core');
     agents.push(...coreAgents);
   }
 
   // Get module agents
   for (const moduleName of selectedModules) {
-    const agentsPath = path.join(bmadDir, moduleName, 'agents');
+    const agentsPath = path.join(mdanDir, moduleName, 'agents');
 
     if (await fs.pathExists(agentsPath)) {
       const moduleAgents = await getAgentsFromDir(agentsPath, moduleName);
@@ -24,8 +24,8 @@ async function getAgentsFromBmad(bmadDir, selectedModules = []) {
     }
   }
 
-  // Get standalone agents from bmad/agents/ directory
-  const standaloneAgentsDir = path.join(bmadDir, 'agents');
+  // Get standalone agents from mdan/agents/ directory
+  const standaloneAgentsDir = path.join(mdanDir, 'agents');
   if (await fs.pathExists(standaloneAgentsDir)) {
     const agentDirs = await fs.readdir(standaloneAgentsDir, { withFileTypes: true });
 
@@ -56,16 +56,16 @@ async function getAgentsFromBmad(bmadDir, selectedModules = []) {
   return agents;
 }
 
-async function getTasksFromBmad(bmadDir, selectedModules = []) {
+async function getTasksFromMdan(mdanDir, selectedModules = []) {
   const tasks = [];
 
-  if (await fs.pathExists(path.join(bmadDir, 'core', 'tasks'))) {
-    const coreTasks = await getTasksFromDir(path.join(bmadDir, 'core', 'tasks'), 'core');
+  if (await fs.pathExists(path.join(mdanDir, 'core', 'tasks'))) {
+    const coreTasks = await getTasksFromDir(path.join(mdanDir, 'core', 'tasks'), 'core');
     tasks.push(...coreTasks);
   }
 
   for (const moduleName of selectedModules) {
-    const tasksPath = path.join(bmadDir, moduleName, 'tasks');
+    const tasksPath = path.join(mdanDir, moduleName, 'tasks');
 
     if (await fs.pathExists(tasksPath)) {
       const moduleTasks = await getTasksFromDir(tasksPath, moduleName);
@@ -167,8 +167,8 @@ async function getTasksFromDir(dirPath, moduleName) {
 }
 
 module.exports = {
-  getAgentsFromBmad,
-  getTasksFromBmad,
+  getAgentsFromMdan,
+  getTasksFromMdan,
   getAgentsFromDir,
   getTasksFromDir,
 };

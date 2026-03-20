@@ -2,7 +2,7 @@ const path = require('node:path');
 const { BaseIdeSetup } = require('./_base-ide');
 const prompts = require('../../../lib/prompts');
 const { AgentCommandGenerator } = require('./shared/agent-command-generator');
-const { BMAD_FOLDER_NAME, toDashPath } = require('./shared/path-utils');
+const { MDAN_FOLDER_NAME, toDashPath } = require('./shared/path-utils');
 const fs = require('fs-extra');
 const csv = require('csv-parse/sync');
 const yaml = require('yaml');
@@ -27,10 +27,10 @@ class GitHubCopilotSetup extends BaseIdeSetup {
   /**
    * Setup GitHub Copilot configuration
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} options - Setup options
    */
-  async setup(projectDir, bmadDir, options = {}) {
+  async setup(projectDir, mdanDir, options = {}) {
     if (!options.silent) await prompts.log.info(`Setting up ${this.name}...`);
 
     // Create .github/agents and .github/prompts directories
@@ -43,15 +43,15 @@ class GitHubCopilotSetup extends BaseIdeSetup {
     // Preserve any customised tool permissions from existing files before cleanup
     this.existingToolPermissions = await this.collectExistingToolPermissions(projectDir);
 
-    // Clean up any existing BMAD files before reinstalling
+    // Clean up any existing MDAN files before reinstalling
     await this.cleanup(projectDir);
 
     // Load agent manifest for enriched descriptions
-    const agentManifest = await this.loadAgentManifest(bmadDir);
+    const agentManifest = await this.loadAgentManifest(mdanDir);
 
     // Generate agent launchers
-    const agentGen = new AgentCommandGenerator(this.bmadFolderName);
-    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(bmadDir, options.selectedModules || []);
+    const agentGen = new AgentCommandGenerator(this.mdanFolderName);
+    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(mdanDir, options.selectedModules || []);
 
     // Create agent .agent.md files
     let agentCount = 0;
@@ -68,11 +68,11 @@ class GitHubCopilotSetup extends BaseIdeSetup {
       agentCount++;
     }
 
-    // Generate prompt files from bmad-help.csv
-    const promptCount = await this.generatePromptFiles(projectDir, bmadDir, agentArtifacts, agentManifest);
+    // Generate prompt files from mdan-help.csv
+    const promptCount = await this.generatePromptFiles(projectDir, mdanDir, agentArtifacts, agentManifest);
 
     // Generate copilot-instructions.md
-    await this.generateCopilotInstructions(projectDir, bmadDir, agentManifest, options);
+    await this.generateCopilotInstructions(projectDir, mdanDir, agentManifest, options);
 
     if (!options.silent) await prompts.log.success(`${this.name} configured: ${agentCount} agents, ${promptCount} prompts → .github/`);
 
@@ -89,11 +89,11 @@ class GitHubCopilotSetup extends BaseIdeSetup {
 
   /**
    * Load agent manifest CSV into a Map keyed by agent name
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @returns {Map} Agent metadata keyed by name
    */
-  async loadAgentManifest(bmadDir) {
-    const manifestPath = path.join(bmadDir, '_config', 'agent-manifest.csv');
+  async loadAgentManifest(mdanDir) {
+    const manifestPath = path.join(mdanDir, '_config', 'agent-manifest.csv');
     const agents = new Map();
 
     if (!(await fs.pathExists(manifestPath))) {
@@ -118,12 +118,12 @@ class GitHubCopilotSetup extends BaseIdeSetup {
   }
 
   /**
-   * Load bmad-help.csv to drive prompt generation
-   * @param {string} bmadDir - BMAD installation directory
+   * Load mdan-help.csv to drive prompt generation
+   * @param {string} mdanDir - MDAN installation directory
    * @returns {Array|null} Parsed CSV rows
    */
-  async loadBmadHelp(bmadDir) {
-    const helpPath = path.join(bmadDir, '_config', 'bmad-help.csv');
+  async loadMdanHelp(mdanDir) {
+    const helpPath = path.join(mdanDir, '_config', 'mdan-help.csv');
 
     if (!(await fs.pathExists(helpPath))) {
       return null;
@@ -161,7 +161,7 @@ class GitHubCopilotSetup extends BaseIdeSetup {
 
     // Build the agent file path for the activation block
     const agentPath = artifact.agentPath || artifact.relativePath;
-    const agentFilePath = `{project-root}/${this.bmadFolderName}/${agentPath}`;
+    const agentFilePath = `{project-root}/${this.mdanFolderName}/${agentPath}`;
 
     return `---
 description: '${description.replaceAll("'", "''")}'
@@ -184,17 +184,17 @@ You must fully embody this agent's persona and follow all activation instruction
   /**
    * Generate .prompt.md files for workflows, tasks, tech-writer commands, and agent activators
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Array} agentArtifacts - Agent artifacts for activator generation
    * @param {Map} agentManifest - Agent manifest data
    * @returns {number} Count of prompts generated
    */
-  async generatePromptFiles(projectDir, bmadDir, agentArtifacts, agentManifest) {
+  async generatePromptFiles(projectDir, mdanDir, agentArtifacts, agentManifest) {
     const promptsDir = path.join(projectDir, this.githubDir, this.promptsDir);
     let promptCount = 0;
 
-    // Load bmad-help.csv to drive workflow/task prompt generation
-    const helpEntries = await this.loadBmadHelp(bmadDir);
+    // Load mdan-help.csv to drive workflow/task prompt generation
+    const helpEntries = await this.loadMdanHelp(mdanDir);
 
     if (helpEntries) {
       for (const entry of helpEntries) {
@@ -227,7 +227,7 @@ You must fully embody this agent's persona and follow all activation instruction
     // Generate agent activator prompts (Pattern D)
     for (const artifact of agentArtifacts) {
       const agentMeta = agentManifest.get(artifact.name);
-      const fileName = `bmad-${artifact.name}.prompt.md`;
+      const fileName = `mdan-${artifact.name}.prompt.md`;
       const toolsStr = this.getToolsForFile(fileName);
       const promptContent = this.createAgentActivatorPromptContent(artifact, agentMeta, toolsStr);
       const promptPath = path.join(promptsDir, fileName);
@@ -239,23 +239,23 @@ You must fully embody this agent's persona and follow all activation instruction
   }
 
   /**
-   * Create prompt content for a workflow/task entry from bmad-help.csv
+   * Create prompt content for a workflow/task entry from mdan-help.csv
    * Determines the pattern (A, B, or A for .xml tasks) based on file extension
-   * @param {Object} entry - bmad-help.csv row
+   * @param {Object} entry - mdan-help.csv row
    * @param {string} workflowFile - Workflow file path
    * @returns {string} Prompt file content
    */
   createWorkflowPromptContent(entry, workflowFile, toolsStr) {
     const description = this.escapeYamlSingleQuote(this.createPromptDescription(entry.name));
     // bmm/config.yaml is safe to hardcode here: these prompts are only generated when
-    // bmad-help.csv exists (bmm module data), so bmm is guaranteed to be installed.
-    const configLine = `1. Load {project-root}/${this.bmadFolderName}/bmm/config.yaml and store ALL fields as session variables`;
+    // mdan-help.csv exists (bmm module data), so bmm is guaranteed to be installed.
+    const configLine = `1. Load {project-root}/${this.mdanFolderName}/bmm/config.yaml and store ALL fields as session variables`;
 
     let body;
     if (workflowFile.endsWith('.yaml')) {
       // Pattern B: YAML-based workflows — use workflow engine
       body = `${configLine}
-2. Load the workflow engine at {project-root}/${this.bmadFolderName}/core/tasks/workflow.xml
+2. Load the workflow engine at {project-root}/${this.mdanFolderName}/core/tasks/workflow.xml
 3. Load and execute the workflow configuration at {project-root}/${workflowFile} using the engine from step 2`;
     } else if (workflowFile.endsWith('.xml')) {
       // Pattern A variant: XML tasks — load and execute directly
@@ -279,7 +279,7 @@ ${body}
 
   /**
    * Create a short 2-5 word description for a prompt from the entry name
-   * @param {string} name - Entry name from bmad-help.csv
+   * @param {string} name - Entry name from mdan-help.csv
    * @returns {string} Short description
    */
   createPromptDescription(name) {
@@ -311,7 +311,7 @@ ${body}
       'Correct Course': 'Correct course',
       Brainstorming: 'Brainstorm ideas',
       'Party Mode': 'Party mode',
-      'bmad-help': 'BMAD help',
+      'mdan-help': 'MDAN help',
       'Index Docs': 'Index documents',
       'Shard Document': 'Shard document',
       'Editorial Review - Prose': 'Editorial review prose',
@@ -324,18 +324,18 @@ ${body}
 
   /**
    * Create prompt content for tech-writer agent-only commands (Pattern C)
-   * @param {Object} entry - bmad-help.csv row
+   * @param {Object} entry - mdan-help.csv row
    * @returns {Object|null} { fileName, content } or null if not a tech-writer command
    */
   createTechWriterPromptContent(entry) {
     if (entry['agent-name'] !== 'tech-writer') return null;
 
     const techWriterCommands = {
-      'Write Document': { code: 'WD', file: 'bmad-bmm-write-document', description: 'Write document' },
-      'Update Standards': { code: 'US', file: 'bmad-bmm-update-standards', description: 'Update standards' },
-      'Mermaid Generate': { code: 'MG', file: 'bmad-bmm-mermaid-generate', description: 'Mermaid generate' },
-      'Validate Document': { code: 'VD', file: 'bmad-bmm-validate-document', description: 'Validate document' },
-      'Explain Concept': { code: 'EC', file: 'bmad-bmm-explain-concept', description: 'Explain concept' },
+      'Write Document': { code: 'WD', file: 'mdan-bmm-write-document', description: 'Write document' },
+      'Update Standards': { code: 'US', file: 'mdan-bmm-update-standards', description: 'Update standards' },
+      'Mermaid Generate': { code: 'MG', file: 'mdan-bmm-mermaid-generate', description: 'Mermaid generate' },
+      'Validate Document': { code: 'VD', file: 'mdan-bmm-validate-document', description: 'Validate document' },
+      'Explain Concept': { code: 'EC', file: 'mdan-bmm-explain-concept', description: 'Explain concept' },
     };
 
     const cmd = techWriterCommands[entry.name];
@@ -350,8 +350,8 @@ agent: 'agent'
 tools: ${toolsStr}
 ---
 
-1. Load {project-root}/${this.bmadFolderName}/bmm/config.yaml and store ALL fields as session variables
-2. Load the full agent file from {project-root}/${this.bmadFolderName}/bmm/agents/tech-writer/tech-writer.md and activate the Paige (Technical Writer) persona
+1. Load {project-root}/${this.mdanFolderName}/bmm/config.yaml and store ALL fields as session variables
+2. Load the full agent file from {project-root}/${this.mdanFolderName}/bmm/agents/tech-writer/tech-writer.md and activate the Paige (Technical Writer) persona
 3. Execute the ${entry.name} menu command (${cmd.code})
 `;
 
@@ -374,7 +374,7 @@ tools: ${toolsStr}
 
     const safeDescription = this.escapeYamlSingleQuote(description);
     const agentPath = artifact.agentPath || artifact.relativePath;
-    const agentFilePath = `{project-root}/${this.bmadFolderName}/${agentPath}`;
+    const agentFilePath = `{project-root}/${this.mdanFolderName}/${agentPath}`;
 
     // bmm/config.yaml is safe to hardcode: agent activators are only generated from
     // bmm agent artifacts, so bmm is guaranteed to be installed.
@@ -384,7 +384,7 @@ agent: 'agent'
 tools: ${toolsStr}
 ---
 
-1. Load {project-root}/${this.bmadFolderName}/bmm/config.yaml and store ALL fields as session variables
+1. Load {project-root}/${this.mdanFolderName}/bmm/config.yaml and store ALL fields as session variables
 2. Load the full agent file from ${agentFilePath}
 3. Follow ALL activation instructions in the agent file
 4. Display the welcome/greeting as instructed
@@ -396,16 +396,16 @@ tools: ${toolsStr}
   /**
    * Generate copilot-instructions.md from module config
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Map} agentManifest - Agent manifest data
    */
-  async generateCopilotInstructions(projectDir, bmadDir, agentManifest, options = {}) {
-    const configVars = await this.loadModuleConfig(bmadDir);
+  async generateCopilotInstructions(projectDir, mdanDir, agentManifest, options = {}) {
+    const configVars = await this.loadModuleConfig(mdanDir);
 
     // Build the agents table from the manifest
     let agentsTable = '| Agent | Persona | Title | Capabilities |\n|---|---|---|---|\n';
     const agentOrder = [
-      'bmad-master',
+      'mdan-master',
       'analyst',
       'architect',
       'dev',
@@ -426,8 +426,8 @@ tools: ${toolsStr}
       }
     }
 
-    const bmad = this.bmadFolderName;
-    const bmadSection = `# BMAD Method — Project Instructions
+    const mdan = this.mdanFolderName;
+    const mdanSection = `# MDAN Method — Project Instructions
 
 ## Project Configuration
 
@@ -441,23 +441,23 @@ tools: ${toolsStr}
 - **Implementation Artifacts**: ${configVars.implementation_artifacts || '{{implementation_artifacts}}'}
 - **Project Knowledge**: ${configVars.project_knowledge || '{{project_knowledge}}'}
 
-## BMAD Runtime Structure
+## MDAN Runtime Structure
 
-- **Agent definitions**: \`${bmad}/bmm/agents/\` (BMM module) and \`${bmad}/core/agents/\` (core)
-- **Workflow definitions**: \`${bmad}/bmm/workflows/\` (organized by phase)
-- **Core tasks**: \`${bmad}/core/tasks/\` (help, editorial review, indexing, sharding, adversarial review)
-- **Core workflows**: \`${bmad}/core/workflows/\` (brainstorming, party-mode, advanced-elicitation)
-- **Workflow engine**: \`${bmad}/core/tasks/workflow.xml\` (executes YAML-based workflows)
-- **Module configuration**: \`${bmad}/bmm/config.yaml\`
-- **Core configuration**: \`${bmad}/core/config.yaml\`
-- **Agent manifest**: \`${bmad}/_config/agent-manifest.csv\`
-- **Workflow manifest**: \`${bmad}/_config/workflow-manifest.csv\`
-- **Help manifest**: \`${bmad}/_config/bmad-help.csv\`
-- **Agent memory**: \`${bmad}/_memory/\`
+- **Agent definitions**: \`${mdan}/bmm/agents/\` (BMM module) and \`${mdan}/core/agents/\` (core)
+- **Workflow definitions**: \`${mdan}/bmm/workflows/\` (organized by phase)
+- **Core tasks**: \`${mdan}/core/tasks/\` (help, editorial review, indexing, sharding, adversarial review)
+- **Core workflows**: \`${mdan}/core/workflows/\` (brainstorming, party-mode, advanced-elicitation)
+- **Workflow engine**: \`${mdan}/core/tasks/workflow.xml\` (executes YAML-based workflows)
+- **Module configuration**: \`${mdan}/bmm/config.yaml\`
+- **Core configuration**: \`${mdan}/core/config.yaml\`
+- **Agent manifest**: \`${mdan}/_config/agent-manifest.csv\`
+- **Workflow manifest**: \`${mdan}/_config/workflow-manifest.csv\`
+- **Help manifest**: \`${mdan}/_config/mdan-help.csv\`
+- **Agent memory**: \`${mdan}/_memory/\`
 
 ## Key Conventions
 
-- Always load \`${bmad}/bmm/config.yaml\` before any agent activation or workflow execution
+- Always load \`${mdan}/bmm/config.yaml\` before any agent activation or workflow execution
 - Store all config fields as session variables: \`{user_name}\`, \`{communication_language}\`, \`{output_folder}\`, \`{planning_artifacts}\`, \`{implementation_artifacts}\`, \`{project_knowledge}\`
 - MD-based workflows execute directly — load and follow the \`.md\` file
 - YAML-based workflows require the workflow engine — load \`workflow.xml\` first, then pass the \`.yaml\` config
@@ -470,12 +470,12 @@ tools: ${toolsStr}
 ${agentsTable}
 ## Slash Commands
 
-Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent activators. Agents are also available in the agents dropdown.`;
+Type \`/mdan-\` in Copilot Chat to see all available MDAN workflows and agent activators. Agents are also available in the agents dropdown.`;
 
     const instructionsPath = path.join(projectDir, this.githubDir, 'copilot-instructions.md');
-    const markerStart = '<!-- BMAD:START -->';
-    const markerEnd = '<!-- BMAD:END -->';
-    const markedContent = `${markerStart}\n${bmadSection}\n${markerEnd}`;
+    const markerStart = '<!-- MDAN:START -->';
+    const markerEnd = '<!-- MDAN:END -->';
+    const markedContent = `${markerStart}\n${mdanSection}\n${markerEnd}`;
 
     if (await fs.pathExists(instructionsPath)) {
       const existing = await fs.readFile(instructionsPath, 'utf8');
@@ -483,7 +483,7 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
       const endIdx = existing.indexOf(markerEnd);
 
       if (startIdx !== -1 && endIdx !== -1 && endIdx > startIdx) {
-        // Replace only the BMAD section between markers
+        // Replace only the MDAN section between markers
         const before = existing.slice(0, startIdx);
         const after = existing.slice(endIdx + markerEnd.length);
         const merged = `${before}${markedContent}${after}`;
@@ -503,12 +503,12 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
 
   /**
    * Load module config.yaml for template variables
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @returns {Object} Config variables
    */
-  async loadModuleConfig(bmadDir) {
-    const bmmConfigPath = path.join(bmadDir, 'bmm', 'config.yaml');
-    const coreConfigPath = path.join(bmadDir, 'core', 'config.yaml');
+  async loadModuleConfig(mdanDir) {
+    const bmmConfigPath = path.join(mdanDir, 'bmm', 'config.yaml');
+    const coreConfigPath = path.join(mdanDir, 'core', 'config.yaml');
 
     for (const configPath of [bmmConfigPath, coreConfigPath]) {
       if (await fs.pathExists(configPath)) {
@@ -543,8 +543,8 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
   async collectExistingToolPermissions(projectDir) {
     const permissions = new Map();
     const dirs = [
-      [path.join(projectDir, this.githubDir, this.agentsDir), /^bmad.*\.agent\.md$/],
-      [path.join(projectDir, this.githubDir, this.promptsDir), /^bmad-.*\.prompt\.md$/],
+      [path.join(projectDir, this.githubDir, this.agentsDir), /^mdan.*\.agent\.md$/],
+      [path.join(projectDir, this.githubDir, this.promptsDir), /^mdan-.*\.prompt\.md$/],
     ];
 
     for (const [dir, pattern] of dirs) {
@@ -575,7 +575,7 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
   /**
    * Get the tools array string for a file, preserving any existing customisation.
    * Falls back to the default tools if no prior customisation exists.
-   * @param {string} fileName - Target filename (e.g. 'bmad-agent-bmm-pm.agent.md')
+   * @param {string} fileName - Target filename (e.g. 'mdan-agent-bmm-pm.agent.md')
    * @returns {string} YAML inline array string
    */
   getToolsForFile(fileName) {
@@ -595,7 +595,7 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
   }
 
   /**
-   * Cleanup GitHub Copilot configuration - surgically remove only BMAD files
+   * Cleanup GitHub Copilot configuration - surgically remove only MDAN files
    */
   async cleanup(projectDir, options = {}) {
     // Clean up agents directory
@@ -605,14 +605,14 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
       let removed = 0;
 
       for (const file of files) {
-        if (file.startsWith('bmad') && (file.endsWith('.agent.md') || file.endsWith('.md'))) {
+        if (file.startsWith('mdan') && (file.endsWith('.agent.md') || file.endsWith('.md'))) {
           await fs.remove(path.join(agentsDir, file));
           removed++;
         }
       }
 
       if (removed > 0 && !options.silent) {
-        await prompts.log.message(`  Cleaned up ${removed} existing BMAD agents`);
+        await prompts.log.message(`  Cleaned up ${removed} existing MDAN agents`);
       }
     }
 
@@ -623,18 +623,18 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
       let removed = 0;
 
       for (const file of files) {
-        if (file.startsWith('bmad-') && file.endsWith('.prompt.md')) {
+        if (file.startsWith('mdan-') && file.endsWith('.prompt.md')) {
           await fs.remove(path.join(promptsDir, file));
           removed++;
         }
       }
 
       if (removed > 0 && !options.silent) {
-        await prompts.log.message(`  Cleaned up ${removed} existing BMAD prompts`);
+        await prompts.log.message(`  Cleaned up ${removed} existing MDAN prompts`);
       }
     }
 
-    // During uninstall, also strip BMAD markers from copilot-instructions.md.
+    // During uninstall, also strip MDAN markers from copilot-instructions.md.
     // During reinstall (default), this is skipped because generateCopilotInstructions()
     // handles marker-based replacement in a single read-modify-write pass,
     // which correctly preserves user content outside the markers.
@@ -644,7 +644,7 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
   }
 
   /**
-   * Strip BMAD marker section from copilot-instructions.md
+   * Strip MDAN marker section from copilot-instructions.md
    * If file becomes empty after stripping, delete it.
    * If a .bak backup exists and the main file was deleted, restore the backup.
    * @param {string} projectDir - Project directory
@@ -659,8 +659,8 @@ Type \`/bmad-\` in Copilot Chat to see all available BMAD workflows and agent ac
     }
 
     const content = await fs.readFile(instructionsPath, 'utf8');
-    const markerStart = '<!-- BMAD:START -->';
-    const markerEnd = '<!-- BMAD:END -->';
+    const markerStart = '<!-- MDAN:START -->';
+    const markerEnd = '<!-- MDAN:END -->';
     const startIdx = content.indexOf(markerStart);
     const endIdx = content.indexOf(markerEnd);
 

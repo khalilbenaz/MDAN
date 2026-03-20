@@ -1,8 +1,8 @@
 # MDAN Memory System v3.0
 
-## Pourquoi c'est différent de BMAD
+## Pourquoi c'est différent de MDAN
 
-BMAD n'a **aucun système de mémoire**. Chaque session repart de zéro. MDAN résout ça.
+MDAN n'a **aucun système de mémoire**. Chaque session repart de zéro. MDAN résout ça.
 
 ## Architecture
 

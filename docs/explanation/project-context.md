@@ -95,12 +95,12 @@ You have three options:
 
 ### Manual Creation
 
-Create the file at `_bmad-output/project-context.md` and add your rules:
+Create the file at `_mdan-output/project-context.md` and add your rules:
 
 ```bash
 # In your project root
-mkdir -p _bmad-output
-touch _bmad-output/project-context.md
+mkdir -p _mdan-output
+touch _mdan-output/project-context.md
 ```
 
 Edit it with your technology stack and implementation rules. The architect and implementation workflows will automatically find and load it.
@@ -110,7 +110,7 @@ Edit it with your technology stack and implementation rules. The architect and i
 Run the `generate-project-context` workflow after completing your architecture:
 
 ```bash
-/bmad-bmm-generate-project-context
+/mdan-bmm-generate-project-context
 ```
 
 This scans your architecture document and project files to generate a context file capturing the decisions made.
@@ -120,7 +120,7 @@ This scans your architecture document and project files to generate a context fi
 For existing projects, run `generate-project-context` to discover existing patterns:
 
 ```bash
-/bmad-bmm-generate-project-context
+/mdan-bmm-generate-project-context
 ```
 
 The workflow analyzes your codebase to identify conventions, then generates a context file you can review and refine.
@@ -153,5 +153,5 @@ The `project-context.md` file is a living document. Update it when:
 You can edit it manually at any time, or re-run `generate-project-context` to update it after significant changes.
 
 :::note[File Location]
-The default location is `_bmad-output/project-context.md`. Workflows search for it there, and also check `**/project-context.md` anywhere in your project.
+The default location is `_mdan-output/project-context.md`. Workflows search for it there, and also check `**/project-context.md` anywhere in your project.
 :::

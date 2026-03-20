@@ -62,17 +62,17 @@ class WorkflowBuilderAgent:
             {
                 "cmd": "CW",
                 "label": "Create a new MDAN workflow",
-                "description": "Create a new BMAD workflow with proper structure and best practices",
+                "description": "Create a new MDAN workflow with proper structure and best practices",
             },
             {
                 "cmd": "EW",
                 "label": "Edit existing MDAN workflows",
-                "description": "Edit existing BMAD workflows while maintaining integrity",
+                "description": "Edit existing MDAN workflows while maintaining integrity",
             },
             {
                 "cmd": "VW",
                 "label": "Run validation check",
-                "description": "Run validation check on BMAD workflows against best practices",
+                "description": "Run validation check on MDAN workflows against best practices",
             },
             {
                 "cmd": "MV",

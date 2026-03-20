@@ -4,62 +4,62 @@
  * Provides utilities to convert hierarchical paths to flat naming conventions.
  *
  * DASH-BASED NAMING (new standard):
- * - Agents: bmad-agent-module-name.md (with bmad-agent- prefix)
- * - Workflows/Tasks/Tools: bmad-module-name.md
+ * - Agents: mdan-agent-module-name.md (with mdan-agent- prefix)
+ * - Workflows/Tasks/Tools: mdan-module-name.md
  *
  * Example outputs:
- * - cis/agents/storymaster.md → bmad-agent-cis-storymaster.md
- * - bmm/workflows/plan-project.md → bmad-bmm-plan-project.md
- * - bmm/tasks/create-story.md → bmad-bmm-create-story.md
- * - core/agents/brainstorming.md → bmad-agent-brainstorming.md (core agents skip module name)
+ * - cis/agents/storymaster.md → mdan-agent-cis-storymaster.md
+ * - bmm/workflows/plan-project.md → mdan-bmm-plan-project.md
+ * - bmm/tasks/create-story.md → mdan-bmm-create-story.md
+ * - core/agents/brainstorming.md → mdan-agent-brainstorming.md (core agents skip module name)
  */
 
 // Type segments - agents are included in naming, others are filtered out
 const TYPE_SEGMENTS = ['workflows', 'tasks', 'tools'];
 const AGENT_SEGMENT = 'agents';
 
-// BMAD installation folder name - centralized constant for all installers
-const BMAD_FOLDER_NAME = '_bmad';
+// MDAN installation folder name - centralized constant for all installers
+const MDAN_FOLDER_NAME = '_mdan';
 
 /**
  * Convert hierarchical path to flat dash-separated name (NEW STANDARD)
- * Converts: 'bmm', 'agents', 'pm' → 'bmad-agent-bmm-pm.md'
- * Converts: 'bmm', 'workflows', 'correct-course' → 'bmad-bmm-correct-course.md'
- * Converts: 'core', 'agents', 'brainstorming' → 'bmad-agent-brainstorming.md' (core agents skip module name)
+ * Converts: 'bmm', 'agents', 'pm' → 'mdan-agent-bmm-pm.md'
+ * Converts: 'bmm', 'workflows', 'correct-course' → 'mdan-bmm-correct-course.md'
+ * Converts: 'core', 'agents', 'brainstorming' → 'mdan-agent-brainstorming.md' (core agents skip module name)
  *
  * @param {string} module - Module name (e.g., 'bmm', 'core')
  * @param {string} type - Artifact type ('agents', 'workflows', 'tasks', 'tools')
  * @param {string} name - Artifact name (e.g., 'pm', 'brainstorming')
- * @returns {string} Flat filename like 'bmad-agent-bmm-pm.md' or 'bmad-bmm-correct-course.md'
+ * @returns {string} Flat filename like 'mdan-agent-bmm-pm.md' or 'mdan-bmm-correct-course.md'
  */
 function toDashName(module, type, name) {
   const isAgent = type === AGENT_SEGMENT;
 
-  // For core module, skip the module name: use 'bmad-agent-name.md' instead of 'bmad-agent-core-name.md'
+  // For core module, skip the module name: use 'mdan-agent-name.md' instead of 'mdan-agent-core-name.md'
   if (module === 'core') {
-    return isAgent ? `bmad-agent-${name}.md` : `bmad-${name}.md`;
+    return isAgent ? `mdan-agent-${name}.md` : `mdan-${name}.md`;
   }
 
-  // Module artifacts: bmad-module-name.md or bmad-agent-module-name.md
+  // Module artifacts: mdan-module-name.md or mdan-agent-module-name.md
   // eslint-disable-next-line unicorn/prefer-string-replace-all -- regex replace is intentional here
   const dashName = name.replace(/\//g, '-'); // Flatten nested paths
-  return isAgent ? `bmad-agent-${module}-${dashName}.md` : `bmad-${module}-${dashName}.md`;
+  return isAgent ? `mdan-agent-${module}-${dashName}.md` : `mdan-${module}-${dashName}.md`;
 }
 
 /**
  * Convert relative path to flat dash-separated name
- * Converts: 'bmm/agents/pm.md' → 'bmad-agent-bmm-pm.md'
- * Converts: 'bmm/agents/tech-writer/tech-writer.md' → 'bmad-agent-bmm-tech-writer.md' (uses folder name)
- * Converts: 'bmm/workflows/correct-course.md' → 'bmad-bmm-correct-course.md'
- * Converts: 'core/agents/brainstorming.md' → 'bmad-agent-brainstorming.md' (core agents skip module name)
+ * Converts: 'bmm/agents/pm.md' → 'mdan-agent-bmm-pm.md'
+ * Converts: 'bmm/agents/tech-writer/tech-writer.md' → 'mdan-agent-bmm-tech-writer.md' (uses folder name)
+ * Converts: 'bmm/workflows/correct-course.md' → 'mdan-bmm-correct-course.md'
+ * Converts: 'core/agents/brainstorming.md' → 'mdan-agent-brainstorming.md' (core agents skip module name)
  *
  * @param {string} relativePath - Path like 'bmm/agents/pm.md'
- * @returns {string} Flat filename like 'bmad-agent-bmm-pm.md' or 'bmad-brainstorming.md'
+ * @returns {string} Flat filename like 'mdan-agent-bmm-pm.md' or 'mdan-brainstorming.md'
  */
 function toDashPath(relativePath) {
   if (!relativePath || typeof relativePath !== 'string') {
     // Return a safe default for invalid input
-    return 'bmad-unknown.md';
+    return 'mdan-unknown.md';
   }
 
   // Strip common file extensions to avoid double extensions in generated filenames
@@ -86,13 +86,13 @@ function toDashPath(relativePath) {
 
 /**
  * Create custom agent dash name
- * Creates: 'bmad-custom-agent-fred-commit-poet.md'
+ * Creates: 'mdan-custom-agent-fred-commit-poet.md'
  *
  * @param {string} agentName - Custom agent name
- * @returns {string} Flat filename like 'bmad-custom-agent-fred-commit-poet.md'
+ * @returns {string} Flat filename like 'mdan-custom-agent-fred-commit-poet.md'
  */
 function customAgentDashName(agentName) {
-  return `bmad-custom-agent-${agentName}.md`;
+  return `mdan-custom-agent-${agentName}.md`;
 }
 
 /**
@@ -101,15 +101,15 @@ function customAgentDashName(agentName) {
  * @returns {boolean} True if filename uses dash format
  */
 function isDashFormat(filename) {
-  return filename.startsWith('bmad-') && filename.includes('-');
+  return filename.startsWith('mdan-') && filename.includes('-');
 }
 
 /**
  * Extract parts from a dash-formatted filename
- * Parses: 'bmad-agent-bmm-pm.md' → { prefix: 'bmad', module: 'bmm', type: 'agents', name: 'pm' }
- * Parses: 'bmad-bmm-correct-course.md' → { prefix: 'bmad', module: 'bmm', type: 'workflows', name: 'correct-course' }
- * Parses: 'bmad-agent-brainstorming.md' → { prefix: 'bmad', module: 'core', type: 'agents', name: 'brainstorming' } (core agents)
- * Parses: 'bmad-brainstorming.md' → { prefix: 'bmad', module: 'core', type: 'workflows', name: 'brainstorming' } (core workflows)
+ * Parses: 'mdan-agent-bmm-pm.md' → { prefix: 'mdan', module: 'bmm', type: 'agents', name: 'pm' }
+ * Parses: 'mdan-bmm-correct-course.md' → { prefix: 'mdan', module: 'bmm', type: 'workflows', name: 'correct-course' }
+ * Parses: 'mdan-agent-brainstorming.md' → { prefix: 'mdan', module: 'core', type: 'agents', name: 'brainstorming' } (core agents)
+ * Parses: 'mdan-brainstorming.md' → { prefix: 'mdan', module: 'core', type: 'workflows', name: 'brainstorming' } (core workflows)
  *
  * @param {string} filename - Dash-formatted filename
  * @returns {Object|null} Parsed parts or null if invalid format
@@ -118,7 +118,7 @@ function parseDashName(filename) {
   const withoutExt = filename.replace('.md', '');
   const parts = withoutExt.split('-');
 
-  if (parts.length < 2 || parts[0] !== 'bmad') {
+  if (parts.length < 2 || parts[0] !== 'mdan') {
     return null;
   }
 
@@ -127,9 +127,9 @@ function parseDashName(filename) {
 
   if (isAgent) {
     // This is an agent file
-    // Format: bmad-agent-name (core) or bmad-agent-module-name
+    // Format: mdan-agent-name (core) or mdan-agent-module-name
     if (parts.length === 3) {
-      // Core agent: bmad-agent-name
+      // Core agent: mdan-agent-name
       return {
         prefix: parts[0],
         module: 'core',
@@ -137,7 +137,7 @@ function parseDashName(filename) {
         name: parts[2],
       };
     } else {
-      // Module agent: bmad-agent-module-name
+      // Module agent: mdan-agent-module-name
       return {
         prefix: parts[0],
         module: parts[2],
@@ -148,7 +148,7 @@ function parseDashName(filename) {
   }
 
   // Not an agent file - must be a workflow/tool/task
-  // If only 2 parts (bmad-name), it's a core workflow/tool/task
+  // If only 2 parts (mdan-name), it's a core workflow/tool/task
   if (parts.length === 2) {
     return {
       prefix: parts[0],
@@ -158,7 +158,7 @@ function parseDashName(filename) {
     };
   }
 
-  // Otherwise, it's a module workflow/tool/task (bmad-module-name)
+  // Otherwise, it's a module workflow/tool/task (mdan-module-name)
   return {
     prefix: parts[0],
     module: parts[1],
@@ -178,9 +178,9 @@ function parseDashName(filename) {
 function toUnderscoreName(module, type, name) {
   const isAgent = type === AGENT_SEGMENT;
   if (module === 'core') {
-    return isAgent ? `bmad_agent_${name}.md` : `bmad_${name}.md`;
+    return isAgent ? `mdan_agent_${name}.md` : `mdan_${name}.md`;
   }
-  return isAgent ? `bmad_${module}_agent_${name}.md` : `bmad_${module}_${name}.md`;
+  return isAgent ? `mdan_${module}_agent_${name}.md` : `mdan_${module}_${name}.md`;
 }
 
 /**
@@ -204,7 +204,7 @@ function toUnderscorePath(relativePath) {
  * @deprecated Use customAgentDashName instead
  */
 function customAgentUnderscoreName(agentName) {
-  return `bmad_custom_${agentName}.md`;
+  return `mdan_custom_${agentName}.md`;
 }
 
 /**
@@ -212,7 +212,7 @@ function customAgentUnderscoreName(agentName) {
  * @deprecated Use isDashFormat instead
  */
 function isUnderscoreFormat(filename) {
-  return filename.startsWith('bmad_') && filename.includes('_');
+  return filename.startsWith('mdan_') && filename.includes('_');
 }
 
 /**
@@ -223,7 +223,7 @@ function parseUnderscoreName(filename) {
   const withoutExt = filename.replace('.md', '');
   const parts = withoutExt.split('_');
 
-  if (parts.length < 2 || parts[0] !== 'bmad') {
+  if (parts.length < 2 || parts[0] !== 'mdan') {
     return null;
   }
 
@@ -295,5 +295,5 @@ module.exports = {
 
   TYPE_SEGMENTS,
   AGENT_SEGMENT,
-  BMAD_FOLDER_NAME,
+  MDAN_FOLDER_NAME,
 };

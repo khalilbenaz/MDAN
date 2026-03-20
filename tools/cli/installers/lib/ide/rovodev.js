@@ -16,9 +16,9 @@ const { toDashPath } = require('./shared/path-utils');
  *
  * prompts.yml format (per Rovo Dev docs):
  *   prompts:
- *     - name: bmad-bmm-create-prd
+ *     - name: mdan-bmm-create-prd
  *       description: "PRD workflow..."
- *       content_file: workflows/bmad-bmm-create-prd.md
+ *       content_file: workflows/mdan-bmm-create-prd.md
  */
 class RovoDevSetup extends BaseIdeSetup {
   constructor() {
@@ -31,14 +31,14 @@ class RovoDevSetup extends BaseIdeSetup {
   /**
    * Setup Rovo Dev configuration
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} options - Setup options
    * @returns {Promise<Object>} Setup result with { success, results: { agents, workflows, tasks, tools } }
    */
-  async setup(projectDir, bmadDir, options = {}) {
+  async setup(projectDir, mdanDir, options = {}) {
     if (!options.silent) await prompts.log.info(`Setting up ${this.name}...`);
 
-    // Clean up any old BMAD installation first
+    // Clean up any old MDAN installation first
     await this.cleanup(projectDir, options);
 
     const workflowsPath = path.join(projectDir, this.rovoDir, this.workflowsDir);
@@ -48,20 +48,20 @@ class RovoDevSetup extends BaseIdeSetup {
     const writtenFiles = [];
 
     // Generate and write agent launchers
-    const agentGen = new AgentCommandGenerator(this.bmadFolderName);
-    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(bmadDir, selectedModules);
+    const agentGen = new AgentCommandGenerator(this.mdanFolderName);
+    const { artifacts: agentArtifacts } = await agentGen.collectAgentArtifacts(mdanDir, selectedModules);
     const agentCount = await agentGen.writeDashArtifacts(workflowsPath, agentArtifacts);
     this._collectPromptEntries(writtenFiles, agentArtifacts, ['agent-launcher'], 'agent');
 
     // Generate and write workflow commands
-    const workflowGen = new WorkflowCommandGenerator(this.bmadFolderName);
-    const { artifacts: workflowArtifacts } = await workflowGen.collectWorkflowArtifacts(bmadDir);
+    const workflowGen = new WorkflowCommandGenerator(this.mdanFolderName);
+    const { artifacts: workflowArtifacts } = await workflowGen.collectWorkflowArtifacts(mdanDir);
     const workflowCount = await workflowGen.writeDashArtifacts(workflowsPath, workflowArtifacts);
     this._collectPromptEntries(writtenFiles, workflowArtifacts, ['workflow-command'], 'workflow');
 
     // Generate and write task/tool commands
-    const taskToolGen = new TaskToolCommandGenerator(this.bmadFolderName);
-    const { artifacts: taskToolArtifacts, counts: taskToolCounts } = await taskToolGen.collectTaskToolArtifacts(bmadDir);
+    const taskToolGen = new TaskToolCommandGenerator(this.mdanFolderName);
+    const { artifacts: taskToolArtifacts, counts: taskToolCounts } = await taskToolGen.collectTaskToolArtifacts(mdanDir);
     await taskToolGen.writeDashArtifacts(workflowsPath, taskToolArtifacts);
     const taskCount = taskToolCounts.tasks || 0;
     const toolCount = taskToolCounts.tools || 0;
@@ -110,8 +110,8 @@ class RovoDevSetup extends BaseIdeSetup {
 
   /**
    * Generate .rovodev/prompts.yml manifest
-   * Merges with existing user entries -- strips entries with names starting 'bmad-',
-   * appends new BMAD entries, and writes back.
+   * Merges with existing user entries -- strips entries with names starting 'mdan-',
+   * appends new MDAN entries, and writes back.
    *
    * @param {string} projectDir - Project directory
    * @param {Array<Object>} writtenFiles - Array of { name, description, contentFile }
@@ -120,14 +120,14 @@ class RovoDevSetup extends BaseIdeSetup {
     const promptsPath = path.join(projectDir, this.rovoDir, this.promptsFile);
     let existingPrompts = [];
 
-    // Read existing prompts.yml and preserve non-BMAD entries
+    // Read existing prompts.yml and preserve non-MDAN entries
     if (await this.pathExists(promptsPath)) {
       try {
         const content = await this.readFile(promptsPath);
         const parsed = yaml.parse(content);
         if (parsed && Array.isArray(parsed.prompts)) {
-          // Keep only non-BMAD entries (entries whose name does NOT start with bmad-)
-          existingPrompts = parsed.prompts.filter((entry) => !entry.name || !entry.name.startsWith('bmad-'));
+          // Keep only non-MDAN entries (entries whose name does NOT start with mdan-)
+          existingPrompts = parsed.prompts.filter((entry) => !entry.name || !entry.name.startsWith('mdan-'));
         }
       } catch {
         // If parsing fails, start fresh but preserve file safety
@@ -135,15 +135,15 @@ class RovoDevSetup extends BaseIdeSetup {
       }
     }
 
-    // Build new BMAD entries (prefix description with name so /prompts list is scannable)
-    const bmadEntries = writtenFiles.map((file) => ({
+    // Build new MDAN entries (prefix description with name so /prompts list is scannable)
+    const mdanEntries = writtenFiles.map((file) => ({
       name: file.name,
       description: `${file.name} - ${file.description}`,
       content_file: file.contentFile,
     }));
 
-    // Merge: user entries first, then BMAD entries
-    const allPrompts = [...existingPrompts, ...bmadEntries];
+    // Merge: user entries first, then MDAN entries
+    const allPrompts = [...existingPrompts, ...mdanEntries];
 
     const config = { prompts: allPrompts };
     const yamlContent = yaml.stringify(config, { lineWidth: 0 });
@@ -152,24 +152,24 @@ class RovoDevSetup extends BaseIdeSetup {
 
   /**
    * Cleanup Rovo Dev configuration
-   * Removes bmad-* files from .rovodev/workflows/ and strips BMAD entries from prompts.yml
+   * Removes mdan-* files from .rovodev/workflows/ and strips MDAN entries from prompts.yml
    * @param {string} projectDir - Project directory
    * @param {Object} options - Cleanup options
    */
   async cleanup(projectDir, options = {}) {
     const workflowsPath = path.join(projectDir, this.rovoDir, this.workflowsDir);
 
-    // Remove all bmad-* entries from workflows dir (aligned with detect() predicate)
+    // Remove all mdan-* entries from workflows dir (aligned with detect() predicate)
     if (await this.pathExists(workflowsPath)) {
       const entries = await fs.readdir(workflowsPath);
       for (const entry of entries) {
-        if (entry.startsWith('bmad-')) {
+        if (entry.startsWith('mdan-')) {
           await fs.remove(path.join(workflowsPath, entry));
         }
       }
     }
 
-    // Clean BMAD entries from prompts.yml (preserve user entries)
+    // Clean MDAN entries from prompts.yml (preserve user entries)
     const promptsPath = path.join(projectDir, this.rovoDir, this.promptsFile);
     if (await this.pathExists(promptsPath)) {
       try {
@@ -178,7 +178,7 @@ class RovoDevSetup extends BaseIdeSetup {
 
         if (Array.isArray(parsed.prompts)) {
           const originalCount = parsed.prompts.length;
-          parsed.prompts = parsed.prompts.filter((entry) => !entry.name || !entry.name.startsWith('bmad-'));
+          parsed.prompts = parsed.prompts.filter((entry) => !entry.name || !entry.name.startsWith('mdan-'));
           const removedCount = originalCount - parsed.prompts.length;
 
           if (removedCount > 0) {
@@ -189,7 +189,7 @@ class RovoDevSetup extends BaseIdeSetup {
               await this.writeFile(promptsPath, yaml.stringify(parsed, { lineWidth: 0 }));
             }
             if (!options.silent) {
-              await prompts.log.message(`Removed ${removedCount} BMAD entries from ${this.promptsFile}`);
+              await prompts.log.message(`Removed ${removedCount} MDAN entries from ${this.promptsFile}`);
             }
           }
         }
@@ -220,29 +220,29 @@ class RovoDevSetup extends BaseIdeSetup {
 
   /**
    * Detect whether Rovo Dev configuration exists in the project
-   * Checks for .rovodev/ dir with bmad files or bmad entries in prompts.yml
+   * Checks for .rovodev/ dir with mdan files or mdan entries in prompts.yml
    * @param {string} projectDir - Project directory
    * @returns {boolean}
    */
   async detect(projectDir) {
     const workflowsPath = path.join(projectDir, this.rovoDir, this.workflowsDir);
 
-    // Check for bmad files in workflows dir
+    // Check for mdan files in workflows dir
     if (await fs.pathExists(workflowsPath)) {
       const entries = await fs.readdir(workflowsPath);
-      if (entries.some((entry) => entry.startsWith('bmad-'))) {
+      if (entries.some((entry) => entry.startsWith('mdan-'))) {
         return true;
       }
     }
 
-    // Check for bmad entries in prompts.yml
+    // Check for mdan entries in prompts.yml
     const promptsPath = path.join(projectDir, this.rovoDir, this.promptsFile);
     if (await fs.pathExists(promptsPath)) {
       try {
         const content = await fs.readFile(promptsPath, 'utf8');
         const parsed = yaml.parse(content);
         if (parsed && Array.isArray(parsed.prompts)) {
-          return parsed.prompts.some((entry) => entry.name && entry.name.startsWith('bmad-'));
+          return parsed.prompts.some((entry) => entry.name && entry.name.startsWith('mdan-'));
         }
       } catch {
         // If parsing fails, check raw content

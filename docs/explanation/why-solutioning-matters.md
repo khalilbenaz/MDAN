@@ -55,8 +55,8 @@ This prevents:
 | Track | Solutioning Required? |
 |-------|----------------------|
 | Quick Flow | No - skip entirely |
-| BMad Method Simple | Optional |
-| BMad Method Complex | Yes |
+| MDAN Method Simple | Optional |
+| MDAN Method Complex | Yes |
 | Enterprise | Yes |
 
 :::tip[Rule of Thumb]

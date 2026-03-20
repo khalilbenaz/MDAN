@@ -1,19 +1,19 @@
 ---
-title: "How to Install BMad"
-description: Step-by-step guide to installing BMad in your project
+title: "How to Install MDAN"
+description: Step-by-step guide to installing MDAN in your project
 sidebar:
   order: 1
 ---
 
-Use the `npx bmad-method install` command to set up BMad in your project with your choice of modules and AI tools.
+Use the `npx mdan install` command to set up MDAN in your project with your choice of modules and AI tools.
 
 If you want to use a non interactive installer and provide all install options on the command line, see [this guide](./non-interactive-installation.md).
 
 ## When to Use This
 
-- Starting a new project with BMad
-- Adding BMad to an existing codebase
-- Update the existing BMad Installation
+- Starting a new project with MDAN
+- Adding MDAN to an existing codebase
+- Update the existing MDAN Installation
 
 :::note[Prerequisites]
 - **Node.js** 20+ (required for the installer)
@@ -26,19 +26,19 @@ If you want to use a non interactive installer and provide all install options o
 ### 1. Run the Installer
 
 ```bash
-npx bmad-method install
+npx mdan install
 ```
 
 :::tip[Bleeding edge]
 To install the latest from the main branch (may be unstable):
 ```bash
-npx github:bmad-code-org/BMAD-METHOD install
+npx github:mdan-code-org/MDAN install
 ```
 :::
 
 ### 2. Choose Installation Location
 
-The installer will ask where to install BMad files:
+The installer will ask where to install MDAN files:
 
 - Current directory (recommended for new projects if you created the directory yourself and ran from within the directory)
 - Custom path
@@ -55,7 +55,7 @@ Each tool has its own way of integrating commands. The installer creates tiny pr
 
 ### 4. Choose Modules
 
-The installer shows available modules. Select whichever ones you need — most users just want **BMad Method** (the software development module).
+The installer shows available modules. Select whichever ones you need — most users just want **MDAN Method** (the software development module).
 
 ### 5. Follow the Prompts
 
@@ -65,33 +65,33 @@ The installer guides you through the rest — custom content, settings, etc.
 
 ```text
 your-project/
-├── _bmad/
+├── _.mdan/
 │   ├── bmm/            # Your selected modules
 │   │   └── config.yaml # Module settings (if you ever need to change them)
 │   ├── core/           # Required core module
 │   └── ...
-├── _bmad-output/       # Generated artifacts
+├── _mdan-output/       # Generated artifacts
 ├── .claude/            # Claude Code commands (if using Claude Code)
 └── .kiro/              # Kiro steering files (if using Kiro)
 ```
 
 ## Verify Installation
 
-Run `/bmad-help` to verify everything works and see what to do next.
+Run `/mdan-help` to verify everything works and see what to do next.
 
-**BMad-Help is your intelligent guide** that will:
+**MDAN-Help is your intelligent guide** that will:
 - Confirm your installation is working
 - Show what's available based on your installed modules
 - Recommend your first step
 
 You can also ask it questions:
 ```
-/bmad-help I just installed, what should I do first?
-/bmad-help What are my options for a SaaS project?
+/mdan-help I just installed, what should I do first?
+/mdan-help What are my options for a SaaS project?
 ```
 
 ## Troubleshooting
 
 **Installer throws an error** — Copy-paste the output into your AI assistant and let it figure it out.
 
-**Installer worked but something doesn't work later** — Your AI needs BMad context to help. See [How to Get Answers About BMad](./get-answers-about-bmad.md) for how to point your AI at the right sources.
+**Installer worked but something doesn't work later** — Your AI needs MDAN context to help. See [How to Get Answers About MDAN](./get-answers-about-mdan.md) for how to point your AI at the right sources.

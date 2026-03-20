@@ -329,7 +329,7 @@ function buildMenuItemSchema() {
                   });
                 }
               }),
-            // Format 2a: Object with array format (like bmad-builder.agent.yaml)
+            // Format 2a: Object with array format (like mdan-builder.agent.yaml)
             z
               .object({})
               .passthrough()

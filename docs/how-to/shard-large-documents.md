@@ -23,11 +23,11 @@ Document sharding splits large markdown files into smaller, organized files base
 
 ```text
 Before Sharding:
-_bmad-output/planning-artifacts/
+_mdan-output/planning-artifacts/
 └── PRD.md (large 50k token file)
 
 After Sharding:
-_bmad-output/planning-artifacts/
+_mdan-output/planning-artifacts/
 └── prd/
     ├── index.md                    # Table of contents with descriptions
     ├── overview.md                 # Section 1
@@ -41,7 +41,7 @@ _bmad-output/planning-artifacts/
 ### 1. Run the Shard-Doc Tool
 
 ```bash
-/bmad-shard-doc
+/mdan-shard-doc
 ```
 
 ### 2. Follow the Interactive Process
@@ -62,7 +62,7 @@ Agent: Sharding PRD.md...
 
 ## How Workflow Discovery Works
 
-BMad workflows use a **dual discovery system**:
+MDAN workflows use a **dual discovery system**:
 
 1. **Try whole document first** - Look for `document-name.md`
 2. **Check for sharded version** - Look for `document-name/index.md`

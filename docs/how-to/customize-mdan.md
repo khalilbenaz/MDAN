@@ -1,5 +1,5 @@
 ---
-title: "How to Customize BMad"
+title: "How to Customize MDAN"
 description: Customize agents, workflows, and modules while preserving update compatibility
 sidebar:
   order: 7
@@ -15,7 +15,7 @@ Use the `.customize.yaml` files to tailor agent behavior, personas, and menus wh
 - You want agents to perform specific actions every time they start up
 
 :::note[Prerequisites]
-- BMad installed in your project (see [How to Install BMad](./install-bmad.md))
+- MDAN installed in your project (see [How to Install MDAN](./install-mdan.md))
 - A text editor for YAML files
 :::
 
@@ -30,8 +30,8 @@ Always use the `.customize.yaml` files described here rather than editing agent 
 After installation, find one `.customize.yaml` file per agent in:
 
 ```text
-_bmad/_config/agents/
-├── core-bmad-master.customize.yaml
+_.mdan/_config/agents/
+├── core-mdan-master.customize.yaml
 ├── bmm-dev.customize.yaml
 ├── bmm-pm.customize.yaml
 └── ... (one file per installed agent)
@@ -131,7 +131,7 @@ prompts:
 After editing, recompile the agent to apply changes:
 
 ```bash
-npx bmad-method install
+npx mdan install
 ```
 
 The installer detects the existing installation and offers these options:
@@ -140,7 +140,7 @@ The installer detects the existing installation and offers these options:
 | ---------------------------- | ------------------------------------------------------------------- |
 | **Quick Update**             | Updates all modules to the latest version and recompiles all agents |
 | **Recompile Agents**         | Applies customizations only, without updating module files          |
-| **Modify BMad Installation** | Full installation flow for adding or removing modules               |
+| **Modify MDAN Installation** | Full installation flow for adding or removing modules               |
 
 For customization-only changes, **Recompile Agents** is the fastest option.
 
@@ -148,7 +148,7 @@ For customization-only changes, **Recompile Agents** is the fastest option.
 
 **Changes not appearing?**
 
-- Run `npx bmad-method install` and select **Recompile Agents** to apply changes
+- Run `npx mdan install` and select **Recompile Agents** to apply changes
 - Check that your YAML syntax is valid (indentation matters)
 - Verify you edited the correct `.customize.yaml` file for the agent
 
@@ -161,11 +161,11 @@ For customization-only changes, **Recompile Agents** is the fastest option.
 **Need to reset an agent?**
 
 - Clear or delete the agent's `.customize.yaml` file
-- Run `npx bmad-method install` and select **Recompile Agents** to restore defaults
+- Run `npx mdan install` and select **Recompile Agents** to restore defaults
 
 ## Workflow Customization
 
-Customization of existing BMad Method workflows and skills is coming soon.
+Customization of existing MDAN Method workflows and skills is coming soon.
 
 ## Module Customization
 

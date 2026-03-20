@@ -1,6 +1,6 @@
 const fs = require('fs-extra');
 const path = require('node:path');
-const { BMAD_FOLDER_NAME } = require('./shared/path-utils');
+const { MDAN_FOLDER_NAME } = require('./shared/path-utils');
 const prompts = require('../../../lib/prompts');
 
 /**
@@ -15,19 +15,19 @@ class IdeManager {
   constructor() {
     this.handlers = new Map();
     this._initialized = false;
-    this.bmadFolderName = BMAD_FOLDER_NAME; // Default, can be overridden
+    this.mdanFolderName = MDAN_FOLDER_NAME; // Default, can be overridden
   }
 
   /**
-   * Set the bmad folder name for all IDE handlers
-   * @param {string} bmadFolderName - The bmad folder name
+   * Set the mdan folder name for all IDE handlers
+   * @param {string} mdanFolderName - The mdan folder name
    */
-  setBmadFolderName(bmadFolderName) {
-    this.bmadFolderName = bmadFolderName;
+  setMdanFolderName(mdanFolderName) {
+    this.mdanFolderName = mdanFolderName;
     // Update all loaded handlers
     for (const handler of this.handlers.values()) {
-      if (typeof handler.setBmadFolderName === 'function') {
-        handler.setBmadFolderName(bmadFolderName);
+      if (typeof handler.setMdanFolderName === 'function') {
+        handler.setMdanFolderName(mdanFolderName);
       }
     }
   }
@@ -74,8 +74,8 @@ class IdeManager {
         if (HandlerClass) {
           const instance = new HandlerClass();
           if (instance.name && typeof instance.name === 'string') {
-            if (typeof instance.setBmadFolderName === 'function') {
-              instance.setBmadFolderName(this.bmadFolderName);
+            if (typeof instance.setMdanFolderName === 'function') {
+              instance.setMdanFolderName(this.mdanFolderName);
             }
             this.handlers.set(instance.name, instance);
           }
@@ -104,8 +104,8 @@ class IdeManager {
       if (!platformInfo.installer) continue;
 
       const handler = new ConfigDrivenIdeSetup(platformCode, platformInfo);
-      if (typeof handler.setBmadFolderName === 'function') {
-        handler.setBmadFolderName(this.bmadFolderName);
+      if (typeof handler.setMdanFolderName === 'function') {
+        handler.setMdanFolderName(this.mdanFolderName);
       }
       this.handlers.set(platformCode, handler);
     }
@@ -164,10 +164,10 @@ class IdeManager {
    * Setup IDE configuration
    * @param {string} ideName - Name of the IDE
    * @param {string} projectDir - Project directory
-   * @param {string} bmadDir - BMAD installation directory
+   * @param {string} mdanDir - MDAN installation directory
    * @param {Object} options - Setup options
    */
-  async setup(ideName, projectDir, bmadDir, options = {}) {
+  async setup(ideName, projectDir, mdanDir, options = {}) {
     const handler = this.handlers.get(ideName.toLowerCase());
 
     if (!handler) {
@@ -177,7 +177,7 @@ class IdeManager {
     }
 
     try {
-      const handlerResult = await handler.setup(projectDir, bmadDir, options);
+      const handlerResult = await handler.setup(projectDir, mdanDir, options);
       // Build detail string from handler-returned data
       let detail = '';
       if (handlerResult && handlerResult.results) {

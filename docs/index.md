@@ -45,7 +45,7 @@ MDAN works with any AI coding assistant that supports custom system prompts or p
 - **[Cursor](https://cursor.sh)** — AI-first code editor
 - **[Codex CLI](https://github.com/openai/codex)** — OpenAI's terminal coding agent
 
-You should be comfortable with basic software development concepts like version control, project structure, and agile workflows. No prior experience with BMad-style agent systems is required—that's what these docs are for.
+You should be comfortable with basic software development concepts like version control, project structure, and agile workflows. No prior experience with MDAN-style agent systems is required—that's what these docs are for.
 
 ## Join the Community
 

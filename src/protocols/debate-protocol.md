@@ -1,8 +1,8 @@
 # MDAN Debate Protocol v3.0
 
-## Différence avec BMAD Party Mode
+## Différence avec MDAN Party Mode
 
-| Aspect | BMAD Party Mode | MDAN Debate Protocol |
+| Aspect | MDAN Party Mode | MDAN Debate Protocol |
 |--------|----------------|---------------------|
 | Structure | Conversation libre | Protocole formel en 5 rounds |
 | Déclenchement | Manuel uniquement | Auto quand conflit détecté |

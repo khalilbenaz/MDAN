@@ -111,21 +111,21 @@ npm link
 When prompted to select modules, choose **MDAN Method**.
 
 The installer creates two folders:
-- `_bmad/` — agents, workflows, tasks, and configuration
-- `_bmad-output/` — empty for now, but this is where your artifacts will be saved
+- `_.mdan/` — agents, workflows, tasks, and configuration
+- `_mdan-output/` — empty for now, but this is where your artifacts will be saved
 
 :::tip[Your Next Step]
 Open your AI IDE in the project folder and run:
 
 ```
-/bmad-help
+/mdan-help
 ```
 
-BMad-Help will detect what you've completed and recommend exactly what to do next. You can also ask it questions like "What are my options?" or "I have a SaaS idea, where should I start?"
+MDAN-Help will detect what you've completed and recommend exactly what to do next. You can also ask it questions like "What are my options?" or "I have a SaaS idea, where should I start?"
 :::
 
 :::note[How to Load Agents and Run Workflows]
-Each workflow has a **slash command** you run in your IDE (e.g., `/bmad-bmm-create-prd`). Running a workflow command automatically loads the appropriate agent — you don't need to load agents separately. You can also load an agent directly for general conversation (e.g., `/bmad-agent-bmm-pm` for the PM agent).
+Each workflow has a **slash command** you run in your IDE (e.g., `/mdan-bmm-create-prd`). Running a workflow command automatically loads the appropriate agent — you don't need to load agents separately. You can also load an agent directly for general conversation (e.g., `/mdan-agent-bmm-pm` for the PM agent).
 :::
 
 :::caution[Fresh Chats]
@@ -139,35 +139,35 @@ Work through phases 1-3. **Use fresh chats for each workflow.**
 :::tip[Project Context (Optional)]
 Before starting, consider creating `project-context.md` to document your technical preferences and implementation rules. This ensures all AI agents follow your conventions throughout the project.
 
-Create it manually at `_bmad-output/project-context.md` or generate it after architecture using `/bmad-bmm-generate-project-context`. [Learn more](../explanation/project-context.md).
+Create it manually at `_mdan-output/project-context.md` or generate it after architecture using `/mdan-bmm-generate-project-context`. [Learn more](../explanation/project-context.md).
 :::
 
 ### Phase 1: Analysis (Optional)
 
 All workflows in this phase are optional:
-- **brainstorming** (`/bmad-brainstorming`) — Guided ideation
-- **research** (`/bmad-bmm-research`) — Market and technical research
-- **create-product-brief** (`/bmad-bmm-create-product-brief`) — Recommended foundation document
+- **brainstorming** (`/mdan-brainstorming`) — Guided ideation
+- **research** (`/mdan-bmm-research`) — Market and technical research
+- **create-product-brief** (`/mdan-bmm-create-product-brief`) — Recommended foundation document
 
 ### Phase 2: Planning (Required)
 
-**For BMad Method and Enterprise tracks:**
-1. Load the **PM agent** (`/bmad-agent-bmm-pm`) in a new chat
-2. Run the `prd` workflow (`/bmad-bmm-create-prd`)
+**For MDAN Method and Enterprise tracks:**
+1. Load the **PM agent** (`/mdan-agent-bmm-pm`) in a new chat
+2. Run the `prd` workflow (`/mdan-bmm-create-prd`)
 3. Output: `PRD.md`
 
 **For Quick Flow track:**
-- Use the `quick-spec` workflow (`/bmad-bmm-quick-spec`) instead of PRD, then skip to implementation
+- Use the `quick-spec` workflow (`/mdan-bmm-quick-spec`) instead of PRD, then skip to implementation
 
 :::note[UX Design (Optional)]
-If your project has a user interface, load the **UX-Designer agent** (`/bmad-agent-bmm-ux-designer`) and run the UX design workflow (`/bmad-bmm-create-ux-design`) after creating your PRD.
+If your project has a user interface, load the **UX-Designer agent** (`/mdan-agent-bmm-ux-designer`) and run the UX design workflow (`/mdan-bmm-create-ux-design`) after creating your PRD.
 :::
 
-### Phase 3: Solutioning (BMad Method/Enterprise)
+### Phase 3: Solutioning (MDAN Method/Enterprise)
 
 **Create Architecture**
-1. Load the **Architect agent** (`/bmad-agent-bmm-architect`) in a new chat
-2. Run `create-architecture` (`/bmad-bmm-create-architecture`)
+1. Load the **Architect agent** (`/mdan-agent-bmm-architect`) in a new chat
+2. Run `create-architecture` (`/mdan-bmm-create-architecture`)
 3. Output: Architecture document with technical decisions
 
 **Create Epics and Stories**
@@ -176,13 +176,13 @@ If your project has a user interface, load the **UX-Designer agent** (`/bmad-age
 Epics and stories are now created *after* architecture. This produces better quality stories because architecture decisions (database, API patterns, tech stack) directly affect how work should be broken down.
 :::
 
-1. Load the **PM agent** (`/bmad-agent-bmm-pm`) in a new chat
-2. Run `create-epics-and-stories` (`/bmad-bmm-create-epics-and-stories`)
+1. Load the **PM agent** (`/mdan-agent-bmm-pm`) in a new chat
+2. Run `create-epics-and-stories` (`/mdan-bmm-create-epics-and-stories`)
 3. The workflow uses both PRD and Architecture to create technically-informed stories
 
 **Implementation Readiness Check** *(Highly Recommended)*
-1. Load the **Architect agent** (`/bmad-agent-bmm-architect`) in a new chat
-2. Run `check-implementation-readiness` (`/bmad-bmm-check-implementation-readiness`)
+1. Load the **Architect agent** (`/mdan-agent-bmm-architect`) in a new chat
+2. Run `check-implementation-readiness` (`/mdan-bmm-check-implementation-readiness`)
 3. Validates cohesion across all planning documents
 
 ## Step 2: Build Your Project
@@ -191,7 +191,7 @@ Once planning is complete, move to implementation. **Each workflow should run in
 
 ### Initialize Sprint Planning
 
-Load the **SM agent** (`/bmad-agent-bmm-sm`) and run `sprint-planning` (`/bmad-bmm-sprint-planning`). This creates `sprint-status.yaml` to track all epics and stories.
+Load the **SM agent** (`/mdan-agent-bmm-sm`) and run `sprint-planning` (`/mdan-bmm-sprint-planning`). This creates `sprint-status.yaml` to track all epics and stories.
 
 ### The Build Cycle
 
@@ -199,17 +199,17 @@ For each story, repeat this cycle with fresh chats:
 
 | Step | Agent | Workflow       | Command                    | Purpose                            |
 | ---- | ----- | -------------- | -------------------------- | ---------------------------------- |
-| 1    | SM    | `create-story` | `/bmad-bmm-create-story`  | Create story file from epic        |
-| 2    | DEV   | `dev-story`    | `/bmad-bmm-dev-story`     | Implement the story                |
-| 3    | DEV   | `code-review`  | `/bmad-bmm-code-review`   | Quality validation *(recommended)* |
+| 1    | SM    | `create-story` | `/mdan-bmm-create-story`  | Create story file from epic        |
+| 2    | DEV   | `dev-story`    | `/mdan-bmm-dev-story`     | Implement the story                |
+| 3    | DEV   | `code-review`  | `/mdan-bmm-code-review`   | Quality validation *(recommended)* |
 
-After completing all stories in an epic, load the **SM agent** (`/bmad-agent-bmm-sm`) and run `retrospective` (`/bmad-bmm-retrospective`).
+After completing all stories in an epic, load the **SM agent** (`/mdan-agent-bmm-sm`) and run `retrospective` (`/mdan-bmm-retrospective`).
 
 ## What You've Accomplished
 
-You've learned the foundation of building with BMad:
+You've learned the foundation of building with MDAN:
 
-- Installed BMad and configured it for your IDE
+- Installed MDAN and configured it for your IDE
 - Initialized a project with your chosen planning track
 - Created planning documents (PRD, Architecture, Epics & Stories)
 - Understood the build cycle for implementation
@@ -218,8 +218,8 @@ Your project now has:
 
 ```text
 your-project/
-├── _bmad/                                   # BMad configuration
-├── _bmad-output/
+├── _.mdan/                                   # MDAN configuration
+├── _mdan-output/
 │   ├── planning-artifacts/
 │   │   ├── PRD.md                           # Your requirements document
 │   │   ├── architecture.md                  # Technical decisions
@@ -234,53 +234,53 @@ your-project/
 
 | Workflow                              | Command                                    | Agent     | Purpose                                         |
 | ------------------------------------- | ------------------------------------------ | --------- | ----------------------------------------------- |
-| **`help`** ⭐                         | `/bmad-help`                               | Any       | **Your intelligent guide — ask anything!**      |
-| `prd`                                 | `/bmad-bmm-create-prd`                     | PM        | Create Product Requirements Document            |
-| `create-architecture`                 | `/bmad-bmm-create-architecture`            | Architect | Create architecture document                     |
-| `generate-project-context`            | `/bmad-bmm-generate-project-context`       | Analyst   | Create project context file                     |
-| `create-epics-and-stories`       | `/bmad-bmm-create-epics-and-stories`       | PM        | Break down PRD into epics            |
-| `check-implementation-readiness` | `/bmad-bmm-check-implementation-readiness` | Architect | Validate planning cohesion           |
-| `sprint-planning`                | `/bmad-bmm-sprint-planning`                | SM        | Initialize sprint tracking           |
-| `create-story`                   | `/bmad-bmm-create-story`                   | SM        | Create a story file                  |
-| `dev-story`                      | `/bmad-bmm-dev-story`                      | DEV       | Implement a story                    |
-| `code-review`                    | `/bmad-bmm-code-review`                    | DEV       | Review implemented code              |
+| **`help`** ⭐                         | `/mdan-help`                               | Any       | **Your intelligent guide — ask anything!**      |
+| `prd`                                 | `/mdan-bmm-create-prd`                     | PM        | Create Product Requirements Document            |
+| `create-architecture`                 | `/mdan-bmm-create-architecture`            | Architect | Create architecture document                     |
+| `generate-project-context`            | `/mdan-bmm-generate-project-context`       | Analyst   | Create project context file                     |
+| `create-epics-and-stories`       | `/mdan-bmm-create-epics-and-stories`       | PM        | Break down PRD into epics            |
+| `check-implementation-readiness` | `/mdan-bmm-check-implementation-readiness` | Architect | Validate planning cohesion           |
+| `sprint-planning`                | `/mdan-bmm-sprint-planning`                | SM        | Initialize sprint tracking           |
+| `create-story`                   | `/mdan-bmm-create-story`                   | SM        | Create a story file                  |
+| `dev-story`                      | `/mdan-bmm-dev-story`                      | DEV       | Implement a story                    |
+| `code-review`                    | `/mdan-bmm-code-review`                    | DEV       | Review implemented code              |
 
 ## Common Questions
 
 **Do I always need architecture?**
-Only for BMad Method and Enterprise tracks. Quick Flow skips from tech-spec to implementation.
+Only for MDAN Method and Enterprise tracks. Quick Flow skips from tech-spec to implementation.
 
 **Can I change my plan later?**
-Yes. The SM agent has a `correct-course` workflow (`/bmad-bmm-correct-course`) for handling scope changes.
+Yes. The SM agent has a `correct-course` workflow (`/mdan-bmm-correct-course`) for handling scope changes.
 
 **What if I want to brainstorm first?**
-Load the Analyst agent (`/bmad-agent-bmm-analyst`) and run `brainstorming` (`/bmad-brainstorming`) before starting your PRD.
+Load the Analyst agent (`/mdan-agent-bmm-analyst`) and run `brainstorming` (`/mdan-brainstorming`) before starting your PRD.
 
 **Do I need to follow a strict order?**
 Not strictly. Once you learn the flow, you can run workflows directly using the Quick Reference above.
 
 ## Getting Help
 
-:::tip[First Stop: BMad-Help]
-**Run `/bmad-help` anytime** — it's the fastest way to get unstuck. Ask it anything:
+:::tip[First Stop: MDAN-Help]
+**Run `/mdan-help` anytime** — it's the fastest way to get unstuck. Ask it anything:
 - "What should I do after installing?"
 - "I'm stuck on workflow X"
 - "What are my options for Y?"
 - "Show me what's been done so far"
 
-BMad-Help inspects your project, detects what you've completed, and tells you exactly what to do next.
+MDAN-Help inspects your project, detects what you've completed, and tells you exactly what to do next.
 :::
 
 - **During workflows** — Agents guide you with questions and explanations
-- **Community** — [Discord](https://discord.gg/gk8jAdXWmj) (#bmad-method-help, #report-bugs-and-issues)
+- **Community** — [Discord](https://discord.gg/gk8jAdXWmj) (#mdan-help, #report-bugs-and-issues)
 
 ## Key Takeaways
 
 :::tip[Remember These]
-- **Start with `/bmad-help`** — Your intelligent guide that knows your project and options
+- **Start with `/mdan-help`** — Your intelligent guide that knows your project and options
 - **Always use fresh chats** — Start a new chat for each workflow
 - **Track matters** — Quick Flow uses quick-spec; Method/Enterprise need PRD and architecture
-- **BMad-Help runs automatically** — Every workflow ends with guidance on what's next
+- **MDAN-Help runs automatically** — Every workflow ends with guidance on what's next
 :::
 
-Ready to start? Install BMad, run `/bmad-help`, and let your intelligent guide lead the way.
+Ready to start? Install MDAN, run `/mdan-help`, and let your intelligent guide lead the way.
