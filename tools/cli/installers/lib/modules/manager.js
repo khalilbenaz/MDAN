@@ -267,7 +267,7 @@ class ModuleManager {
     }
 
     // Mark as custom if it's using custom.yaml OR if it's outside src/bmm or src/core
-    const isCustomSource = sourceDescription !== 'src/bmm' && sourceDescription !== 'src/core' && sourceDescription !== 'src/modules';
+    const isCustomSource = sourceDescription !== 'src/bmm' && sourceDescription !== 'src/core' && sourceDescription !== 'src/modules' && sourceDescription !== 'src/packs';
     const moduleInfo = {
       id: defaultName,
       path: modulePath,
