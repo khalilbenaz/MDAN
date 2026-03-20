@@ -15,7 +15,7 @@ Use the **DEV agent** directly for bug fixes, refactorings, or small targeted ch
 - Exploratory work to understand an unfamiliar codebase
 
 :::note[Prerequisites]
-- MDAN Method installed (`npx mdan install`)
+- MDAN Method installed (`npx mdan-method install`)
 - An AI-powered IDE (Claude Code, Cursor, or similar)
 :::
 

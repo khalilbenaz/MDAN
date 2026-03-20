@@ -65,14 +65,14 @@ The `_mdan` folder is created when you install MDAN. If you don't have it yet, c
 **If your AI can read files (Claude Code, Cursor, etc.):**
 
 - **MDAN installed:** Point at the `_mdan` folder and ask directly
-- **Want deeper context:** Clone the [full repo](https://github.com/mdan-code-org/MDAN)
+- **Want deeper context:** Clone the [full repo](https://github.com/khalilbenaz/MDAN)
 
 **If you use ChatGPT or Claude.ai:**
 
 Fetch `llms-full.txt` into your session:
 
 ```text
-https://mdan-code-org.github.io/MDAN/llms-full.txt
+https://github.com/khalilbenaz/MDAN
 ```
 
 
@@ -104,9 +104,9 @@ Tried the LLM approach and still need help? You now have a much better question 
 | `#suggestions-feedback`   | Ideas and feature requests                  |
 | `#report-bugs-and-issues` | Bug reports                                 |
 
-**Discord:** [discord.gg/gk8jAdXWmj](https://discord.gg/gk8jAdXWmj)
+**Discord:** [github.com/khalilbenaz/MDAN/issues](https://github.com/khalilbenaz/MDAN/issues)
 
-**GitHub Issues:** [github.com/mdan-code-org/MDAN/issues](https://github.com/mdan-code-org/MDAN/issues) (for clear bugs)
+**GitHub Issues:** [github.com/khalilbenaz/MDAN/issues](https://github.com/khalilbenaz/MDAN/issues) (for clear bugs)
 
 *You!*
         *Stuck*

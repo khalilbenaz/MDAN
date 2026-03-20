@@ -51,9 +51,7 @@ export default defineConfig({
 
       // Social links
       social: [
-        { icon: 'discord', label: 'Discord', href: 'https://discord.gg/gk8jAdXWmj' },
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/mdan-code-org/MDAN' },
-        { icon: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@MDANCode' },
+        { icon: 'github', label: 'GitHub', href: 'https://github.com/khalilbenaz/MDAN' },
       ],
 
       // Show last updated timestamps

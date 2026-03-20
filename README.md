@@ -2,6 +2,7 @@
 
 ![MDAN](https://i.imgur.com/YwfB0Gx.jpeg)
 
+[![npm](https://img.shields.io/npm/v/mdan-method.svg)](https://www.npmjs.com/package/mdan-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Wizards](https://img.shields.io/badge/wizards-25-purple)]()
 [![Agents](https://img.shields.io/badge/agents-29-blue)]()
@@ -37,7 +38,7 @@
 
 ```bash
 # Installation
-npx mdan-ai install
+npx mdan-method install
 
 # Ou manuellement
 git clone https://github.com/khalilbenaz/MDAN.git

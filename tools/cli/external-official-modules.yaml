@@ -1,53 +1,6 @@
-# This file allows these modules under mdan-code-org to also be installed with the mdan method installer, while
+# This file allows external modules to also be installed with the MDAN installer, while
 # allowing us to keep the source of these projects in separate repos.
+# Note: These modules are currently bundled in the main MDAN repo under src/packs/
+# External repos will be set up in the future.
 
-modules:
-  mdan-builder:
-    url: https://github.com/mdan-code-org/mdan-builder
-    module-definition: src/module.yaml
-    code: bmb
-    name: "MDAN Builder"
-    description: "Agent, Workflow and Module Builder"
-    defaultSelected: false
-    type: mdan-org
-    npmPackage: mdan-builder
-
-  mdan-creative-intelligence-suite:
-    url: https://github.com/mdan-code-org/mdan-module-creative-intelligence-suite
-    module-definition: src/module.yaml
-    code: cis
-    name: "MDAN Creative Intelligence Suite"
-    description: "Creative tools for writing, brainstorming, and more"
-    defaultSelected: false
-    type: mdan-org
-    npmPackage: mdan-creative-intelligence-suite
-
-  mdan-game-dev-studio:
-    url: https://github.com/mdan-code-org/mdan-module-game-dev-studio.git
-    module-definition: src/module.yaml
-    code: gds
-    name: "MDAN Game Dev Studio"
-    description: "Game development agents and workflows"
-    defaultSelected: false
-    type: mdan-org
-    npmPackage: mdan-game-dev-studio
-
-  mdan-test-architecture-enterprise:
-    url: https://github.com/mdan-code-org/mdan-test-architecture-enterprise
-    module-definition: src/module.yaml
-    code: tea
-    name: "Test Architect"
-    description: "Master Test Architect for quality strategy, test automation, and release gates"
-    defaultSelected: false
-    type: mdan-org
-    npmPackage: mdan-test-architecture-enterprise
-
-  # whiteport-design-system:
-  #   url: https://github.com/mdan-code-org/mdan-wds-expansion
-  #   module-definition: src/module.yaml
-  #   code: wds
-  #   name: "Whiteport UX Design System"
-  #   description: "UX design framework with Figma integration"
-  #   defaultSelected: false
-  #   type: community
-  #   npmPackage: mdan-wds-expansion
+modules: {}

@@ -14,7 +14,7 @@ if (process.stdin?.setMaxListeners) {
 
 // Check for updates - do this asynchronously so it doesn't block startup
 const packageJson = require('../../package.json');
-const packageName = 'mdan';
+const packageName = 'mdan-method';
 checkForUpdate().catch(() => {
   // Silently ignore errors - version check is best-effort
 });

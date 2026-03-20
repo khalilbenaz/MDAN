@@ -1378,10 +1378,7 @@ class Installer {
     lines.push(
       '',
       '  Next steps:',
-      `    Read our new Docs Site: ${color.dim('https://docs.mdan.org/')}`,
-      `    Join our Discord: ${color.dim('https://discord.gg/gk8jAdXWmj')}`,
-      `    Star us on GitHub: ${color.dim('https://github.com/mdan-code-org/MDAN/')}`,
-      `    Subscribe on YouTube: ${color.dim('https://www.youtube.com/@MDANCode')}`,
+      `    Star us on GitHub: ${color.dim('https://github.com/khalilbenaz/MDAN')}`,
       `    Run ${color.cyan('/mdan-help')} with your IDE Agent and ask it how to get started`,
     );
 

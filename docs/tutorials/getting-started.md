@@ -21,7 +21,7 @@ Build software faster using AI-powered workflows with specialized agents that gu
 :::
 
 :::tip[The Easiest Path]
-**Install** → `npx mdan install`
+**Install** → `npx mdan-method install`
 **Ask** → `/mdan-help what should I do first?`
 **Build** → Let MDAN-Help guide you workflow by workflow
 :::
@@ -94,7 +94,7 @@ Story counts are guidance, not definitions. Choose your track based on planning 
 Open a terminal in your project directory and run:
 
 ```bash
-npx mdan install
+npx mdan-method install
 ```
 
 ### Install from GitHub
@@ -272,7 +272,7 @@ MDAN-Help inspects your project, detects what you've completed, and tells you ex
 :::
 
 - **During workflows** — Agents guide you with questions and explanations
-- **Community** — [Discord](https://discord.gg/gk8jAdXWmj) (#mdan-help, #report-bugs-and-issues)
+- **Community** — [Discord](https://github.com/khalilbenaz/MDAN/issues) (#mdan-help, #report-bugs-and-issues)
 
 ## Key Takeaways
 

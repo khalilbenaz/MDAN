@@ -36,13 +36,13 @@ This is the easiest way to install MDAN globally on your system.
 
 ```bash
 # Install MDAN globally
-npm install -g mdan-ai
+npm install -g mdan-method
 
 # Verify installation
-mdan-ai --version
+mdan-method --version
 ```
 
-**Package URL:** https://www.npmjs.com/package/mdan-ai
+**Package URL:** https://www.npmjs.com/package/mdan-method
 
 ### Method 2: Local Installation
 
@@ -54,7 +54,7 @@ mkdir my-mdan-project
 cd my-mdan-project
 
 # Initialize MDAN
-npx mdan-ai install
+npx mdan-method install
 ```
 
 ### Method 3: Clone from GitHub
@@ -63,7 +63,7 @@ Clone the repository and install dependencies manually.
 
 ```bash
 # Clone the repository
-git clone https://github.com/khalilbenaz/MDANV2.git
+git clone https://github.com/khalilbenaz/MDAN.git
 cd MDANV2
 
 # Install dependencies
@@ -76,7 +76,7 @@ npm link
 mdan --version
 ```
 
-**Repository URL:** https://github.com/khalilbenaz/MDANV2
+**Repository URL:** https://github.com/khalilbenaz/MDAN
 
 ## ⚙️ Configuration
 
@@ -176,13 +176,13 @@ MDAN supports modular installation. You can install only the modules you need:
 
 ```bash
 # Install only the FinTech pack
-npx mdan-ai install --modules fintech
+npx mdan-method install --modules fintech
 
 # Install multiple modules
-npx mdan-ai install --modules fintech devops-azure db-optimization
+npx mdan-method install --modules fintech devops-azure db-optimization
 
 # Install all modules
-npx mdan-ai install --modules all
+npx mdan-method install --modules all
 ```
 
 Available modules:
@@ -228,7 +228,7 @@ pip install -r requirements.txt
 If you encounter any issues not covered here:
 
 1. Check the [Documentation](./README.md)
-2. Search [GitHub Issues](https://github.com/khalilbenaz/MDANV2/issues)
+2. Search [GitHub Issues](https://github.com/khalilbenaz/MDAN/issues)
 3. Create a new issue with detailed information about your problem
 
 ## 🚀 Next Steps
