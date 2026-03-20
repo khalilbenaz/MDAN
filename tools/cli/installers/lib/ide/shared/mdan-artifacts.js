@@ -119,11 +119,18 @@ async function getAgentsFromDir(dirPath, moduleName, relativePath = '') {
         continue;
       }
 
+      // Extract description from capabilities or title in the compiled agent XML
+      const capMatch = content.match(/capabilities="([^"]+)"/);
+      const titleMatch = content.match(/title="([^"]+)"/);
+      const roleMatch = content.match(/<role>([^<]+)<\/role>/);
+      const description = capMatch ? capMatch[1] : (titleMatch ? titleMatch[1] : (roleMatch ? roleMatch[1] : ''));
+
       agents.push({
         path: fullPath,
         name: entry.name.replace('.md', ''),
         module: moduleName,
         relativePath: newRelativePath, // Keep the .md extension for the full path
+        description: description,
       });
     }
   }
