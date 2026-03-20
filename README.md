@@ -4,166 +4,147 @@
 
 [![npm](https://img.shields.io/npm/v/mdan-method.svg)](https://www.npmjs.com/package/mdan-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Wizards](https://img.shields.io/badge/wizards-25-purple)]()
-[![Agents](https://img.shields.io/badge/agents-29-blue)]()
+[![Wizards](https://img.shields.io/badge/wizards-16-purple)]()
+[![Agents](https://img.shields.io/badge/agents-18-blue)]()
 [![Packs](https://img.shields.io/badge/packs-3-orange)]()
 
 **MDAN** est un framework de développement piloté par l'IA avec des agents spécialisés, des wizards interactifs step-by-step, un système de mémoire persistante, et un protocole de débat structuré.
 
-**100% gratuit et open source.** 🇲🇦
-
-🇫🇷 [Spécification française](./MDAN.fr.md)
+**100% gratuit et open source.**
 
 ---
 
-## MDAN vs MDAN — Ce qui nous différencie
-
-| Fonctionnalité | MDAN V0 | MDAN |
-|---|---|---|
-| Wizards step-by-step | ✅ | ✅ Même qualité + améliorations |
-| **Mémoire persistante** | ❌ | ✅ MDAN-STATE cross-wizard et cross-session |
-| **Debate Protocol** | Party Mode (informel) | ✅ Protocole formel en 5 rounds avec scoring |
-| **Scale-Adaptive** | Mentionné | ✅ Implémenté — auto-détecte solo/team/enterprise |
-| **Quality Gates adaptatifs** | Statiques | ✅ S'ajustent au scale du projet |
-| **CrewAI** (agents Python réels) | ❌ | ✅ Orchestration multi-agents exécutable |
-| **Universal Envelope** | ❌ | ✅ Format inter-agents standardisé |
-| **Bilingue FR/EN** | English only | ✅ Natif |
-| **Personnalités marocaines** | Noms génériques | ✅ Khalil, Reda, Jihane, Haytame... |
-| Cross-wizard context | ❌ Wizards isolés | ✅ Contexte partagé via MDAN-STATE |
-| Auto-debate on conflict | ❌ | ✅ Déclenché automatiquement |
-
----
-
-## 🚀 Quick Start
+## Quick Start
 
 ```bash
-# Installation
 npx mdan-method install
-
-# Ou manuellement
-git clone https://github.com/khalilbenaz/MDAN.git
-cd MDAN && npm install
 ```
 
-Puis dans votre IDE (Claude Code, Cursor, Windsurf...) :
+L'installeur vous guide pour choisir vos modules et IDE (Claude Code, Gemini CLI, OpenCode, QwenCoder...).
 
-```
-/mdan-help        → Que faire ensuite ?
-/discover         → Créer un product brief
-/prd              → Créer un PRD
-/architect        → Concevoir l'architecture
-/dev              → Implémenter une story
-/party            → Multi-agents collaboration
-/debate           → Débat structuré
-/status           → État du projet
-/resume           → Reprendre la session
-```
+Puis dans votre IDE, tapez `/mdan-` pour voir toutes les commandes disponibles.
 
 ---
 
-## 📋 Les 25 Wizards
+## Commandes disponibles
 
-### Phase 1 — Discover
-| Wizard | Commande | Steps | Description |
-|--------|---------|-------|-------------|
-| Product Brief | `/discover` | 6 | Brief produit collaboratif |
-| Research (Market) | `/research market` | 6 | Recherche marché |
-| Research (Technical) | `/research tech` | 6 | Recherche technique |
-| Research (Domain) | `/research domain` | 6 | Recherche domaine |
+Toutes les commandes commencent par `/mdan-`.
 
-### Phase 2 — Plan
-| Wizard | Commande | Steps | Description |
-|--------|---------|-------|-------------|
-| Create PRD | `/prd` | 12 | Product Requirements Document complet |
-| Edit PRD | `/prd edit` | 4 | Modifier un PRD existant |
-| Validate PRD | `/prd validate` | 13 | Validation en profondeur |
-| UX Design | `/ux` | 14 | Design UX complet |
+### Wizards — Phase 1 : Discover
 
-### Phase 3 — Architect
-| Wizard | Commande | Steps | Description |
-|--------|---------|-------|-------------|
-| Architecture | `/architect` | 8 | Architecture technique + debate |
-| Epics & Stories | `/epics` | 4 | Découpage en epics et stories |
-| Readiness Check | `/ready` | 6 | Vérifier si prêt pour l'implémentation |
+| Commande | Description |
+|----------|-------------|
+| `/mdan-create-product-brief` | Crée un product brief collaboratif en 6 étapes. Définit la vision, les utilisateurs cibles, le scope et les métriques de succès. |
+| `/mdan-market-research` | Recherche marché : analyse concurrentielle, comportement client, pain points et opportunités. |
+| `/mdan-technical-research` | Recherche technique : technologies, patterns d'architecture, intégrations et tendances. |
+| `/mdan-domain-research` | Recherche domaine : analyse sectorielle, réglementation, paysage concurrentiel. |
 
-### Phase 4 — Build
-| Wizard | Commande | Steps | Description |
-|--------|---------|-------|-------------|
-| Sprint Planning | `/sprint` | — | Planifier un sprint |
-| Dev Story | `/dev` | — | Implémenter une story |
-| Code Review | `/review` | — | Review structurée |
-| Sprint Status | `/sprint status` | — | État du sprint |
-| Retrospective | `/retro` | — | Rétrospective |
+### Wizards — Phase 2 : Plan
 
-### Phase 5 — Ship
-| Wizard | Commande | Steps | Description |
-|--------|---------|-------|-------------|
-| Deploy | `/deploy` | — | Préparer le déploiement |
-| Document Project | `/docs` | — | Documentation complète |
-| E2E Tests | `/e2e` | — | Générer tests end-to-end |
+| Commande | Description |
+|----------|-------------|
+| `/mdan-create-prd` | Crée un Product Requirements Document complet en 12 étapes. Couvre la vision, les user journeys, le scoping, les requirements fonctionnels et non-fonctionnels. |
+| `/mdan-create-ux-design` | Planifie le design UX en 14 étapes : discovery, design system, fondations visuelles, user journeys, composants et responsive. |
+
+### Wizards — Phase 3 : Architect
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-create-architecture` | Crée l'architecture technique en 8 étapes : contexte, décisions, patterns, structure et validation. |
+| `/mdan-create-epics-and-stories` | Découpe les requirements en epics et user stories prêtes pour le développement. |
+
+### Wizards — Phase 4 : Build
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-sprint-planning` | Génère un sprint plan à partir des epics. Organise les stories en sprints avec estimation. |
+| `/mdan-dev-story` | Implémente une story en suivant son fichier de spec. TDD, tests, et documentation automatique. |
+| `/mdan-code-review` | Review de code adversariale : trouve les bugs, problèmes de sécurité et violations de patterns. |
+
+### Wizards — Phase 5 : Ship
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-document-project` | Génère la documentation complète du projet : overview, deep-dives, source tree. |
 
 ### Quick Flows
-| Wizard | Commande | Steps | Description |
-|--------|---------|-------|-------------|
-| Quick Dev | `/quick` | 6 | Dev rapide sans planification lourde |
-| Quick Spec | `/spec` | 4 | Spec technique rapide |
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-quick-dev` | Dev rapide en 6 étapes pour les petits changements. Détection de mode, contexte, exécution, self-check et review. |
+| `/mdan-quick-spec` | Spec technique rapide en 4 étapes. Produit une spec prête pour l'implémentation. |
 
 ### Special
-| Wizard | Commande | Description |
-|--------|---------|-------------|
-| Brainstorming | `/brainstorm` | 12+ techniques de brainstorming |
-| Party Mode | `/party` | Multi-agents dans une session |
-| Debate | `/debate` | Débat structuré en 5 rounds |
-| Retrospective | `/retro` | Rétrospective de sprint |
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-party-mode` | Mode multi-agents : réunit tous les agents MDAN dans une discussion de groupe. Chaque agent intervient avec sa personnalité et expertise. |
+| `/mdan-brainstorming` | Session de brainstorming avec 12+ techniques créatives (SCAMPER, Six Thinking Hats, Mind Mapping, etc.). |
 
 ---
 
-## 🤖 Les 29 Agents
+## Agents
 
-### Équipe principale (MMM)
-| Agent | Nom 🇲🇦 | Rôle |
-|-------|---------|------|
-| PM | Khalil | Product Manager — vision, PRD |
-| Analyst | Amina | Business Analyst — research, brief |
-| Architect | Reda | Architecture système, tech stack |
-| Dev | Haytame | Développement, implémentation |
-| QA | Fatima | Tests, qualité |
-| UX Designer | Jihane | Design UX/UI |
-| Tech Writer | Youssef | Documentation technique |
-| Scrum Master | Nadia | Gestion agile, sprints |
-| Solo Dev | — | Mode rapide tout-en-un |
+Les agents sont des personnalités IA spécialisées que vous pouvez invoquer directement.
 
-### Builders (MMB)
-| Agent Builder | Module Builder | Workflow Builder |
+### Equipe principale
 
-### Creative Suite (CIS)
-| Brainstorming Coach | Creative Solver | Design Thinking | Innovation Strategist | Storyteller | Presentation Master |
+| Commande | Agent | Role |
+|----------|-------|------|
+| `/mdan-agent-pm` | Khalil | **Product Manager** — Vision produit, PRD, priorisation, roadmap |
+| `/mdan-agent-analyst` | Amina | **Business Analyst** — Recherche, briefs, analyse de marché |
+| `/mdan-agent-architect` | Reda | **Architect** — Architecture système, tech stack, patterns |
+| `/mdan-agent-dev` | Haytame | **Developer** — Implémentation, TDD, code propre |
+| `/mdan-agent-qa` | Fatima | **QA Engineer** — Tests, qualité, stratégie de test |
+| `/mdan-agent-ux-designer` | Jihane | **UX Designer** — Design UX/UI, wireframes, prototypes |
+| `/mdan-agent-tech-writer` | Youssef | **Technical Writer** — Documentation technique, guides, API docs |
+| `/mdan-agent-sm` | Nadia | **Scrum Master** — Gestion agile, sprints, rétrospectives |
+| `/mdan-agent-quick-flow-solo-dev` | — | **Solo Dev** — Mode rapide tout-en-un pour développeurs solo |
 
-### Packs spécialisés
-| 💰 **FinTech** | Financial Analyst · Compliance Officer · Risk Manager |
-| ☁️ **DevOps/Azure** | Azure Specialist · CI/CD Architect · DevOps Engineer |
-| 🗄️ **DB Optimization** | Query Optimizer · Indexing Specialist · Performance Analyst |
+### Pack FinTech
+
+| Commande | Agent | Role |
+|----------|-------|------|
+| `/mdan-agent-fintech-compliance-officer` | Rachid | **Compliance Officer** — Conformité réglementaire (GDPR, PCI DSS, AML/KYC), audit, policies |
+| `/mdan-agent-fintech-financial-analyst` | Amina | **Financial Analyst** — Modélisation financière, analyse de marché, reporting |
+| `/mdan-agent-fintech-risk-manager` | Karim | **Risk Manager** — Identification et mitigation des risques, stress testing |
+
+### Pack DevOps & Azure
+
+| Commande | Agent | Role |
+|----------|-------|------|
+| `/mdan-agent-devops-azure-azure-specialist` | Reda | **Azure Specialist** — Architecture cloud Azure, migration, optimisation des coûts |
+| `/mdan-agent-devops-azure-cicd-architect` | Yassine | **CI/CD Architect** — Pipelines CI/CD, déploiement blue-green/canary, automatisation |
+| `/mdan-agent-devops-azure-devops-engineer` | Omar | **DevOps Engineer** — Infrastructure as Code (Terraform, Bicep), monitoring, Kubernetes |
+
+### Pack Database Optimization
+
+| Commande | Agent | Role |
+|----------|-------|------|
+| `/mdan-agent-db-optimization-query-optimizer` | Driss | **Query Optimizer** — Analyse de plans d'exécution, tuning SQL, détection N+1 |
+| `/mdan-agent-db-optimization-indexing-specialist` | Salma | **Indexing Specialist** — Stratégie d'indexation, index composites, audit d'index |
+| `/mdan-agent-db-optimization-performance-analyst` | Mehdi | **DB Performance Analyst** — Monitoring, diagnostic, capacity planning, tuning |
 
 ---
 
-## 🧠 Système de Mémoire (exclusif MDAN)
+## Systeme de Memoire
 
 ```
-.mdan/
-├── config/config.yaml          ← Configuration projet
-└── state/MDAN-STATE.json       ← État persistant
+_mdan/
+├── core/config.yaml            ← Configuration projet
+└── _config/manifest.yaml       ← État de l'installation
 
 Le contexte survit entre :
-✅ Les wizards (le PRD a accès au brief)
-✅ Les sessions (reprise automatique)
-✅ Les agents (décisions partagées)
+- Les wizards (le PRD a accès au brief)
+- Les sessions (reprise automatique)
+- Les agents (décisions partagées)
 ```
 
 ---
 
-## ⚔️ Debate Protocol (exclusif MDAN)
+## Debate Protocol
 
-Quand une décision critique arrive (choix de stack, pattern, priorisation) :
+Quand une décision critique arrive (choix de stack, pattern, priorisation), les agents débattent :
 
 ```
 Round 1: Ouverture     → Chaque agent présente sa position
@@ -171,64 +152,39 @@ Round 2: Challenge     → Chaque agent attaque la position adverse
 Round 3: Données       → Preuves concrètes (benchmarks, patterns, risques)
 Round 4: Synthèse      → Position finale intégrant les objections
 Round 5: Scoring       → Score automatique + décision utilisateur
-→ Résultat enregistré dans MDAN-STATE
 ```
 
 ---
 
-## 📁 Architecture
+## Installation
 
+### Via npm (recommandé)
+
+```bash
+npx mdan-method install
 ```
-MDAN/
-├── .mdan/                      # Config + État
-│   ├── config/config.yaml
-│   └── state/MDAN-STATE.json
-├── src/
-│   ├── core/                   # Moteur : master agent, tasks
-│   ├── wizards/                # 25 wizards step-by-step
-│   │   ├── 01-discover/
-│   │   ├── 02-plan/
-│   │   ├── 03-architect/
-│   │   ├── 04-build/
-│   │   ├── 05-ship/
-│   │   ├── quick/
-│   │   └── special/
-│   ├── agents/                 # Définitions YAML des agents
-│   ├── packs/                  # FinTech, DevOps-Azure, DB
-│   ├── memory/                 # Système de mémoire
-│   ├── protocols/              # Debate, Envelope
-│   └── phases/                 # 13 phases (5 manual + 8 auto)
-├── integrations/crewai/        # Agents Python exécutables
-├── prompts/                    # Prompts YAML versionnés
-├── tools/cli/                  # CLI Node.js
-├── docs/                       # Documentation Diataxis
-├── tests/                      # Tests JS + Python
-└── website/                    # Site Astro
+
+### Manuellement
+
+```bash
+git clone https://github.com/khalilbenaz/MDAN.git
+cd MDAN && npm install
+node tools/cli/mdan-cli.js install
 ```
+
+### IDE supportés
+
+Claude Code, Gemini CLI, OpenCode, QwenCoder, Cursor, Windsurf, Cline, Codex, et d'autres.
 
 ---
 
-## 📖 Documentation
-
-| Doc | Contenu |
-|-----|---------|
-| [Getting Started](./docs/tutorials/getting-started.md) | Premier projet |
-| [Installation](./INSTALL.md) | Guide installation |
-| [Usage](./USAGE.md) | Utilisation quotidienne |
-| [Agents](./AGENTS_LIST.md) | Catalogue agents |
-| [Architecture](./ARCHITECTURE.md) | Architecture technique |
-| [MDAN Spec FR](./MDAN.fr.md) | Spécification française |
-| [Contributing](./CONTRIBUTING.md) | Contribution |
-
----
-
-## 📄 Licence
+## Licence
 
 MIT
 
 ---
 
 <p align="center">
-  <strong>25 wizards · 29 agents · 3 packs · Mémoire persistante · Debate Protocol</strong><br>
-  Construit avec 🇲🇦 par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
+  <strong>16 wizards · 18 agents · 3 packs · Mémoire persistante · Debate Protocol</strong><br>
+  Construit par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
