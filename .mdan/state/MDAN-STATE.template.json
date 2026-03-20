@@ -1,0 +1,39 @@
+{
+  "version": "3.0.0",
+  "project": {
+    "name": "",
+    "type": "",
+    "scale": "",
+    "created_at": "",
+    "updated_at": ""
+  },
+  "current_phase": null,
+  "current_wizard": null,
+  "current_step": null,
+  "completed_wizards": [],
+  "artifacts": {
+    "product_brief": null,
+    "research": [],
+    "prd": null,
+    "ux_design": null,
+    "architecture": null,
+    "epics": null,
+    "stories": [],
+    "sprint_plans": []
+  },
+  "decisions": [],
+  "debates": [],
+  "memory": {
+    "context_summary": "",
+    "key_decisions": [],
+    "agent_observations": [],
+    "user_preferences": {}
+  },
+  "quality_gates": {
+    "planning_complete": false,
+    "architecture_reviewed": false,
+    "implementation_ready": false,
+    "tests_passing": false,
+    "documentation_complete": false
+  }
+}
