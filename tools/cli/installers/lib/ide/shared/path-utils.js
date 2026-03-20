@@ -35,8 +35,8 @@ const MDAN_FOLDER_NAME = '_mdan';
 function toDashName(module, type, name) {
   const isAgent = type === AGENT_SEGMENT;
 
-  // For core module, skip the module name: use 'mdan-agent-name.md' instead of 'mdan-agent-core-name.md'
-  if (module === 'core') {
+  // For core and bmm modules, skip the module name: use 'mdan-agent-name.md' instead of 'mdan-agent-core-name.md'
+  if (module === 'core' || module === 'bmm') {
     return isAgent ? `mdan-agent-${name}.md` : `mdan-${name}.md`;
   }
 
