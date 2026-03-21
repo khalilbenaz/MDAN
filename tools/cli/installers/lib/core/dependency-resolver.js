@@ -85,7 +85,7 @@ class DependencyResolver {
         // Source directory structure: src/core or src/mdan
         if (module === 'core') {
           moduleDir = path.join(srcDir, 'core');
-        } else if (module === 'mdan') {
+        } else if (module === 'mdan' || module === 'mdan') {
           moduleDir = path.join(srcDir, 'mdan');
         }
       }
@@ -418,7 +418,7 @@ class DependencyResolver {
           const module = parts[0];
           const rest = parts.slice(1).join('/');
           let modulePath;
-          if (module === 'mdan') {
+          if (module === 'mdan' || module === 'mdan') {
             // mdan is directly under src/
             modulePath = path.join(mdanDir, module, rest);
           } else {
@@ -634,7 +634,7 @@ class DependencyResolver {
       if (file.includes('/src/core/') || file.includes('/src/mdan/')) {
         if (module === 'core') {
           moduleBase = path.join(mdanDir, 'src', 'core');
-        } else if (module === 'mdan') {
+        } else if (module === 'mdan' || module === 'mdan') {
           moduleBase = path.join(mdanDir, 'src', 'mdan');
         }
       } else {

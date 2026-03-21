@@ -26,7 +26,7 @@ class Manifest {
     if (data.modules && Array.isArray(data.modules)) {
       for (const moduleName of data.modules) {
         // Core and MDAN modules use the MDAN version
-        const moduleVersion = moduleName === 'core' || moduleName === 'mdan' ? mdanVersion : null;
+        const moduleVersion = moduleName === 'core' || moduleName === 'mdan' || moduleName === 'mdan' ? mdanVersion : null;
         const now = data.installDate || new Date().toISOString();
 
         moduleDetails.push({
@@ -34,7 +34,7 @@ class Manifest {
           version: moduleVersion,
           installDate: now,
           lastUpdated: now,
-          source: moduleName === 'core' || moduleName === 'mdan' ? 'built-in' : 'unknown',
+          source: moduleName === 'core' || moduleName === 'mdan' || moduleName === 'mdan' ? 'built-in' : 'unknown',
         });
       }
     }
@@ -839,7 +839,7 @@ class Manifest {
     const yaml = require('yaml');
 
     // Built-in modules use MDAN version (only core and mdan are in MDAN repo)
-    if (['core', 'mdan'].includes(moduleName)) {
+    if (['core', 'mdan', 'mdan'].includes(moduleName)) {
       const mdanVersion = require(path.join(getProjectRoot(), 'package.json')).version;
       return {
         version: mdanVersion,

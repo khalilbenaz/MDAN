@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 6: Project Structure & Boundaries
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

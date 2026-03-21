@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 2c: Random Technique Selection
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Technical Research Step 4: Architectural Patterns
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

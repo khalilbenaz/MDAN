@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-12-complete'
 description: 'Complete the PRD workflow, update status files, and suggest next steps including validation'

@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Domain Research Step 3: Competitive Landscape
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

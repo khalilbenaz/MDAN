@@ -320,7 +320,7 @@ class ModuleManager {
     }
 
     // Check for built-in mdan module (directly under src/mdan)
-    if (moduleCode === 'mdan') {
+    if (moduleCode === 'mdan' || moduleCode === 'mdan') {
       const bmmPath = getSourcePath('mdan');
       if (await fs.pathExists(bmmPath)) {
         return bmmPath;

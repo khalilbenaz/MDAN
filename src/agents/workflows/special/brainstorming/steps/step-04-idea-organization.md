@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 4: Idea Organization and Action Planning
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

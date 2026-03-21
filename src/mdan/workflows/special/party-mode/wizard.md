@@ -3,6 +3,10 @@ name: party-mode
 description: 'Orchestrates group discussions between all installed MDAN agents, enabling natural multi-agent conversations. Use when user requests party mode.'
 ---
 
+**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+
+
+
 # Party Mode Workflow
 
 **Goal:** Orchestrates group discussions between all installed MDAN agents, enabling natural multi-agent conversations

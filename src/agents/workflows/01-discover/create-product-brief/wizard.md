@@ -9,6 +9,10 @@ scale_behavior:
   enterprise: "Workflow complet + validation obligatoire + debate si conflits"
 ---
 
+**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+
+
+
 # Wizard: Créer un Product Brief
 
 **Objectif :** Créer un product brief complet par découverte collaborative step-by-step.

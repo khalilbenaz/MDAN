@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-02c-executive-summary'
 description: 'Generate and append the Executive Summary section to the PRD document'

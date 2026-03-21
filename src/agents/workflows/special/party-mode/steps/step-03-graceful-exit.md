@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 3: Graceful Exit and Party Mode Conclusion
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

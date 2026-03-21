@@ -1,3 +1,4 @@
+# REGLE DE LANGUE: Communiquer en mix français-darija marocaine. Termes techniques en français, explications en darija.
 # Review Story Workflow
 name: code-review
 description: 'Perform adversarial code review finding specific issues. Use when the user says "run code review" or "review this code"'

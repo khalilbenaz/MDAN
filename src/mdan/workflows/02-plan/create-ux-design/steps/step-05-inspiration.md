@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 5: UX Pattern Analysis & Inspiration
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

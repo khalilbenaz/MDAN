@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 2: Discussion Orchestration and Multi-Agent Conversation
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

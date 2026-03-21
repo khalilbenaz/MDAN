@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-06-resolve-findings'
 description: 'Handle review findings interactively, apply fixes, update tech-spec with final status'

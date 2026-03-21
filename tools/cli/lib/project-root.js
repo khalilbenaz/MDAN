@@ -63,7 +63,7 @@ function getModulePath(moduleName, ...segments) {
   if (moduleName === 'core') {
     return getSourcePath('core', ...segments);
   }
-  if (moduleName === 'mdan') {
+  if (moduleName === 'mdan' || moduleName === 'mdan') {
     return getSourcePath('mdan', ...segments);
   }
   return getSourcePath('modules', moduleName, ...segments);

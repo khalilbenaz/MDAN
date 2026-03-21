@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-04-journeys'
 description: 'Map ALL user types that interact with the system with narrative story-based journeys'

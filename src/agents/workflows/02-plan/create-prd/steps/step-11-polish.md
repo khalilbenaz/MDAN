@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-11-polish'
 description: 'Optimize and polish the complete PRD document for flow, coherence, and readability'

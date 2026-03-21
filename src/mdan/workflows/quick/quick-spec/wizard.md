@@ -9,6 +9,10 @@ party_mode_exec: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
 quick_dev_workflow: '{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/workflow.md'
 ---
 
+**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+
+
+
 # Quick-Spec Workflow
 
 **Goal:** Create implementation-ready technical specifications through conversational discovery, code investigation, and structured documentation.
