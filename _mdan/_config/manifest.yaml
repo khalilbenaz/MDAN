@@ -1,0 +1,42 @@
+installation:
+  version: 2.8.3
+  installDate: 2026-03-21T09:55:31.820Z
+  lastUpdated: 2026-03-21T09:55:31.820Z
+modules:
+  - name: core
+    version: 2.8.3
+    installDate: 2026-03-21T09:55:31.820Z
+    lastUpdated: 2026-03-21T09:55:31.820Z
+    source: built-in
+    npmPackage: null
+    repoUrl: null
+  - name: mdan
+    version: 2.8.3
+    installDate: 2026-03-21T09:55:31.772Z
+    lastUpdated: 2026-03-21T09:55:31.820Z
+    source: built-in
+    npmPackage: null
+    repoUrl: null
+  - name: db-optimization
+    version: null
+    installDate: 2026-03-21T09:55:31.784Z
+    lastUpdated: 2026-03-21T09:55:31.820Z
+    source: unknown
+    npmPackage: null
+    repoUrl: null
+  - name: devops-azure
+    version: null
+    installDate: 2026-03-21T09:55:31.796Z
+    lastUpdated: 2026-03-21T09:55:31.820Z
+    source: unknown
+    npmPackage: null
+    repoUrl: null
+  - name: fintech
+    version: null
+    installDate: 2026-03-21T09:55:31.807Z
+    lastUpdated: 2026-03-21T09:55:31.820Z
+    source: unknown
+    npmPackage: null
+    repoUrl: null
+ides:
+  - claude-code

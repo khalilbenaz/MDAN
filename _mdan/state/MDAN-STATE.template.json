@@ -1,0 +1,16 @@
+{
+  "version": "3.0.0",
+  "project": {
+    "name": "",
+    "created_at": "",
+    "last_updated": ""
+  },
+  "context_graph_path": "_mdan/state/context-graph.json",
+  "workflows_completed": [],
+  "current_workflow": null,
+  "artifacts": [],
+  "sessions": [],
+  "agent_sidecars": {},
+  "decisions": [],
+  "context_summary": ""
+}
