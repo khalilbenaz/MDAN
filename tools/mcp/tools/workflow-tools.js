@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs';
 export function registerWorkflowTools(server, discovery, projectRoot) {
   // List workflows tool
   server.tool(
-    'mdan/list-workflows',
+    'mdan_list-workflows',
     'List all available MDAN workflows with their descriptions',
     {},
     async () => ({
@@ -24,7 +24,7 @@ export function registerWorkflowTools(server, discovery, projectRoot) {
   // Register each workflow as a tool
   for (const wf of discovery.workflows) {
     server.tool(
-      `mdan/workflow/${wf.name}`,
+      `mdan_workflow_${wf.name}`,
       wf.description || `Execute the ${wf.name} workflow`,
       {
         topic: { type: 'string', description: 'Topic or subject for the workflow' },

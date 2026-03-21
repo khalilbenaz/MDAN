@@ -4,7 +4,7 @@ import { existsSync } from 'node:fs';
 
 export function registerOrchestrationTools(server, projectRoot) {
   server.tool(
-    'mdan/orchestrate/party-mode',
+    'mdan_orchestrate_party-mode',
     'Start a multi-agent party mode session. Modes: discussion, debate, consensus',
     {
       mode: { type: 'string', description: 'Orchestration mode: discussion, debate, or consensus' },
@@ -43,7 +43,7 @@ export function registerOrchestrationTools(server, projectRoot) {
   );
 
   server.tool(
-    'mdan/orchestrate/create-decision-record',
+    'mdan_orchestrate_create-decision-record',
     'Create a decision record from a debate or consensus session',
     {
       id: { type: 'string', description: 'Decision record ID (e.g., DR-001)' },

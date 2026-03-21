@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { discoverMdan } from './discovery.js';
 import { registerWorkflowTools } from './tools/workflow-tools.js';
@@ -13,10 +13,7 @@ import { registerGraphResource } from './resources/graph-resource.js';
 export async function startServer({ transport = 'stdio', port = 3100 } = {}) {
   const projectRoot = process.env.MDAN_PROJECT_ROOT || process.cwd();
 
-  const server = new Server(
-    { name: 'mdan', version: '3.0.0' },
-    { capabilities: { tools: {}, resources: {} } }
-  );
+  const server = new McpServer({ name: 'mdan', version: '3.0.0' });
 
   // Discover installed modules, workflows, agents
   const discovery = await discoverMdan(projectRoot);

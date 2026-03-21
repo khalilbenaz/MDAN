@@ -5,7 +5,7 @@ import { existsSync } from 'node:fs';
 export function registerAgentTools(server, discovery, projectRoot) {
   // List agents tool
   server.tool(
-    'mdan/list-agents',
+    'mdan_list-agents',
     'List all installed MDAN agents with their capabilities',
     {},
     async () => ({
@@ -26,7 +26,7 @@ export function registerAgentTools(server, discovery, projectRoot) {
   // Register each agent as a tool
   for (const agent of discovery.agents) {
     server.tool(
-      `mdan/agent/${agent.name}`,
+      `mdan_agent_${agent.name}`,
       `Consult ${agent.displayName} (${agent.title}): ${agent.role}`,
       {
         question: { type: 'string', description: 'Question or topic to discuss with this agent' },

@@ -43,14 +43,14 @@ Zid had la config f `.mcp.json` dyalek :
 
 | Tool | Chnou kadir |
 |------|-------------|
-| `mdan/list-workflows` | Kaylisté ga3 les workflows |
-| `mdan/workflow/{name}` | Kayexécuté un workflow (create-prd, create-architecture, etc.) |
-| `mdan/list-agents` | Kaylisté ga3 les agents installés |
-| `mdan/agent/{name}` | Kayconsulté un agent spécifique |
-| `mdan/graph/impact` | Analyse d'impact en aval d'un artifact |
-| `mdan/graph/visualize` | Diagramme Mermaid dial le context graph |
-| `mdan/orchestrate/party-mode` | Session multi-agent (discussion/debate/consensus) |
-| `mdan/orchestrate/create-decision-record` | Créé un decision record |
+| `mdan_list-workflows` | Kaylisté ga3 les workflows |
+| `mdan_workflow_{name}` | Kayexécuté un workflow (create-prd, create-architecture, etc.) |
+| `mdan_list-agents` | Kaylisté ga3 les agents installés |
+| `mdan_agent_{name}` | Kayconsulté un agent spécifique |
+| `mdan_graph_impact` | Analyse d'impact en aval d'un artifact |
+| `mdan_graph_visualize` | Diagramme Mermaid dial le context graph |
+| `mdan_orchestrate_party-mode` | Session multi-agent (discussion/debate/consensus) |
+| `mdan_orchestrate_create-decision-record` | Créé un decision record |
 
 **MCP resources :** `mdan://state`, `mdan://config`, `mdan://graph`
 
