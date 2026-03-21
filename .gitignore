@@ -1,0 +1,6 @@
+node_modules/
+.DS_Store
+*.log
+mdan_output/
+_mdan/state/MDAN-STATE.json
+_mdan/state/sidecars/

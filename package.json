@@ -1,0 +1,20 @@
+{
+  "name": "mdan-method",
+  "version": "3.0.0",
+  "description": "MDAN - AI-Driven Development Methodology Platform",
+  "type": "module",
+  "bin": {
+    "mdan": "./tools/cli/index.js",
+    "mdan-mcp": "./tools/mcp/server.js"
+  },
+  "scripts": {
+    "serve": "node tools/cli/commands/serve.js",
+    "test": "node --test tools/**/*.test.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
