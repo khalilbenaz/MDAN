@@ -87,7 +87,7 @@ const INSTALL_GENERATED_FILES = ['config.yaml'];
 
 // Variables that indicate a path is not statically resolvable
 const UNRESOLVABLE_VARS = [
-  '{output_folder}',
+  'mdan_output',
   '{value}',
   '{timestamp}',
   '{config_source}:',

@@ -1,3 +1,3 @@
 module,phase,name,workflow-file,description
-mdan,anytime,Template Var,{output_folder}/something.md,Has unresolvable template var
+mdan,anytime,Template Var,mdan_output/something.md,Has unresolvable template var
 mdan,anytime,Normal Ref,_.mdan/core/tasks/help.md,Normal resolvable ref

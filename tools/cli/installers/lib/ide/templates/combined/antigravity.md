@@ -1,6 +1,6 @@
 ---
 name: '{{name}}'
-description: '{{description}}'
+description: "{{description}}"
 ---
 
 Read the entire workflow file at: {project-root}/_.mdan/{{workflow_path}}
