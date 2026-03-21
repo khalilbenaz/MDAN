@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-04-self-check'
 description: 'Self-audit implementation against tasks, tests, AC, and patterns'
@@ -89,7 +90,7 @@ Proceeding to adversarial code review...
 
 ## NEXT STEP
 
-Proceed immediately to `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-05-adversarial-review.md`.
+Proceed immediately to `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-05-adversarial-review.md`.
 
 ---
 

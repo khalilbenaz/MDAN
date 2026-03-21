@@ -1,13 +1,14 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-06-innovation'
 description: 'Detect and explore innovative aspects of the product (optional step)'
 
 # File References
-nextStepFile: '{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-prd/steps-c/step-07-project-type.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-07-project-type.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Data Files
-projectTypesCSV: '{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-prd/data/project-types.csv'
+projectTypesCSV: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/data/project-types.csv'
 
 # Task References
 advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'

@@ -22,7 +22,7 @@ module.exports = {
     ['--user-name <name>', 'Name for agents to use (default: system username)'],
     ['--communication-language <lang>', 'Language for agent communication (default: English)'],
     ['--document-output-language <lang>', 'Language for document output (default: English)'],
-    ['--output-folder <path>', 'Output folder path relative to project root (default: _mdan-output)'],
+    ['--output-folder <path>', 'Output folder path relative to project root (default: mdan-output)'],
     ['-y, --yes', 'Accept all defaults and skip prompts where possible'],
   ],
   action: async (options) => {

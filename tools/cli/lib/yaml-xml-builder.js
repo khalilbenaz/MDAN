@@ -528,7 +528,7 @@ class YamlXmlBuilder {
       // Path contains /.mdan/{module}/
       const potentialModule = pathParts[mdanIndex + 1];
       // Check if it's a known module, not 'agents' or '_config'
-      if (['bmm', 'bmb', 'cis', 'core'].includes(potentialModule)) {
+      if (['bmm', 'mdan', 'bmb', 'cis', 'core'].includes(potentialModule)) {
         module = potentialModule;
       }
     } else if (srcIndex !== -1 && pathParts[srcIndex + 1]) {

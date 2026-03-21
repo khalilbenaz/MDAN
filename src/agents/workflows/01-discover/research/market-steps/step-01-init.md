@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Market Research Step 1: Market Research Initialization
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -138,7 +139,7 @@ Show initial scope document and present continue option:
 
 - Update frontmatter: `stepsCompleted: [1]`
 - Add confirmation note to document: "Scope confirmed by user on {{date}}"
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/market-steps/step-02-customer-behavior.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/market-steps/step-02-customer-behavior.md`
 
 #### If 'Modify':
 
@@ -177,6 +178,6 @@ This step ensures:
 
 ## NEXT STEP:
 
-After user confirmation and scope finalization, load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/market-steps/step-02-customer-behavior.md` to begin detailed market research with customer insights analysis.
+After user confirmation and scope finalization, load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/market-steps/step-02-customer-behavior.md` to begin detailed market research with customer insights analysis.
 
 Remember: Init steps confirm understanding and scope, not generate research content!

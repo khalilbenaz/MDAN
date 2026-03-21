@@ -1,9 +1,10 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-02-design-epics'
 description: 'Design and approve the epics_list that will organize all requirements into user-value-focused epics'
 
 # Path Definitions
-workflow_path: '{project-root}/_.mdan/bmm/workflows/3-solutioning/create-epics-and-stories'
+workflow_path: '{project-root}/_.mdan/mdan/workflows/3-solutioning/create-epics-and-stories'
 
 # File References
 thisStepFile: './step-02-design-epics.md'

@@ -1,10 +1,10 @@
 agent:
   metadata:
-    id: "_.mdan/bmm/agents/security.md"
+    id: "_.mdan/mdan/agents/security.md"
     name: Yassir
     title: Security Engineer
     icon: 🔐
-    module: bmm
+    module: mdan
     capabilities: "security audit, vulnerability assessment, threat modeling, OWASP compliance, penetration testing guidance"
     hasSidecar: false
 

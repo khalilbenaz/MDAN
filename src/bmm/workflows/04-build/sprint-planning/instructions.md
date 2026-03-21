@@ -1,7 +1,7 @@
 # Sprint Planning - Sprint Status Generator
 
 <critical>The workflow execution engine is governed by: {project-root}/_.mdan/core/tasks/workflow.xml</critical>
-<critical>You MUST have already loaded and processed: {project-root}/_.mdan/bmm/workflows/4-implementation/sprint-planning/workflow.yaml</critical>
+<critical>You MUST have already loaded and processed: {project-root}/_.mdan/mdan/workflows/4-implementation/sprint-planning/workflow.yaml</critical>
 
 ## 📚 Document Discovery - Full Epic Loading
 

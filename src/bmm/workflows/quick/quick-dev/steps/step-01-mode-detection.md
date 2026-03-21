@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-01-mode-detection'
 description: 'Determine execution mode (tech-spec vs direct), handle escalation, set state variables'
@@ -50,7 +51,7 @@ Analyze the user's input to determine mode:
 - Load the spec, extract tasks/context/AC
 - Set `{execution_mode}` = "tech-spec"
 - Set `{tech_spec_path}` = provided path
-- **NEXT:** Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`
+- **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`
 
 **Mode B: Direct Instructions**
 
@@ -91,7 +92,7 @@ Display: "**Select:** [P] Plan first (tech-spec) [E] Execute directly"
 #### Menu Handling Logic:
 
 - IF P: Direct user to `{quick_spec_workflow}`. **EXIT Quick Dev.**
-- IF E: Ask for any additional guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
+- IF E: Ask for any additional guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
 
 #### EXECUTION RULES:
 
@@ -114,7 +115,7 @@ Display:
 
 - IF P: Direct to `{quick_spec_workflow}`. **EXIT Quick Dev.**
 - IF W: Direct user to run the PRD workflow instead. **EXIT Quick Dev.**
-- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
+- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
 
 #### EXECUTION RULES:
 
@@ -137,7 +138,7 @@ Display:
 
 - IF P: Direct to `{quick_spec_workflow}`. **EXIT Quick Dev.**
 - IF W: Direct user to run the PRD workflow instead. **EXIT Quick Dev.**
-- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
+- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
 
 #### EXECUTION RULES:
 
@@ -150,8 +151,8 @@ Display:
 
 **CRITICAL:** When this step completes, explicitly state which step to load:
 
-- Mode A (tech-spec): "**NEXT:** read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`"
-- Mode B (direct, [E] selected): "**NEXT:** Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`"
+- Mode A (tech-spec): "**NEXT:** read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`"
+- Mode B (direct, [E] selected): "**NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`"
 - Escalation ([P] or [W]): "**EXITING Quick Dev.** Follow the directed workflow."
 
 ---

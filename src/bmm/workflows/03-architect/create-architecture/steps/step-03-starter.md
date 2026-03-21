@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 3: Starter Template Evaluation
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -294,7 +295,7 @@ Show the generated content and present choices:
 
 - Append the final content to `{planning_artifacts}/architecture.md`
 - Update frontmatter: `stepsCompleted: [1, 2, 3]`
-- Load `{project-root}/_.mdan/bmm/workflows/3-solutioning/create-architecture/steps/step-04-decisions.md`
+- Load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-04-decisions.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -324,6 +325,6 @@ When user selects 'C', append the content directly to the document using the str
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/bmm/workflows/3-solutioning/create-architecture/steps/step-04-decisions.md` to begin making specific architectural decisions.
+After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-04-decisions.md` to begin making specific architectural decisions.
 
 Remember: Do NOT proceed to step-04 until user explicitly selects 'C' from the A/P/C menu and content is saved!

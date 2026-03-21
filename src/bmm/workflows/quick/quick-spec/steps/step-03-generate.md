@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-03-generate'
 description: 'Build the implementation plan based on the technical mapping of constraints'
@@ -112,7 +113,7 @@ stepsCompleted: [1, 2, 3]
 ---
 ```
 
-c) **Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-spec/steps/step-04-review.md` (Step 4)**
+c) **Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-04-review.md` (Step 4)**
 
 ## REQUIRED OUTPUTS:
 

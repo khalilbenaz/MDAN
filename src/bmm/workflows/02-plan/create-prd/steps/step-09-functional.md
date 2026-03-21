@@ -1,9 +1,10 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-09-functional'
 description: 'Synthesize all discovery into comprehensive functional requirements'
 
 # File References
-nextStepFile: '{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-prd/steps-c/step-10-nonfunctional.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-10-nonfunctional.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Task References

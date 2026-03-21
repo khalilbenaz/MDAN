@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 9: Design Direction Mockups
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -187,7 +188,7 @@ Show the generated design direction content and present choices:
 
 - Append the final content to `{planning_artifacts}/ux-design-specification.md`
 - Update frontmatter: append step to end of stepsCompleted array
-- Load `{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-ux-design/steps/step-10-user-journeys.md`
+- Load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-10-user-journeys.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -219,6 +220,6 @@ When user selects 'C', append the content directly to the document using the str
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-ux-design/steps/step-10-user-journeys.md` to design user journey flows.
+After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-10-user-journeys.md` to design user journey flows.
 
 Remember: Do NOT proceed to step-10 until user explicitly selects 'C' from the A/P/C menu and content is saved!

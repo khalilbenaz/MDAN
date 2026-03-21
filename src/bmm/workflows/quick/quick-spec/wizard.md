@@ -1,13 +1,17 @@
 ---
 name: quick-spec
 description: 'Very quick process to create implementation-ready quick specs for small changes or features. Use when the user says "create a quick spec" or "generate a quick tech spec"'
-main_config: '{project-root}/_.mdan/bmm/config.yaml'
+main_config: '{project-root}/_.mdan/mdan/config.yaml'
 
 # Checkpoint handler paths
 advanced_elicitation: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
 party_mode_exec: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
-quick_dev_workflow: '{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/workflow.md'
+quick_dev_workflow: '{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/workflow.md'
 ---
+
+**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+
+
 
 # Quick-Spec Workflow
 
@@ -76,4 +80,4 @@ Load and read full config from `{main_config}` and resolve:
 
 ### 2. First Step Execution
 
-Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-spec/steps/step-01-understand.md` to begin the workflow.
+Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-01-understand.md` to begin the workflow.

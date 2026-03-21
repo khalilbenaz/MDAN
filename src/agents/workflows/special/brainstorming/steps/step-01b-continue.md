@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 1b: Workflow Continuation
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

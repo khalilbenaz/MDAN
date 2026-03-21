@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Technical Research Step 5: Implementation Research
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -179,7 +180,7 @@ Show the generated implementation research and present continue option:
 
 - Append the final content to the research document
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-06-research-synthesis.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-06-research-synthesis.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -230,4 +231,4 @@ When 'C' is selected:
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-06-research-synthesis.md` to produce the comprehensive technical research document with narrative introduction, detailed TOC, and executive summary.
+After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-06-research-synthesis.md` to produce the comprehensive technical research document with narrative introduction, detailed TOC, and executive summary.

@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Technical Research Step 1: Technical Research Scope Confirmation
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -78,7 +79,7 @@ For **{{research_topic}}**, I will research:
 
 - Document scope confirmation in research file
 - Update frontmatter: `stepsCompleted: [1]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-02-technical-overview.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-02-technical-overview.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -132,6 +133,6 @@ When user selects 'C', append scope confirmation:
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-02-technical-overview.md` to begin technology stack analysis.
+After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-02-technical-overview.md` to begin technology stack analysis.
 
 Remember: This is SCOPE CONFIRMATION ONLY - no actual technical research yet, just confirming the research approach and scope!

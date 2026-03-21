@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 2a: User-Selected Techniques
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

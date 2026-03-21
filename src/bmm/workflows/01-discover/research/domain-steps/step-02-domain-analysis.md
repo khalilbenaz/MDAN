@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Domain Research Step 2: Industry Analysis
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -171,7 +172,7 @@ _Source: [URL]_
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/domain-steps/step-03-competitive-landscape.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-03-competitive-landscape.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -224,6 +225,6 @@ Content is already written to document when generated in step 4. No additional a
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/domain-steps/step-03-competitive-landscape.md` to analyze competitive landscape, key players, and ecosystem analysis for {{research_topic}}.
+After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-03-competitive-landscape.md` to analyze competitive landscape, key players, and ecosystem analysis for {{research_topic}}.
 
 Remember: Always write research content to document immediately and search the web to verify facts!

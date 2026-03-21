@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-05-adversarial-review'
 description: 'Construct diff and invoke adversarial review task'
@@ -83,7 +84,7 @@ If TodoWrite or similar tool is available, turn each finding into a TODO, includ
 
 ## NEXT STEP
 
-With findings in hand, read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-06-resolve-findings.md` for user to choose resolution approach.
+With findings in hand, read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-06-resolve-findings.md` for user to choose resolution approach.
 
 ---
 

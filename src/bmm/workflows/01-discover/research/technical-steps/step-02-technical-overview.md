@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Technical Research Step 2: Technology Stack Analysis
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -180,7 +181,7 @@ _Source: [URL]_
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-03-integration-patterns.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-03-integration-patterns.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -234,6 +235,6 @@ Content is already written to document when generated in step 4. No additional a
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-03-integration-patterns.md` to analyze APIs, communication protocols, and system interoperability for {{research_topic}}.
+After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-03-integration-patterns.md` to analyze APIs, communication protocols, and system interoperability for {{research_topic}}.
 
 Remember: Always write research content to document immediately and emphasize current technology data with rigorous source verification!

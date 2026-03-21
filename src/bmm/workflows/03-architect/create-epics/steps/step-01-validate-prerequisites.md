@@ -1,9 +1,10 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-01-validate-prerequisites'
 description: 'Validate required documents exist and extract all requirements for epic and story creation'
 
 # Path Definitions
-workflow_path: '{project-root}/_.mdan/bmm/workflows/3-solutioning/create-epics-and-stories'
+workflow_path: '{project-root}/_.mdan/mdan/workflows/3-solutioning/create-epics-and-stories'
 
 # File References
 thisStepFile: './step-01-validate-prerequisites.md'

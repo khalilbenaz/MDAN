@@ -1627,7 +1627,7 @@ class Installer {
    * Get the configured output folder name for a project
    * Resolves mdanDir internally from projectDir
    * @param {string} projectDir - Project directory
-   * @returns {string} Output folder name (relative, default: '_mdan-output')
+   * @returns {string} Output folder name (relative, default: 'mdan-output')
    */
   async getOutputFolder(projectDir) {
     const { mdanDir } = await this.findMdanDir(projectDir);
@@ -1662,7 +1662,7 @@ class Installer {
     try {
       const entries = await fs.readdir(mdanDir, { withFileTypes: true });
       for (const entry of entries) {
-        if (!entry.isDirectory() || entry.name === 'bmm' || entry.name.startsWith('_')) continue;
+        if (!entry.isDirectory() || entry.name === 'bmm' || entry.name === 'mdan' || entry.name.startsWith('_')) continue;
         const configPath = path.join(mdanDir, entry.name, 'config.yaml');
         if (await fs.pathExists(configPath)) {
           try {
@@ -1681,7 +1681,7 @@ class Installer {
     }
 
     // Default fallback
-    return '_mdan-output';
+    return 'mdan-output';
   }
 
   /**

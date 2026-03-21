@@ -4,6 +4,10 @@ description: 'Facilitate interactive brainstorming sessions using diverse creati
 context_file: '' # Optional context file path for project-specific guidance
 ---
 
+**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+
+
+
 # Brainstorming Session Workflow
 
 **Goal:** Facilitate interactive brainstorming sessions using diverse creative techniques and ideation methods

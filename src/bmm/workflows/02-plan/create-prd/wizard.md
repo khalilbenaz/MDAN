@@ -1,9 +1,13 @@
 ---
 name: create-prd
 description: 'Create a PRD from scratch. Use when the user says "lets create a product requirements document" or "I want to create a new PRD"'
-main_config: '{project-root}/_.mdan/bmm/config.yaml'
+main_config: '{project-root}/_.mdan/mdan/config.yaml'
 nextStep: './steps-c/step-01-init.md'
 ---
+
+**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+
+
 
 # PRD Create Workflow
 

@@ -1,6 +1,6 @@
-code: bmm
+code: mdan
 name: "MDAN Core Agents & Wizards"
-description: "AI-driven agile development framework"
+description: "Framework de développement b l'IA, fih agents spécialisés w wizards interactifs"
 default_selected: true # This module will be selected by default for new installations
 
 # Variables from Core Config inserted:

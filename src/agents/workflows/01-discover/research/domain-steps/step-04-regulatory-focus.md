@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Domain Research Step 4: Regulatory Focus
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -155,7 +156,7 @@ Show the generated regulatory analysis and present continue option:
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/domain-steps/step-05-technical-trends.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-05-technical-trends.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -201,6 +202,6 @@ Content is already written to document when generated in step 5. No additional a
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/domain-steps/step-05-technical-trends.md` to analyze technical trends and innovations in the domain.
+After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-05-technical-trends.md` to analyze technical trends and innovations in the domain.
 
 Remember: Search the web to verify regulatory facts and provide practical implementation considerations!

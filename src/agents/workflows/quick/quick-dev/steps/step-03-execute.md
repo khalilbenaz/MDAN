@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-03-execute'
 description: 'Execute implementation - iterate through tasks, write code, run tests'
@@ -89,7 +90,7 @@ For each task:
 
 ## NEXT STEP
 
-When ALL tasks are complete (or halted on blocker), read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-04-self-check.md`.
+When ALL tasks are complete (or halted on blocker), read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-04-self-check.md`.
 
 ---
 

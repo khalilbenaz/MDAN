@@ -320,7 +320,7 @@ class ModuleManager {
     }
 
     // Check for built-in bmm module (directly under src/bmm)
-    if (moduleCode === 'bmm') {
+    if (moduleCode === 'bmm' || moduleCode === 'mdan') {
       const bmmPath = getSourcePath('bmm');
       if (await fs.pathExists(bmmPath)) {
         return bmmPath;

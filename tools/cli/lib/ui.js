@@ -897,7 +897,7 @@ class UI {
           user_name: defaultUsername,
           communication_language: 'English',
           document_output_language: 'English',
-          output_folder: '_mdan-output',
+          output_folder: 'mdan-output',
         };
         await prompts.log.info('Using default configuration (--yes flag)');
       }
@@ -1116,7 +1116,7 @@ class UI {
 
     // If no defaults found, use 'bmm' as the fallback default
     if (defaultModules.length === 0) {
-      defaultModules.push('bmm');
+      defaultModules.push('mdan');
     }
 
     return defaultModules;

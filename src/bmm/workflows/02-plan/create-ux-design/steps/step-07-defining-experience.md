@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 7: Defining Core Experience
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -217,7 +218,7 @@ Show the generated defining experience content and present choices:
 
 - Append the final content to `{planning_artifacts}/ux-design-specification.md`
 - Update frontmatter: append step to end of stepsCompleted array
-- Load `{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-ux-design/steps/step-08-visual-foundation.md`
+- Load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-08-visual-foundation.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -249,6 +250,6 @@ When user selects 'C', append the content directly to the document using the str
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-ux-design/steps/step-08-visual-foundation.md` to establish visual design foundation.
+After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-08-visual-foundation.md` to establish visual design foundation.
 
 Remember: Do NOT proceed to step-08 until user explicitly selects 'C' from the A/P/C menu and content is saved!

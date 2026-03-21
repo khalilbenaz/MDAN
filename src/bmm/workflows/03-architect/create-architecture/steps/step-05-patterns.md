@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 5: Implementation Patterns & Consistency Rules
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -323,7 +324,7 @@ Show the generated patterns content and present choices:
 
 - Append the final content to `{planning_artifacts}/architecture.md`
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5]`
-- Load `{project-root}/_.mdan/bmm/workflows/3-solutioning/create-architecture/steps/step-06-structure.md`
+- Load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-06-structure.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -354,6 +355,6 @@ When user selects 'C', append the content directly to the document using the str
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/bmm/workflows/3-solutioning/create-architecture/steps/step-06-structure.md` to define the complete project structure.
+After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-06-structure.md` to define the complete project structure.
 
 Remember: Do NOT proceed to step-06 until user explicitly selects 'C' from the A/P/C menu and content is saved!

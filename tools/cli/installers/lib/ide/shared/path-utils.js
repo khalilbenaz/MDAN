@@ -36,7 +36,7 @@ function toDashName(module, type, name) {
   const isAgent = type === AGENT_SEGMENT;
 
   // For core and bmm modules, skip the module name: use 'mdan-agent-name.md' instead of 'mdan-agent-core-name.md'
-  if (module === 'core' || module === 'bmm') {
+  if (module === 'core' || module === 'bmm' || module === 'mdan') {
     return isAgent ? `mdan-agent-${name}.md` : `mdan-${name}.md`;
   }
 

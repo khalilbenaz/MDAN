@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Technical Research Step 4: Architectural Patterns
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -156,7 +157,7 @@ Show the generated architectural patterns and present continue option:
 
 - Append the final content to the research document
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-05-implementation-research.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-05-implementation-research.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -197,6 +198,6 @@ When user selects 'C', append the content directly to the research document usin
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/technical-steps/step-05-implementation-research.md` to focus on implementation approaches and technology adoption.
+After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-05-implementation-research.md` to focus on implementation approaches and technology adoption.
 
 Remember: Always emphasize current architectural data and rigorous source verification!

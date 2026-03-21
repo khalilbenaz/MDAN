@@ -1,9 +1,10 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-07-project-type'
 description: 'Conduct project-type specific discovery using CSV-driven guidance'
 
 # File References
-nextStepFile: '{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-prd/steps-c/step-08-scoping.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-08-scoping.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Data Files

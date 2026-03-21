@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Market Research Step 5: Competitive Analysis
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

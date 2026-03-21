@@ -1,9 +1,10 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-03-create-stories'
 description: 'Generate all epics with their stories following the template structure'
 
 # Path Definitions
-workflow_path: '{project-root}/_.mdan/bmm/workflows/3-solutioning/create-epics-and-stories'
+workflow_path: '{project-root}/_.mdan/mdan/workflows/3-solutioning/create-epics-and-stories'
 
 # File References
 thisStepFile: './step-03-create-stories.md'

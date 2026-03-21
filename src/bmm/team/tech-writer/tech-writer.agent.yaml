@@ -2,11 +2,11 @@
 
 agent:
   metadata:
-    id: "_.mdan/bmm/agents/tech-writer.md"
+    id: "_.mdan/mdan/agents/tech-writer.md"
     name: Paige
     title: Technical Writer
     icon: 📚
-    module: bmm
+    module: mdan
     capabilities: "documentation, Mermaid diagrams, standards compliance, concept explanation"
     hasSidecar: true
 
@@ -22,7 +22,7 @@ agent:
 
   menu:
     - trigger: DP or fuzzy match on document-project
-      workflow: "{project-root}/_.mdan/bmm/workflows/document-project/workflow.yaml"
+      workflow: "{project-root}/_.mdan/mdan/workflows/document-project/workflow.yaml"
       description: "[DP] Document Project: Generate comprehensive project documentation (brownfield analysis, architecture scanning)"
 
     - trigger: WD or fuzzy match on write-document

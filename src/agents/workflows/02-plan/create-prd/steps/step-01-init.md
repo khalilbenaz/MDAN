@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-01-init'
 description: 'Initialize the PRD workflow by detecting continuation state and setting up the document'

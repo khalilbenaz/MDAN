@@ -2,11 +2,11 @@
 
 agent:
   metadata:
-    id: "_.mdan/bmm/agents/quick-flow-solo-dev.md"
+    id: "_.mdan/mdan/agents/quick-flow-solo-dev.md"
     name: Barry
     title: Quick Flow Solo Dev
     icon: 🚀
-    module: bmm
+    module: mdan
     capabilities: "rapid spec creation, lean implementation, minimum ceremony"
     hasSidecar: false
 
@@ -20,13 +20,13 @@ agent:
 
   menu:
     - trigger: QS or fuzzy match on quick-spec
-      exec: "{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-spec/workflow.md"
+      exec: "{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/workflow.md"
       description: "[QS] Quick Spec: Architect a quick but complete technical spec with implementation-ready stories/specs"
 
     - trigger: QD or fuzzy match on quick-dev
-      workflow: "{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/workflow.md"
+      workflow: "{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/workflow.md"
       description: "[QD] Quick-flow Develop: Implement a story tech spec end-to-end (Core of Quick Flow)"
 
     - trigger: CR or fuzzy match on code-review
-      workflow: "{project-root}/_.mdan/bmm/workflows/4-implementation/code-review/workflow.yaml"
+      workflow: "{project-root}/_.mdan/mdan/workflows/4-implementation/code-review/workflow.yaml"
       description: "[CR] Code Review: Initiate a comprehensive code review across multiple quality facets. For best results, use a fresh context and a different quality LLM if available"

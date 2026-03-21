@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Domain Research Step 3: Competitive Landscape
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -180,7 +181,7 @@ _Source: [URL]_
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2, 3]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/domain-steps/step-04-regulatory-focus.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-04-regulatory-focus.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -233,6 +234,6 @@ Content is already written to document when generated in step 4. No additional a
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/domain-steps/step-04-regulatory-focus.md` to analyze regulatory requirements, compliance frameworks, and legal considerations for {{research_topic}}.
+After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-04-regulatory-focus.md` to analyze regulatory requirements, compliance frameworks, and legal considerations for {{research_topic}}.
 
 Remember: Always write research content to document immediately and search the web to verify facts!

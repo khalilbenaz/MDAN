@@ -1,9 +1,10 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-10-nonfunctional'
 description: 'Define quality attributes that matter for this specific product'
 
 # File References
-nextStepFile: '{project-root}/_.mdan/bmm/workflows/2-plan-workflows/create-prd/steps-c/step-11-polish.md'
+nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-11-polish.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Task References

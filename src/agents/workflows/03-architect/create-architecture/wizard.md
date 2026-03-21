@@ -3,6 +3,10 @@ name: create-architecture
 description: 'Create architecture solution design decisions for AI agent consistency. Use when the user says "lets create architecture" or "create technical architecture" or "create a solution design"'
 ---
 
+**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+
+
+
 # Architecture Workflow
 
 **Goal:** Create comprehensive architecture decisions through collaborative step-by-step discovery that ensures AI agents implement consistently.
@@ -27,7 +31,7 @@ This uses **micro-file architecture** for disciplined execution:
 
 ### Configuration Loading
 
-Load config from `{project-root}/_.mdan/bmm/config.yaml` and resolve:
+Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
 
 - `project_name`, `output_folder`, `planning_artifacts`, `user_name`
 - `communication_language`, `document_output_language`, `user_skill_level`
@@ -36,7 +40,7 @@ Load config from `{project-root}/_.mdan/bmm/config.yaml` and resolve:
 
 ### Paths
 
-- `installed_path` = `{project-root}/_.mdan/bmm/workflows/3-solutioning/create-architecture`
+- `installed_path` = `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture`
 - `template_path` = `{installed_path}/architecture-decision-template.md`
 - `data_files_path` = `{installed_path}/data/`
 
@@ -44,6 +48,6 @@ Load config from `{project-root}/_.mdan/bmm/config.yaml` and resolve:
 
 ## EXECUTION
 
-Read fully and follow: `{project-root}/_.mdan/bmm/workflows/3-solutioning/create-architecture/steps/step-01-init.md` to begin the workflow.
+Read fully and follow: `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-01-init.md` to begin the workflow.
 
 **Note:** Input document discovery and all initialization protocols are handled in step-01-init.md.

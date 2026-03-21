@@ -85,7 +85,7 @@ class DependencyResolver {
         // Source directory structure: src/core or src/bmm
         if (module === 'core') {
           moduleDir = path.join(srcDir, 'core');
-        } else if (module === 'bmm') {
+        } else if (module === 'bmm' || module === 'mdan') {
           moduleDir = path.join(srcDir, 'bmm');
         }
       }
@@ -418,7 +418,7 @@ class DependencyResolver {
           const module = parts[0];
           const rest = parts.slice(1).join('/');
           let modulePath;
-          if (module === 'bmm') {
+          if (module === 'bmm' || module === 'mdan') {
             // bmm is directly under src/
             modulePath = path.join(mdanDir, module, rest);
           } else {
@@ -634,7 +634,7 @@ class DependencyResolver {
       if (file.includes('/src/core/') || file.includes('/src/bmm/')) {
         if (module === 'core') {
           moduleBase = path.join(mdanDir, 'src', 'core');
-        } else if (module === 'bmm') {
+        } else if (module === 'bmm' || module === 'mdan') {
           moduleBase = path.join(mdanDir, 'src', 'bmm');
         }
       } else {

@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-02-context-gathering'
 description: 'Quick context gathering for direct mode - identify files, patterns, dependencies'
@@ -97,7 +98,7 @@ Ready to execute? (y/n/adjust)
 
 **CRITICAL:** When user confirms ready, explicitly state:
 
-- **y:** "**NEXT:** Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`"
+- **y:** "**NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`"
 - **n/adjust:** Continue gathering context, then re-present plan
 
 ---

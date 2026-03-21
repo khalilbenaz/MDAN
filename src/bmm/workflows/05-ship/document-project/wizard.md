@@ -1,7 +1,7 @@
 # Document Project Workflow Router
 
 <critical>The workflow execution engine is governed by: {project-root}/_.mdan/core/tasks/workflow.xml</critical>
-<critical>You MUST have already loaded and processed: {project-root}/_.mdan/bmm/workflows/document-project/workflow.yaml</critical>
+<critical>You MUST have already loaded and processed: {project-root}/_.mdan/mdan/workflows/document-project/workflow.yaml</critical>
 <critical>Communicate all responses in {communication_language}</critical>
 
 <workflow>

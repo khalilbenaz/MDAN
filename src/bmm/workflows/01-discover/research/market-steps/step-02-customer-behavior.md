@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Market Research Step 2: Customer Behavior and Segments
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -179,7 +180,7 @@ _Source: [URL]_
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2]`
-- Load: `{project-root}/_.mdan/bmm/workflows/1-analysis/research/market-steps/step-03-customer-pain-points.md`
+- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/market-steps/step-03-customer-pain-points.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -232,6 +233,6 @@ Content is already written to document when generated in step 4. No additional a
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/bmm/workflows/1-analysis/research/market-steps/step-03-customer-pain-points.md` to analyze customer pain points, challenges, and unmet needs for {{research_topic}}.
+After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/market-steps/step-03-customer-pain-points.md` to analyze customer pain points, challenges, and unmet needs for {{research_topic}}.
 
 Remember: Always write research content to document immediately and emphasize current customer data with rigorous source verification!

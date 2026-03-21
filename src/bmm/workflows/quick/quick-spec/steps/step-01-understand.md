@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 ---
 name: 'step-01-understand'
 description: 'Analyze the requirement delta between current state and what user wants to build'
@@ -54,9 +55,9 @@ a) **Menu Handling:**
 
 - **[Y] Continue existing:**
   - Jump directly to the appropriate step based on `stepsCompleted`:
-    - `[1]` → Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-spec/steps/step-02-investigate.md` (Step 2)
-    - `[1, 2]` → Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-spec/steps/step-03-generate.md` (Step 3)
-    - `[1, 2, 3]` → Read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-spec/steps/step-04-review.md` (Step 4)
+    - `[1]` → Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-02-investigate.md` (Step 2)
+    - `[1, 2]` → Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-03-generate.md` (Step 3)
+    - `[1, 2, 3]` → Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-04-review.md` (Step 4)
 - **[N] Archive and start fresh:**
   - Rename `{wipFile}` to `{implementation_artifacts}/tech-spec-{slug}-archived-{date}.md`
 
@@ -167,7 +168,7 @@ b) **HALT and wait for user selection.**
 
 - IF A: Read fully and follow: `{advanced_elicitation}` with current tech-spec content, process enhanced insights, ask user "Accept improvements? (y/n)", if yes update WIP file then redisplay menu, if no keep original then redisplay menu
 - IF P: Read fully and follow: `{party_mode_exec}` with current tech-spec content, process collaborative insights, ask user "Accept changes? (y/n)", if yes update WIP file then redisplay menu, if no keep original then redisplay menu
-- IF C: Verify `{wipFile}` has `stepsCompleted: [1]`, then read fully and follow: `{project-root}/_.mdan/bmm/workflows/mdan-quick-flow/quick-spec/steps/step-02-investigate.md`
+- IF C: Verify `{wipFile}` has `stepsCompleted: [1]`, then read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-02-investigate.md`
 - IF Any other comments or queries: respond helpfully then redisplay menu
 
 #### EXECUTION RULES:

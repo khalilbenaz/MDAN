@@ -1,3 +1,4 @@
+<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
 # Step 1: Session Setup and Continuation Detection
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
