@@ -123,7 +123,7 @@ class UI {
       );
 
       const proceed = await prompts.select({
-        message: 'How would you like to proceed?',
+        message: 'Kifach bghiti tkemmel?',
         choices: [
           {
             name: 'Cancel and do a fresh install (recommended)',
@@ -237,7 +237,7 @@ class UI {
         await prompts.log.info(`Non-interactive mode (--yes): defaulting to ${actionType}`);
       } else {
         actionType = await prompts.select({
-          message: 'How would you like to proceed?',
+          message: 'Kifach bghiti tkemmel?',
           choices: choices,
           default: choices[0].value,
         });
@@ -657,7 +657,7 @@ class UI {
       const sortedInitialValues = sortedTools.filter((ide) => configuredIdes.includes(ide.value)).map((ide) => ide.value);
 
       const upgradeSelected = await prompts.autocompleteMultiselect({
-        message: 'Integrate with',
+        message: 'Intégrer m3a',
         options: upgradeOptions,
         initialValues: sortedInitialValues,
         required: false,
@@ -668,7 +668,7 @@ class UI {
 
       if (selectedIdes.length === 0) {
         const confirmNoTools = await prompts.confirm({
-          message: 'No tools selected. Continue without installing any tools?',
+          message: 'Ma khtarti htta tool. Tkemmel bla ma tinstalli chi IDE?',
           default: false,
         });
 
@@ -731,7 +731,7 @@ class UI {
 
     // Interactive mode
     const interactiveSelectedIdes = await prompts.autocompleteMultiselect({
-      message: 'Integrate with:',
+      message: 'Intégrer m3a:',
       options: allToolOptions,
       initialValues: configuredIdes.length > 0 ? configuredIdes : undefined,
       required: false,
@@ -745,7 +745,7 @@ class UI {
     // ─────────────────────────────────────────────────────────────────────────────
     if (selectedIdes.length === 0) {
       const confirmNoTools = await prompts.confirm({
-        message: 'No tools selected. Continue without installing any tools?',
+        message: 'Ma khtarti htta tool. Tkemmel bla ma tinstalli chi IDE?',
         default: false,
       });
 
@@ -775,12 +775,12 @@ class UI {
    */
   async promptUpdate() {
     const backupFirst = await prompts.confirm({
-      message: 'Create backup before updating?',
+      message: 'Créer backup 9bel ma t-updaté?',
       default: true,
     });
 
     const preserveCustomizations = await prompts.confirm({
-      message: 'Preserve local customizations?',
+      message: 'Hfed les modifications locales?',
       default: true,
     });
 
@@ -1073,7 +1073,7 @@ class UI {
     allOptions.push(...communityModules.map(({ label, value, hint }) => ({ label, value, hint })));
 
     const selected = await prompts.autocompleteMultiselect({
-      message: 'Select modules to install:',
+      message: 'Khtar les modules li bghiti tinstalli:',
       options: allOptions,
       initialValues: initialValues.length > 0 ? initialValues : undefined,
       lockedValues,
@@ -1129,7 +1129,7 @@ class UI {
   async promptForDirectory() {
     // Use sync validation because @clack/prompts doesn't support async validate
     const directory = await prompts.text({
-      message: 'Installation directory:',
+      message: 'Dossier dial l'installation:',
       default: process.cwd(),
       placeholder: process.cwd(),
       validate: (input) => this.validateDirectorySync(input),
@@ -1186,7 +1186,7 @@ class UI {
 
     if (dirExists) {
       const proceed = await prompts.confirm({
-        message: 'Install to this directory?',
+        message: 'Installer f had le dossier?',
         default: true,
       });
 
@@ -1771,7 +1771,7 @@ class UI {
     }
 
     const proceed = await prompts.select({
-      message: 'How would you like to proceed?',
+      message: 'Kifach bghiti tkemmel?',
       choices: [
         {
           name: 'Proceed with update anyway (may have issues)',
@@ -1850,7 +1850,7 @@ class UI {
 
     // Add "Update All" and "Cancel" options
     const action = await prompts.select({
-      message: 'How would you like to proceed?',
+      message: 'Kifach bghiti tkemmel?',
       choices: [
         { name: 'Update all available modules', value: 'all' },
         { name: 'Select specific modules to update', value: 'select' },
@@ -1869,7 +1869,7 @@ class UI {
 
     // Allow specific selection
     const selected = await prompts.multiselect({
-      message: 'Select modules to update (use arrow keys, space to toggle):',
+      message: 'Khtar les modules li bghiti t-updaté:',
       choices: choices,
       required: true,
     });

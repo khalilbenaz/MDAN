@@ -1,4 +1,4 @@
-<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
+**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-03-generate'
 description: 'Build the implementation plan based on the technical mapping of constraints'

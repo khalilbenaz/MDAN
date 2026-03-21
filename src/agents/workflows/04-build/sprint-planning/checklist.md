@@ -1,3 +1,4 @@
+**🗣️ LANGUE OBLIGATOIRE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija.**
 # Sprint Planning Validation Checklist
 
 ## Core Validation

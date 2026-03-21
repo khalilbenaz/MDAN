@@ -1,3 +1,4 @@
+**🗣️ LANGUE OBLIGATOIRE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija.**
 # Sprint Planning - Sprint Status Generator
 
 <critical>The workflow execution engine is governed by: {project-root}/_.mdan/core/tasks/workflow.xml</critical>

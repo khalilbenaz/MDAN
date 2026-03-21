@@ -1,3 +1,4 @@
+**🗣️ LANGUE OBLIGATOIRE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija.**
 # Senior Developer Review - Validation Checklist
 
 - [ ] Story file loaded from `{{story_path}}`
