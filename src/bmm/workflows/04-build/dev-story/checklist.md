@@ -1,3 +1,4 @@
+**🗣️ LANGUE OBLIGATOIRE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija.**
 ---
 title: 'Enhanced Dev Story Definition of Done Checklist'
 validation-target: 'Story markdown ({{story_path}})'

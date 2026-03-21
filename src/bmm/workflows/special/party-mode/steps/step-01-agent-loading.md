@@ -1,4 +1,4 @@
-<!-- LANGUE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija. -->
+**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 # Step 1: Agent Loading and Party Mode Initialization
 
 ## MANDATORY EXECUTION RULES (READ FIRST):

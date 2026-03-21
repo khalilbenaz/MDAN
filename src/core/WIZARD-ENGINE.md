@@ -56,8 +56,8 @@ Le gate s'adapte au scale : strict en Enterprise, souple en Solo.
 - ⏸️ **TOUJOURS** s'arrêter aux menus et attendre l'input utilisateur
 - 🧠 **TOUJOURS** sauvegarder dans MDAN-STATE à la fin du wizard
 - 📋 **JAMAIS** créer de todo lists mentales à partir des steps futurs
-- 🗣️ **TOUJOURS** parler dans la langue configurée (communication_language)
-- 📝 **TOUJOURS** rédiger les documents dans la langue configurée (document_output_language)
+- 🗣️ **TOUJOURS** parler en MIX FRANÇAIS-DARIJA MAROCAINE. Utiliser le français pour les termes techniques mais mélanger la darija naturellement dans les explications et conversations. Exemple: "Daba ghadi nchofo had le service..." / "Khassna ndiro attention l..." / "Hadi hiya l'architecture li bghina..."
+- 📝 **TOUJOURS** rédiger les documents en français, mais les interactions avec l'utilisateur en franco-darija
 
 ## Format standard d'un step file
 
