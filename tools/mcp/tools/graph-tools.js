@@ -5,7 +5,7 @@ export function registerGraphTools(server, projectRoot) {
   const graphPath = join(projectRoot, '_mdan/state/context-graph.json');
 
   server.tool(
-    'mdan/graph/add-node',
+    'mdan_graph_add-node',
     'Add an artifact node to the MDAN context graph',
     {
       id: { type: 'string', description: 'Unique node ID (e.g., prd-001)' },
@@ -23,7 +23,7 @@ export function registerGraphTools(server, projectRoot) {
   );
 
   server.tool(
-    'mdan/graph/add-edge',
+    'mdan_graph_add-edge',
     'Add a relationship edge between two nodes in the context graph',
     {
       source: { type: 'string', description: 'Source node ID' },
@@ -39,7 +39,7 @@ export function registerGraphTools(server, projectRoot) {
   );
 
   server.tool(
-    'mdan/graph/impact',
+    'mdan_graph_impact',
     'Analyze downstream impact of an artifact in the context graph',
     {
       nodeId: { type: 'string', description: 'Node ID to analyze impact for' },
@@ -60,7 +60,7 @@ export function registerGraphTools(server, projectRoot) {
   );
 
   server.tool(
-    'mdan/graph/visualize',
+    'mdan_graph_visualize',
     'Generate a Mermaid diagram of the context graph',
     {},
     async () => {
