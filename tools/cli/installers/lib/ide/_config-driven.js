@@ -409,11 +409,17 @@ LOAD and execute from: {project-root}/{{mdanFolderName}}/{{path}}
       // No default
     }
 
+    // Escape double quotes in description for TOML basic string compatibility.
+    // Without this, descriptions containing quotes (e.g. 'Use when the user says "X"')
+    // produce invalid TOML when injected into: description = "{{description}}"
+    const rawDescription = artifact.description || `${artifact.name} ${artifact.type || ''}`;
+    const safeDescription = rawDescription.replace(/"/g, '\\"');
+
     let rendered = template
       .replaceAll('{{name}}', artifact.name || '')
       .replaceAll('{{module}}', artifact.module || 'core')
       .replaceAll('{{path}}', pathToUse)
-      .replaceAll('{{description}}', artifact.description || `${artifact.name} ${artifact.type || ''}`)
+      .replaceAll('{{description}}', safeDescription)
       .replaceAll('{{workflow_path}}', pathToUse);
 
     // Replace _mdan placeholder with actual folder name
