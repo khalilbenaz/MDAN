@@ -1129,7 +1129,7 @@ class UI {
   async promptForDirectory() {
     // Use sync validation because @clack/prompts doesn't support async validate
     const directory = await prompts.text({
-      message: 'Dossier dial l'installation:',
+      message: "Dossier dial l'installation:",
       default: process.cwd(),
       placeholder: process.cwd(),
       validate: (input) => this.validateDirectorySync(input),
