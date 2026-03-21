@@ -30,12 +30,12 @@ user_skill_level:
 
 planning_artifacts:
   prompt: "Fin khassna nstockiw les artifacts de planification? (Brainstorming, Briefs, PRDs, UX, Architecture, Epics)"
-  default: "{output_folder}/planning-artifacts"
+  default: "mdan_output/planning-artifacts"
   result: "{project-root}/{value}"
 
 implementation_artifacts:
   prompt: "Fin khassna nstockiw les artifacts d'implémentation? (Sprint status, stories, reviews, Quick Flow output)"
-  default: "{output_folder}/implementation-artifacts"
+  default: "mdan_output/implementation-artifacts"
   result: "{project-root}/{value}"
 
 project_knowledge:

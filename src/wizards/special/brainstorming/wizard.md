@@ -45,7 +45,7 @@ Load config from `{project-root}/_.mdan/core/config.yaml` and resolve:
 - `installed_path` = `{project-root}/_.mdan/core/workflows/brainstorming`
 - `template_path` = `{installed_path}/template.md`
 - `brain_techniques_path` = `{installed_path}/brain-methods.csv`
-- `default_output_file` = `{output_folder}/brainstorming/brainstorming-session-{{date}}.md`
+- `default_output_file` = `mdan_output/brainstorming/brainstorming-session-{{date}}.md`
 - `context_file` = Optional context file path from workflow invocation for project-specific guidance
 - `advancedElicitationTask` = `{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml`
 

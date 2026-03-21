@@ -436,7 +436,7 @@ tools: ${toolsStr}
 - **Communication Language**: ${configVars.communication_language || '{{communication_language}}'}
 - **Document Output Language**: ${configVars.document_output_language || '{{document_output_language}}'}
 - **User Skill Level**: ${configVars.user_skill_level || '{{user_skill_level}}'}
-- **Output Folder**: ${configVars.output_folder || '{{output_folder}}'}
+- **Output Folder**: ${configVars.output_folder || '{mdan_output}'}
 - **Planning Artifacts**: ${configVars.planning_artifacts || '{{planning_artifacts}}'}
 - **Implementation Artifacts**: ${configVars.implementation_artifacts || '{{implementation_artifacts}}'}
 - **Project Knowledge**: ${configVars.project_knowledge || '{{project_knowledge}}'}
@@ -458,7 +458,7 @@ tools: ${toolsStr}
 ## Key Conventions
 
 - Always load \`${mdan}/bmm/config.yaml\` before any agent activation or workflow execution
-- Store all config fields as session variables: \`{user_name}\`, \`{communication_language}\`, \`{output_folder}\`, \`{planning_artifacts}\`, \`{implementation_artifacts}\`, \`{project_knowledge}\`
+- Store all config fields as session variables: \`{user_name}\`, \`{communication_language}\`, \`mdan_output\`, \`{planning_artifacts}\`, \`{implementation_artifacts}\`, \`{project_knowledge}\`
 - MD-based workflows execute directly — load and follow the \`.md\` file
 - YAML-based workflows require the workflow engine — load \`workflow.xml\` first, then pass the \`.yaml\` config
 - Follow step-based workflow execution: load steps JIT, never multiple at once

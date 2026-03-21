@@ -155,7 +155,7 @@
 
               <strategy name="FULL_LOAD">
                 <desc>Load ALL files in sharded directory - used for PRD, Architecture, UX, brownfield docs</desc>
-                <action>Use glob pattern to find ALL .md files (e.g., "{output_folder}/*architecture*/*.md")</action>
+                <action>Use glob pattern to find ALL .md files (e.g., "mdan_output/*architecture*/*.md")</action>
                 <action>Load EVERY matching file completely</action>
                 <action>Concatenate content in logical order (index.md first if exists, then alphabetical)</action>
                 <action>Store in variable: {pattern_name_content}</action>
@@ -189,7 +189,7 @@
 
           <substep n="2b" title="Try Whole Document if No Sharded Found">
             <check if="no sharded matches found OR no sharded pattern exists">
-              <action>Attempt glob match on 'whole' pattern (e.g., "{output_folder}/*prd*.md")</action>
+              <action>Attempt glob match on 'whole' pattern (e.g., "mdan_output/*prd*.md")</action>
               <check if="matches found">
                 <action>Load ALL matching files completely (no offset/limit)</action>
                 <action>Store content in variable: {pattern_name_content} (e.g., {prd_content})</action>

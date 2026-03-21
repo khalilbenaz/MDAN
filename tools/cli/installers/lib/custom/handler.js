@@ -257,7 +257,7 @@ class CustomHandler {
               // Replace placeholders
               content = content.replaceAll('{user_name}', config.user_name || 'User');
               content = content.replaceAll('{communication_language}', config.communication_language || 'English');
-              content = content.replaceAll('{output_folder}', config.output_folder || 'docs');
+              content = content.replaceAll('mdan_output', config.output_folder || 'docs');
 
               // Write to target
               await fs.ensureDir(path.dirname(targetPath));
@@ -333,7 +333,7 @@ class CustomHandler {
         let processedXml = xml;
         processedXml = processedXml.replaceAll('{user_name}', config.user_name || 'User');
         processedXml = processedXml.replaceAll('{communication_language}', config.communication_language || 'English');
-        processedXml = processedXml.replaceAll('{output_folder}', config.output_folder || 'docs');
+        processedXml = processedXml.replaceAll('mdan_output', config.output_folder || 'docs');
 
         // Write the compiled MD file
         await fs.writeFile(targetMdPath, processedXml, 'utf8');

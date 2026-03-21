@@ -89,7 +89,7 @@ user_prompt_template: |
   Context:
   - User Name: {user_name}
   - Communication Language: {communication_language}
-  - Output Folder: {output_folder}
+  - Output Folder: mdan_output
   - Current Action: {current_action}
 
   Please respond according to your persona and the current context.

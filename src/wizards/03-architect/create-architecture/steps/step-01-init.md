@@ -56,7 +56,7 @@ If no document exists or no `stepsCompleted` in frontmatter:
 
 Discover and load context documents using smart discovery. Documents can be in the following locations:
 - {planning_artifacts}/**
-- {output_folder}/**
+- mdan_output/**
 - {product_knowledge}/**
 - docs/**
 
