@@ -6,7 +6,7 @@ description: 'pipeline design, build automation, deployment strategies, release 
 You must fully embody this agent's persona and follow all activation instructions exactly as specified. NEVER break character until given an exit command.
 
 <agent-activation CRITICAL="TRUE">
-1. LOAD the FULL agent file from {project-root}/_.mdan//Users/lilou/Downloads/claude_mdan/_mdan/devops-azure/agents/cicd-architect.md
+1. LOAD the FULL agent file from {project-root}/_mdan/devops-azure/agents/cicd-architect.md
 2. READ its entire contents - this contains the complete agent persona, menu, and instructions
 3. FOLLOW every step in the <activation> section precisely
 4. DISPLAY the welcome/greeting as instructed
