@@ -4,7 +4,7 @@
 
 [![npm](https://img.shields.io/npm/v/mdan-method.svg)](https://www.npmjs.com/package/mdan-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Wizards](https://img.shields.io/badge/wizards-16-purple)]()
+[![Wizards](https://img.shields.io/badge/wizards-17-purple)]()
 [![Agents](https://img.shields.io/badge/agents-19-blue)]()
 [![Packs](https://img.shields.io/badge/packs-3-orange)]()
 
@@ -84,7 +84,7 @@ Party Mode daba 3endo **3 modes** :
 | **Debate** | Argumentation structurée b 3 d les rôles → Decision Record |
 | **Consensus** | N agents kayt-convergéw vers position mochterka |
 
-**Debate mode** — 3 rôles : Proponent 🟢, Opponent 🔴, Arbitrator ⚖️. 3 rounds structurés. Automatiquement kayproduisé Decision Record (DR-XXX) w kayt-enregistré f le Context Graph.
+**Debate mode** — 3 rôles : Proponent 🟢, Opponent 🔴, Arbitrator ⚖️. 3 rounds structurés. Automatiquement kayproduisé Decision Record (DR-XXX) w kayt-enregistré f le Context Graph. Disponible comme sous-mode de party-mode OU directement via `/mdan-debate`.
 
 **Consensus mode** — 3-5 agents kaymchiw f 4 phases : positions initiales → mapping d'accord/désaccord → itérations de convergence → synthèse.
 
@@ -157,6 +157,7 @@ Ga3 les commandes kaybdaw b `/mdan-`.
 | Commande | Chnou kadir |
 |----------|-------------|
 | `/mdan-party-mode` | Mode multi-agents : 3 modes — Discussion, Debate, Consensus. Agent sidecars, Decision Records, Context Graph. |
+| `/mdan-debate` | Débat structuré standalone entre agents (Proponent 🟢 vs Opponent 🔴 + Arbitrator ⚖️). 3 rounds → Arbitration → Decision Record. Accès direct sans passer par party-mode. |
 | `/mdan-brainstorming` | Session de brainstorming b 12+ techniques créatives (SCAMPER, Six Thinking Hats, Mind Mapping, etc.). |
 
 ### CLI Commands (Jdid f v3)
@@ -316,6 +317,6 @@ MIT
 ---
 
 <p align="center">
-  <strong>16 wizards · 19 agents · 3 packs · MCP Server · Context Graph · Debate/Consensus</strong><br>
+  <strong>17 wizards · 19 agents · 3 packs · MCP Server · Context Graph · Debate/Consensus</strong><br>
   Msnou3 f lMghrib par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>

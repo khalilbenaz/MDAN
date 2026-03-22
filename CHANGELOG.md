@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.1] - 2026-03-22
+
+### Added
+- **Standalone Debate Workflow** (`/mdan-debate`): Direct access to structured multi-agent debate without going through party-mode. Full 4-step workflow (topic setup → 3 rounds + arbitration → decision record → conclusion). Produces Decision Records (DR-XXX) and registers in Context Graph.
+- `mdan-debate.md` slash command for Claude Code
+
+### Fixed
+- **All slash command paths**: Fixed double `_mdan/_mdan/mdan` path in all workflow commands — was causing commands to fail to locate workflow files
+- **Agent command paths**: Fixed absolute local paths (`/Users/.../claude_mdan/_mdan/...`) leaked into agent commands — replaced with correct relative `{project-root}/_mdan/...` paths
+- Added debate entry to `workflow-manifest.csv`
+- Updated README badges and command table
+
 ## [3.0.0] - 2026-03-21
 
 ### Added

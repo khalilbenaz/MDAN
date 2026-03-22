@@ -1,17 +1,17 @@
 installation:
-  version: 2.8.3
+  version: 3.0.1
   installDate: 2026-03-21T09:55:31.820Z
   lastUpdated: 2026-03-21T09:55:31.820Z
 modules:
   - name: core
-    version: 2.8.3
+    version: 3.0.1
     installDate: 2026-03-21T09:55:31.820Z
     lastUpdated: 2026-03-21T09:55:31.820Z
     source: built-in
     npmPackage: null
     repoUrl: null
   - name: mdan
-    version: 2.8.3
+    version: 3.0.1
     installDate: 2026-03-21T09:55:31.772Z
     lastUpdated: 2026-03-21T09:55:31.820Z
     source: built-in
