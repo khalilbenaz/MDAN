@@ -1,0 +1,29 @@
+# ECOSYSTEM Module Configuration
+# Claude Code Skills/Agents/Commands Bridge
+# Provides access to 1,053 skills, 418 agents, 340 commands, 67 hooks, 67 settings, 69 MCPs
+# Source: khalilbenaz/claude-skills-collection + davila7/claude-code-templates (aitmpl.com)
+
+ecosystem:
+  version: 1.0.0
+  description: "Bridge module connecting MDAN to the full Claude Code component ecosystem"
+  sources:
+    - name: khalilbenaz/claude-skills-collection
+      type: skills
+      count: 352
+      path: ~/.claude/skills/
+    - name: davila7/claude-code-templates
+      type: mixed
+      skills: 701
+      agents: 418
+      commands: 340
+      hooks: 67
+      settings: 67
+      mcps: 69
+      paths:
+        skills: ~/.claude/skills/
+        agents: ~/.claude/agents/
+        commands: ~/.claude/commands/
+        hooks: ~/.claude/hooks/aitmpl/
+        settings: ~/.claude/settings-templates/
+        mcps: ~/.claude/mcp-templates/
+  catalog: _mdan/ecosystem/catalog/CATALOG.md
