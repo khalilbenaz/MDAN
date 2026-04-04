@@ -38,5 +38,19 @@ modules:
     source: unknown
     npmPackage: null
     repoUrl: null
+  - name: ecosystem
+    version: 1.0.0
+    installDate: 2026-04-04T00:00:00.000Z
+    lastUpdated: 2026-04-04T00:00:00.000Z
+    source: claude-code-ecosystem
+    npmPackage: null
+    repoUrl: https://github.com/khalilbenaz/claude-skills-collection
+    components:
+      skills: 1053
+      agents: 418
+      commands: 340
+      hooks: 67
+      settings: 67
+      mcps: 69
 ides:
   - claude-code

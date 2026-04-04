@@ -6,6 +6,7 @@ import { registerWorkflowTools } from './tools/workflow-tools.js';
 import { registerAgentTools } from './tools/agent-tools.js';
 import { registerGraphTools } from './tools/graph-tools.js';
 import { registerOrchestrationTools } from './tools/orchestration-tools.js';
+import { registerEcosystemTools } from './tools/ecosystem-tools.js';
 import { registerStateResource } from './resources/state-resource.js';
 import { registerConfigResource } from './resources/config-resource.js';
 import { registerGraphResource } from './resources/graph-resource.js';
@@ -23,6 +24,7 @@ export async function startServer({ transport = 'stdio', port = 3100 } = {}) {
   registerAgentTools(server, discovery, projectRoot);
   registerGraphTools(server, projectRoot);
   registerOrchestrationTools(server, projectRoot);
+  registerEcosystemTools(server, discovery, projectRoot);
 
   // Register resources
   registerStateResource(server, projectRoot);
