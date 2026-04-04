@@ -5,27 +5,36 @@
 [![npm](https://img.shields.io/npm/v/mdan-method.svg)](https://www.npmjs.com/package/mdan-method)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Wizards](https://img.shields.io/badge/wizards-17-purple)]()
-[![Agents](https://img.shields.io/badge/agents-19-blue)]()
-[![Packs](https://img.shields.io/badge/packs-3-orange)]()
+[![Agents](https://img.shields.io/badge/agents-28-blue)]()
+[![Packs](https://img.shields.io/badge/packs-4-orange)]()
+[![Ecosystem](https://img.shields.io/badge/ecosystem-2014_composants-green)]()
 
-**MDAN** howa framework dial développement b l'IA, fih des agents spécialisés, des wizards interactifs step-by-step, un système de mémoire persistante, w un protocole de débat structuré.
+**MDAN** est un framework de développement piloté par l'IA, composé d'agents spécialisés, de wizards interactifs pas-à-pas, d'un système de mémoire persistante et d'un protocole de débat structuré.
 
-**100% gratuit w open source.** Made in Morocco.
+**100% gratuit et open source.** Made in Morocco.
 
 ---
 
-## Jdid f v3 🚀
+## Nouveautés v3.1 🚀
 
-### MCP Server
+### Module Ecosystem — 2,014 composants
 
-Daba MDAN kaychtaghel bhal **MCP server** — ay IDE compatible b [MCP](https://modelcontextprotocol.io/) (Claude Code, Cursor, etc.) ygdar yconnecter directement w yst3mel ga3 les workflows w les agents bhal des tools.
+MDAN est désormais connecté à l'**écosystème complet Claude Code** : **1,053 skills, 418 agents, 340 commandes, 67 hooks, 67 settings, 69 MCPs**.
+
+Sources : [khalilbenaz/claude-skills-collection](https://github.com/khalilbenaz/claude-skills-collection) + [aitmpl.com](https://www.aitmpl.com/) (davila7/claude-code-templates)
+
+9 nouveaux agents spécialisés, dirigés par **Fayçal (IA Master)** et supervisés par **Khalil (MDAN Master)**.
+
+### Serveur MCP
+
+MDAN fonctionne comme **serveur MCP** — tout IDE compatible [MCP](https://modelcontextprotocol.io/) (Claude Code, Cursor, etc.) peut se connecter directement et utiliser tous les workflows et agents comme des outils.
 
 ```bash
-mdan serve            # stdio transport
-mdan serve --sse      # SSE l remote
+mdan serve            # transport stdio
+mdan serve --sse      # SSE pour le distant
 ```
 
-Zid had la config f `.mcp.json` dyalek :
+Ajoutez cette configuration dans votre `.mcp.json` :
 
 ```json
 {
@@ -39,24 +48,31 @@ Zid had la config f `.mcp.json` dyalek :
 }
 ```
 
-**Les MCP tools li disponibles :**
+**Outils MCP disponibles :**
 
-| Tool | Chnou kadir |
-|------|-------------|
-| `mdan_list-workflows` | Kaylisté ga3 les workflows |
-| `mdan_workflow_{name}` | Kayexécuté un workflow (create-prd, create-architecture, etc.) |
-| `mdan_list-agents` | Kaylisté ga3 les agents installés |
-| `mdan_agent_{name}` | Kayconsulté un agent spécifique |
+| Outil | Description |
+|-------|-------------|
+| `mdan_list-workflows` | Liste tous les workflows |
+| `mdan_workflow_{name}` | Exécute un workflow (create-prd, create-architecture, etc.) |
+| `mdan_list-agents` | Liste tous les agents installés |
+| `mdan_agent_{name}` | Consulte un agent spécifique |
 | `mdan_graph_impact` | Analyse d'impact en aval d'un artifact |
-| `mdan_graph_visualize` | Diagramme Mermaid dial le context graph |
-| `mdan_orchestrate_party-mode` | Session multi-agent (discussion/debate/consensus) |
-| `mdan_orchestrate_create-decision-record` | Créé un decision record |
+| `mdan_graph_visualize` | Diagramme Mermaid du context graph |
+| `mdan_orchestrate_party-mode` | Session multi-agent (discussion/débat/consensus) |
+| `mdan_orchestrate_create-decision-record` | Crée un decision record |
+| `mdan_ecosystem_catalog` | Affiche le catalogue complet de l'écosystème (2,014 composants) |
+| `mdan_ecosystem_search-skills` | Recherche parmi 1,053 skills par mot-clé |
+| `mdan_ecosystem_search-agents` | Recherche parmi 418 templates d'agents |
+| `mdan_ecosystem_search-commands` | Recherche parmi 340 commandes |
+| `mdan_ecosystem_read-skill` | Lit le contenu d'un skill |
+| `mdan_ecosystem_read-agent` | Lit le contenu d'un template d'agent |
+| `mdan_ecosystem_stats` | Statistiques d'installation de l'écosyst��me |
 
-**MCP resources :** `mdan://state`, `mdan://config`, `mdan://graph`
+**Ressources MCP :** `mdan://state`, `mdan://config`, `mdan://graph`
 
 ### Context Graph
 
-DAG léger li kaytracké ga3 les relations entre les artifacts. Kol workflow mlli kaykmel, l'artifact automatiquement kayt-enregistré f le graphe.
+DAG léger qui trace toutes les relations entre les artifacts. Chaque workflow terminé enregistre automatiquement son artifact dans le graphe.
 
 ```bash
 mdan impact <artifact-id>   # Analyse d'impact en aval
@@ -72,113 +88,121 @@ graph TD
   dr-001[DR-001: API Strategy] -->|impacts| arch
 ```
 
-Les Decision Records dial les débats aussi kayt-enregistrów f le graphe.
+Les Decision Records des débats sont aussi enregistrés dans le graphe.
 
-### Multi-Agent Orchestration Avancée
+### Orchestration multi-agent avancée
 
-Party Mode daba 3endo **3 modes** :
+Le Party Mode propose **3 modes** :
 
-| Mode | Chnou fih |
-|------|-----------|
+| Mode | Description |
+|------|-------------|
 | **Discussion** | Conversation libre multi-agent (mode original) |
-| **Debate** | Argumentation structurée b 3 d les rôles → Decision Record |
-| **Consensus** | N agents kayt-convergéw vers position mochterka |
+| **Débat** | Argumentation structurée à 3 rôles → Decision Record |
+| **Consensus** | N agents convergent vers une position commune |
 
-**Debate mode** — 3 rôles : Proponent 🟢, Opponent 🔴, Arbitrator ⚖️. 3 rounds structurés. Automatiquement kayproduisé Decision Record (DR-XXX) w kayt-enregistré f le Context Graph. Disponible comme sous-mode de party-mode OU directement via `/mdan-debate`.
+**Mode Débat** — 3 rôles : Partisan 🟢, Opposant 🔴, Arbitre ⚖️. 3 rounds structurés. Produit automatiquement un Decision Record (DR-XXX) enregistré dans le Context Graph. Disponible en sous-mode de party-mode OU directement via `/mdan-debate`.
 
-**Consensus mode** — 3-5 agents kaymchiw f 4 phases : positions initiales → mapping d'accord/désaccord → itérations de convergence → synthèse.
+**Mode Consensus** — 3-5 agents passent par 4 phases : positions initiales → cartographie accord/désaccord → itérations de convergence → synthèse.
 
-**Agent Sidecars** — Mémoire persistante l kol agent entre les sessions. Les agents kaytfekrów les observations, les préférences, w les décisions dial les sessions précédentes.
+**Agent Sidecars** — Mémoire persistante pour chaque agent entre les sessions. Les agents se souviennent des observations, préférences et décisions des sessions précédentes.
+
+### Sélection de langue
+
+À l'installation, MDAN vous demande votre langue préférée :
+1. 🇫🇷🇲🇦 Français + Darija Marocaine (par défaut)
+2. 🇫🇷 Français uniquement
+3. 🇬🇧 English
+4. 🇲🇦 Darija Marocaine
 
 ---
 
-## Bdew mn hna — Quick Start
+## Démarrage rapide
 
 ```bash
 npx mdan-method install
 ```
 
-L'installeur kayguide-k bach tkhtar les modules w l'IDE dyalek (Claude Code, Gemini CLI, OpenCode, QwenCoder...).
+L'installeur vous guide pour choisir les modules et votre IDE (Claude Code, Gemini CLI, OpenCode, QwenCoder...).
 
-Mn b3d, f l'IDE dyalek, kteb `/mdan-` w ghadi tchof ga3 les commandes li disponibles.
+Ensuite, dans votre IDE, tapez `/mdan-` pour voir toutes les commandes disponibles.
 
 ---
 
-## Les commandes li kaynin
+## Commandes disponibles
 
-Ga3 les commandes kaybdaw b `/mdan-`.
+Toutes les commandes commencent par `/mdan-`.
 
-### Wizards — Phase 1 : Discover (Lektichaf)
+### Wizards — Phase 1 : Découverte
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `/mdan-create-product-brief` | Kaycréé lik product brief collaboratif f 6 d les étapes. Kaydéfini la vision, les utilisateurs cibles, le scope w les métriques de succès. |
-| `/mdan-market-research` | Recherche dial souk : analyse concurrentielle, comportement dial les clients, pain points w les opportunités. |
-| `/mdan-technical-research` | Recherche technique : les technologies, patterns d'architecture, intégrations w les tendances. |
-| `/mdan-domain-research` | Recherche dial domaine : analyse sectorielle, réglementation, paysage concurrentiel. |
+| `/mdan-create-product-brief` | Crée un product brief collaboratif en 6 étapes. Définit la vision, les utilisateurs cibles, le scope et les métriques de succès. |
+| `/mdan-market-research` | Recherche de marché : analyse concurrentielle, comportement clients, pain points et opportunités. |
+| `/mdan-technical-research` | Recherche technique : technologies, patterns d'architecture, intégrations et tendances. |
+| `/mdan-domain-research` | Recherche de domaine : analyse sectorielle, réglementation, paysage concurrentiel. |
 
-### Wizards — Phase 2 : Plan (Tkhtiit)
+### Wizards — Phase 2 : Planification
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `/mdan-create-prd` | Kaycréé Product Requirements Document kamel f 12 étape. Fih la vision, les user journeys, le scoping, les requirements fonctionnels w non-fonctionnels. |
-| `/mdan-create-ux-design` | Kayplani le design UX f 14 étape : discovery, design system, fondations visuelles, user journeys, composants w responsive. |
+| `/mdan-create-prd` | Crée un Product Requirements Document complet en 12 étapes. Vision, user journeys, scoping, requirements fonctionnels et non-fonctionnels. |
+| `/mdan-create-ux-design` | Planifie le design UX en 14 étapes : discovery, design system, fondations visuelles, user journeys, composants et responsive. |
 
-### Wizards — Phase 3 : Architect (L'handasa)
+### Wizards — Phase 3 : Architecture
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `/mdan-create-architecture` | Kaycréé l'architecture technique f 8 étapes : contexte, décisions, patterns, structure w validation. |
-| `/mdan-create-epics-and-stories` | Kayfssel les requirements l epics w user stories prêtes bach tbda le développement. |
+| `/mdan-create-architecture` | Crée l'architecture technique en 8 étapes : contexte, décisions, patterns, structure et validation. |
+| `/mdan-create-epics-and-stories` | Découpe les requirements en epics et user stories prêtes pour le développement. |
 
-### Wizards — Phase 4 : Build (Lbni)
+### Wizards — Phase 4 : Construction
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `/mdan-sprint-planning` | Kaygénéré sprint plan mn les epics. Kayorganisi les stories f les sprints b estimation. |
-| `/mdan-dev-story` | Kayimplémenté une story b le fichier de spec dyalha. TDD, tests, w documentation automatique. |
-| `/mdan-code-review` | Review de code adversariale : kaylga les bugs, les problèmes de sécurité w les violations dial patterns. |
+| `/mdan-sprint-planning` | Génère un sprint plan depuis les epics. Organise les stories en sprints avec estimation. |
+| `/mdan-dev-story` | Implémente une story depuis son fichier de spec. TDD, tests et documentation automatique. |
+| `/mdan-code-review` | Review de code adversariale : détecte les bugs, problèmes de sécurité et violations de patterns. |
 
-### Wizards — Phase 5 : Ship (Tslim)
+### Wizards — Phase 5 : Livraison
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `/mdan-document-project` | Kaygénéré la documentation kamla dial le projet : overview, deep-dives, source tree. |
+| `/mdan-document-project` | Génère la documentation complète du projet : overview, deep-dives, source tree. |
 
-### Quick Flows (Bsser3a)
+### Flows rapides
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `/mdan-quick-dev` | Dev b ssre3a f 6 étapes l les changements sghir. Détection de mode, contexte, exécution, self-check w review. |
-| `/mdan-quick-spec` | Spec technique b ssre3a f 4 étapes. Kayproduit spec prête l l'implémentation. |
+| `/mdan-quick-dev` | Développement rapide en 6 étapes pour les petits changements. Détection de mode, contexte, exécution, self-check et review. |
+| `/mdan-quick-spec` | Spec technique rapide en 4 étapes. Produit une spec prête pour l'implémentation. |
 
-### Special (Khassa)
+### Modes spéciaux
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `/mdan-party-mode` | Mode multi-agents : 3 modes — Discussion, Debate, Consensus. Agent sidecars, Decision Records, Context Graph. |
-| `/mdan-debate` | Débat structuré standalone entre agents (Proponent 🟢 vs Opponent 🔴 + Arbitrator ⚖️). 3 rounds → Arbitration → Decision Record. Accès direct sans passer par party-mode. |
-| `/mdan-brainstorming` | Session de brainstorming b 12+ techniques créatives (SCAMPER, Six Thinking Hats, Mind Mapping, etc.). |
+| `/mdan-party-mode` | Mode multi-agents : 3 modes — Discussion, Débat, Consensus. Agent sidecars, Decision Records, Context Graph. |
+| `/mdan-debate` | Débat structuré standalone entre agents (Partisan 🟢 vs Opposant 🔴 + Arbitre ⚖️). 3 rounds → Arbitrage → Decision Record. |
+| `/mdan-brainstorming` | Session de brainstorming avec 12+ techniques créatives (SCAMPER, Six Thinking Hats, Mind Mapping, etc.). |
 
-### CLI Commands (Jdid f v3)
+### Commandes CLI
 
-| Commande | Chnou kadir |
+| Commande | Description |
 |----------|-------------|
-| `mdan serve` | Kaystart le MCP server (stdio ou SSE) |
-| `mdan impact <id>` | Analyse d'impact d'un artifact f le Context Graph |
-| `mdan graph` | Kayaffiche le Context Graph bhal Mermaid diagram |
+| `mdan serve` | Démarre le serveur MCP (stdio ou SSE) |
+| `mdan impact <id>` | Analyse d'impact d'un artifact dans le Context Graph |
+| `mdan graph` | Affiche le Context Graph en diagramme Mermaid |
 
 ---
 
 ## Les Agents
 
-Les agents homa des personnalités IA spécialisées, t9der t3ayyet 3lihom directement.
+Les agents sont des personnalités IA spécialisées que vous pouvez invoquer directement.
 
-### L'équipe principale
+### Équipe principale
 
-| Commande | Agent | Chnou kaydir |
-|----------|-------|-------------|
-| `/mdan-agent-pm` | Khalil | **Product Manager** — Vision produit, PRD, priorisation, roadmap |
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-pm` | Khalil | **MDAN Master** — Orchestre tout le projet, gère les wizards, garde la mémoire |
 | `/mdan-agent-analyst` | Amina | **Business Analyst** — Recherche, briefs, analyse de marché |
 | `/mdan-agent-architect` | Reda | **Architect** — Architecture système, tech stack, patterns |
 | `/mdan-agent-dev` | Haytame | **Developer** — Implémentation, TDD, code propre |
@@ -186,111 +210,163 @@ Les agents homa des personnalités IA spécialisées, t9der t3ayyet 3lihom direc
 | `/mdan-agent-ux-designer` | Jihane | **UX Designer** — Design UX/UI, wireframes, prototypes |
 | `/mdan-agent-tech-writer` | Youssef | **Technical Writer** — Documentation technique, guides, API docs |
 | `/mdan-agent-sm` | Nadia | **Scrum Master** — Gestion agile, sprints, rétrospectives |
-| `/mdan-agent-security` | Yassir | **Security Engineer** — Audit de sécurité, threat modeling (STRIDE), OWASP Top 10, audit de dépendances, hardening |
-| `/mdan-agent-quick-flow-solo-dev` | — | **Solo Dev** — Mode rapide tout-en-un l les développeurs solo |
+| `/mdan-agent-security` | Yassir | **Security Engineer** — Audit de sécurité, threat modeling, OWASP Top 10 |
+| `/mdan-agent-quick-flow-solo-dev` | — | **Solo Dev** — Mode rapide tout-en-un pour développeurs solo |
 
 ### Pack FinTech
 
-| Commande | Agent | Chnou kaydir |
-|----------|-------|-------------|
-| `/mdan-agent-fintech-compliance-officer` | Rachid | **Compliance Officer** — Conformité réglementaire (GDPR, PCI DSS, AML/KYC), audit, policies |
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-fintech-compliance-officer` | Rachid | **Compliance Officer** — Conformité réglementaire (GDPR, PCI DSS, AML/KYC), audit, politiques |
 | `/mdan-agent-fintech-financial-analyst` | Amina | **Financial Analyst** — Modélisation financière, analyse de marché, reporting |
-| `/mdan-agent-fintech-risk-manager` | Karim | **Risk Manager** — Identification w mitigation dial les risques, stress testing |
+| `/mdan-agent-fintech-risk-manager` | Karim | **Risk Manager** — Identification et mitigation des risques, stress testing |
 
 ### Pack DevOps & Azure
 
-| Commande | Agent | Chnou kaydir |
-|----------|-------|-------------|
-| `/mdan-agent-devops-azure-azure-specialist` | Reda | **Azure Specialist** — Architecture cloud Azure, migration, optimisation dial les coûts |
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-devops-azure-azure-specialist` | Reda | **Azure Specialist** — Architecture cloud Azure, migration, optimisation des coûts |
 | `/mdan-agent-devops-azure-cicd-architect` | Yassine | **CI/CD Architect** — Pipelines CI/CD, déploiement blue-green/canary, automatisation |
 | `/mdan-agent-devops-azure-devops-engineer` | Omar | **DevOps Engineer** — Infrastructure as Code (Terraform, Bicep), monitoring, Kubernetes |
 
 ### Pack Database Optimization
 
-| Commande | Agent | Chnou kaydir |
-|----------|-------|-------------|
-| `/mdan-agent-db-optimization-query-optimizer` | Driss | **Query Optimizer** — Analyse dial plans d'exécution, tuning SQL, détection N+1 |
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-db-optimization-query-optimizer` | Driss | **Query Optimizer** — Analyse de plans d'exécution, tuning SQL, détection N+1 |
 | `/mdan-agent-db-optimization-indexing-specialist` | Salma | **Indexing Specialist** — Stratégie d'indexation, index composites, audit d'index |
 | `/mdan-agent-db-optimization-performance-analyst` | Mehdi | **DB Performance Analyst** — Monitoring, diagnostic, capacity planning, tuning |
 
+### Pack Ecosystem — 2,014 Composants 🌐
+
+Module qui connecte MDAN à l'écosystème complet Claude Code : **1,053 skills, 418 agents, 340 commandes, 67 hooks, 67 settings, 69 MCPs**.
+
+| Agent | Nom | Rôle |
+|-------|-----|------|
+| 🧠 **IA Master** | Fayçal | **Chef de la stratégie IA** — Fine-tuning, RAG, agents, MLOps, 130+ skills AI. Décide tous les choix IA, reporte à Khalil. |
+| 🎯 **Skill Dispatcher** | Nadia | **Routeur central** — Route vers les 1,053 skills, 418 agents, 340 commandes. Catalogue complet. |
+| 🔬 **Research Team Lead** | Leila | **Chef de recherche** — Deep research, bioinformatique, 126 skills scientifiques, PubMed, UniProt. |
+| 🛡️ **Security Specialist** | Samir | **Expert sécurité** — 40+ skills sécurité, pentesting, OWASP, threat modeling, compliance. |
+| 🏗️ **Fullstack Architect** | Amine | **Architecte fullstack** — 200+ skills dev, system design, frontend/backend/infra. |
+| 🚀 **DevOps Commander** | Youssef | **Commandant DevOps** — CI/CD, K8s, Terraform, 39 agents infra, 11 commandes de déploiement. |
+| 📈 **Marketing Strategist** | Imane | **Stratège marketing** — SEO, growth hacking, ads, contenu, email, publication multi-plateforme. |
+| 📊 **Data Scientist** | Saad | **Data scientist** — Analyse, visualisation, ML, ETL, dbt, Power BI, Tableau. |
+| 💡 **Product Lead** | Adnane | **Chef produit** — PRDs, sprints, estimation, roadmap, communication stakeholders. |
+
+**Utilisation :**
+
+```
+> ecosystem        # 🎯 Ouvre le skill dispatcher (Nadia)
+> ai               # 🧠 Consulte le IA Master (Fayçal)
+> security         # 🛡️ Lance le Security Specialist (Samir)
+> devops           # 🚀 Active le DevOps Commander (Youssef)
+> data             # 📊 Parle au Data Scientist (Saad)
+> marketing        # 📈 Consulte la Marketing Strategist (Imane)
+> product          # 💡 Travaille avec le Product Lead (Adnane)
+> research         # 🔬 Lance la Research Team Lead (Leila)
+> fullstack        # 🏗️ Consulte le Fullstack Architect (Amine)
+```
+
+**Hiérarchie :**
+```
+🧙 Khalil (MDAN Master) — Gère TOUT le projet
+  ├── 🧠 Fayçal (IA Master) — Gère tout ce qui est IA/ML
+  ├── 🎯 Nadia (Skill Dispatcher) — Route vers 2,014 composants
+  ├── 🔬 Leila (Research) ── 🛡️ Samir (Security)
+  ├── 🏗️ Amine (Fullstack) ── 🚀 Youssef (DevOps)
+  ├─��� 📈 Imane (Marketing) ── 📊 Saad (Data)
+  └── 💡 Adnane (Product)
+```
+
 ---
 
-## Système de Mémoire
+## Système de mémoire
 
 ```
 _mdan/
-├── core/config.yaml            ← Configuration dial le projet
+├── core/config.yaml            ← Configuration du projet
 ├── state/
 │   ├── MDAN-STATE.json         ← État global persistant
-│   ├── context-graph.json      ← DAG dial les artifacts w les relations
-│   └── sidecars/               ← Mémoire persistante dial kol agent
-└── _config/manifest.yaml       ← État dial l'installation
+│   ├── context-graph.json      ← DAG des artifacts et relations
+│   └─�� sidecars/               ← Mémoire persistante de chaque agent
+├── ecosystem/                  ← Bridge vers 2,014 composants
+│   ├── catalog/CATALOG.md      ← Index complet de l'écosystème
+│   └── agents/                 ← 9 agents spécialisés
+└── _config/manifest.yaml       ← État de l'installation
 
-Le contexte kaybqa entre :
-- Les wizards (le PRD 3endo accès l le brief)
+Le contexte persiste entre :
+- Les wizards (le PRD a accès au brief)
 - Les sessions (reprise automatique)
-- Les agents (les décisions partagées + sidecars)
-- Le Context Graph (traçabilité dial ga3 les artifacts)
+- Les agents (décisions partagées + sidecars)
+- Le Context Graph (traçabilité de tous les artifacts)
 ```
 
 ---
 
-## Debate Protocol
+## Protocole de débat
 
-Mlli katwsel décision critique (choix de stack, pattern, priorisation), les agents kaydébatiw :
+Lorsqu'une décision critique arrive (choix de stack, pattern, priorisation), les agents débattent :
 
-### Discussion Mode (Original)
-Conversation libre, 2-3 agents kaytjawbow b turn rotation.
+### Mode Discussion (Original)
+Conversation libre, 2-3 agents répondent par rotation.
 
-### Debate Mode (Jdid f v3) ⚔️
+### Mode Débat ⚔️
 ```
-3 rôles : Proponent 🟢, Opponent 🔴, Arbitrator ⚖️
+3 rôles : Partisan 🟢, Opposant 🔴, Arbitre ⚖️
 
-Round 1: Opening      → Kol agent kayprésenté la position dyalo (max 150 mots)
-Round 2: Rebuttal     → Kol agent kayrépondé directement l l'autre
-Round 3: Final        → Derniers arguments avant l'arbitrage
+Round 1: Ouverture     → Chaque agent présente sa position (max 150 mots)
+Round 2: Réfutation    → Chaque agent répond directement à l'autre
+Round 3: Final         → Derniers arguments avant l'arbitrage
 
-→ Arbitration : L'arbitre kaydécidé b rationale, confidence score w dissent
-→ Decision Record (DR-XXX) : Kayt-enregistré automatiquement f le Context Graph
+→ Arbitrage : L'arbitre décide avec justification, score de confiance et dissidence
+→ Decision Record (DR-XXX) : Enregistré automatiquement dans le Context Graph
 ```
 
-### Consensus Mode (Jdid f v3) 🤝
+### Mode Consensus 🤝
 ```
-3-5 agents kayt-convergéw :
+3-5 agents convergent :
 
-Phase 1: Positions    → Kol agent kayprésenté la position dyalo
-Phase 2: Mapping      → Zones d'accord ✅ w de tension ⚠️
-Phase 3: Convergence  → Les agents kaybddlo positions, concessions
-Phase 4: Synthèse     → Position merguée li kaydkhol fiha ga3 les perspectives
+Phase 1: Positions    → Chaque agent présente sa position
+Phase 2: Cartographie → Zones d'accord ✅ et de tension ⚠️
+Phase 3: Convergence  → Les agents ajustent positions et concessions
+Phase 4: Synthèse     → Position fusionnée intégrant toutes les perspectives
 
-→ Decision Record kayt-enregistré f le Context Graph
+→ Decision Record enregistré dans le Context Graph
 ```
 
 ---
 
-## Architecture (v3)
+## Architecture (v3.1)
 
 ```
 _mdan/                          ← Modules MDAN installés
-├── _config/                    ← Manifests, config agents
+├── _config/                    ← Manifests, configuration agents
 ├── core/                       ← Moteur (wizard engine, workflow.xml)
 ├── mdan/                       ← Module principal (workflows, teams)
 ├── state/                      ← État runtime (graph, sidecars)
+���── ecosystem/                  ← Bridge vers l'écosystème (2,014 composants)
+│   ├── agents/                 ← 9 agents spécialisés
+│   └── catalog/                ← Index complet
 └── {module}/                   ← Modules de domaine (fintech, devops-azure, etc.)
 
-tools/                          ← Nouveau f v3
-├── cli/                        ← Commandes CLI (serve, impact, graph)
-│   └── lib/                    ← Librairies (context-graph)
-└── mcp/                        ← MCP Server
-    ├── tools/                  ← Enregistrement dial les MCP tools
-    └── resources/              ← Enregistrement dial les MCP resources
+tools/
+├���─ cli/                        ← Commandes CLI (serve, impact, graph)
+���   └── lib/                    ← Librairies (context-graph)
+└─�� mcp/                        ← Serveur MCP
+    ��── tools/                  ← Enregistrement des outils MCP
+    │   ├── workflow-tools.js
+    │   ├── agent-tools.js
+    │   ├── graph-tools.js
+    │   ├── orchestration-tools.js
+    │   └── ecosystem-tools.js  ← 7 nouveaux outils écosystème
+    └── resources/              ← Enregistrement des ressources MCP
 ```
 
 ---
 
 ## Installation
 
-### B npm (recommandé)
+### Via npm (recommandé)
 
 ```bash
 npx mdan-method install
@@ -304,9 +380,9 @@ cd MDAN && npm install
 node tools/cli/mdan-cli.js install
 ```
 
-### Les IDE supportés
+### IDE supportés
 
-Claude Code, Gemini CLI, OpenCode, QwenCoder, Cursor, Windsurf, Cline, Codex, w bzzaf d'autres.
+Claude Code, Gemini CLI, OpenCode, QwenCoder, Cursor, Windsurf, Cline, Codex, et bien d'autres.
 
 ---
 
@@ -317,6 +393,6 @@ MIT
 ---
 
 <p align="center">
-  <strong>17 wizards · 19 agents · 3 packs · MCP Server · Context Graph · Debate/Consensus</strong><br>
-  Msnou3 f lMghrib par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
+  <strong>17 wizards · 28 agents · 4 packs · 2,014 composants · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
+  Conçu au Maroc par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
