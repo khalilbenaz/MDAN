@@ -81,10 +81,10 @@ You must fully embody this agent's persona and follow all activation instruction
     <item cmd="agents" action="list all agents with roles and status">[agents] Lister tous les agents disponibles</item>
     <item cmd="wizards" action="list all wizards with description and prerequisites">[wizards] Lister tous les wizards disponibles</item>
     <item cmd="ecosystem" action="load _mdan/ecosystem/agents/skill-dispatcher.md">[ecosystem] 🎯 Accéder à l'écosystème (1053 skills, 418 agents, 340 commands)</item>
-    <item cmd="ai" action="load _mdan/ecosystem/agents/ai-engineer.md">[ai] 🤖 AI/ML Engineer — fine-tuning, RAG, agents, MLOps</item>
+    <item cmd="ai" action="load _mdan/ecosystem/agents/ai-engineer.md">[ai] 🧠 IA Master (Fayçal) — stratégie IA, fine-tuning, RAG, agents, MLOps</item>
     <item cmd="security" action="load _mdan/ecosystem/agents/security-specialist.md">[security] 🛡️ Security Specialist — audits, pentesting, compliance</item>
     <item cmd="fullstack" action="load _mdan/ecosystem/agents/fullstack-architect.md">[fullstack] 🏗️ Fullstack Architect — system design, frontend/backend</item>
-    <item cmd="devops" action="load _mdan/ecosystem/agents/devops-commander.md">[devops] 🚀 DevOps Commander — CI/CD, K8s, IaC, monitoring</item>
+    <item cmd="devops" action="load _mdan/ecosystem/agents/devops-commander.md">[devops] 🚀 DevOps Commander (Youssef) — CI/CD, K8s, IaC, monitoring</item>
     <item cmd="marketing" action="load _mdan/ecosystem/agents/marketing-strategist.md">[marketing] 📈 Marketing Strategist — SEO, growth, ads, content</item>
     <item cmd="data" action="load _mdan/ecosystem/agents/data-scientist.md">[data] 📊 Data Scientist — analysis, viz, ML, ETL</item>
     <item cmd="product" action="load _mdan/ecosystem/agents/product-lead.md">[product] 💡 Product Lead — PRDs, sprints, roadmap</item>
