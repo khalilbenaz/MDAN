@@ -1,6 +1,15 @@
 #!/usr/bin/env node
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+let McpServer, StdioServerTransport;
+
+try {
+  ({ McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js'));
+  ({ StdioServerTransport } = await import('@modelcontextprotocol/sdk/server/stdio.js'));
+} catch {
+  console.error('[mdan] @modelcontextprotocol/sdk is required for MCP server.');
+  console.error('[mdan] Install it: npm install @modelcontextprotocol/sdk');
+  process.exit(1);
+}
+
 import { discoverMdan } from './discovery.js';
 import { registerWorkflowTools } from './tools/workflow-tools.js';
 import { registerAgentTools } from './tools/agent-tools.js';
@@ -14,24 +23,20 @@ import { registerGraphResource } from './resources/graph-resource.js';
 export async function startServer({ transport = 'stdio', port = 3100 } = {}) {
   const projectRoot = process.env.MDAN_PROJECT_ROOT || process.cwd();
 
-  const server = new McpServer({ name: 'mdan', version: '3.0.0' });
+  const server = new McpServer({ name: 'mdan', version: '3.1.2' });
 
-  // Discover installed modules, workflows, agents
   const discovery = await discoverMdan(projectRoot);
 
-  // Register tools
   registerWorkflowTools(server, discovery, projectRoot);
   registerAgentTools(server, discovery, projectRoot);
   registerGraphTools(server, projectRoot);
   registerOrchestrationTools(server, projectRoot);
   registerEcosystemTools(server, discovery, projectRoot);
 
-  // Register resources
   registerStateResource(server, projectRoot);
   registerConfigResource(server, discovery, projectRoot);
   registerGraphResource(server, projectRoot);
 
-  // Start transport
   if (transport === 'stdio') {
     const stdioTransport = new StdioServerTransport();
     await server.connect(stdioTransport);
@@ -41,7 +46,6 @@ export async function startServer({ transport = 'stdio', port = 3100 } = {}) {
   return server;
 }
 
-// Direct execution
 if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'))) {
   startServer().catch(err => {
     console.error('[mdan] Fatal:', err);
