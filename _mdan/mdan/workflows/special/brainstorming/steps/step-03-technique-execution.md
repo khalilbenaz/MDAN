@@ -398,3 +398,16 @@ When user selects 'C', append the content directly to `mdan_output/brainstorming
 After technique completion and user confirmation, load `./step-04-idea-organization.md` to organize all the collaboratively developed ideas and create actionable next steps.
 
 Remember: This is creative coaching, not technique delivery! The user's creative energy is your guide, not the technique structure.
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

@@ -103,3 +103,16 @@ With findings in hand, read fully and follow: `{project-root}/_.mdan/mdan/workfl
 - Invoking task without providing diff input
 - Accepting zero findings without questioning
 - Presenting fewer findings than the review task returned without explicit instruction to do so
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

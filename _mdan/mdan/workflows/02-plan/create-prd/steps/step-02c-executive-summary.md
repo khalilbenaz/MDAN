@@ -169,3 +169,16 @@ ONLY WHEN [C continue option] is selected and [content appended to document], wi
 ❌ **CRITICAL**: Making decisions without complete understanding of step requirements and protocols
 
 **Master Rule:** Generate high-quality Executive Summary content from discovered insights. Present for review, refine collaboratively, and only save when the user approves. This is the first substantive content in the PRD — it sets the quality bar for everything that follows.
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

@@ -201,3 +201,16 @@ When user selects 'C', append the content directly to the research document usin
 After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-05-implementation-research.md` to focus on implementation approaches and technology adoption.
 
 Remember: Always emphasize current architectural data and rigorous source verification!
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

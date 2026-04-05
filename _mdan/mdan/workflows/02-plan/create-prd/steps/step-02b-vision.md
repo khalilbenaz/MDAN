@@ -153,3 +153,16 @@ ONLY WHEN [C continue option] is selected and [stepsCompleted updated], will you
 ❌ **CRITICAL**: Proceeding with 'C' without fully reading and understanding the next step file
 
 **Master Rule:** This step is vision discovery only. No content generation, no document writing. Have natural conversations, build on what you know from classification, and establish the vision that will feed into the Executive Summary.
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.
