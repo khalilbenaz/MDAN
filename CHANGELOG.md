@@ -1,14 +1,21 @@
 # Changelog
 
-## [3.1.1] - 2026-04-05
+## [3.1.2] - 2026-04-05
 
 ### Added
 - **Ultra-concise communication rules** enforced across all 149 components (agents, wizards, skills, tasks)
 - `ultra-concise-mode` behavior skill in `_mdan/core/`
 - Communication Rules section in README (in French)
+- `LICENSE` file (MIT)
+- `.npmignore` for clean npm publishes
+- `files` field in package.json for explicit publish control
+- `repository`, `homepage`, `bugs`, `author`, `keywords` metadata
 
 ### Changed
-- All agent/skill/task markdown files now include mandatory communication rules: tool-first, result-first, no filler, no politeness wrappers, minimum words
+- All agent/skill/task markdown files now include mandatory communication rules
+- Pinned `@modelcontextprotocol/sdk` to exact `1.29.0` (was `^1.12.1`)
+- Fixed bin script paths (removed `./` prefix)
+- Made bin scripts executable
 
 ## [3.0.1] - 2026-03-22
 

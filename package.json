@@ -1,18 +1,37 @@
 {
   "name": "mdan-method",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "MDAN - AI-Driven Development Methodology Platform",
   "type": "module",
-  "bin": {
-    "mdan": "./tools/cli/index.js",
-    "mdan-mcp": "./tools/mcp/server.js"
+  "license": "MIT",
+  "author": "Khalil Benaz <khalilbenaz@gmail.com> (https://github.com/khalilbenaz)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/khalilbenaz/MDAN.git"
   },
+  "homepage": "https://github.com/khalilbenaz/MDAN#readme",
+  "bugs": {
+    "url": "https://github.com/khalilbenaz/MDAN/issues"
+  },
+  "keywords": ["mdan", "ai", "agents", "mcp", "claude", "development", "methodology"],
+  "bin": {
+    "mdan": "tools/cli/index.js",
+    "mdan-mcp": "tools/mcp/server.js"
+  },
+  "files": [
+    "_mdan/**",
+    "tools/**",
+    ".claude/commands/**",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "serve": "node tools/cli/commands/serve.js",
     "test": "node --test tools/**/*.test.js"
   },
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.12.1"
+    "@modelcontextprotocol/sdk": "1.29.0"
   },
   "engines": {
     "node": ">=18.0.0"
