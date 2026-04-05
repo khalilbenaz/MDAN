@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.3] - 2026-04-05
+
+### Changed
+- Moved `@modelcontextprotocol/sdk` from `dependencies` to `optionalDependencies` — zero mandatory deps, SDK loaded only when `mdan serve` is called
+- MCP server now shows clear install instructions if SDK is missing
+
 ## [3.1.2] - 2026-04-05
 
 ### Added
