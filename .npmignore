@@ -1,0 +1,6 @@
+.git
+.github
+.claude/session-state.md
+node_modules
+*.log
+.DS_Store

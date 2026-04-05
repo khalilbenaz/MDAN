@@ -1,5 +1,5 @@
 ---
-saved_at: 2026-04-05T12:06:48Z
+saved_at: 2026-04-05T12:15:46Z
 directory: /private/tmp/MDAN
 ---
 
@@ -7,7 +7,7 @@ directory: /private/tmp/MDAN
 
 ## Git
 - Branch: main
-- Last commit: 3143797 Traduire la section Communication Rules en français
+- Last commit: 6319cac v3.1.1 — npm publish fix
 
 ### Modified files (unstaged)
 ```
@@ -16,9 +16,9 @@ directory: /private/tmp/MDAN
 
 ### Recent commits
 ```
+6319cac v3.1.1 — npm publish fix
+6278b8d v3.1.0 — Ultra-concise communication rules across all components
 3143797 Traduire la section Communication Rules en français
 15a452f Add Communication Rules section to README
 53020c9 Add mandatory communication rules to all 149 components
-ddca9ab Add ultra-concise-mode behavior skill
-19aea8c docs: rewrite README entirely in French + add ecosystem section
 ```
