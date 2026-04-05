@@ -228,3 +228,16 @@ Content is already written to document when generated in step 4. No additional a
 After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-03-competitive-landscape.md` to analyze competitive landscape, key players, and ecosystem analysis for {{research_topic}}.
 
 Remember: Always write research content to document immediately and search the web to verify facts!
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

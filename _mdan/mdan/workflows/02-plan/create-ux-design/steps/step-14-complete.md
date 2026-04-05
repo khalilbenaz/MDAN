@@ -170,3 +170,16 @@ This UX design workflow is now complete. The specification serves as the foundat
 - ✅ UX Design Specification: `{planning_artifacts}/ux-design-specification.md`
 - ✅ Color Themes Visualizer: `{planning_artifacts}/ux-color-themes.html`
 - ✅ Design Directions: `{planning_artifacts}/ux-design-directions.html`
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

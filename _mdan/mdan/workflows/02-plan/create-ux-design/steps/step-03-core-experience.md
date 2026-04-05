@@ -215,3 +215,16 @@ When user selects 'C', append the content directly to the document using the str
 After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-04-emotional-response.md` to define desired emotional responses.
 
 Remember: Do NOT proceed to step-04 until user explicitly selects 'C' from the A/P/C menu and content is saved!
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

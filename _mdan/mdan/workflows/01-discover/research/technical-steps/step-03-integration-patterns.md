@@ -247,3 +247,16 @@ Content is already written to document when generated in step 4. No additional a
 After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-04-architectural-patterns.md` to analyze architectural patterns, design decisions, and system structures for {{research_topic}}.
 
 Remember: Always write research content to document immediately and emphasize current integration data with rigorous source verification!
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

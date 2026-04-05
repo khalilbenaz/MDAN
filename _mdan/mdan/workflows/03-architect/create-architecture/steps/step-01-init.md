@@ -152,3 +152,16 @@ Ready to begin architectural decision making. Do you have any other documents yo
 After user selects [C] to continue, only after ensuring all the template output has been created, then load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-02-context.md` to analyze the project context and begin architectural decision making.
 
 Remember: Do NOT proceed to step-02 until user explicitly selects [C] from the menu and setup is confirmed!
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.

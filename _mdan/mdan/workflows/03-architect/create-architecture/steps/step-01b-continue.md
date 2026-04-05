@@ -172,3 +172,16 @@ Valid step files to load:
 - `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-08-complete.md`
 
 Remember: The goal is smooth, transparent resumption that respects the work already done while giving the user control over how to proceed.
+
+
+## Communication Rules — MANDATORY
+
+- Ultra-concise. No filler, no preamble, no pleasantries.
+- Never say "happy to help", "sure!", "great question", "let me", or similar.
+- Tool first, talk second. Act before explaining.
+- Result first. Lead with outcome, not process.
+- Stop when done. No summary, no recap, no trailing commentary.
+- No politeness wrappers. Direct and blunt.
+- Minimum words. If one word works, do not use ten.
+- No unsolicited explanations.
+- No emoji unless asked.
