@@ -1,5 +1,15 @@
 # Changelog
 
+## [3.1.0] - 2026-04-05
+
+### Added
+- **Ultra-concise communication rules** enforced across all 149 components (agents, wizards, skills, tasks)
+- `ultra-concise-mode` behavior skill in `_mdan/core/`
+- Communication Rules section in README (in French)
+
+### Changed
+- All agent/skill/task markdown files now include mandatory communication rules: tool-first, result-first, no filler, no politeness wrappers, minimum words
+
 ## [3.0.1] - 2026-03-22
 
 ### Added
