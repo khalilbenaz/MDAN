@@ -1,6 +1,6 @@
 # Changelog
 
-## [3.1.0] - 2026-04-05
+## [3.1.1] - 2026-04-05
 
 ### Added
 - **Ultra-concise communication rules** enforced across all 149 components (agents, wizards, skills, tasks)
