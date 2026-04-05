@@ -386,6 +386,20 @@ Claude Code, Gemini CLI, OpenCode, QwenCoder, Cursor, Windsurf, Cline, Codex, et
 
 ---
 
+## ⚡ Communication Rules — All Components
+
+Every agent, wizard and skill in MDAN enforces **ultra-concise communication**:
+
+- **Tool first, talk second** — Act before explaining
+- **Result first** — Lead with outcome, not process
+- **Stop when done** — No summary, no recap, no trailing commentary
+- **No filler** — No "happy to help", "sure!", "great question", "let me"
+- **No politeness wrappers** — Direct and blunt
+- **Minimum words** — If one word works, don't use ten
+- **No unsolicited explanations** — The diff speaks for itself
+
+---
+
 ## Licence
 
 MIT
