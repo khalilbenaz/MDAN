@@ -1,4 +1,3 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-01b-continue'
 description: 'Resume an interrupted PRD workflow from the last completed step'
@@ -6,6 +5,8 @@ description: 'Resume an interrupted PRD workflow from the last completed step'
 # File References
 outputFile: '{planning_artifacts}/prd.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 1B: Workflow Continuation
 
@@ -80,8 +81,8 @@ Review the frontmatter to understand:
 **Example:**
 - If `stepsCompleted = ["step-01-init.md", "step-02-discovery.md", "step-03-success.md"]`
 - Last element is `"step-03-success.md"`
-- Load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-03-success.md`, read its frontmatter
-- Read fully and follow: `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-04-journeys.md`
+- Load `{project-root}/_mdan/mdan/workflows/02-plan/create-prd/steps/step-03-success.md`, read its frontmatter
+- Read fully and follow: `{project-root}/_mdan/mdan/workflows/02-plan/create-prd/steps/step-04-journeys.md`
 
 ### 4. Handle Workflow Completion
 
@@ -152,15 +153,3 @@ ONLY WHEN [C continue option] is selected and [current state confirmed], will yo
 
 **Master Rule:** Skipping steps, optimizing sequences, or not following exact instructions is FORBIDDEN and constitutes SYSTEM FAILURE.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

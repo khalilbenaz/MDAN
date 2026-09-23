@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 1b: Workflow Continuation Handler
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -86,7 +87,7 @@ Show the user their current progress:
 
 - Identify the next step based on `stepsCompleted`
 - Load the appropriate step file to continue
-- Example: If `stepsCompleted: [1, 2, 3]`, load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-04-decisions.md`
+- Example: If `stepsCompleted: [1, 2, 3]`, load `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-04-decisions.md`
 
 #### If 'C' (Continue to next logical step):
 
@@ -104,7 +105,7 @@ Show the user their current progress:
 #### If 'X' (Start over):
 
 - Confirm: "This will delete all existing architectural decisions. Are you sure? (y/n)"
-- If confirmed: Delete existing document and read fully and follow: `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-01-init.md`
+- If confirmed: Delete existing document and read fully and follow: `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-01-init.md`
 - If not confirmed: Return to continuation menu
 
 ### 4. Navigate to Selected Step
@@ -163,25 +164,13 @@ After user makes choice:
 After user selects their continuation option, load the appropriate step file based on their choice. The step file will handle the detailed work from that point forward.
 
 Valid step files to load:
-- `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-02-context.md`
-- `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-03-starter.md`
-- `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-04-decisions.md`
-- `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-05-patterns.md`
-- `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-06-structure.md`
-- `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-07-validation.md`
-- `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-08-complete.md`
+- `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-02-context.md`
+- `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-03-starter.md`
+- `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-04-decisions.md`
+- `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-05-patterns.md`
+- `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-06-structure.md`
+- `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-07-validation.md`
+- `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-08-complete.md`
 
 Remember: The goal is smooth, transparent resumption that respects the work already done while giving the user control over how to proceed.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

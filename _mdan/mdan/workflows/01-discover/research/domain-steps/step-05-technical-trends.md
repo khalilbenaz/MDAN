@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Domain Research Step 5: Technical Trends
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -175,7 +176,7 @@ Show the generated technical analysis and present complete option:
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5]`
-- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-06-research-synthesis.md`
+- Load: `{project-root}/_mdan/mdan/workflows/01-discover/research/domain-steps/step-06-research-synthesis.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -234,15 +235,3 @@ Research workflow complete. User may:
 
 Congratulations on completing comprehensive domain research! 🎉
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

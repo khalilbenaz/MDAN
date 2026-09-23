@@ -3,7 +3,8 @@ name: party-mode
 description: 'Orchestrates group discussions between all installed MDAN agents, enabling natural multi-agent conversations. Use when user requests party mode.'
 ---
 
-**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 
 
 
@@ -40,17 +41,17 @@ This uses **micro-file architecture** with **sequential conversation orchestrati
 
 ### Configuration Loading
 
-Load config from `{project-root}/_.mdan/core/config.yaml` and resolve:
+Load config from `{project-root}/_mdan/core/config.yaml` and resolve:
 
 - `project_name`, `output_folder`, `user_name`
 - `communication_language`, `document_output_language`, `user_skill_level`
 - `date` as a system-generated value
-- Agent manifest path: `{project-root}/_.mdan/_config/agent-manifest.csv`
+- Agent manifest path: `{project-root}/_mdan/_config/agent-manifest.csv`
 
 ### Paths
 
-- `installed_path` = `{project-root}/_.mdan/core/workflows/party-mode`
-- `agent_manifest_path` = `{project-root}/_.mdan/_config/agent-manifest.csv`
+- `installed_path` = `{project-root}/_mdan/core/workflows/party-mode`
+- `agent_manifest_path` = `{project-root}/_mdan/_config/agent-manifest.csv`
 - `standalone_mode` = `true` (party mode is an interactive workflow)
 
 ---
@@ -224,15 +225,3 @@ If conversation naturally concludes:
 - Handle topic drift while maintaining productive conversation
 - Facilitate cross-agent collaboration and knowledge sharing
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

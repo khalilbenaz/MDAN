@@ -1,10 +1,9 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-02-discovery'
 description: 'Discover project type, domain, and context through collaborative dialogue'
 
 # File References
-nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-02b-vision.md'
+nextStepFile: '{project-root}/_mdan/mdan/workflows/02-plan/create-prd/steps/step-02b-vision.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Data Files
@@ -12,9 +11,10 @@ projectTypesCSV: '../data/project-types.csv'
 domainComplexityCSV: '../data/domain-complexity.csv'
 
 # Task References
-advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
+partyModeWorkflow: '{project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 2: Project Discovery
 
@@ -224,15 +224,3 @@ ONLY WHEN [C continue option] is selected and [classification saved to frontmatt
 
 **Master Rule:** This is classification and understanding only. No content generation yet. Build on what the user already has. Have natural conversations, don't follow scripts.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

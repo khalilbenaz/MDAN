@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Domain Research Step 1: Domain Research Scope Confirmation
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -79,7 +80,7 @@ For **{{research_topic}}**, I will research:
 
 - Document scope confirmation in research file
 - Update frontmatter: `stepsCompleted: [1]`
-- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-02-domain-analysis.md`
+- Load: `{project-root}/_mdan/mdan/workflows/01-discover/research/domain-steps/step-02-domain-analysis.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -133,19 +134,7 @@ When user selects 'C', append scope confirmation:
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-02-domain-analysis.md` to begin industry analysis.
+After user selects 'C', load `{project-root}/_mdan/mdan/workflows/01-discover/research/domain-steps/step-02-domain-analysis.md` to begin industry analysis.
 
 Remember: This is SCOPE CONFIRMATION ONLY - no actual domain research yet, just confirming the research approach and scope!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

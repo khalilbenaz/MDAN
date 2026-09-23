@@ -1,10 +1,11 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-02-context-gathering'
 description: 'Quick context gathering for direct mode - identify files, patterns, dependencies'
 
 nextStepFile: './step-03-execute.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 2: Context Gathering (Direct Mode)
 
@@ -98,7 +99,7 @@ Ready to execute? (y/n/adjust)
 
 **CRITICAL:** When user confirms ready, explicitly state:
 
-- **y:** "**NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`"
+- **y:** "**NEXT:** Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-03-execute.md`"
 - **n/adjust:** Continue gathering context, then re-present plan
 
 ---
@@ -118,15 +119,3 @@ Ready to execute? (y/n/adjust)
 - Not presenting plan for user confirmation
 - Missing obvious patterns in existing code
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

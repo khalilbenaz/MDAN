@@ -1,10 +1,10 @@
-# REGLE DE LANGUE: Communiquer en mix français-darija marocaine. Termes techniques en français, explications en darija.
+# Règles obligatoires : charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 name: sprint-planning
 description: 'Generate sprint status tracking from epics. Use when the user says "run sprint planning" or "generate sprint plan"'
 author: "MDAN"
 
 # Critical variables from config
-config_source: "{project-root}/_.mdan/mdan/config.yaml"
+config_source: "{project-root}/_mdan/mdan/config.yaml"
 user_name: "{config_source}:user_name"
 communication_language: "{config_source}:communication_language"
 date: system-generated
@@ -12,7 +12,7 @@ implementation_artifacts: "{config_source}:implementation_artifacts"
 planning_artifacts: "{config_source}:planning_artifacts"
 
 # Workflow components
-installed_path: "{project-root}/_.mdan/mdan/workflows/4-implementation/sprint-planning"
+installed_path: "{project-root}/_mdan/mdan/workflows/04-build/sprint-planning"
 instructions: "{installed_path}/instructions.md"
 template: "{installed_path}/sprint-status-template.yaml"
 validation: "{installed_path}/checklist.md"
