@@ -53,6 +53,14 @@ test('reinstall keeps user-modified files and writes .mdan-new', () => {
   assert.notEqual(readFileSync(wizard, 'utf-8'), 'my custom wizard');
 });
 
+test('a CRLF-only change (git autocrlf) is not treated as a user modification', () => {
+  const dir = tmp();
+  install(dir, opts());
+  const wizard = join(dir, '_mdan/mdan/workflows/02-plan/create-prd/wizard.md');
+  writeFileSync(wizard, readFileSync(wizard, 'utf-8').replace(/\r?\n/g, '\r\n'));
+  assert.deepEqual(install(dir, opts()).conflicts, []);
+});
+
 test('user config edits survive reinstall; only managed keys change', () => {
   const dir = tmp();
   install(dir, opts());
