@@ -1,4 +1,3 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-12-complete'
 description: 'Complete the PRD workflow, update status files, and suggest next steps including validation'
@@ -7,6 +6,8 @@ description: 'Complete the PRD workflow, update status files, and suggest next s
 outputFile: '{planning_artifacts}/prd.md'
 validationFlow: '../steps-v/step-v-01-discovery.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 12: Workflow Completion
 
@@ -88,7 +89,7 @@ Offer validation workflows to ensure PRD is ready for implementation:
 
 ### 4. Suggest Next Workflows
 
-PRD complete. Read fully and follow: `{project-root}/_.mdan/core/tasks/help.md`
+PRD complete. Read fully and follow: `{project-root}/_mdan/core/tasks/help.md`
 
 ### 5. Final Completion Confirmation
 
@@ -124,15 +125,3 @@ The polished PRD serves as the foundation for all subsequent product development
 
 **Congratulations on completing the Product Requirements Document for {{project_name}}!** 🎉
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

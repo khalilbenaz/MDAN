@@ -1,7 +1,14 @@
+---
+name: document-project
+description: 'Analyze an existing project to produce useful documentation (index, source tree, deep dives). Use when the user says "document this project" or "generate project docs".'
+---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Document Project Workflow Router
 
-<critical>The workflow execution engine is governed by: {project-root}/_.mdan/core/tasks/workflow.xml</critical>
-<critical>You MUST have already loaded and processed: {project-root}/_.mdan/mdan/workflows/document-project/workflow.yaml</critical>
+<critical>The workflow execution engine is governed by: {project-root}/_mdan/core/tasks/workflow.xml</critical>
+<critical>This wizard is self-contained: no separate workflow.yaml config to preload.</critical>
 <critical>Communicate all responses in {communication_language}</critical>
 
 <workflow>
@@ -129,15 +136,3 @@ Your choice [1/2/3]:
 
 </workflow>
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

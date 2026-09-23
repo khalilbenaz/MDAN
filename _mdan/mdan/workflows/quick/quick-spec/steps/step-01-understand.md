@@ -1,11 +1,12 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-01-understand'
 description: 'Analyze the requirement delta between current state and what user wants to build'
 
-templateFile: '../tech-spec-template.md'
+templateFile: '../templates/tech-spec-template.md'
 wipFile: '{implementation_artifacts}/tech-spec-wip.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 1: Analyze Requirement Delta
 
@@ -55,9 +56,9 @@ a) **Menu Handling:**
 
 - **[Y] Continue existing:**
   - Jump directly to the appropriate step based on `stepsCompleted`:
-    - `[1]` → Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-02-investigate.md` (Step 2)
-    - `[1, 2]` → Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-03-generate.md` (Step 3)
-    - `[1, 2, 3]` → Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-04-review.md` (Step 4)
+    - `[1]` → Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-spec/steps/step-02-investigate.md` (Step 2)
+    - `[1, 2]` → Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-spec/steps/step-03-generate.md` (Step 3)
+    - `[1, 2, 3]` → Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-spec/steps/step-04-review.md` (Step 4)
 - **[N] Archive and start fresh:**
   - Rename `{wipFile}` to `{implementation_artifacts}/tech-spec-{slug}-archived-{date}.md`
 
@@ -168,7 +169,7 @@ b) **HALT and wait for user selection.**
 
 - IF A: Read fully and follow: `{advanced_elicitation}` with current tech-spec content, process enhanced insights, ask user "Accept improvements? (y/n)", if yes update WIP file then redisplay menu, if no keep original then redisplay menu
 - IF P: Read fully and follow: `{party_mode_exec}` with current tech-spec content, process collaborative insights, ask user "Accept changes? (y/n)", if yes update WIP file then redisplay menu, if no keep original then redisplay menu
-- IF C: Verify `{wipFile}` has `stepsCompleted: [1]`, then read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-02-investigate.md`
+- IF C: Verify `{wipFile}` has `stepsCompleted: [1]`, then read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-spec/steps/step-02-investigate.md`
 - IF Any other comments or queries: respond helpfully then redisplay menu
 
 #### EXECUTION RULES:
@@ -189,15 +190,3 @@ b) **HALT and wait for user selection.**
 - [ ] `{wipFile}` created with correct frontmatter, Overview, Context for Development, and `stepsCompleted: [1]`.
 - [ ] User selected [C] to continue.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

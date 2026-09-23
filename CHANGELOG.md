@@ -1,5 +1,37 @@
 # Changelog
 
+## [4.0.0] - 2026-09-23
+
+### Breaking
+- MCP tools regrouped: `mdan_workflow_<name>` → `mdan_run_workflow { name, topic }`, `mdan_agent_<name>` → `mdan_consult_agent { name, question }`; all tool names now use `_` (`mdan_list_workflows`, `mdan_graph_add_node`, `mdan_party_mode`, `mdan_create_decision_record`, `mdan_ecosystem_search`/`read`/`catalog`/`stats`).
+- `mdan serve --sse` replaced by `--http` (Streamable HTTP on `/mcp`); `--sse` kept as a deprecated alias.
+- Node.js >= 20.
+
+### Fixed
+- MCP server crashed at startup with SDK 1.29 (`expected a Zod schema or ToolAnnotations`): every tool now has a real Zod input schema, and arguments actually reach the handlers.
+- `npx mdan-method install` did not exist: new interactive / non-interactive installer.
+- `mdan-mcp` binary never started the server when launched through the npm bin shim.
+- `@modelcontextprotocol/sdk` moved back to `dependencies` (+ `zod`); server version read from `package.json`.
+- 298 broken file references in the content (`_.mdan/…`, old `steps-c/` and `2-plan-workflows/` layout, missing `advanced-elicitation`) — `mdan validate` and CI now enforce 0.
+- Path traversal in `create-decision-record` (`id`), `ecosystem read-skill/read-agent` and graph node paths.
+- Unguarded `JSON.parse`, missing-argument crashes: tool errors are returned as MCP errors instead of killing the call.
+- Decision records were never registered in the context graph (`registered_in_graph: false`).
+- Context graph writes are atomic and locked (no lost updates on concurrent calls); downstream traversal deduplicated.
+- CSV parser handles quoted multi-line fields and CRLF.
+- README advertised 10 core agents that do not exist; agent tables and counts are now generated.
+
+### Added
+- `mdan install` / `mdan update`: language, optional packs, IDEs (Claude Code, Cursor, OpenCode, Gemini CLI, Qwen Code), user name, optional `.mcp.json`; hash-tracked files so updates never overwrite your changes (`.mdan-new`), managed config keys only.
+- MCP prompts for every workflow and agent; `mdan_graph_stale`; decision records with sequential ids and `impacts` edges; ranked ecosystem search on frontmatter; paginated catalog.
+- Context graph: cycle detection, relation/type validation, file hashes and staleness (`mdan stale`, `--touch`), `mdan graph --html`.
+- Serves the bundled content when the project has no install (Glama, plain `npx`); `Dockerfile` and `glama.json`.
+- Single source of truth: `npm run build` generates the manifests, `.claude/commands` and README sections from the content files; `--check` in CI.
+- Language and communication rules centralized in `_mdan/core/rules.md` (was duplicated in ~150 files).
+- Tests (`node --test`: graph, CSV, paths, build, installer, MCP over stdio and HTTP), ESLint, GitHub Actions CI (Linux + Windows, Node 20/22, Docker handshake) and tag-based npm release with provenance.
+
+### Removed
+- `.claude/session-state.md` from the repository; `.npmignore` (the `files` whitelist is authoritative).
+
 ## [3.1.3] - 2026-04-05
 
 ### Changed

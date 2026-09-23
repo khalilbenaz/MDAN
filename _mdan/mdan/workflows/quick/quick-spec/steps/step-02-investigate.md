@@ -1,10 +1,11 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-02-investigate'
 description: 'Map technical constraints and anchor points within the codebase'
 
 wipFile: '{implementation_artifacts}/tech-spec-wip.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 2: Map Technical Constraints & Anchor Points
 
@@ -122,7 +123,7 @@ Display: "**Select:** [A] Advanced Elicitation [P] Party Mode [C] Continue to Ge
 
 - IF A: Read fully and follow: `{advanced_elicitation}` with current tech-spec content, process enhanced insights, ask user "Accept improvements? (y/n)", if yes update WIP file then redisplay menu, if no keep original then redisplay menu
 - IF P: Read fully and follow: `{party_mode_exec}` with current tech-spec content, process collaborative insights, ask user "Accept changes? (y/n)", if yes update WIP file then redisplay menu, if no keep original then redisplay menu
-- IF C: Verify frontmatter updated with `stepsCompleted: [1, 2]`, then read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-03-generate.md`
+- IF C: Verify frontmatter updated with `stepsCompleted: [1, 2]`, then read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-spec/steps/step-03-generate.md`
 - IF Any other comments or queries: respond helpfully then redisplay menu
 
 #### EXECUTION RULES:
@@ -143,15 +144,3 @@ Display: "**Select:** [A] Advanced Elicitation [P] Party Mode [C] Continue to Ge
 - [ ] Technical mapping performed and documented.
 - [ ] `stepsCompleted: [1, 2]` set in frontmatter.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

@@ -1,10 +1,11 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-04-self-check'
 description: 'Self-audit implementation against tasks, tests, AC, and patterns'
 
 nextStepFile: './step-05-adversarial-review.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 4: Self-Check
 
@@ -90,7 +91,7 @@ Proceeding to adversarial code review...
 
 ## NEXT STEP
 
-Proceed immediately to `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-05-adversarial-review.md`.
+Proceed immediately to `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-05-adversarial-review.md`.
 
 ---
 
@@ -111,15 +112,3 @@ Proceed immediately to `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/qui
 - Ignoring pattern violations
 - Not updating tech-spec status (Mode A)
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

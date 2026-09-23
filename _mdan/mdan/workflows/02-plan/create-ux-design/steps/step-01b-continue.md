@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 1B: UX Design Workflow Continuation
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -73,9 +74,9 @@ Does this look right, or do you want to make any adjustments before we proceed?"
 
 Based on `lastStep` value, determine which step to load next:
 
-- If `lastStep = 1` → Load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-02-discovery.md`
-- If `lastStep = 2` → Load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-03-core-experience.md`
-- If `lastStep = 3` → Load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-04-emotional-response.md`
+- If `lastStep = 1` → Load `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-02-discovery.md`
+- If `lastStep = 2` → Load `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-03-core-experience.md`
+- If `lastStep = 3` → Load `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-04-emotional-response.md`
 - Continue this pattern for all steps
 - If `lastStep` indicates final step → Workflow already complete
 
@@ -127,15 +128,3 @@ After user confirms they're ready to continue, load the appropriate next step fi
 
 Remember: Do NOT load the next step until user explicitly selects [C] to continue!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

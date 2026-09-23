@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 1: UX Design Workflow Initialization
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -45,7 +46,7 @@ First, check if the output document already exists:
 
 If the document exists and has frontmatter with `stepsCompleted`:
 
-- **STOP here** and load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-01b-continue.md` immediately
+- **STOP here** and load `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-01b-continue.md` immediately
 - Do not proceed with any initialization tasks
 - Let step-01b handle the continuation logic
 
@@ -111,7 +112,7 @@ Do you have any other documents you'd like me to include, or shall we continue t
 
 ## NEXT STEP:
 
-After user selects [C] to continue, ensure the file `{planning_artifacts}/ux-design-specification.md` has been created and saved, and then load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-02-discovery.md` to begin the UX discovery phase.
+After user selects [C] to continue, ensure the file `{planning_artifacts}/ux-design-specification.md` has been created and saved, and then load `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-02-discovery.md` to begin the UX discovery phase.
 
 Remember: Do NOT proceed to step-02 until output file has been updated and user explicitly selects [C] to continue!
 
@@ -135,15 +136,3 @@ Remember: Do NOT proceed to step-02 until output file has been updated and user 
 ❌ **CRITICAL**: Proceeding with 'C' without fully reading and understanding the next step file
 ❌ **CRITICAL**: Making decisions without complete understanding of step requirements and protocols
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

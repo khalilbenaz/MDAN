@@ -1,10 +1,11 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-03-generate'
 description: 'Build the implementation plan based on the technical mapping of constraints'
 
 wipFile: '{implementation_artifacts}/tech-spec-wip.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 3: Generate Implementation Plan
 
@@ -113,7 +114,7 @@ stepsCompleted: [1, 2, 3]
 ---
 ```
 
-c) **Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-04-review.md` (Step 4)**
+c) **Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-spec/steps/step-04-review.md` (Step 4)**
 
 ## REQUIRED OUTPUTS:
 
@@ -126,15 +127,3 @@ c) **Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flo
 - [ ] `stepsCompleted: [1, 2, 3]` set in frontmatter.
 - [ ] Spec meets the **READY FOR DEVELOPMENT** standard.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

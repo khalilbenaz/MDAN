@@ -1,10 +1,9 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-03-create-stories'
 description: 'Generate all epics with their stories following the template structure'
 
 # Path Definitions
-workflow_path: '{project-root}/_.mdan/mdan/workflows/3-solutioning/create-epics-and-stories'
+workflow_path: '{project-root}/_mdan/mdan/workflows/03-architect/create-epics'
 
 # File References
 thisStepFile: './step-03-create-stories.md'
@@ -13,12 +12,13 @@ workflowFile: '{workflow_path}/workflow.md'
 outputFile: '{planning_artifacts}/epics.md'
 
 # Task References
-advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
+partyModeWorkflow: '{project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md'
 
 # Template References
 epicsTemplate: '{workflow_path}/templates/epics-template.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 3: Generate Epics and Stories
 
@@ -272,15 +272,3 @@ ONLY WHEN [C continue option] is selected and [all epics and stories saved to do
 
 **Master Rule:** Skipping steps, optimizing sequences, or not following exact instructions is FORBIDDEN and constitutes SYSTEM FAILURE.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

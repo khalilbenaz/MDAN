@@ -1,54 +1,83 @@
-#!/usr/bin/env node
-let McpServer, StdioServerTransport;
-
-try {
-  ({ McpServer } = await import('@modelcontextprotocol/sdk/server/mcp.js'));
-  ({ StdioServerTransport } = await import('@modelcontextprotocol/sdk/server/stdio.js'));
-} catch {
-  console.error('[mdan] @modelcontextprotocol/sdk is required for MCP server.');
-  console.error('[mdan] Install it: npm install @modelcontextprotocol/sdk');
-  process.exit(1);
-}
-
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { createServer as createHttpServer } from 'node:http';
+import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
+import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
+import { VERSION, PACKAGE_ROOT, projectRootFromEnv } from '../lib/paths.js';
 import { discoverMdan } from './discovery.js';
 import { registerWorkflowTools } from './tools/workflow-tools.js';
 import { registerAgentTools } from './tools/agent-tools.js';
 import { registerGraphTools } from './tools/graph-tools.js';
 import { registerOrchestrationTools } from './tools/orchestration-tools.js';
 import { registerEcosystemTools } from './tools/ecosystem-tools.js';
-import { registerStateResource } from './resources/state-resource.js';
-import { registerConfigResource } from './resources/config-resource.js';
-import { registerGraphResource } from './resources/graph-resource.js';
+import { registerResources } from './resources.js';
 
-export async function startServer({ transport = 'stdio', port = 3100 } = {}) {
-  const projectRoot = process.env.MDAN_PROJECT_ROOT || process.cwd();
+const log = msg => console.error(`[mdan] ${msg}`);
 
-  const server = new McpServer({ name: 'mdan', version: '3.1.2' });
+// When the project has no MDAN install, serve the content bundled in the package (read-only);
+// graph and decision records are still written to the project.
+export async function resolveRoots(projectRoot = projectRootFromEnv()) {
+  const installed = existsSync(join(projectRoot, '_mdan', '_config', 'workflow-manifest.csv'));
+  return { projectRoot, contentRoot: installed ? projectRoot : PACKAGE_ROOT, installed };
+}
 
-  const discovery = await discoverMdan(projectRoot);
+export async function createMcpServer({ projectRoot, contentRoot }) {
+  const discovery = await discoverMdan(contentRoot);
+  const server = new McpServer(
+    { name: 'mdan', version: VERSION },
+    { instructions: 'MDAN: AI-driven development methodology. Use mdan_list_workflows / mdan_run_workflow to run a wizard, mdan_consult_agent for an expert persona, mdan_party_mode for multi-agent debate, and the mdan_graph_* tools to track artifacts.' },
+  );
 
-  registerWorkflowTools(server, discovery, projectRoot);
-  registerAgentTools(server, discovery, projectRoot);
+  registerWorkflowTools(server, discovery, contentRoot);
+  registerAgentTools(server, discovery, contentRoot);
   registerGraphTools(server, projectRoot);
-  registerOrchestrationTools(server, projectRoot);
-  registerEcosystemTools(server, discovery, projectRoot);
-
-  registerStateResource(server, projectRoot);
-  registerConfigResource(server, discovery, projectRoot);
-  registerGraphResource(server, projectRoot);
-
-  if (transport === 'stdio') {
-    const stdioTransport = new StdioServerTransport();
-    await server.connect(stdioTransport);
-    console.error('[mdan] MCP server running on stdio');
-  }
-
+  registerOrchestrationTools(server, discovery, projectRoot, contentRoot);
+  registerEcosystemTools(server, contentRoot);
+  registerResources(server, discovery, projectRoot);
   return server;
 }
 
-if (process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'))) {
-  startServer().catch(err => {
-    console.error('[mdan] Fatal:', err);
-    process.exit(1);
+async function startHttp(roots, { port, host }) {
+  const http = createHttpServer(async (req, res) => {
+    const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+    if (url.pathname === '/health') {
+      res.writeHead(200, { 'content-type': 'application/json' }).end(JSON.stringify({ status: 'ok', version: VERSION }));
+      return;
+    }
+    if (url.pathname !== '/mcp') {
+      res.writeHead(404).end('Not found. MCP endpoint: /mcp');
+      return;
+    }
+    if (req.method !== 'POST') {
+      res.writeHead(405, { allow: 'POST' }).end(JSON.stringify({ jsonrpc: '2.0', error: { code: -32000, message: 'Method not allowed (stateless server: POST only)' }, id: null }));
+      return;
+    }
+    // Stateless mode: one server + transport per request, as recommended by the SDK.
+    try {
+      const server = await createMcpServer(roots);
+      const transport = new StreamableHTTPServerTransport({ sessionIdGenerator: undefined });
+      res.on('close', () => { transport.close(); server.close(); });
+      await server.connect(transport);
+      await transport.handleRequest(req, res);
+    } catch (err) {
+      log(`HTTP error: ${err.message}`);
+      if (!res.headersSent) res.writeHead(500).end(JSON.stringify({ jsonrpc: '2.0', error: { code: -32603, message: 'Internal server error' }, id: null }));
+    }
   });
+  await new Promise((resolve, reject) => http.once('error', reject).listen(port, host, resolve));
+  log(`MCP server on http://${host}:${http.address().port}/mcp`);
+  return http;
+}
+
+export async function startServer({ transport = 'stdio', port = 3100, host = '127.0.0.1', projectRoot } = {}) {
+  const roots = await resolveRoots(projectRoot);
+  if (!roots.installed) log(`No MDAN install in ${roots.projectRoot} — serving bundled content (run \`mdan install\` to customize).`);
+
+  if (transport === 'http') return startHttp(roots, { port, host });
+
+  const server = await createMcpServer(roots);
+  await server.connect(new StdioServerTransport());
+  log(`MCP server v${VERSION} running on stdio (project: ${roots.projectRoot})`);
+  return server;
 }

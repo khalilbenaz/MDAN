@@ -1,232 +1,125 @@
+import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { existsSync } from 'node:fs';
-import { readdirSync, statSync } from 'node:fs';
+import { join, relative, sep } from 'node:path';
+import { homedir } from 'node:os';
+import { z } from 'zod';
+import { parseFrontmatter } from '../../lib/frontmatter.js';
+import { safeJoin } from '../../lib/paths.js';
+import { safe, text } from '../util.js';
 
-export function registerEcosystemTools(server, discovery, projectRoot) {
-  const homedir = process.env.HOME || process.env.USERPROFILE;
-  const claudeDir = join(homedir, '.claude');
+const KINDS = {
+  skill: { dir: 'skills', label: 'skills' },
+  agent: { dir: 'agents', label: 'agents' },
+  command: { dir: 'commands', label: 'commands' },
+};
 
-  // Tool: List ecosystem catalog summary
-  server.tool(
-    'mdan_ecosystem_catalog',
-    'Browse the full Claude Code ecosystem catalog — 1,053 skills, 418 agents, 340 commands, 67 hooks, 67 settings, 69 MCPs. Returns categorized summary.',
-    {},
-    async () => {
-      const catalogPath = join(projectRoot, '_mdan', 'ecosystem', 'catalog', 'CATALOG.md');
-      let catalog = 'Catalog not found. Run ecosystem module installation first.';
-      if (existsSync(catalogPath)) {
-        catalog = await readFile(catalogPath, 'utf-8');
-        // Truncate if too long for MCP response
-        if (catalog.length > 15000) {
-          catalog = catalog.substring(0, 15000) + '\n\n... [truncated — read full catalog at ' + catalogPath + ']';
-        }
-      }
-      return { content: [{ type: 'text', text: catalog }] };
-    }
-  );
+export const claudeDir = () => process.env.MDAN_CLAUDE_DIR || join(homedir(), '.claude');
 
-  // Tool: Search ecosystem skills
-  server.tool(
-    'mdan_ecosystem_search-skills',
-    'Search for skills by keyword in the ecosystem. Returns matching skill names.',
-    {
-      query: { type: 'string', description: 'Keyword to search for (e.g., "react", "security", "bioinformatics")' }
+function listMarkdown(dir, out = []) {
+  if (!existsSync(dir)) return out;
+  for (const name of readdirSync(dir)) {
+    const full = join(dir, name);
+    let st;
+    try { st = statSync(full); } catch { continue; }
+    if (st.isDirectory()) listMarkdown(full, out);
+    else if (name.endsWith('.md')) out.push(full);
+  }
+  return out;
+}
+
+// One entry per component: skills are folders with SKILL.md, agents/commands are .md files (optionally in categories).
+function listComponents(kind) {
+  const base = join(claudeDir(), KINDS[kind].dir);
+  const files = listMarkdown(base).filter(f => kind !== 'skill' || f.endsWith(`${sep}SKILL.md`));
+  return files.map(file => {
+    const rel = relative(base, file).split(sep).join('/');
+    const id = kind === 'skill' ? rel.replace(/\/SKILL\.md$/, '') : rel.replace(/\.md$/, '');
+    return { id, file };
+  });
+}
+
+function score(entry, terms) {
+  let head;
+  try { head = readFileSync(entry.file, 'utf-8').slice(0, 4000); } catch { return 0; }
+  const fm = parseFrontmatter(head);
+  const fields = [
+    [entry.id.toLowerCase(), 5],
+    [(fm.name || '').toLowerCase(), 4],
+    [(fm.description || '').toLowerCase(), 3],
+    [head.toLowerCase(), 1],
+  ];
+  let total = 0;
+  for (const t of terms) {
+    const hit = fields.find(([value]) => value.includes(t));
+    if (!hit) return 0;
+    total += hit[1];
+  }
+  entry.description = fm.description || '';
+  return total;
+}
+
+function resolveComponent(kind, name) {
+  const base = join(claudeDir(), KINDS[kind].dir);
+  const file = kind === 'skill' ? safeJoin(base, name, 'SKILL.md') : safeJoin(base, `${name}.md`);
+  if (!existsSync(file)) throw new Error(`${kind} "${name}" not found under ${base}`);
+  return file;
+}
+
+export function registerEcosystemTools(server, projectRoot) {
+  server.registerTool('mdan_ecosystem_search', {
+    description: 'Search installed Claude Code skills, agents or commands (~/.claude) by keywords, ranked by name/description match',
+    inputSchema: {
+      kind: z.enum(['skill', 'agent', 'command']).describe('Component type'),
+      query: z.string().min(1).describe('Keywords, e.g. "react testing"'),
+      limit: z.number().int().min(1).max(100).default(20),
     },
-    async ({ query }) => {
-      const skillsDir = join(claudeDir, 'skills');
-      if (!existsSync(skillsDir)) {
-        return { content: [{ type: 'text', text: 'Skills directory not found at ' + skillsDir }] };
-      }
+    annotations: { readOnlyHint: true },
+  }, safe(async ({ kind, query, limit }) => {
+    const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+    const results = listComponents(kind)
+      .map(e => { const s = score(e, terms); return { ...e, score: s }; })
+      .filter(e => e.score > 0)
+      .sort((a, b) => b.score - a.score || a.id.localeCompare(b.id))
+      .slice(0, limit);
+    if (!results.length) return text(`No ${KINDS[kind].label} matching "${query}" in ${join(claudeDir(), KINDS[kind].dir)}.`);
+    return text(`${results.length} ${KINDS[kind].label} matching "${query}":\n\n` +
+      results.map(r => `- **${r.id}**${r.description ? ` — ${r.description}` : ''}`).join('\n') +
+      `\n\nRead one with mdan_ecosystem_read { kind: "${kind}", name: "${results[0].id}" }.`);
+  }));
 
-      const q = query.toLowerCase();
-      const matches = [];
-
-      try {
-        const dirs = readdirSync(skillsDir);
-        for (const dir of dirs) {
-          if (dir.toLowerCase().includes(q)) {
-            matches.push(dir);
-            continue;
-          }
-          // Check SKILL.md content for keyword match
-          const skillFile = join(skillsDir, dir, 'SKILL.md');
-          if (existsSync(skillFile)) {
-            try {
-              const content = await readFile(skillFile, 'utf-8');
-              const first200 = content.substring(0, 200).toLowerCase();
-              if (first200.includes(q)) {
-                matches.push(dir);
-              }
-            } catch {}
-          }
-        }
-      } catch {}
-
-      return {
-        content: [{
-          type: 'text',
-          text: matches.length > 0
-            ? `Found ${matches.length} skills matching "${query}":\n\n${matches.map(m => `- ${m}`).join('\n')}\n\nTo use: Skill(skill: "${matches[0]}")`
-            : `No skills found matching "${query}". Try a broader keyword or check ~/.claude/CATALOG.md`
-        }]
-      };
-    }
-  );
-
-  // Tool: Search ecosystem agents
-  server.tool(
-    'mdan_ecosystem_search-agents',
-    'Search for agent templates by keyword. Returns matching agent paths.',
-    {
-      query: { type: 'string', description: 'Keyword to search (e.g., "python", "devops", "security")' }
+  server.registerTool('mdan_ecosystem_read', {
+    description: 'Read the full content of an installed skill, agent or command',
+    inputSchema: {
+      kind: z.enum(['skill', 'agent', 'command']),
+      name: z.string().describe('Skill folder name, or agent/command path "category/name"'),
     },
-    async ({ query }) => {
-      const agentsDir = join(claudeDir, 'agents');
-      if (!existsSync(agentsDir)) {
-        return { content: [{ type: 'text', text: 'Agents directory not found at ' + agentsDir }] };
-      }
+    annotations: { readOnlyHint: true },
+  }, safe(async ({ kind, name }) => text(await readFile(resolveComponent(kind, name), 'utf-8'))));
 
-      const q = query.toLowerCase();
-      const matches = [];
-
-      try {
-        const categories = readdirSync(agentsDir);
-        for (const cat of categories) {
-          const catPath = join(agentsDir, cat);
-          if (!statSync(catPath).isDirectory()) continue;
-          const files = readdirSync(catPath);
-          for (const file of files) {
-            if (file.endsWith('.md') && (file.toLowerCase().includes(q) || cat.toLowerCase().includes(q))) {
-              matches.push(`${cat}/${file.replace('.md', '')}`);
-            }
-          }
-        }
-      } catch {}
-
-      return {
-        content: [{
-          type: 'text',
-          text: matches.length > 0
-            ? `Found ${matches.length} agents matching "${query}":\n\n${matches.map(m => `- ${m}`).join('\n')}\n\nTo use: Read ~/.claude/agents/${matches[0]}.md then spawn Agent with instructions.`
-            : `No agents found matching "${query}".`
-        }]
-      };
-    }
-  );
-
-  // Tool: Search ecosystem commands
-  server.tool(
-    'mdan_ecosystem_search-commands',
-    'Search for command templates by keyword. Returns matching command paths.',
-    {
-      query: { type: 'string', description: 'Keyword to search (e.g., "deploy", "test", "git")' }
+  server.registerTool('mdan_ecosystem_catalog', {
+    description: 'Page through the MDAN ecosystem catalog (categorized list of known components)',
+    inputSchema: {
+      offset: z.number().int().min(0).default(0).describe('Character offset'),
+      length: z.number().int().min(1000).max(50000).default(15000),
     },
-    async ({ query }) => {
-      const commandsDir = join(claudeDir, 'commands');
-      if (!existsSync(commandsDir)) {
-        return { content: [{ type: 'text', text: 'Commands directory not found at ' + commandsDir }] };
-      }
+    annotations: { readOnlyHint: true },
+  }, safe(async ({ offset, length }) => {
+    const catalogPath = join(projectRoot, '_mdan', 'ecosystem', 'catalog', 'CATALOG.md');
+    if (!existsSync(catalogPath)) throw new Error('Catalog not found: install the ecosystem module (mdan install --modules ecosystem).');
+    const catalog = await readFile(catalogPath, 'utf-8');
+    const chunk = catalog.slice(offset, offset + length);
+    const end = offset + chunk.length;
+    return text(chunk + (end < catalog.length ? `\n\n[… ${catalog.length - end} more characters — call again with offset=${end}]` : ''));
+  }));
 
-      const q = query.toLowerCase();
-      const matches = [];
-
-      try {
-        const categories = readdirSync(commandsDir);
-        for (const cat of categories) {
-          const catPath = join(commandsDir, cat);
-          if (!statSync(catPath).isDirectory()) continue;
-          const files = readdirSync(catPath);
-          for (const file of files) {
-            if (file.endsWith('.md') && (file.toLowerCase().includes(q) || cat.toLowerCase().includes(q))) {
-              matches.push(`${cat}/${file.replace('.md', '')}`);
-            }
-          }
-        }
-      } catch {}
-
-      return {
-        content: [{
-          type: 'text',
-          text: matches.length > 0
-            ? `Found ${matches.length} commands matching "${query}":\n\n${matches.map(m => `- ${m}`).join('\n')}`
-            : `No commands found matching "${query}".`
-        }]
-      };
-    }
-  );
-
-  // Tool: Read a skill's content
-  server.tool(
-    'mdan_ecosystem_read-skill',
-    'Read the full content of a specific skill by name.',
-    {
-      name: { type: 'string', description: 'Skill name (e.g., "react-best-practices", "scanpy")' }
-    },
-    async ({ name }) => {
-      const skillFile = join(claudeDir, 'skills', name, 'SKILL.md');
-      if (!existsSync(skillFile)) {
-        return { content: [{ type: 'text', text: `Skill "${name}" not found at ${skillFile}` }] };
-      }
-      const content = await readFile(skillFile, 'utf-8');
-      return { content: [{ type: 'text', text: content }] };
-    }
-  );
-
-  // Tool: Read an agent template
-  server.tool(
-    'mdan_ecosystem_read-agent',
-    'Read the full content of an agent template by category/name.',
-    {
-      path: { type: 'string', description: 'Agent path as category/name (e.g., "security/penetration-tester")' }
-    },
-    async ({ path }) => {
-      const agentFile = join(claudeDir, 'agents', path + '.md');
-      if (!existsSync(agentFile)) {
-        return { content: [{ type: 'text', text: `Agent "${path}" not found at ${agentFile}` }] };
-      }
-      const content = await readFile(agentFile, 'utf-8');
-      return { content: [{ type: 'text', text: content }] };
-    }
-  );
-
-  // Tool: List ecosystem stats
-  server.tool(
-    'mdan_ecosystem_stats',
-    'Show ecosystem component statistics and installation status.',
-    {},
-    async () => {
-      const stats = {};
-      const dirs = {
-        skills: join(claudeDir, 'skills'),
-        agents: join(claudeDir, 'agents'),
-        commands: join(claudeDir, 'commands'),
-        hooks: join(claudeDir, 'hooks', 'aitmpl'),
-        settings: join(claudeDir, 'settings-templates'),
-        mcps: join(claudeDir, 'mcp-templates')
-      };
-
-      for (const [name, dir] of Object.entries(dirs)) {
-        if (existsSync(dir)) {
-          try {
-            const count = readdirSync(dir, { recursive: true })
-              .filter(f => f.endsWith('.md') || f.endsWith('.json')).length;
-            stats[name] = { installed: true, count };
-          } catch {
-            stats[name] = { installed: true, count: '?' };
-          }
-        } else {
-          stats[name] = { installed: false, count: 0 };
-        }
-      }
-
-      const text = `# Ecosystem Status\n\n` +
-        Object.entries(stats).map(([name, s]) =>
-          `- **${name}**: ${s.installed ? `✅ ${s.count} components` : '❌ Not installed'}`
-        ).join('\n') +
-        `\n\nSources:\n- khalilbenaz/claude-skills-collection\n- davila7/claude-code-templates (aitmpl.com)`;
-
-      return { content: [{ type: 'text', text }] };
-    }
-  );
+  server.registerTool('mdan_ecosystem_stats', {
+    description: 'Count installed Claude Code components (skills, agents, commands) in ~/.claude',
+    annotations: { readOnlyHint: true },
+  }, safe(async () => {
+    const lines = Object.keys(KINDS).map(kind => {
+      const n = listComponents(kind).length;
+      return `- **${KINDS[kind].label}**: ${n ? `${n} installed` : 'none found'}`;
+    });
+    return text(`# Ecosystem status (${claudeDir()})\n\n${lines.join('\n')}\n\nSources:\n- khalilbenaz/claude-skills-collection\n- davila7/claude-code-templates (aitmpl.com)`);
+  }));
 }

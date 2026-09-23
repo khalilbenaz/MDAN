@@ -1,27 +1,33 @@
-import { join } from 'node:path';
-import { ContextGraph } from '../lib/context-graph.js';
+import { parseArgs } from 'node:util';
+import { resolve } from 'node:path';
+import { ContextGraph, graphPathFor } from '../lib/context-graph.js';
+import { projectRootFromEnv } from '../../lib/paths.js';
+import { writeFileAtomic } from '../../lib/fs-atomic.js';
 
-export default async function graph(args) {
-  const projectRoot = process.env.MDAN_PROJECT_ROOT || process.cwd();
-  const graphPath = join(projectRoot, '_mdan/state/context-graph.json');
-  const graph = ContextGraph.load(graphPath);
+export const help = `Usage: mdan graph [--json | --html <file>]
 
-  const nodeCount = Object.keys(graph.nodes).length;
-  const edgeCount = graph.edges.length;
+Prints the context graph as Mermaid (default), raw JSON, or writes a standalone HTML page.`;
 
-  if (nodeCount === 0) {
-    console.log('Context graph is empty. Run workflows to populate it.');
-    return;
+export default async function graph(argv) {
+  const { values } = parseArgs({
+    args: argv,
+    options: { json: { type: 'boolean' }, html: { type: 'string' }, help: { type: 'boolean', short: 'h' } },
+  });
+  if (values.help) return console.log(help);
+
+  const g = ContextGraph.load(graphPathFor(projectRootFromEnv()));
+  const nodeCount = Object.keys(g.nodes).length;
+
+  if (values.json) return console.log(JSON.stringify(g.toJSON(), null, 2));
+  if (nodeCount === 0) return console.log('Context graph is empty. Run workflows to populate it.');
+
+  if (values.html) {
+    const out = resolve(values.html);
+    writeFileAtomic(out, g.toHtml());
+    return console.log(`Wrote ${out} (${nodeCount} nodes, ${g.edges.length} edges)`);
   }
-
-  const format = args.includes('--json') ? 'json' : 'mermaid';
-
-  if (format === 'json') {
-    console.log(JSON.stringify(graph.toJSON(), null, 2));
-  } else {
-    console.log(`# MDAN Context Graph (${nodeCount} nodes, ${edgeCount} edges)\n`);
-    console.log('```mermaid');
-    console.log(graph.toMermaid());
-    console.log('```');
-  }
+  console.log(`# MDAN Context Graph (${nodeCount} nodes, ${g.edges.length} edges)\n`);
+  console.log('```mermaid');
+  console.log(g.toMermaid());
+  console.log('```');
 }

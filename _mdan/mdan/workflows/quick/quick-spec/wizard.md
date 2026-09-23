@@ -1,15 +1,15 @@
 ---
 name: quick-spec
 description: 'Very quick process to create implementation-ready quick specs for small changes or features. Use when the user says "create a quick spec" or "generate a quick tech spec"'
-main_config: '{project-root}/_.mdan/mdan/config.yaml'
+main_config: '{project-root}/_mdan/mdan/config.yaml'
 
 # Checkpoint handler paths
-advanced_elicitation: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
-party_mode_exec: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
-quick_dev_workflow: '{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/workflow.md'
+party_mode_exec: '{project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md'
+quick_dev_workflow: '{project-root}/_mdan/mdan/workflows/quick/quick-dev/wizard.md'
 ---
 
-**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 
 
 
@@ -80,17 +80,5 @@ Load and read full config from `{main_config}` and resolve:
 
 ### 2. First Step Execution
 
-Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/steps/step-01-understand.md` to begin the workflow.
+Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-spec/steps/step-01-understand.md` to begin the workflow.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

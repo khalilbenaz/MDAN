@@ -1,10 +1,11 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-04-review'
 description: 'Review and finalize the tech-spec'
 
 wipFile: '{implementation_artifacts}/tech-spec-wip.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 4: Review & Finalize
 
@@ -154,7 +155,7 @@ b) **HALT and wait for user selection.**
 
 1. **Invoke Adversarial Review Task**:
        > With `{finalFile}` constructed, load and follow the review task. If possible, use information asymmetry: load this task, and only it, in a separate subagent or process with read access to the project, but no context except the `{finalFile}`.
-       <invoke-task>Review {finalFile} using {project-root}/_.mdan/core/tasks/review-adversarial-general.xml</invoke-task>
+       <invoke-task>Review {finalFile} using {project-root}/_mdan/core/tasks/review-adversarial-general.xml</invoke-task>
        > **Platform fallback:** If task invocation not available, load the task file and follow its instructions inline, passing `{finalFile}` as the content.
        > The task should: review `{finalFile}` and return a list of findings.
 
@@ -200,15 +201,3 @@ Ship it!"
 - [ ] Spec verified against **READY FOR DEVELOPMENT** standard.
 - [ ] `stepsCompleted: [1, 2, 3, 4]` set and file renamed.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.
