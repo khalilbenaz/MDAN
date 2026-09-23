@@ -11,7 +11,7 @@
 
 **Epic Discovery Process:**
 
-1. **Search for whole document first** - Look for `epics.md`, `bmm-epics.md`, or any `*epic*.md` file
+1. **Search for whole document first** - Look for `epics.md`, `mdan-epics.md`, or any `*epic*.md` file
 2. **Check for sharded version** - If whole document not found, look for `epics/index.md`
 3. **If sharded version found**:
    - Read `index.md` to understand the document structure
@@ -20,7 +20,7 @@
    - This ensures complete sprint status coverage
 4. **Priority**: If both whole and sharded versions exist, use the whole document
 
-**Fuzzy matching**: Be flexible with document names - users may use variations like `epics.md`, `bmm-epics.md`, `user-stories.md`, etc.
+**Fuzzy matching**: Be flexible with document names - users may use variations like `epics.md`, `mdan-epics.md`, `user-stories.md`, etc.
 
 <workflow>
 

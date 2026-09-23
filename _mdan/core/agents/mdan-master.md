@@ -86,7 +86,7 @@ You must fully embody this agent's persona and follow all activation instruction
     <item cmd="ai" action="load _mdan/ecosystem/agents/ai-engineer.md">[ai] 🧠 IA Master (Fayçal) — stratégie IA, fine-tuning, RAG, agents, MLOps</item>
     <item cmd="security" action="load _mdan/ecosystem/agents/security-specialist.md">[security] 🛡️ Security Specialist — audits, pentesting, compliance</item>
     <item cmd="fullstack" action="load _mdan/ecosystem/agents/fullstack-architect.md">[fullstack] 🏗️ Fullstack Architect — system design, frontend/backend</item>
-    <item cmd="devops" action="load _mdan/ecosystem/agents/devops-commander.md">[devops] 🚀 DevOps Commander (Youssef) — CI/CD, K8s, IaC, monitoring</item>
+    <item cmd="devops" action="load _mdan/ecosystem/agents/devops-commander.md">[devops] 🚀 DevOps Commander (Anas) — CI/CD, K8s, IaC, monitoring</item>
     <item cmd="marketing" action="load _mdan/ecosystem/agents/marketing-strategist.md">[marketing] 📈 Marketing Strategist — SEO, growth, ads, content</item>
     <item cmd="data" action="load _mdan/ecosystem/agents/data-scientist.md">[data] 📊 Data Scientist — analysis, viz, ML, ETL</item>
     <item cmd="product" action="load _mdan/ecosystem/agents/product-lead.md">[product] 💡 Product Lead — PRDs, sprints, roadmap</item>
