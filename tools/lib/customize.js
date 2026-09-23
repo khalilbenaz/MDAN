@@ -44,7 +44,7 @@ function readLayer(file) {
   try {
     return YAML.parse(readFileSync(file, 'utf-8')) || {};
   } catch (err) {
-    throw new Error(`Invalid YAML in ${file}: ${err.message}`);
+    throw new Error(`Invalid YAML in ${file}: ${err.message}`, { cause: err });
   }
 }
 

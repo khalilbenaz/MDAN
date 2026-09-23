@@ -24,7 +24,7 @@ export function withLock(filePath, fn, { timeoutMs = 5000, staleMs = 30000 } = {
       try {
         if (Date.now() - statSync(lock).mtimeMs > staleMs) { rmSync(lock, { recursive: true, force: true }); continue; }
       } catch { continue; }
-      if (Date.now() - start > timeoutMs) throw new Error(`Timed out waiting for lock ${lock}`);
+      if (Date.now() - start > timeoutMs) throw new Error(`Timed out waiting for lock ${lock}`, { cause: err });
       sleep(25);
     }
   }
