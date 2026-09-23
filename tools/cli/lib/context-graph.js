@@ -158,7 +158,7 @@ export class ContextGraph {
     try {
       return new ContextGraph(JSON.parse(raw));
     } catch (err) {
-      throw new Error(`Corrupted context graph ${filePath}: ${err.message}`);
+      throw new Error(`Corrupted context graph ${filePath}: ${err.message}`, { cause: err });
     }
   }
 

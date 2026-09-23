@@ -37,7 +37,7 @@ export function loadState(projectRoot) {
   try {
     return { ...empty(projectRoot), ...JSON.parse(readFileSync(file, 'utf-8')) };
   } catch (err) {
-    throw new Error(`Corrupted state ${file}: ${err.message}`);
+    throw new Error(`Corrupted state ${file}: ${err.message}`, { cause: err });
   }
 }
 
