@@ -1,5 +1,6 @@
 import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname, relative, sep } from 'node:path';
+import { parseCsv } from './csv.js';
 
 const TEXT_EXT = /\.(md|xml|yaml|yml|csv|json)$/;
 const PROJECT_REF = /\{project-root\}\/([^\s`'"()<>\]|,]+)/g;
@@ -37,6 +38,12 @@ export function findBrokenRefs(root, dirs = ['_mdan', '.claude/commands']) {
         if (ref.includes('{') || ref.includes('*') || !/\.[a-z]+$/.test(ref)) continue;
         if (RUNTIME_PREFIXES.some(p => ref.startsWith(p))) continue;
         if (!existsSync(join(root, ref))) broken.push({ file: rel, ref: `{project-root}/${ref}` });
+      }
+      // Team / manifest CSVs: every `path` column must point to an existing file.
+      if (file.endsWith('.csv')) {
+        for (const row of parseCsv(text)) {
+          if (row.path && /^_mdan\//.test(row.path) && !existsSync(join(root, row.path))) broken.push({ file: rel, ref: row.path });
+        }
       }
       for (const m of text.matchAll(RELATIVE_REF)) {
         const ref = clean(m[1]);
