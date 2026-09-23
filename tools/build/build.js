@@ -35,27 +35,54 @@ const MODULE_LABELS = {
   'payments-ma': 'Pack Paiements Maroc',
 };
 
+const MODULE_LABELS_EN = {
+  core: 'Core',
+  mdan: 'Main module',
+  fintech: 'FinTech pack',
+  'devops-azure': 'DevOps & Azure pack',
+  'db-optimization': 'Database Optimization pack',
+  ecosystem: 'Ecosystem pack',
+  qa: 'Test Architect pack (QA)',
+  'payments-ma': 'Morocco Payments pack',
+};
+
 const cell = s => String(s || '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
 
-function readmeSections({ agents, workflows }) {
+function agentTables(agents, labels, header) {
   const modules = [...new Set(agents.map(a => a.module))];
-  const packs = modules.filter(m => m !== 'core' && m !== 'mdan').length;
-  const tables = modules.map(m => [
-    `### ${MODULE_LABELS[m] || m}`,
+  return modules.map(m => [
+    `### ${labels[m] || m}`,
     '',
-    '| Commande | Agent | Rôle |',
+    header,
     '|----------|-------|------|',
     ...agents.filter(a => a.module === m).map(a =>
       `| \`/mdan-${agentSlug(a)}\` | ${cell(a.icon)} ${cell(a.displayName)} | **${cell(a.title)}** — ${cell(a.role)} |`),
   ].join('\n')).join('\n\n');
+}
+
+function readmeSections({ agents, workflows }) {
+  const packs = [...new Set(agents.map(a => a.module))].filter(m => m !== 'core' && m !== 'mdan').length;
   return {
     badges: [
       `[![Wizards](https://img.shields.io/badge/wizards-${workflows.length}-purple)](#commandes-disponibles)`,
       `[![Agents](https://img.shields.io/badge/agents-${agents.length}-blue)](#les-agents)`,
       `[![Packs](https://img.shields.io/badge/packs-${packs}-orange)](#les-agents)`,
     ].join('\n'),
-    agents: tables,
+    agents: agentTables(agents, MODULE_LABELS, '| Commande | Agent | Rôle |'),
     footer: `  <strong>${workflows.length} wizards · ${agents.length} agents · ${packs} packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>`,
+  };
+}
+
+function readmeSectionsEn({ agents, workflows }) {
+  const packs = [...new Set(agents.map(a => a.module))].filter(m => m !== 'core' && m !== 'mdan').length;
+  return {
+    badges: [
+      `[![Wizards](https://img.shields.io/badge/wizards-${workflows.length}-purple)](#available-commands)`,
+      `[![Agents](https://img.shields.io/badge/agents-${agents.length}-blue)](#the-agents)`,
+      `[![Packs](https://img.shields.io/badge/packs-${packs}-orange)](#the-agents)`,
+    ].join('\n'),
+    agents: agentTables(agents, MODULE_LABELS_EN, '| Command | Agent | Role |'),
+    footer: `  <strong>${workflows.length} wizards · ${agents.length} agents · ${packs} packs · MCP server · Context Graph · Debate/Consensus</strong><br>`,
   };
 }
 
@@ -78,6 +105,9 @@ export function generate(root) {
 
   const readmePath = join(root, 'README.md');
   if (existsSync(readmePath)) outputs.set('README.md', renderReadme(readFileSync(readmePath, 'utf-8'), readmeSections(sources)));
+
+  const readmeEnPath = join(root, 'README.en.md');
+  if (existsSync(readmeEnPath)) outputs.set('README.en.md', renderReadme(readFileSync(readmeEnPath, 'utf-8'), readmeSectionsEn(sources)));
 
   const files = [];
   for (const full of walk(join(root, '_mdan'))) {
