@@ -10,3 +10,5 @@ _mdan/state/sidecars/
 .claude/session-state.md
 .claude/settings.local.json
 .claude/worktrees/
+tools/eval/out/
+dist/
