@@ -1,6 +1,6 @@
 {
   "name": "mdan-method",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "MDAN — AI-driven development methodology: agents, step-by-step wizards, multi-agent debate and a context graph, as IDE commands and an MCP server",
   "type": "module",
   "license": "MIT",
@@ -27,6 +27,7 @@
     "wizards"
   ],
   "bin": {
+    "mdan-method": "tools/cli/index.js",
     "mdan": "tools/cli/index.js",
     "mdan-mcp": "tools/mcp/bin.js"
   },
