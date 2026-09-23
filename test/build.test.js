@@ -16,6 +16,20 @@ test('every file reference in the content resolves', () => {
   assert.deepEqual(findBrokenRefs(root), []);
 });
 
+test('README.en.md generated sections stay in sync with README.md', async () => {
+  const { existsSync, readFileSync } = await import('node:fs');
+  const enPath = new URL('../README.en.md', import.meta.url);
+  assert.ok(existsSync(enPath), 'README.en.md must exist');
+  const en = readFileSync(enPath, 'utf-8');
+  for (const name of ['badges', 'agents', 'footer']) {
+    assert.match(en, new RegExp(`<!-- generated:${name} -->[\\s\\S]*?<!-- /generated:${name} -->`), `missing marker pair ${name}`);
+  }
+  // Same agent/workflow counts as the French README (build() already asserted both are up to date).
+  const fr = readFileSync(new URL('../README.md', import.meta.url), 'utf-8');
+  const countRows = s => (s.match(/^\| `\/mdan-agent-/gm) || []).length;
+  assert.equal(countRows(en), countRows(fr), 'README.en.md and README.md must list the same agents');
+});
+
 test('`npx mdan-method <cmd>` resolves: a bin is named after the package', async () => {
   const { readFileSync } = await import('node:fs');
   const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url), 'utf-8'));
