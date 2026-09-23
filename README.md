@@ -52,6 +52,7 @@ npx mdan-method install --yes --lang fr --ide claude-code,cursor --modules finte
 
 ```bash
 npx mdan-method@latest update
+npx mdan-method update --channel next    # tester la prochaine version
 ```
 
 Chaque fichier installé est tracé par son hash (`_mdan/_config/files-manifest.csv`). Un fichier que tu as modifié n'est jamais écrasé : la nouvelle version est écrite à côté en `<fichier>.mdan-new`. Dans les `config.yaml`, seules les clés gérées (`user_name`, `communication_language`, `project_name`) sont mises à jour.
@@ -77,6 +78,7 @@ Tout client [MCP](https://modelcontextprotocol.io/) (Claude Code, Claude Desktop
 ```bash
 mdan serve                                # stdio (défaut)
 mdan serve --http --port 3100             # Streamable HTTP sur /mcp, health check sur /health
+mdan serve --http --host 0.0.0.0 --token $MDAN_HTTP_TOKEN   # exposé : jeton obligatoire
 docker build -t mdan-mcp . && docker run -i --rm -v "$PWD:/workspace" mdan-mcp
 ```
 
@@ -89,7 +91,8 @@ Sans installation dans le projet, le serveur sert le contenu embarqué dans le p
 | `mdan_status` | Où en est le projet : workflow et étape en cours, phases terminées, artifacts, décisions, prochaine étape |
 | `mdan_list_workflows` / `mdan_run_workflow` | Liste les workflows / charge un wizard avec son point de reprise et les artifacts existants |
 | `mdan_state_update` | Enregistre la progression (`start` / `step` / `complete`) ; à la fin, les artifacts sont ajoutés au graphe |
-| `mdan_list_agents` / `mdan_consult_agent` | Liste les agents / charge un persona avec la personnalisation du projet et ses souvenirs |
+| `mdan_list_agents` / `mdan_consult_agent` | Liste les agents / charge un persona avec sa personnalisation en couches et ses souvenirs |
+| `mdan_customize_agent` | Personnalise un agent sans toucher à son fichier : couche équipe (`_mdan/custom/<agent>.yaml`, versionnée) ou perso (`.user.yaml`, ignorée par git) |
 | `mdan_party_mode` | Session multi-agent : `discussion`, `debate` ou `consensus` (avec la mémoire de chaque participant) |
 | `mdan_memory_remember` / `recall` / `forget` / `end_session` / `list` | Mémoire persistante des agents entre sessions (renforcement, oubli progressif, relations) |
 | `mdan_create_decision_record` | Enregistre un DR-XXX (ids séquentiels) et l'ajoute au graphe, avec des arêtes `impacts` |
@@ -105,7 +108,7 @@ Sans installation dans le projet, le serveur sert le contenu embarqué dans le p
 
 **Prompts** : chaque workflow (`create-prd`, `create-architecture`, …) et chaque agent (`agent-<nom>`) est aussi exposé comme prompt MCP, ce qui permet au client de les proposer comme slash commands.
 
-**Ressources** : `mdan://state`, `mdan://config`, `mdan://graph`.
+**Ressources** : `mdan://state`, `mdan://config`, `mdan://graph`, `mdan://health` (bilan en un appel), `mdan://workflow/{name}` et `mdan://agent/{name}` (listables).
 
 > Migration depuis la v3 : les outils `mdan_workflow_<nom>` et `mdan_agent_<nom>` sont remplacés par `mdan_run_workflow { name }` et `mdan_consult_agent { name }`, et les noms utilisent désormais `_` (`mdan_list_workflows`, `mdan_graph_add_node`, …).
 
@@ -210,7 +213,7 @@ Toutes les commandes commencent par `/mdan-`.
 | `mdan trace [--graph]` | Matrice de traçabilité exigence → story → test |
 | `mdan scope "<changement>"` | Recommande quick-dev, quick-spec ou une replanification complète |
 | `mdan serve [--http]` | Démarre le serveur MCP |
-| `mdan graph`, `mdan impact <id>`, `mdan stale` | Context Graph |
+| `mdan graph [--since <id>]`, `mdan impact <id>`, `mdan stale` | Context Graph (`--since DR-001` surligne une décision et tout ce qu'elle impacte) |
 | `mdan validate` | Vérifie que toutes les références de fichiers de `_mdan/` existent |
 
 ---

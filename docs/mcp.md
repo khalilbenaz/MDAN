@@ -29,7 +29,7 @@ docker run -i --rm -v "$PWD:/workspace" mdan-mcp
 - `MDAN_PROJECT_ROOT` (default: current directory) is where the context graph and decision records are written.
 - If the project has no MDAN install (`_mdan/_config/workflow-manifest.csv`), the content bundled in the package is served read-only.
 - `MDAN_CLAUDE_DIR` overrides `~/.claude` for the ecosystem tools.
-- The HTTP transport is stateless and binds `127.0.0.1` by default (`--host 0.0.0.0` to expose it; put it behind authentication if you do).
+- The HTTP transport is stateless and binds `127.0.0.1` by default. `--token` / `MDAN_HTTP_TOKEN` requires `Authorization: Bearer <token>`; binding a non-loopback address without a token is refused unless `--insecure` is passed.
 
 ## Tools
 
@@ -62,6 +62,9 @@ Every workflow is a prompt named after it (`create-prd`, `create-architecture`, 
 - `mdan://state` — `_mdan/state/MDAN-STATE.json`
 - `mdan://config` — installed modules, their `config.yaml`, counts
 - `mdan://graph` — context graph JSON
+- `mdan://workflow/{name}` — wizard / workflow definition (listable)
+- `mdan://agent/{name}` — agent persona (listable)
+- `mdan://health` — progress, next step, quality gate, stale artifacts, agents with memory, in one call
 
 ## Architecture
 

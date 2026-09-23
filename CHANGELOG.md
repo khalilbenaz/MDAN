@@ -10,6 +10,13 @@
 - Traceability: `mdan trace` / `mdan_trace` — requirement → story → test matrix from the PRD, epics and test files, coverage thresholds per scale, optional write into the context graph (`mdan impact FR3` then lists stories and tests).
 - Scale-adaptive routing: `mdan scope` / `mdan_estimate_scope` — oneshot / spec / full from risk terms, file count and the real downstream impact in the context graph; quick-dev uses it, code-review now re-validates downstream artifacts and stale items.
 
+- Layered agent customization (shipped < team `_mdan/custom/<agent>.yaml` < personal `<agent>.user.yaml`, git-ignored), merged when the agent is loaded; `mdan_customize_agent`; reinstalls never touch `_mdan/custom/`.
+- HTTP transport security: `--token` / `MDAN_HTTP_TOKEN` bearer auth (constant-time), refusal to bind a non-loopback address without a token unless `--insecure`.
+- MCP resources `mdan://workflow/{name}`, `mdan://agent/{name}` (listable) and `mdan://health` (progress, quality gate, stale artifacts, memories in one call).
+- `mdan graph --since <node>` highlights a decision and everything downstream of it (Mermaid and HTML).
+- `mdan update --channel latest|next|<version>` delegates to another published installer.
+- Dependabot for npm (MCP SDK + zod grouped) and GitHub Actions.
+
 ### Fixed
 - WIZARD-ENGINE still hardcoded the French-Darija rule; it now defers to `_mdan/core/rules.md`.
 

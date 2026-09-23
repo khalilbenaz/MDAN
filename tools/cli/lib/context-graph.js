@@ -117,7 +117,8 @@ export class ContextGraph {
     return node;
   }
 
-  toMermaid() {
+  // `highlight`: node ids to emphasize (e.g. a decision and everything downstream of it).
+  toMermaid({ highlight = [] } = {}) {
     const lines = ['graph TD'];
     for (const [id, node] of Object.entries(this.nodes)) {
       const label = [id, node.type, node.path].filter(Boolean).map(mermaidLabel).join('<br/>');
@@ -127,16 +128,21 @@ export class ContextGraph {
       const arrow = edge.relation === 'references' ? '-.->' : '-->';
       lines.push(`  ${edge.source} ${arrow}|${edge.relation}| ${edge.target}`);
     }
+    const marked = highlight.filter(id => this.nodes[id]);
+    if (marked.length) {
+      lines.push('  classDef impacted fill:#fde68a,stroke:#b45309,stroke-width:2px,color:#111');
+      lines.push(`  class ${marked.join(',')} impacted`);
+    }
     return lines.join('\n');
   }
 
-  toHtml(title = 'MDAN Context Graph') {
+  toHtml(title = 'MDAN Context Graph', options = {}) {
     const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
     return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>${esc(title)}</title>
 <style>body{font-family:system-ui,sans-serif;margin:24px;background:#fff;color:#111}@media(prefers-color-scheme:dark){body{background:#111;color:#eee}}</style>
 </head><body><h1>${esc(title)}</h1>
-<pre class="mermaid">${esc(this.toMermaid())}</pre>
+<pre class="mermaid">${esc(this.toMermaid(options))}</pre>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:true,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'default'});</script>
 </body></html>
 `;
