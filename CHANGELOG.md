@@ -17,6 +17,10 @@
 - `mdan update --channel latest|next|<version>` delegates to another published installer.
 - Dependabot for npm (MCP SDK + zod grouped) and GitHub Actions.
 
+- `mdan export --to csv|github|ado|jira` / `mdan_export_backlog`: epics and stories to CSV, GitHub Issues (with "Part of #N"), Azure DevOps (Epic / User Story with parent links) or Jira (ADF, parent keys); dry run by default, idempotent re-runs update instead of duplicating.
+- Web bundles: `mdan bundle [agent…] [--all]` builds `<agent>.instructions.md` (fits the ~8k GPT limit) + `<agent>.knowledge.md` (persona, rules and every workflow the agent's menu references) for ChatGPT GPTs, Gemini Gems and Claude Projects.
+- Wizard evaluation harness `npm run eval` (tools/eval): an LLM runs a wizard end to end against a scripted user persona, the document goes through `mdan check` and expected-content assertions; three scenarios included.
+
 ### Fixed
 - WIZARD-ENGINE still hardcoded the French-Darija rule; it now defers to `_mdan/core/rules.md`.
 
