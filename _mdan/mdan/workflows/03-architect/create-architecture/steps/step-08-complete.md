@@ -77,3 +77,6 @@ This is the final step of the Architecture workflow. The user now has a complete
 
 The architecture will serve as the single source of truth for all technical decisions, ensuring consistent implementation across the entire project development lifecycle.
 
+## Quality gate (before marking the workflow complete)
+
+Run `mdan_check` (MCP) or `mdan check` (CLI) on the produced document. Fix every ❌ error; with a `team` scale resolve or justify ⚠️ warnings; with `enterprise` all warnings must be fixed. Then call `mdan_state_update { action: "complete", … }`.
