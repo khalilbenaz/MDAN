@@ -1,4 +1,3 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-01-mode-detection'
 description: 'Determine execution mode (tech-spec vs direct), handle escalation, set state variables'
@@ -6,6 +5,8 @@ description: 'Determine execution mode (tech-spec vs direct), handle escalation,
 nextStepFile_modeA: './step-03-execute.md'
 nextStepFile_modeB: './step-02-context-gathering.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 1: Mode Detection
 
@@ -51,7 +52,7 @@ Analyze the user's input to determine mode:
 - Load the spec, extract tasks/context/AC
 - Set `{execution_mode}` = "tech-spec"
 - Set `{tech_spec_path}` = provided path
-- **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`
+- **NEXT:** Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-03-execute.md`
 
 **Mode B: Direct Instructions**
 
@@ -92,7 +93,7 @@ Display: "**Select:** [P] Plan first (tech-spec) [E] Execute directly"
 #### Menu Handling Logic:
 
 - IF P: Direct user to `{quick_spec_workflow}`. **EXIT Quick Dev.**
-- IF E: Ask for any additional guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
+- IF E: Ask for any additional guidance, then **NEXT:** Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-02-context-gathering.md`
 
 #### EXECUTION RULES:
 
@@ -115,7 +116,7 @@ Display:
 
 - IF P: Direct to `{quick_spec_workflow}`. **EXIT Quick Dev.**
 - IF W: Direct user to run the PRD workflow instead. **EXIT Quick Dev.**
-- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
+- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-02-context-gathering.md`
 
 #### EXECUTION RULES:
 
@@ -138,7 +139,7 @@ Display:
 
 - IF P: Direct to `{quick_spec_workflow}`. **EXIT Quick Dev.**
 - IF W: Direct user to run the PRD workflow instead. **EXIT Quick Dev.**
-- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`
+- IF E: Ask for guidance, then **NEXT:** Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-02-context-gathering.md`
 
 #### EXECUTION RULES:
 
@@ -151,8 +152,8 @@ Display:
 
 **CRITICAL:** When this step completes, explicitly state which step to load:
 
-- Mode A (tech-spec): "**NEXT:** read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-03-execute.md`"
-- Mode B (direct, [E] selected): "**NEXT:** Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-02-context-gathering.md`"
+- Mode A (tech-spec): "**NEXT:** read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-03-execute.md`"
+- Mode B (direct, [E] selected): "**NEXT:** Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-02-context-gathering.md`"
 - Escalation ([P] or [W]): "**EXITING Quick Dev.** Follow the directed workflow."
 
 ---
@@ -174,15 +175,3 @@ Display:
 - Attempting to "return" after escalation instead of EXIT
 - No explicit NEXT directive at step completion
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

@@ -3,8 +3,7 @@ name: create-architecture
 description: 'Create architecture solution design decisions for AI agent consistency. Use when the user says "lets create architecture" or "create technical architecture" or "create a solution design"'
 ---
 
-**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
-
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 
 # Architecture Workflow
@@ -31,7 +30,7 @@ This uses **micro-file architecture** for disciplined execution:
 
 ### Configuration Loading
 
-Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
+Load config from `{project-root}/_mdan/mdan/config.yaml` and resolve:
 
 - `project_name`, `output_folder`, `planning_artifacts`, `user_name`
 - `communication_language`, `document_output_language`, `user_skill_level`
@@ -40,7 +39,7 @@ Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
 
 ### Paths
 
-- `installed_path` = `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture`
+- `installed_path` = `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture`
 - `template_path` = `{installed_path}/architecture-decision-template.md`
 - `data_files_path` = `{installed_path}/data/`
 
@@ -48,19 +47,7 @@ Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
 
 ## EXECUTION
 
-Read fully and follow: `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-01-init.md` to begin the workflow.
+Read fully and follow: `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-01-init.md` to begin the workflow.
 
 **Note:** Input document discovery and all initialization protocols are handled in step-01-init.md.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

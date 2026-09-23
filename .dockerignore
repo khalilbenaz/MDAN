@@ -1,0 +1,9 @@
+node_modules
+.git
+.github
+.claude
+test
+mdan_output
+_mdan/state/context-graph.json
+_mdan/state/MDAN-STATE.json
+*.log

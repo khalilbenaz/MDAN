@@ -1,10 +1,9 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-01-validate-prerequisites'
 description: 'Validate required documents exist and extract all requirements for epic and story creation'
 
 # Path Definitions
-workflow_path: '{project-root}/_.mdan/mdan/workflows/3-solutioning/create-epics-and-stories'
+workflow_path: '{project-root}/_mdan/mdan/workflows/03-architect/create-epics'
 
 # File References
 thisStepFile: './step-01-validate-prerequisites.md'
@@ -14,12 +13,13 @@ outputFile: '{planning_artifacts}/epics.md'
 epicsTemplate: '{workflow_path}/templates/epics-template.md'
 
 # Task References
-advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
+partyModeWorkflow: '{project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md'
 
 # Template References
 epicsTemplate: '{workflow_path}/templates/epics-template.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 1: Validate Prerequisites and Extract Requirements
 
@@ -259,15 +259,3 @@ ONLY WHEN C is selected and all requirements are saved to document and frontmatt
 
 **Master Rule:** Skipping steps, optimizing sequences, or not following exact instructions is FORBIDDEN and constitutes SYSTEM FAILURE.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

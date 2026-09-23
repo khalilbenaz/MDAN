@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 8: Architecture Completion & Handoff
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -42,7 +43,7 @@ completedAt: '{{current_date}}'
 
 ### 3. Next Steps Guidance
 
-Architecture complete. Read fully and follow: `{project-root}/_.mdan/core/tasks/help.md`
+Architecture complete. Read fully and follow: `{project-root}/_mdan/core/tasks/help.md`
 
 Upon Completion of task output: offer to answer any questions about the Architecture Document.
 
@@ -76,15 +77,3 @@ This is the final step of the Architecture workflow. The user now has a complete
 
 The architecture will serve as the single source of truth for all technical decisions, ensuring consistent implementation across the entire project development lifecycle.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

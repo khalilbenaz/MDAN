@@ -1,16 +1,16 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-02b-vision'
 description: 'Discover the product vision and differentiator through collaborative dialogue'
 
 # File References
-nextStepFile: '{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-prd/steps-c/step-02c-executive-summary.md'
+nextStepFile: '{project-root}/_mdan/mdan/workflows/02-plan/create-prd/steps/step-02c-executive-summary.md'
 outputFile: '{planning_artifacts}/prd.md'
 
 # Task References
-advancedElicitationTask: '{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml'
-partyModeWorkflow: '{project-root}/_.mdan/core/workflows/party-mode/workflow.md'
+partyModeWorkflow: '{project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 2b: Product Vision Discovery
 
@@ -154,15 +154,3 @@ ONLY WHEN [C continue option] is selected and [stepsCompleted updated], will you
 
 **Master Rule:** This step is vision discovery only. No content generation, no document writing. Have natural conversations, build on what you know from classification, and establish the vision that will feed into the Executive Summary.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

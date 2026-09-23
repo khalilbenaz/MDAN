@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 7: Architecture Validation & Completion
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -33,8 +34,8 @@ This step will generate content and present choices:
 
 ## PROTOCOL INTEGRATION:
 
-- When 'A' selected: Read fully and follow: {project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml
-- When 'P' selected: Read fully and follow: {project-root}/_.mdan/core/workflows/party-mode/workflow.md
+- When 'A' selected: Run an advanced elicitation pass: ask deep, probing questions to sharpen the current content
+- When 'P' selected: Read fully and follow: {project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md
 - PROTOCOLS always return to display this step's A/P/C menu after the A or P have completed
 - User accepts/rejects protocol changes before proceeding
 
@@ -306,7 +307,7 @@ Show the validation results and present choices:
 
 #### If 'A' (Advanced Elicitation):
 
-- Read fully and follow: {project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml with validation issues
+- Run an advanced elicitation pass: ask deep, probing questions to sharpen with validation issues
 - Process enhanced solutions for complex concerns
 - Ask user: "Accept these architectural improvements? (y/n)"
 - If yes: Update content, then return to A/P/C menu
@@ -314,7 +315,7 @@ Show the validation results and present choices:
 
 #### If 'P' (Party Mode):
 
-- Read fully and follow: {project-root}/_.mdan/core/workflows/party-mode/workflow.md with validation context
+- Read fully and follow: {project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md with validation context
 - Process collaborative insights on implementation readiness
 - Ask user: "Accept these changes to the validation results? (y/n)"
 - If yes: Update content, then return to A/P/C menu
@@ -324,7 +325,7 @@ Show the validation results and present choices:
 
 - Append the final content to `{planning_artifacts}/architecture.md`
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4, 5, 6, 7]`
-- Load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-08-complete.md`
+- Load `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-08-complete.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -355,19 +356,7 @@ When user selects 'C', append the content directly to the document using the str
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-08-complete.md` to complete the workflow and provide implementation guidance.
+After user selects 'C' and content is saved to document, load `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-08-complete.md` to complete the workflow and provide implementation guidance.
 
 Remember: Do NOT proceed to step-08 until user explicitly selects 'C' from the A/P/C menu and content is saved!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

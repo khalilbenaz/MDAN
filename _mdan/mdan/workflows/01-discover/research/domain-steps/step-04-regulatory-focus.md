@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Domain Research Step 4: Regulatory Focus
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -156,7 +157,7 @@ Show the generated regulatory analysis and present continue option:
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2, 3, 4]`
-- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-05-technical-trends.md`
+- Load: `{project-root}/_mdan/mdan/workflows/01-discover/research/domain-steps/step-05-technical-trends.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -202,19 +203,7 @@ Content is already written to document when generated in step 5. No additional a
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/domain-steps/step-05-technical-trends.md` to analyze technical trends and innovations in the domain.
+After user selects 'C' and content is saved to document, load `{project-root}/_mdan/mdan/workflows/01-discover/research/domain-steps/step-05-technical-trends.md` to analyze technical trends and innovations in the domain.
 
 Remember: Search the web to verify regulatory facts and provide practical implementation considerations!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

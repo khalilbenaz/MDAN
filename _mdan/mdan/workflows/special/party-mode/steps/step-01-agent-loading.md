@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 1: Agent Loading and Party Mode Initialization
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -20,7 +21,7 @@
 
 ## CONTEXT BOUNDARIES:
 
-- Agent manifest CSV is available at `{project-root}/_.mdan/_config/agent-manifest.csv`
+- Agent manifest CSV is available at `{project-root}/_mdan/_config/agent-manifest.csv`
 - User configuration from config.yaml is loaded and resolved
 - Party mode is standalone interactive workflow
 - All agent data is available for conversation orchestration
@@ -39,7 +40,7 @@ Begin agent loading process:
 
 **Agent Manifest Loading:**"
 
-Load and parse the agent manifest CSV from `{project-root}/_.mdan/_config/agent-manifest.csv`
+Load and parse the agent manifest CSV from `{project-root}/_mdan/_config/agent-manifest.csv`
 
 ### 2. Extract Agent Data
 
@@ -163,15 +164,3 @@ After user selects 'C', load `./step-02-discussion-orchestration.md` to begin th
 
 Remember: Create an engaging, party-like atmosphere while maintaining professional expertise and intelligent conversation orchestration!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

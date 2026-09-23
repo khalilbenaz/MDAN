@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 1: Architecture Workflow Initialization
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -45,7 +46,7 @@ First, check if the output document already exists:
 
 If the document exists and has frontmatter with `stepsCompleted`:
 
-- **STOP here** and load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-01b-continue.md` immediately
+- **STOP here** and load `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-01b-continue.md` immediately
 - Do not proceed with any initialization tasks
 - Let step-01b handle the continuation logic
 
@@ -149,19 +150,7 @@ Ready to begin architectural decision making. Do you have any other documents yo
 
 ## NEXT STEP:
 
-After user selects [C] to continue, only after ensuring all the template output has been created, then load `{project-root}/_.mdan/mdan/workflows/3-solutioning/create-architecture/steps/step-02-context.md` to analyze the project context and begin architectural decision making.
+After user selects [C] to continue, only after ensuring all the template output has been created, then load `{project-root}/_mdan/mdan/workflows/03-architect/create-architecture/steps/step-02-context.md` to analyze the project context and begin architectural decision making.
 
 Remember: Do NOT proceed to step-02 until user explicitly selects [C] from the menu and setup is confirmed!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

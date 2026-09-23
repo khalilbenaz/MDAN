@@ -3,8 +3,7 @@ name: create-ux-design
 description: 'Plan UX patterns and design specifications. Use when the user says "lets create UX design" or "create UX specifications" or "help me plan the UX"'
 ---
 
-**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
-
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 
 # Create UX Design Workflow
@@ -28,7 +27,7 @@ This uses **micro-file architecture** for disciplined execution:
 
 ### Configuration Loading
 
-Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
+Load config from `{project-root}/_mdan/mdan/config.yaml` and resolve:
 
 - `project_name`, `output_folder`, `planning_artifacts`, `user_name`
 - `communication_language`, `document_output_language`, `user_skill_level`
@@ -36,24 +35,12 @@ Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
 
 ### Paths
 
-- `installed_path` = `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design`
+- `installed_path` = `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design`
 - `template_path` = `{installed_path}/ux-design-template.md`
 - `default_output_file` = `{planning_artifacts}/ux-design-specification.md`
 
 ## EXECUTION
 
 - ✅ YOU MUST ALWAYS SPEAK OUTPUT In your Agent communication style with the config `{communication_language}`
-- Read fully and follow: `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-01-init.md` to begin the UX design workflow.
+- Read fully and follow: `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-01-init.md` to begin the UX design workflow.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

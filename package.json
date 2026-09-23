@@ -1,7 +1,7 @@
 {
   "name": "mdan-method",
-  "version": "3.1.3",
-  "description": "MDAN - AI-Driven Development Methodology Platform",
+  "version": "4.0.0",
+  "description": "MDAN — AI-driven development methodology: agents, step-by-step wizards, multi-agent debate and a context graph, as IDE commands and an MCP server",
   "type": "module",
   "license": "MIT",
   "author": "Khalil Benaz <khalilbenaz@gmail.com> (https://github.com/khalilbenaz)",
@@ -13,27 +13,55 @@
   "bugs": {
     "url": "https://github.com/khalilbenaz/MDAN/issues"
   },
-  "keywords": ["mdan", "ai", "agents", "mcp", "claude", "development", "methodology"],
+  "keywords": [
+    "mdan",
+    "ai",
+    "agents",
+    "mcp",
+    "claude",
+    "development",
+    "methodology",
+    "mcp-server",
+    "model-context-protocol",
+    "agents",
+    "wizards"
+  ],
   "bin": {
     "mdan": "tools/cli/index.js",
-    "mdan-mcp": "tools/mcp/server.js"
+    "mdan-mcp": "tools/mcp/bin.js"
   },
   "files": [
     "_mdan/**",
+    "!_mdan/state/context-graph.json",
+    "!_mdan/state/MDAN-STATE.json",
+    "!_mdan/_config/manifest.yaml",
+    "!_mdan/_config/files-manifest.csv",
+    "!**/*.mdan-new",
     "tools/**",
-    ".claude/commands/**",
     "LICENSE",
     "README.md",
     "CHANGELOG.md"
   ],
   "scripts": {
-    "serve": "node tools/cli/commands/serve.js",
-    "test": "node --test tools/**/*.test.js"
+    "build": "node tools/build/build.js",
+    "build:check": "node tools/build/build.js --check",
+    "validate": "node tools/build/validate.js",
+    "lint": "eslint .",
+    "test": "node --test",
+    "check": "npm run lint && npm run build:check && npm run validate && npm test",
+    "serve": "node tools/cli/index.js serve",
+    "prepublishOnly": "npm run check"
   },
-  "optionalDependencies": {
-    "@modelcontextprotocol/sdk": "1.29.0"
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.29.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^17.12.0"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }

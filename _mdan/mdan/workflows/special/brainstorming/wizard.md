@@ -4,7 +4,8 @@ description: 'Facilitate interactive brainstorming sessions using diverse creati
 context_file: '' # Optional context file path for project-specific guidance
 ---
 
-**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 
 
 
@@ -38,7 +39,7 @@ This uses **micro-file architecture** for disciplined execution:
 
 ### Configuration Loading
 
-Load config from `{project-root}/_.mdan/core/config.yaml` and resolve:
+Load config from `{project-root}/_mdan/core/config.yaml` and resolve:
 
 - `project_name`, `output_folder`, `user_name`
 - `communication_language`, `document_output_language`, `user_skill_level`
@@ -46,12 +47,11 @@ Load config from `{project-root}/_.mdan/core/config.yaml` and resolve:
 
 ### Paths
 
-- `installed_path` = `{project-root}/_.mdan/core/workflows/brainstorming`
+- `installed_path` = `{project-root}/_mdan/core/workflows/brainstorming`
 - `template_path` = `{installed_path}/template.md`
 - `brain_techniques_path` = `{installed_path}/brain-methods.csv`
 - `default_output_file` = `mdan_output/brainstorming/brainstorming-session-{{date}}.md`
 - `context_file` = Optional context file path from workflow invocation for project-specific guidance
-- `advancedElicitationTask` = `{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml`
 
 ---
 
@@ -61,15 +61,3 @@ Read fully and follow: `steps/step-01-session-setup.md` to begin the workflow.
 
 **Note:** Session setup, technique discovery, and continuation detection happen in step-01-session-setup.md.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

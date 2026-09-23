@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 14: Workflow Completion
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -83,7 +84,7 @@ Update the main workflow status file:
 
 ### 3. Suggest Next Steps
 
-UX Design complete. Read fully and follow: `{project-root}/_.mdan/core/tasks/help.md`
+UX Design complete. Read fully and follow: `{project-root}/_mdan/core/tasks/help.md`
 
 ### 5. Final Completion Confirmation
 
@@ -171,15 +172,3 @@ This UX design workflow is now complete. The specification serves as the foundat
 - ✅ Color Themes Visualizer: `{planning_artifacts}/ux-color-themes.html`
 - ✅ Design Directions: `{planning_artifacts}/ux-design-directions.html`
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.
