@@ -6,9 +6,9 @@
 [![CI](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml/badge.svg)](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- generated:badges -->
-[![Wizards](https://img.shields.io/badge/wizards-17-purple)](#commandes-disponibles)
-[![Agents](https://img.shields.io/badge/agents-19-blue)](#les-agents)
-[![Packs](https://img.shields.io/badge/packs-4-orange)](#les-agents)
+[![Wizards](https://img.shields.io/badge/wizards-31-purple)](#commandes-disponibles)
+[![Agents](https://img.shields.io/badge/agents-31-blue)](#les-agents)
+[![Packs](https://img.shields.io/badge/packs-6-orange)](#les-agents)
 <!-- /generated:badges -->
 [![MCP](https://img.shields.io/badge/MCP-server-black)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
 
@@ -43,7 +43,8 @@ npx mdan-method install --yes --lang fr --ide claude-code,cursor --modules finte
 |--------|---------|
 | `--lang` | `fr-darija` (défaut) · `fr` · `en` · `darija` |
 | `--ide` | `claude-code` (défaut) · `cursor` · `opencode` · `gemini` · `qwen` (plusieurs séparés par des virgules) |
-| `--modules` | `fintech` · `devops-azure` · `db-optimization` · `ecosystem` · `all` · `none` |
+| `--modules` | `qa` · `payments-ma` · `fintech` · `devops-azure` · `db-optimization` · `ecosystem` · `all` · `none` |
+| `--scale` | `auto` (défaut) · `solo` · `team` · `enterprise` : sévérité des contrôles qualité |
 | `--user` | Ton nom, utilisé par les agents |
 | `--mcp` | Ajoute le serveur MCP MDAN à `.mcp.json` |
 | `--force` | Écrase les fichiers que tu as modifiés |
@@ -171,7 +172,9 @@ Toutes les commandes commencent par `/mdan-`.
 |----------|-------------|
 | `/mdan-sprint-planning` | Sprint plan depuis les epics, avec estimation. |
 | `/mdan-dev-story` | Implémente une story depuis sa spec : TDD, tests, documentation. |
-| `/mdan-code-review` | Review de code adversariale : bugs, sécurité, violations de patterns. |
+| `/mdan-code-review` | Review de code adversariale : bugs, sécurité, violations de patterns, et revalidation de ce qui dépend du changement (graphe). |
+| `/mdan-correct-course` | Changement important en cours de sprint : analyse d'impact (graphe), options, mise à jour PRD/architecture/epics, Sprint Change Proposal. |
+| `/mdan-retrospective` | Rétrospective d'epic ou de sprint : constats, causes, actions ; les leçons deviennent des souvenirs des agents. |
 
 ### Wizards — Phase 5 : Livraison
 
@@ -193,6 +196,34 @@ Toutes les commandes commencent par `/mdan-`.
 | `/mdan-party-mode` | Multi-agents en 3 modes : discussion, débat, consensus. |
 | `/mdan-debate` | Débat structuré (Partisan 🟢 vs Opposant 🔴 + Arbitre ⚖️), 3 rounds, arbitrage, puis decision record. |
 | `/mdan-brainstorming` | Brainstorming avec plus de 12 techniques (SCAMPER, Six Thinking Hats, Mind Mapping…). |
+
+### Pack Test Architect — `--modules qa`
+
+Tous les livrables de test sont reliés au graphe : « quels tests relancer si cette story change ? » a une réponse.
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-qa-test-design` | Stratégie de test par le risque : priorités P0-P3 (probabilité × impact), niveaux de test par story/epic. |
+| `/mdan-qa-atdd` | Tests d'acceptation en échec (Given/When/Then) générés depuis les critères, avant l'implémentation. |
+| `/mdan-qa-traceability` | Matrice exigence → story → test, trous de couverture, décision PASS/CONCERNS/FAIL. |
+| `/mdan-qa-nfr-assessment` | Performance, sécurité, fiabilité, maintenabilité : seuils et preuves. |
+| `/mdan-qa-test-review` | Qualité des tests existants (flakiness, isolation, assertions) avec grille notée. |
+| `/mdan-qa-ci-gates` | Pipeline de test et quality gates en CI (exemples GitHub Actions et Azure DevOps). |
+| `/mdan-qa-release-gate` | Go/no-go : agrège tout, bloque si des artifacts aval d'une spec modifiée n'ont pas été revérifiés. |
+
+### Pack Paiements Maroc — `--modules payments-ma`
+
+Wallets, établissements de paiement, banques : exigences BAM, ISO 8583/20022, rapprochement. Les plafonds réglementaires sont indiqués comme « à vérifier dans la circulaire BAM en vigueur ».
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-pay-kyc-limits` | Niveaux KYC du wallet, plafonds (solde, flux mensuels, par opération), montée/descente de niveau, points de contrôle. |
+| `/mdan-pay-txn-flow` | Flux de mouvement d'argent : états, écritures en partie double, idempotence, timeouts, extournes, frais, outbox. |
+| `/mdan-pay-iso8583` | Spécification d'interface ISO 8583 : MTI, mapping des DE, codes réponse, reversals/advices, vecteurs de test. |
+| `/mdan-pay-recon` | Rapprochement de fin de journée : sources, règles de matching, catégories d'écarts, résolution automatique. |
+| `/mdan-pay-compliance-review` | Revue d'une fonctionnalité face à BAM / LCB-FT / CNDP / PCI DSS, avec rapport d'écarts. |
+
+Fiches de référence incluses : structure RIB/IBAN MA avec calcul de clé (`_mdan/payments-ma/data/rib-iban.md`) et aide-mémoire ISO 8583.
 
 ### Tâches
 
@@ -230,7 +261,15 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
+| `/mdan-agent-analyst` | 📊 Amina | **Business Analyst** — Business Analyst + Requirements Discovery Lead |
+| `/mdan-agent-architect` | 🏗️ Reda | **System Architect** — System Architect + Technical Design Leader |
+| `/mdan-agent-dev` | 💻 Haytame | **Senior Developer** — Senior Implementation Engineer + TDD Practitioner |
 | `/mdan-agent-mdan-master` | 🧙 MDAN Master | **Orchestrateur Principal, Gardien du Contexte, Directeur des Wizards** — Master Orchestrator + MDAN Expert + Context Guardian |
+| `/mdan-agent-pm` | 📋 Khadija | **Product Manager** — Product Manager + Scope Guardian |
+| `/mdan-agent-scrum-master` | 🏃 Nadia | **Scrum Master** — Technical Scrum Master + Delivery Guardian |
+| `/mdan-agent-security` | 🛡️ Yassir | **Security Engineer** — Application Security Engineer + Threat Modeling Lead |
+| `/mdan-agent-tech-writer` | 📚 Youssef | **Technical Writer** — Technical Documentation Specialist + Knowledge Curator |
+| `/mdan-agent-ux-designer` | 🎨 Jihane | **UX Designer** — User Experience Designer + Interaction Specialist |
 
 ### Pack Database Optimization
 
@@ -244,7 +283,7 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
-| `/mdan-agent-devops-azure-azure-specialist` | ☁️ Reda | **Azure Specialist** — Azure Cloud Architecture Expert |
+| `/mdan-agent-devops-azure-azure-specialist` | ☁️ Hamza | **Azure Specialist** — Azure Cloud Architecture Expert |
 | `/mdan-agent-devops-azure-cicd-architect` | 🔄 Yassine | **CI/CD Architect** — CI/CD Pipeline Architecture Expert |
 | `/mdan-agent-devops-azure-devops-engineer` | ⚙️ Omar | **DevOps Engineer** — DevOps Engineering and Operations Expert |
 
@@ -254,24 +293,38 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 |----------|-------|------|
 | `/mdan-agent-ecosystem-ia-master` | 🧠 Fayçal | **IA Master** — IA Master — Chief AI Strategist, owns all AI/ML architecture, orchestrates 130+ AI skills and 48 AI agents. Reports to Khalil (MDAN Master) for project-level decisions. |
 | `/mdan-agent-ecosystem-data-scientist` | 📊 Saad | **Data Scientist** — Data Scientist — orchestrates data analysis, visualization, and ML skills |
-| `/mdan-agent-ecosystem-devops-commander` | 🚀 Youssef | **DevOps Commander** — DevOps Commander — orchestrates 30+ DevOps skills, 39 infra agents, 11 deployment commands |
+| `/mdan-agent-ecosystem-devops-commander` | 🚀 Ilyas | **DevOps Commander** — DevOps Commander — orchestrates 30+ DevOps skills, 39 infra agents, 11 deployment commands |
 | `/mdan-agent-ecosystem-fullstack-architect` | 🏗️ Amine | **Fullstack Architect** — Fullstack Architecture Expert — routes to 200+ development skills and 100+ dev agents |
 | `/mdan-agent-ecosystem-marketing-strategist` | 📈 Imane | **Marketing Strategist** — Marketing Strategist — orchestrates 25+ marketing skills and publishing commands |
 | `/mdan-agent-ecosystem-product-lead` | 💡 Adnane | **Product Lead** — Product Lead — orchestrates product, project management, and team skills |
 | `/mdan-agent-ecosystem-research-team-lead` | 🔬 Leila | **Deep Research Team Lead** — Deep Research Orchestrator — coordinates research teams using ecosystem agents and scientific skills |
 | `/mdan-agent-ecosystem-security-specialist` | 🛡️ Samir | **Security Specialist** — Security Expert — orchestrates 40+ security skills and 21 security agents |
-| `/mdan-agent-ecosystem-skill-dispatcher` | 🎯 Nadia | **Ecosystem Skill Dispatcher** — Ecosystem Orchestrator — Routes requests to the right specialist from 1,053 skills, 418 agents, 340 commands |
+| `/mdan-agent-ecosystem-skill-dispatcher` | 🎯 Zineb | **Ecosystem Skill Dispatcher** — Ecosystem Orchestrator — Routes requests to the right specialist from 1,053 skills, 418 agents, 340 commands |
 
 ### Pack FinTech
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
 | `/mdan-agent-fintech-compliance-officer` | ⚖️ Rachid | **Compliance Officer** — Regulatory Compliance and Risk Assessment Expert |
-| `/mdan-agent-fintech-financial-analyst` | 📊 Amina | **Financial Analyst** — Financial Analysis and Modeling Expert |
+| `/mdan-agent-fintech-financial-analyst` | 📊 Sanae | **Financial Analyst** — Financial Analysis and Modeling Expert |
 | `/mdan-agent-fintech-risk-manager` | 🛡️ Karim | **Risk Manager** — Financial Risk Management Expert |
+
+### Pack Paiements Maroc
+
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-payments-ma-bam-compliance` | ⚖️ Houda | **BAM Compliance Officer** — Officier de Conformité Bank Al-Maghrib (BAM) pour établissements de paiement |
+| `/mdan-agent-payments-ma-payments-architect` | 💳 Anas | **Payments Systems Architect** — Architecte Systèmes de Paiement (switch, wallet, core banking) |
+| `/mdan-agent-payments-ma-recon-lead` | 🧾 Samira | **Reconciliation & Settlement Lead** — Responsable Rapprochement (EOD) & Règlement |
+
+### Pack Test Architect (QA)
+
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-qa-test-architect` | 🧪 Fatima | **Test Architect** — Test Architecture & Quality Gate Expert |
 <!-- /generated:agents -->
 
-Le mode Party utilise en plus l'équipe de personas définie dans `_mdan/mdan/teams/default-party.csv`.
+L'équipe du mode Party (`_mdan/mdan/teams/default-party.csv`) référence uniquement des agents réels ; la CI le vérifie, ainsi que l'unicité des noms.
 
 ---
 
@@ -324,7 +377,7 @@ MIT
 
 <p align="center">
 <!-- generated:footer -->
-  <strong>17 wizards · 19 agents · 4 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
+  <strong>31 wizards · 31 agents · 6 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
 <!-- /generated:footer -->
   Conçu au Maroc par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
