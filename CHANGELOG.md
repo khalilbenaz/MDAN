@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+- Project state for real: `mdan_state_update` (start / step / complete), `mdan_status` and `mdan status` with the recommended next step; interrupted wizards are offered a resume point by `mdan_run_workflow`; completed artifacts are registered in the context graph; decision records are recorded in the state.
+- Agent memory sidecars (schema of the party-mode protocol): `mdan_memory_remember` / `recall` / `forget` / `end_session` / `list`, reinforcement of identical memories, decay after 5 idle sessions, relationships and decision history; memories are injected when an agent is consulted or joins party mode; `mdan memory` CLI.
+
+### Fixed
+- WIZARD-ENGINE still hardcoded the French-Darija rule; it now defers to `_mdan/core/rules.md`.
+
 ## [4.0.1] - 2026-09-23
 
 ### Fixed

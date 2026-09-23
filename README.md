@@ -86,9 +86,12 @@ Sans installation dans le projet, le serveur sert le contenu embarqué dans le p
 
 | Outil | Description |
 |-------|-------------|
-| `mdan_list_workflows` / `mdan_run_workflow` | Liste les workflows / charge un wizard (`name` en enum, `topic` optionnel) |
-| `mdan_list_agents` / `mdan_consult_agent` | Liste les agents / charge un persona avec la personnalisation du projet |
-| `mdan_party_mode` | Session multi-agent : `discussion`, `debate` ou `consensus` |
+| `mdan_status` | Où en est le projet : workflow et étape en cours, phases terminées, artifacts, décisions, prochaine étape |
+| `mdan_list_workflows` / `mdan_run_workflow` | Liste les workflows / charge un wizard avec son point de reprise et les artifacts existants |
+| `mdan_state_update` | Enregistre la progression (`start` / `step` / `complete`) ; à la fin, les artifacts sont ajoutés au graphe |
+| `mdan_list_agents` / `mdan_consult_agent` | Liste les agents / charge un persona avec la personnalisation du projet et ses souvenirs |
+| `mdan_party_mode` | Session multi-agent : `discussion`, `debate` ou `consensus` (avec la mémoire de chaque participant) |
+| `mdan_memory_remember` / `recall` / `forget` / `end_session` / `list` | Mémoire persistante des agents entre sessions (renforcement, oubli progressif, relations) |
 | `mdan_create_decision_record` | Enregistre un DR-XXX (ids séquentiels) et l'ajoute au graphe, avec des arêtes `impacts` |
 | `mdan_graph_add_node` / `mdan_graph_add_edge` | Trace un artifact (hash du fichier enregistré) / une relation (cycles refusés) |
 | `mdan_graph_impact` | Dépendances amont et impact aval d'un artifact |
@@ -198,6 +201,8 @@ Toutes les commandes commencent par `/mdan-`.
 | Commande | Description |
 |----------|-------------|
 | `mdan install` / `mdan update` | Installe / met à jour MDAN dans un projet |
+| `mdan status` | Où en est le projet et quelle est la prochaine étape |
+| `mdan memory [agent]` | Affiche ou supprime les souvenirs d'un agent |
 | `mdan serve [--http]` | Démarre le serveur MCP |
 | `mdan graph`, `mdan impact <id>`, `mdan stale` | Context Graph |
 | `mdan validate` | Vérifie que toutes les références de fichiers de `_mdan/` existent |

@@ -25,7 +25,7 @@ type,name,module,path,hash
 "xml","review-adversarial-general","core","_mdan/core/tasks/review-adversarial-general.xml","95579015a565ad3e6b7f763cef785566819cde366015393475f0d5a390cbd0a6"
 "xml","shard-doc","core","_mdan/core/tasks/shard-doc.xml","9092bd0664f7789705b43030578f66ad743df8aa4ce6000b95ba9b7253abe1fa"
 "xml","workflow","core","_mdan/core/tasks/workflow.xml","0ee370e7fa9e7c44b9177e8b5fe82b9287070b33f7fea18f08ea77e9e1e37079"
-"md","WIZARD-ENGINE","core","_mdan/core/WIZARD-ENGINE.md","7feff72a324fb5e68ef23c4c255ea2f9cd6a4717d31989c7e3dfa73a68b02922"
+"md","WIZARD-ENGINE","core","_mdan/core/WIZARD-ENGINE.md","c339c8d05475cb6d5fa9dd37a1399332aeabf6a203f06a22a29ab4e52e8f6ac8"
 "md","indexing-specialist","db-optimization","_mdan/db-optimization/agents/indexing-specialist.md","8f9d4cbf2bef5aa9ba50072e865d44ef7f500e0d1c0a6c7e992b6a9bdfe66f2e"
 "md","performance-analyst","db-optimization","_mdan/db-optimization/agents/performance-analyst.md","a58d77624cf5a0d18294cc2605abd0ccafaab77535915cf4b120a708ca8dc35c"
 "md","query-optimizer","db-optimization","_mdan/db-optimization/agents/query-optimizer.md","97a31dfbb92c5f5e3b6e636a98079b404b45f4274aaaefb8426d551baea60016"

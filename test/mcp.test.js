@@ -123,3 +123,30 @@ test('streamable HTTP transport', async () => {
     http.close();
   }
 });
+
+test('state tools drive resume and next-step, artifacts land in the graph', async () => {
+  await call('mdan_state_update', { action: 'start', workflow: 'create-prd' });
+  await call('mdan_state_update', { action: 'step', workflow: 'create-prd', step: 'step-05-domain', stepFile: 'steps/step-05-domain.md' });
+  const resume = await call('mdan_run_workflow', { name: 'create-prd' });
+  assert.match(resume.text, /Resume:.*step-05-domain/);
+
+  mkdirSync(join(project, 'docs'), { recursive: true });
+  writeFileSync(join(project, 'docs/prd.md'), '# PRD');
+  const done = await call('mdan_state_update', { action: 'complete', workflow: 'create-prd', artifacts: [{ id: 'prd', path: 'docs/prd.md' }] });
+  assert.match(done.text, /completed/);
+  assert.match(done.text, /Next recommended/);
+  const status = JSON.parse((await call('mdan_status')).text);
+  assert.equal(status.current, null);
+  assert.ok(status.artifacts.some(a => a.id === 'prd'));
+  const graph = JSON.parse(readFileSync(join(project, '_mdan/state/context-graph.json'), 'utf-8'));
+  assert.ok(graph.nodes.prd.hash, 'artifact hash recorded');
+});
+
+test('agent memory is injected when the agent is consulted', async () => {
+  await call('mdan_memory_remember', { agent: 'risk-manager', content: 'Client exige plafonds BAM niveau 3', type: 'context', confidence: 1 });
+  const r = await call('mdan_consult_agent', { name: 'risk-manager', question: 'plafonds ?' });
+  assert.match(r.text, /Client exige plafonds BAM niveau 3/);
+  const recalled = JSON.parse((await call('mdan_memory_recall', { agent: 'risk-manager' })).text);
+  assert.equal(recalled.memories.length, 1);
+  assert.equal((await call('mdan_memory_remember', { agent: '../x', content: 'y' })).error, true);
+});
