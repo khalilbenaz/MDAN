@@ -3,8 +3,7 @@ name: quick-dev
 description: 'Implement a Quick Tech Spec for small changes or features. Use when the user provides a quick tech spec and says "implement this quick spec" or "proceed with implementation of [quick tech spec]"'
 ---
 
-**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
-
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 
 # Quick Dev Workflow
@@ -29,7 +28,7 @@ This uses **step-file architecture** for focused execution:
 
 ### Configuration Loading
 
-Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
+Load config from `{project-root}/_mdan/mdan/config.yaml` and resolve:
 
 - `user_name`, `communication_language`, `user_skill_level`
 - `planning_artifacts`, `implementation_artifacts`
@@ -38,30 +37,17 @@ Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
 
 ### Paths
 
-- `installed_path` = `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev`
+- `installed_path` = `{project-root}/_mdan/mdan/workflows/quick/quick-dev`
 - `project_context` = `**/project-context.md` (load if exists)
 
 ### Related Workflows
 
-- `quick_spec_workflow` = `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-spec/workflow.md`
-- `party_mode_exec` = `{project-root}/_.mdan/core/workflows/party-mode/workflow.md`
-- `advanced_elicitation` = `{project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml`
+- `quick_spec_workflow` = `{project-root}/_mdan/mdan/workflows/quick/quick-spec/wizard.md`
+- `party_mode_exec` = `{project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md`
 
 ---
 
 ## EXECUTION
 
-Read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-01-mode-detection.md` to begin the workflow.
+Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-01-mode-detection.md` to begin the workflow.
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

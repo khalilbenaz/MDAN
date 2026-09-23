@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Market Research Step 1: Market Research Initialization
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -139,7 +140,7 @@ Show initial scope document and present continue option:
 
 - Update frontmatter: `stepsCompleted: [1]`
 - Add confirmation note to document: "Scope confirmed by user on {{date}}"
-- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/market-steps/step-02-customer-behavior.md`
+- Load: `{project-root}/_mdan/mdan/workflows/01-discover/research/market-steps/step-02-customer-behavior.md`
 
 #### If 'Modify':
 
@@ -178,19 +179,7 @@ This step ensures:
 
 ## NEXT STEP:
 
-After user confirmation and scope finalization, load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/market-steps/step-02-customer-behavior.md` to begin detailed market research with customer insights analysis.
+After user confirmation and scope finalization, load `{project-root}/_mdan/mdan/workflows/01-discover/research/market-steps/step-02-customer-behavior.md` to begin detailed market research with customer insights analysis.
 
 Remember: Init steps confirm understanding and scope, not generate research content!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

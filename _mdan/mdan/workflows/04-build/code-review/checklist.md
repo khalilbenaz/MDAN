@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija.**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Senior Developer Review - Validation Checklist
 
 - [ ] Story file loaded from `{{story_path}}`
@@ -23,15 +24,3 @@
 
 _Reviewer: {{user_name}} on {{date}}_
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

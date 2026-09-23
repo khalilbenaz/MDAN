@@ -9,7 +9,8 @@ scale_behavior:
   enterprise: "Workflow complet + validation obligatoire + debate si conflits"
 ---
 
-**REGLE DE LANGUE OBLIGATOIRE:** Tu DOIS toujours communiquer en mix français-darija marocaine. Utilise le français pour les termes techniques mais mélange la darija naturellement pour les explications. Exemple: "Daba ghadi nchofo had la fonctionnalité..." / "Khassna ndiro attention l..."
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 
 
 
@@ -47,10 +48,10 @@ Ce wizard utilise le **MDAN Wizard Engine v3.0** :
 ## INITIALISATION
 
 ### 1. Charger la configuration
-Charger `{project-root}/.mdan/config/config.yaml` et résoudre toutes les variables.
+Charger `{project-root}/_mdan/mdan/config.yaml` et résoudre toutes les variables.
 
 ### 2. Charger l'état mémoire
-Charger `{project-root}/.mdan/state/MDAN-STATE.json` :
+Charger `{project-root}/_mdan/state/MDAN-STATE.json` :
 - Si le fichier existe → restaurer le contexte, vérifier si ce wizard a déjà été fait
 - Si le fichier n'existe pas → créer à partir du template
 
@@ -108,15 +109,3 @@ envelope:
     next_action: "Créer le PRD basé sur ce brief → commande /prd"
 ```
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

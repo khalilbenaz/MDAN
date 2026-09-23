@@ -1,10 +1,11 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-03-execute'
 description: 'Execute implementation - iterate through tasks, write code, run tests'
 
 nextStepFile: './step-04-self-check.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 3: Execute Implementation
 
@@ -90,7 +91,7 @@ For each task:
 
 ## NEXT STEP
 
-When ALL tasks are complete (or halted on blocker), read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-04-self-check.md`.
+When ALL tasks are complete (or halted on blocker), read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-04-self-check.md`.
 
 ---
 
@@ -111,15 +112,3 @@ When ALL tasks are complete (or halted on blocker), read fully and follow: `{pro
 - Giving up after first failure
 - Not following project-context rules (if exists)
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

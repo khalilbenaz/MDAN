@@ -1,10 +1,11 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
 ---
 name: 'step-05-adversarial-review'
 description: 'Construct diff and invoke adversarial review task'
 
 nextStepFile: './step-06-resolve-findings.md'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # Step 5: Adversarial Code Review
 
@@ -61,7 +62,7 @@ Merge all changes into `{diff_output}`.
 With `{diff_output}` constructed, load and follow the review task. If possible, use information asymmetry: load this step, and only it, in a separate subagent or process with read access to the project, but no context except the `{diff_output}`.
 
 ```xml
-<invoke-task>Review {diff_output} using {project-root}/_.mdan/core/tasks/review-adversarial-general.xml</invoke-task>
+<invoke-task>Review {diff_output} using {project-root}/_mdan/core/tasks/review-adversarial-general.xml</invoke-task>
 ```
 
 **Platform fallback:** If task invocation not available, load the task file and follow its instructions inline, passing `{diff_output}` as the content.
@@ -84,7 +85,7 @@ If TodoWrite or similar tool is available, turn each finding into a TODO, includ
 
 ## NEXT STEP
 
-With findings in hand, read fully and follow: `{project-root}/_.mdan/mdan/workflows/mdan-quick-flow/quick-dev/steps/step-06-resolve-findings.md` for user to choose resolution approach.
+With findings in hand, read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-06-resolve-findings.md` for user to choose resolution approach.
 
 ---
 
@@ -104,15 +105,3 @@ With findings in hand, read fully and follow: `{project-root}/_.mdan/mdan/workfl
 - Accepting zero findings without questioning
 - Presenting fewer findings than the review task returned without explicit instruction to do so
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

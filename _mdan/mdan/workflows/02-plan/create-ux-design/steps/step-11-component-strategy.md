@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Step 11: Component Strategy
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -31,8 +32,8 @@ This step will generate content and present choices:
 
 ## PROTOCOL INTEGRATION:
 
-- When 'A' selected: Read fully and follow: {project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml
-- When 'P' selected: Read fully and follow: {project-root}/_.mdan/core/workflows/party-mode/workflow.md
+- When 'A' selected: Run an advanced elicitation pass: ask deep, probing questions to sharpen the current content
+- When 'P' selected: Read fully and follow: {project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md
 - PROTOCOLS always return to this step's A/P/C menu
 - User accepts/rejects protocol changes before proceeding
 
@@ -194,7 +195,7 @@ Show the generated component strategy content and present choices:
 
 #### If 'A' (Advanced Elicitation):
 
-- Read fully and follow: {project-root}/_.mdan/core/workflows/advanced-elicitation/workflow.xml with the current component strategy content
+- Run an advanced elicitation pass: ask deep, probing questions to sharpen the current component strategy content
 - Process the enhanced component insights that come back
 - Ask user: "Accept these improvements to the component strategy? (y/n)"
 - If yes: Update content with improvements, then return to A/P/C menu
@@ -202,7 +203,7 @@ Show the generated component strategy content and present choices:
 
 #### If 'P' (Party Mode):
 
-- Read fully and follow: {project-root}/_.mdan/core/workflows/party-mode/workflow.md with the current component strategy
+- Read fully and follow: {project-root}/_mdan/mdan/workflows/special/party-mode/wizard.md with the current component strategy
 - Process the collaborative component insights that come back
 - Ask user: "Accept these changes to the component strategy? (y/n)"
 - If yes: Update content with improvements, then return to A/P/C menu
@@ -212,7 +213,7 @@ Show the generated component strategy content and present choices:
 
 - Append the final content to `{planning_artifacts}/ux-design-specification.md`
 - Update frontmatter: append step to end of stepsCompleted array
-- Load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-12-ux-patterns.md`
+- Load `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-12-ux-patterns.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -244,19 +245,7 @@ When user selects 'C', append the content directly to the document using the str
 
 ## NEXT STEP:
 
-After user selects 'C' and content is saved to document, load `{project-root}/_.mdan/mdan/workflows/2-plan-workflows/create-ux-design/steps/step-12-ux-patterns.md` to define UX consistency patterns.
+After user selects 'C' and content is saved to document, load `{project-root}/_mdan/mdan/workflows/02-plan/create-ux-design/steps/step-12-ux-patterns.md` to define UX consistency patterns.
 
 Remember: Do NOT proceed to step-12 until user explicitly selects 'C' from the A/P/C menu and content is saved!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

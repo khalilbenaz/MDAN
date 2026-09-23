@@ -1,4 +1,3 @@
-**🗣️ LANGUE OBLIGATOIRE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija.**
 ---
 title: 'Enhanced Dev Story Definition of Done Checklist'
 validation-target: 'Story markdown ({{story_path}})'
@@ -18,6 +17,8 @@ validation-rules:
   - 'Definition of Done checklist must pass completely'
   - 'Enhanced story context must contain sufficient technical guidance'
 ---
+
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
 
 # 🎯 Enhanced Definition of Done Checklist
 
@@ -80,15 +81,3 @@ Definition of Done: {{PASS/FAIL}}
 
 **If PASS:** Story is fully ready for code review and production consideration
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

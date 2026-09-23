@@ -1,4 +1,5 @@
-**🗣️ LANGUE OBLIGATOIRE: Tu DOIS répondre en MIX FRANÇAIS-DARIJA MAROCAINE. Exemple: "Daba ghadi nchofo..." / "Khassna ndiro..." / "Hadi hiya..."**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Technical Research Step 3: Integration Patterns
 
 ## MANDATORY EXECUTION RULES (READ FIRST):
@@ -190,7 +191,7 @@ _Source: [URL]_
 
 - **CONTENT ALREADY WRITTEN TO DOCUMENT**
 - Update frontmatter: `stepsCompleted: [1, 2, 3]`
-- Load: `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-04-architectural-patterns.md`
+- Load: `{project-root}/_mdan/mdan/workflows/01-discover/research/technical-steps/step-04-architectural-patterns.md`
 
 ## APPEND TO DOCUMENT:
 
@@ -244,19 +245,7 @@ Content is already written to document when generated in step 4. No additional a
 
 ## NEXT STEP:
 
-After user selects 'C', load `{project-root}/_.mdan/mdan/workflows/1-analysis/research/technical-steps/step-04-architectural-patterns.md` to analyze architectural patterns, design decisions, and system structures for {{research_topic}}.
+After user selects 'C', load `{project-root}/_mdan/mdan/workflows/01-discover/research/technical-steps/step-04-architectural-patterns.md` to analyze architectural patterns, design decisions, and system structures for {{research_topic}}.
 
 Remember: Always write research content to document immediately and emphasize current integration data with rigorous source verification!
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

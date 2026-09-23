@@ -3,6 +3,8 @@ name: market-research
 description: 'Conduct market research on competition and customers. Use when the user says "create a market research report about [business idea]".'
 ---
 
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Market Research Workflow
 
 **Goal:** Conduct comprehensive market research using current web data and verified sources to produce complete research documents with compelling narratives and proper citations.
@@ -15,7 +17,7 @@ description: 'Conduct market research on competition and customers. Use when the
 
 ## CONFIGURATION
 
-Load config from `{project-root}/_.mdan/mdan/config.yaml` and resolve:
+Load config from `{project-root}/_mdan/mdan/config.yaml` and resolve:
 - `project_name`, `output_folder`, `planning_artifacts`, `user_name`
 - `communication_language`, `document_output_language`, `user_skill_level`
 - `date` as a system-generated value
@@ -53,15 +55,3 @@ After gathering the topic and goals:
 
 **✅ YOU MUST ALWAYS SPEAK OUTPUT In your Agent communication style with the config `{communication_language}`**
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.

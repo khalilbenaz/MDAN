@@ -1,8 +1,9 @@
-**🗣️ LANGUE OBLIGATOIRE: Réponds TOUJOURS en mix français-darija marocaine. Termes techniques en français, explications en darija.**
+**Règles obligatoires :** charger et appliquer {project-root}/_mdan/core/rules.md (langue + style de communication).
+
 # Sprint Planning - Sprint Status Generator
 
-<critical>The workflow execution engine is governed by: {project-root}/_.mdan/core/tasks/workflow.xml</critical>
-<critical>You MUST have already loaded and processed: {project-root}/_.mdan/mdan/workflows/4-implementation/sprint-planning/workflow.yaml</critical>
+<critical>The workflow execution engine is governed by: {project-root}/_mdan/core/tasks/workflow.xml</critical>
+<critical>You MUST have already loaded and processed: {project-root}/_mdan/mdan/workflows/04-build/sprint-planning/workflow.yaml</critical>
 
 ## 📚 Document Discovery - Full Epic Loading
 
@@ -226,15 +227,3 @@ optional ↔ done
 4. **Review Before Done**: Stories should pass through `review` before `done`
 5. **Learning Transfer**: SM typically creates next story after previous one is `done` to incorporate learnings
 
-
-## Communication Rules — MANDATORY
-
-- Ultra-concise. No filler, no preamble, no pleasantries.
-- Never say "happy to help", "sure!", "great question", "let me", or similar.
-- Tool first, talk second. Act before explaining.
-- Result first. Lead with outcome, not process.
-- Stop when done. No summary, no recap, no trailing commentary.
-- No politeness wrappers. Direct and blunt.
-- Minimum words. If one word works, do not use ten.
-- No unsolicited explanations.
-- No emoji unless asked.
