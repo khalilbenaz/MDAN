@@ -6,6 +6,10 @@
 - Project state for real: `mdan_state_update` (start / step / complete), `mdan_status` and `mdan status` with the recommended next step; interrupted wizards are offered a resume point by `mdan_run_workflow`; completed artifacts are registered in the context graph; decision records are recorded in the state.
 - Agent memory sidecars (schema of the party-mode protocol): `mdan_memory_remember` / `recall` / `forget` / `end_session` / `list`, reinforcement of identical memories, decay after 5 idle sessions, relationships and decision history; memories are injected when an agent is consulted or joins party mode; `mdan memory` CLI.
 
+- Quality gates: `mdan check` / `mdan_check` — unfilled placeholders, TODO/TBD, empty and missing sections, measurable NFRs, FR coverage by stories, NFR coverage by the architecture, acceptance criteria; PASS / CONCERNS / FAIL with strictness from the project scale (`project_scale`: auto | solo | team | enterprise, `--scale` at install). Planning wizards run it before completing.
+- Traceability: `mdan trace` / `mdan_trace` — requirement → story → test matrix from the PRD, epics and test files, coverage thresholds per scale, optional write into the context graph (`mdan impact FR3` then lists stories and tests).
+- Scale-adaptive routing: `mdan scope` / `mdan_estimate_scope` — oneshot / spec / full from risk terms, file count and the real downstream impact in the context graph; quick-dev uses it, code-review now re-validates downstream artifacts and stale items.
+
 ### Fixed
 - WIZARD-ENGINE still hardcoded the French-Darija rule; it now defers to `_mdan/core/rules.md`.
 

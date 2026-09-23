@@ -13,6 +13,7 @@ import { registerOrchestrationTools } from './tools/orchestration-tools.js';
 import { registerEcosystemTools } from './tools/ecosystem-tools.js';
 import { registerStateTools } from './tools/state-tools.js';
 import { registerMemoryTools } from './tools/memory-tools.js';
+import { registerQualityTools } from './tools/quality-tools.js';
 import { registerResources } from './resources.js';
 
 const log = msg => console.error(`[mdan] ${msg}`);
@@ -38,6 +39,7 @@ export async function createMcpServer({ projectRoot, contentRoot }) {
   registerEcosystemTools(server, contentRoot);
   registerStateTools(server, discovery, projectRoot);
   registerMemoryTools(server, projectRoot);
+  registerQualityTools(server, projectRoot);
   registerResources(server, discovery, projectRoot);
   return server;
 }

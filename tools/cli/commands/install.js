@@ -18,6 +18,7 @@ export const LANGUAGES = {
   darija: 'darija',
 };
 const REQUIRED_MODULES = ['core', 'mdan'];
+const SCALE_VALUES = ['auto', 'solo', 'team', 'enterprise'];
 const AGENT_HEADERS = ['name', 'displayName', 'title', 'icon', 'capabilities', 'role', 'identity', 'communicationStyle', 'principles', 'module', 'path'];
 const WORKFLOW_HEADERS = ['name', 'description', 'module', 'path'];
 const TASK_HEADERS = ['name', 'displayName', 'description', 'module', 'path', 'standalone'];
@@ -30,6 +31,7 @@ Installs MDAN (agents, wizards, IDE commands) into a project (default: current d
   --ide <list>      ${Object.keys(IDE_TARGETS).join(',')} (default claude-code)
   --modules <list>  optional packs: ${optionalModules().join(',')} | all | none (default none)
   --user <name>     your name, used by the agents (default: OS user)
+  --scale <s>       auto | solo | team | enterprise (default auto): quality-gate strictness
   --mcp             add the MDAN MCP server to .mcp.json
   --force           overwrite files you modified (default: write <file>.mdan-new next to them)
   -y, --yes         non-interactive, accept defaults`;
@@ -57,6 +59,7 @@ function readExisting(target) {
     ides: section('ides'),
     lang,
     user: config.user_name,
+    scale: config.project_scale,
   };
 }
 
@@ -105,6 +108,7 @@ export function resolveOptions(values, existing) {
     ides: list(values.ide) ?? (existing?.ides.length ? existing.ides : ['claude-code']),
     modules: list(values.modules) ?? existing?.modules ?? [],
     user: values.user ?? existing?.user ?? userInfo().username,
+    scale: values.scale ?? existing?.scale ?? 'auto',
     mcp: Boolean(values.mcp),
     force: Boolean(values.force),
   };
@@ -115,6 +119,7 @@ export function resolveOptions(values, existing) {
 }
 
 function validate(opts) {
+  if (!SCALE_VALUES.includes(opts.scale)) throw new Error(`Unknown scale '${opts.scale}' (expected ${SCALE_VALUES.join(', ')})`);
   if (!LANGUAGES[opts.lang]) throw new Error(`Unknown language '${opts.lang}' (expected ${Object.keys(LANGUAGES).join(', ')})`);
   const badIde = opts.ides.filter(i => !IDE_TARGETS[i]);
   if (badIde.length) throw new Error(`Unknown IDE(s): ${badIde.join(', ')} (expected ${Object.keys(IDE_TARGETS).join(', ')})`);
@@ -160,7 +165,7 @@ function writeConfig(target, module, opts) {
   const src = join(PACKAGE_ROOT, '_mdan', module, 'config.yaml');
   const base = existsSync(full) ? readFileSync(full, 'utf-8') : existsSync(src) ? readFileSync(src, 'utf-8') : '';
   const values = { user_name: opts.user, communication_language: LANGUAGES[opts.lang] };
-  if (module === 'mdan') values.project_name = basename(target);
+  if (module === 'mdan') Object.assign(values, { project_name: basename(target), project_scale: opts.scale });
   mkdirSync(dirname(full), { recursive: true });
   writeFileSync(full, setYamlScalars(base, values));
 }
@@ -270,6 +275,7 @@ export default async function installCommand(argv, { update = false } = {}) {
       ide: { type: 'string' },
       modules: { type: 'string' },
       user: { type: 'string' },
+      scale: { type: 'string' },
       mcp: { type: 'boolean' },
       force: { type: 'boolean' },
       yes: { type: 'boolean', short: 'y' },

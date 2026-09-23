@@ -97,6 +97,9 @@ Sans installation dans le projet, le serveur sert le contenu embarqué dans le p
 | `mdan_graph_impact` | Dépendances amont et impact aval d'un artifact |
 | `mdan_graph_stale` | Artifacts modifiés depuis leur enregistrement et artifacts aval à revoir |
 | `mdan_graph_visualize` | Diagramme Mermaid du graphe |
+| `mdan_check` | Contrôle qualité des livrables (placeholders, sections vides, couverture FR/NFR entre PRD, architecture et epics, critères d'acceptation), sévérité selon la taille du projet |
+| `mdan_trace` | Matrice exigence → story → test, couverture et décision ; peut l'écrire dans le graphe |
+| `mdan_estimate_scope` | Quelle dose de process pour un changement : `oneshot` (quick-dev), `spec` (quick-spec) ou `full` (replanification), selon l'impact réel dans le graphe |
 | `mdan_ecosystem_search` / `mdan_ecosystem_read` | Recherche classée (nom, description) et lecture des skills, agents et commandes de `~/.claude` |
 | `mdan_ecosystem_catalog` / `mdan_ecosystem_stats` | Catalogue paginé / composants installés |
 
@@ -203,6 +206,9 @@ Toutes les commandes commencent par `/mdan-`.
 | `mdan install` / `mdan update` | Installe / met à jour MDAN dans un projet |
 | `mdan status` | Où en est le projet et quelle est la prochaine étape |
 | `mdan memory [agent]` | Affiche ou supprime les souvenirs d'un agent |
+| `mdan check [fichiers]` | Contrôle qualité des livrables (code de sortie 1 si FAIL, utilisable en CI) |
+| `mdan trace [--graph]` | Matrice de traçabilité exigence → story → test |
+| `mdan scope "<changement>"` | Recommande quick-dev, quick-spec ou une replanification complète |
 | `mdan serve [--http]` | Démarre le serveur MCP |
 | `mdan graph`, `mdan impact <id>`, `mdan stale` | Context Graph |
 | `mdan validate` | Vérifie que toutes les références de fichiers de `_mdan/` existent |

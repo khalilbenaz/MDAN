@@ -125,3 +125,6 @@ The polished PRD serves as the foundation for all subsequent product development
 
 **Congratulations on completing the Product Requirements Document for {{project_name}}!** 🎉
 
+## Quality gate (before marking the workflow complete)
+
+Run `mdan_check` (MCP) or `mdan check` (CLI) on the produced document. Fix every ❌ error; with a `team` scale resolve or justify ⚠️ warnings; with `enterprise` all warnings must be fixed. Then call `mdan_state_update { action: "complete", … }`.
