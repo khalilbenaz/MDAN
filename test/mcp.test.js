@@ -150,3 +150,14 @@ test('agent memory is injected when the agent is consulted', async () => {
   assert.equal(recalled.memories.length, 1);
   assert.equal((await call('mdan_memory_remember', { agent: '../x', content: 'y' })).error, true);
 });
+
+test('quality tools: check, trace and scope are exposed', async () => {
+  writeFileSync(join(project, 'docs/prd.md'), '# PRD\n\n## Functional Requirements\n- FR1: A user can log in\n\n## Non-Functional Requirements\n- NFR1: login p95 < 300 ms\n');
+  const check = JSON.parse((await call('mdan_check', { paths: ['docs/prd.md'], scale: 'team' })).text);
+  assert.equal(check.results[0].kind, 'prd');
+  const trace = JSON.parse((await call('mdan_trace', {})).text);
+  assert.equal(trace.rows[0].id, 'FR1');
+  const scope = JSON.parse((await call('mdan_estimate_scope', { description: 'rename a variable', files: ['a.js'] })).text);
+  assert.equal(scope.route, 'oneshot');
+  assert.equal((await call('mdan_check', { paths: ['../../etc/passwd'] })).error, true);
+});

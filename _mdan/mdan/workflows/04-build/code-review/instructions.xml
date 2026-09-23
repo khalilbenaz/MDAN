@@ -45,6 +45,12 @@
     <action>Load {project_context} for coding standards (if exists)</action>
   </step>
 
+  <step n="1b" goal="Impact-aware review (context graph)">
+    <action>If the MCP tools are available, call mdan_graph_impact for the story node (e.g. story-1.2) and every artifact the change touches; otherwise run `mdan impact &lt;id&gt;`</action>
+    <action>List downstream artifacts and tests that must be re-validated; call mdan_graph_stale (or `mdan stale`) and include stale items as review findings</action>
+    <action>If a traceability matrix exists (`mdan trace`), check that the story's acceptance criteria have tests; missing tests are HIGH severity findings</action>
+  </step>
+
   <step n="2" goal="Build review attack plan">
     <action>Extract ALL Acceptance Criteria from story</action>
     <action>Extract ALL Tasks/Subtasks with completion status ([x] vs [ ])</action>

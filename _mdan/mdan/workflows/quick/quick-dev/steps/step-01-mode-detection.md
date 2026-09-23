@@ -54,6 +54,11 @@ Analyze the user's input to determine mode:
 - Set `{tech_spec_path}` = provided path
 - **NEXT:** Read fully and follow: `{project-root}/_mdan/mdan/workflows/quick/quick-dev/steps/step-03-execute.md`
 
+**Scope check (both modes, before executing):** if the MCP tool `mdan_estimate_scope` is available, call it with the task description, the files you expect to touch and the context graph nodes it affects (or run `mdan scope "<description>" --files … --artifacts …`).
+- `oneshot` → continue here.
+- `spec` → recommend `/mdan-quick-spec` first; continue only if the user insists.
+- `full` → stop and recommend `/mdan-correct-course` (existing product) or `/mdan-create-prd` (new product): the change impacts planned artifacts listed in `downstream`.
+
 **Mode B: Direct Instructions**
 
 - User provided task description directly (e.g., `refactor src/foo.ts...`)

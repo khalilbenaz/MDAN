@@ -149,3 +149,6 @@ Epics and Stories complete. Read fully and follow: `{project-root}/_mdan/core/ta
 
 Upon Completion of task output: offer to answer any questions about the Epics and Stories.
 
+## Quality gate (before marking the workflow complete)
+
+Run `mdan_check` (MCP) or `mdan check` (CLI) on the produced document. Fix every ❌ error; with a `team` scale resolve or justify ⚠️ warnings; with `enterprise` all warnings must be fixed. Then call `mdan_state_update { action: "complete", … }`.
