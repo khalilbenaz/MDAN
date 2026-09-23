@@ -1,5 +1,10 @@
 # Changelog
 
+## [4.0.1] - 2026-09-23
+
+### Fixed
+- `npx mdan-method install` / `npx mdan-method serve` failed with "could not determine executable to run" (no bin named after the package). Added the `mdan-method` bin.
+
 ## [4.0.0] - 2026-09-23
 
 ### Breaking
