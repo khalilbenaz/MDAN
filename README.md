@@ -6,9 +6,9 @@
 [![CI](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml/badge.svg)](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- generated:badges -->
-[![Wizards](https://img.shields.io/badge/wizards-26-purple)](#commandes-disponibles)
-[![Agents](https://img.shields.io/badge/agents-28-blue)](#les-agents)
-[![Packs](https://img.shields.io/badge/packs-5-orange)](#les-agents)
+[![Wizards](https://img.shields.io/badge/wizards-31-purple)](#commandes-disponibles)
+[![Agents](https://img.shields.io/badge/agents-31-blue)](#les-agents)
+[![Packs](https://img.shields.io/badge/packs-6-orange)](#les-agents)
 <!-- /generated:badges -->
 [![MCP](https://img.shields.io/badge/MCP-server-black)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
 
@@ -275,6 +275,14 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 | `/mdan-agent-fintech-financial-analyst` | 📊 Sanae | **Financial Analyst** — Financial Analysis and Modeling Expert |
 | `/mdan-agent-fintech-risk-manager` | 🛡️ Karim | **Risk Manager** — Financial Risk Management Expert |
 
+### payments-ma
+
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-payments-ma-bam-compliance` | ⚖️ Houda | **BAM Compliance Officer** — Officier de Conformité Bank Al-Maghrib (BAM) pour établissements de paiement |
+| `/mdan-agent-payments-ma-payments-architect` | 💳 Anas | **Payments Systems Architect** — Architecte Systèmes de Paiement (switch, wallet, core banking) |
+| `/mdan-agent-payments-ma-recon-lead` | 🧾 Samira | **Reconciliation & Settlement Lead** — Responsable Rapprochement (EOD) & Règlement |
+
 ### qa
 
 | Commande | Agent | Rôle |
@@ -334,7 +342,7 @@ MIT
 
 <p align="center">
 <!-- generated:footer -->
-  <strong>26 wizards · 28 agents · 5 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
+  <strong>31 wizards · 31 agents · 6 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
 <!-- /generated:footer -->
   Conçu au Maroc par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
