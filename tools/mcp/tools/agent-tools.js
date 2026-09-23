@@ -3,11 +3,12 @@ import { existsSync } from 'node:fs';
 import { z } from 'zod';
 import { safeJoin } from '../../lib/paths.js';
 import { safe, text, nameSchema } from '../util.js';
+import { memoryBriefing } from '../../lib/memory.js';
 
-async function renderAgent(projectRoot, agent, question) {
-  const agentPath = safeJoin(projectRoot, agent.path);
+async function renderAgent(contentRoot, agent, question, projectRoot = contentRoot) {
+  const agentPath = safeJoin(contentRoot, agent.path);
   const agentContent = existsSync(agentPath) ? await readFile(agentPath, 'utf-8') : '';
-  const customPath = safeJoin(projectRoot, '_mdan/_config/agents', `${agent.module}-${agent.name}.customize.yaml`);
+  const customPath = safeJoin(contentRoot, '_mdan/_config/agents', `${agent.module}-${agent.name}.customize.yaml`);
   const customContent = existsSync(customPath) ? await readFile(customPath, 'utf-8') : '';
 
   return [
@@ -18,7 +19,11 @@ async function renderAgent(projectRoot, agent, question) {
     `**Principles:** ${agent.principles}`,
     '',
     `**Question:** ${question || '(ask the user)'}`,
-    `**Project root:** \`${projectRoot}\``,
+    `**Project root:** \`${contentRoot}\``,
+    '',
+    memoryBriefing(projectRoot, agent.name),
+    '',
+    `Store anything worth remembering for next time with mdan_memory_remember { agent: "${agent.name}" }.`,
     '',
     '---',
     '',
@@ -29,7 +34,7 @@ async function renderAgent(projectRoot, agent, question) {
   ].join('\n');
 }
 
-export function registerAgentTools(server, discovery, projectRoot) {
+export function registerAgentTools(server, discovery, contentRoot, projectRoot = contentRoot) {
   const byName = new Map(discovery.agents.map(a => [a.name, a]));
 
   server.registerTool('mdan_list_agents', {
@@ -48,7 +53,7 @@ export function registerAgentTools(server, discovery, projectRoot) {
   }, safe(async ({ name, question }) => {
     const agent = byName.get(name);
     if (!agent) throw new Error(`Unknown agent '${name}'. Available: ${[...byName.keys()].join(', ')}`);
-    return text(await renderAgent(projectRoot, agent, question));
+    return text(await renderAgent(contentRoot, agent, question, projectRoot));
   }));
 
   for (const agent of discovery.agents) {
@@ -57,7 +62,7 @@ export function registerAgentTools(server, discovery, projectRoot) {
       description: agent.role || agent.title,
       argsSchema: { question: z.string().optional().describe('Question or topic for this agent') },
     }, async ({ question }) => ({
-      messages: [{ role: 'user', content: { type: 'text', text: await renderAgent(projectRoot, agent, question) } }],
+      messages: [{ role: 'user', content: { type: 'text', text: await renderAgent(contentRoot, agent, question, projectRoot) } }],
     }));
   }
 }

@@ -4,6 +4,8 @@ import { VERSION } from '../lib/paths.js';
 const commands = {
   install: { load: () => import('./commands/install.js'), summary: 'Install MDAN into a project (interactive)' },
   update: { load: () => import('./commands/install.js'), summary: 'Update an existing install, keeping your changes', options: { update: true } },
+  status: { load: () => import('./commands/status.js'), summary: 'Where the project is and what to do next' },
+  memory: { load: () => import('./commands/memory.js'), summary: 'Show or edit agent memories' },
   serve: { load: () => import('./commands/serve.js'), summary: 'Start the MCP server (stdio, or --http)' },
   graph: { load: () => import('./commands/graph.js'), summary: 'Output the context graph (Mermaid, --json, --html <file>)' },
   impact: { load: () => import('./commands/impact.js'), summary: 'Upstream/downstream impact of an artifact' },

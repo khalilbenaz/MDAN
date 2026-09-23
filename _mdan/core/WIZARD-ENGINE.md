@@ -61,13 +61,20 @@ Chaque wizard enregistre automatiquement ses artifacts dans le Context Graph :
 - `mdan graph` génère un diagramme Mermaid du graphe
 - Les Decision Records des débats sont aussi des noeuds du graphe
 
-### 4c. Agent Memory Sidecars (MDAN v3)
-Les agents maintiennent une mémoire persistante entre les sessions Party Mode :
-- Stockée dans `_mdan/state/sidecars/{agent-name}.sidecar.json`
-- Chargée au démarrage de Party Mode
-- Accumulée pendant la session (observations, préférences, décisions)
-- Persistée à la sortie gracieuse
-- Memory decay: confidence diminue après 5 sessions sans renforcement
+### 4c. Agent Memory Sidecars
+Les agents maintiennent une mémoire persistante entre les sessions :
+- Stockée dans `_mdan/state/sidecars/{agent-name}.sidecar.json` (max 50 souvenirs, les moins sûrs sont élagués)
+- Injectée automatiquement quand un agent est chargé (`mdan_consult_agent`, `mdan_party_mode`)
+- Écriture : `mdan_memory_remember` (un souvenir identique est renforcé, pas dupliqué)
+- Fin de session : `mdan_memory_end_session` (compteur de sessions, relations, decision history)
+- Memory decay : la confiance baisse après 5 sessions sans renforcement ; sous 0.3 le souvenir est oublié
+- CLI : `mdan memory [agent]`
+
+### 4d. Progression et reprise
+- Début de wizard : `mdan_state_update { action: "start" }` ; à chaque step : `action: "step"` ; fin : `action: "complete"` avec les artifacts
+- `mdan_run_workflow` indique le point de reprise si le wizard a été interrompu
+- `mdan status` / `mdan_status` : phase courante, artifacts, décisions, prochaine étape recommandée
+- Sans outils MCP : mettre à jour `_mdan/state/MDAN-STATE.json` directement
 
 ### 5. Quality Gates Adaptatifs (MDAN exclusif)
 À la fin de chaque wizard, un quality gate vérifie :
@@ -83,10 +90,9 @@ Le gate s'adapte au scale : strict en Enterprise, souple en Solo.
 - 🚫 **JAMAIS** sauter d'étapes ou optimiser la séquence
 - 💾 **TOUJOURS** mettre à jour le frontmatter avant de passer au step suivant
 - ⏸️ **TOUJOURS** s'arrêter aux menus et attendre l'input utilisateur
-- 🧠 **TOUJOURS** sauvegarder dans MDAN-STATE à la fin du wizard
+- 🧠 **TOUJOURS** enregistrer la progression (`mdan_state_update`) et, en fin de wizard, les artifacts produits
 - 📋 **JAMAIS** créer de todo lists mentales à partir des steps futurs
-- 🗣️ **TOUJOURS** parler en MIX FRANÇAIS-DARIJA MAROCAINE. Utiliser le français pour les termes techniques mais mélanger la darija naturellement dans les explications et conversations. Exemple: "Daba ghadi nchofo had le service..." / "Khassna ndiro attention l..." / "Hadi hiya l'architecture li bghina..."
-- 📝 **TOUJOURS** rédiger les documents en français, mais les interactions avec l'utilisateur en franco-darija
+- 🗣️ **TOUJOURS** appliquer `{project-root}/_mdan/core/rules.md` (langue des échanges selon `communication_language`, langue des documents selon `document_output_language`)
 
 ## Format standard d'un step file
 
