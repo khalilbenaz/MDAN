@@ -6,9 +6,9 @@
 [![CI](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml/badge.svg)](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- generated:badges -->
-[![Wizards](https://img.shields.io/badge/wizards-19-purple)](#commandes-disponibles)
-[![Agents](https://img.shields.io/badge/agents-27-blue)](#les-agents)
-[![Packs](https://img.shields.io/badge/packs-4-orange)](#les-agents)
+[![Wizards](https://img.shields.io/badge/wizards-26-purple)](#commandes-disponibles)
+[![Agents](https://img.shields.io/badge/agents-28-blue)](#les-agents)
+[![Packs](https://img.shields.io/badge/packs-5-orange)](#les-agents)
 <!-- /generated:badges -->
 [![MCP](https://img.shields.io/badge/MCP-server-black)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
 
@@ -274,6 +274,12 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 | `/mdan-agent-fintech-compliance-officer` | ⚖️ Rachid | **Compliance Officer** — Regulatory Compliance and Risk Assessment Expert |
 | `/mdan-agent-fintech-financial-analyst` | 📊 Sanae | **Financial Analyst** — Financial Analysis and Modeling Expert |
 | `/mdan-agent-fintech-risk-manager` | 🛡️ Karim | **Risk Manager** — Financial Risk Management Expert |
+
+### qa
+
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-qa-test-architect` | 🧪 Fatima | **Test Architect** — Test Architecture & Quality Gate Expert |
 <!-- /generated:agents -->
 
 Le mode Party utilise en plus l'équipe de personas définie dans `_mdan/mdan/teams/default-party.csv`.
@@ -328,7 +334,7 @@ MIT
 
 <p align="center">
 <!-- generated:footer -->
-  <strong>19 wizards · 27 agents · 4 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
+  <strong>26 wizards · 28 agents · 5 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
 <!-- /generated:footer -->
   Conçu au Maroc par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
