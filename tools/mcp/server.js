@@ -15,6 +15,7 @@ import { registerEcosystemTools } from './tools/ecosystem-tools.js';
 import { registerStateTools } from './tools/state-tools.js';
 import { registerMemoryTools } from './tools/memory-tools.js';
 import { registerQualityTools } from './tools/quality-tools.js';
+import { registerExportTools } from './tools/export-tools.js';
 import { registerResources } from './resources.js';
 
 const log = msg => console.error(`[mdan] ${msg}`);
@@ -41,6 +42,7 @@ export async function createMcpServer({ projectRoot, contentRoot }) {
   registerStateTools(server, discovery, projectRoot);
   registerMemoryTools(server, projectRoot);
   registerQualityTools(server, projectRoot);
+  registerExportTools(server, projectRoot);
   registerResources(server, discovery, projectRoot, contentRoot);
   return server;
 }

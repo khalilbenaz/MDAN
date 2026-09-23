@@ -105,6 +105,7 @@ Sans installation dans le projet, le serveur sert le contenu embarqué dans le p
 | `mdan_estimate_scope` | Quelle dose de process pour un changement : `oneshot` (quick-dev), `spec` (quick-spec) ou `full` (replanification), selon l'impact réel dans le graphe |
 | `mdan_ecosystem_search` / `mdan_ecosystem_read` | Recherche classée (nom, description) et lecture des skills, agents et commandes de `~/.claude` |
 | `mdan_ecosystem_catalog` / `mdan_ecosystem_stats` | Catalogue paginé / composants installés |
+| `mdan_export_backlog` | Exporte le backlog vers CSV, GitHub Issues, Azure DevOps ou Jira (simulation par défaut) |
 
 **Prompts** : chaque workflow (`create-prd`, `create-architecture`, …) et chaque agent (`agent-<nom>`) est aussi exposé comme prompt MCP, ce qui permet au client de les proposer comme slash commands.
 
@@ -212,6 +213,8 @@ Toutes les commandes commencent par `/mdan-`.
 | `mdan check [fichiers]` | Contrôle qualité des livrables (code de sortie 1 si FAIL, utilisable en CI) |
 | `mdan trace [--graph]` | Matrice de traçabilité exigence → story → test |
 | `mdan scope "<changement>"` | Recommande quick-dev, quick-spec ou une replanification complète |
+| `mdan export --to csv\|github\|ado\|jira` | Exporte epics et stories (simulation par défaut, `--apply` pour envoyer ; relancer met à jour sans dupliquer) |
+| `mdan bundle [agent…] [--all]` | Web bundles pour ChatGPT (GPT), Gemini (Gem) ou Claude (Project) : instructions + fichier de connaissances |
 | `mdan serve [--http]` | Démarre le serveur MCP |
 | `mdan graph [--since <id>]`, `mdan impact <id>`, `mdan stale` | Context Graph (`--since DR-001` surligne une décision et tout ce qu'elle impacte) |
 | `mdan validate` | Vérifie que toutes les références de fichiers de `_mdan/` existent |
@@ -306,6 +309,7 @@ git clone https://github.com/khalilbenaz/MDAN.git && cd MDAN
 npm ci
 npm run build      # régénère _mdan/_config/*.csv, .claude/commands et les sections générées du README
 npm run check      # lint + build à jour + références valides + tests
+ANTHROPIC_API_KEY=... npm run eval   # banc d'évaluation : un LLM déroule les wizards, le livrable passe mdan check
 ```
 
 Pour ajouter un agent ou un workflow, crée le fichier source dans `_mdan/<module>/agents/` ou `_mdan/<module>/workflows/` (frontmatter `name` + `description`), puis lance `npm run build`. Il n'y a rien d'autre à maintenir à la main. La CI vérifie que les fichiers générés sont à jour.

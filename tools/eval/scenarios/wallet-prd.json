@@ -1,0 +1,8 @@
+{
+  "workflow": "create-prd",
+  "kind": "prd",
+  "scale": "team",
+  "topic": "Wallet mobile marocain pour transferts P2P et paiement marchand",
+  "persona": "You are the founder of a Moroccan payment institution licensed by Bank Al-Maghrib. You want a mobile wallet: account opening with KYC levels (level 1 phone only, level 2 ID card, level 3 in agency), P2P transfers, cash-in/cash-out at agents, merchant QR payments. Constraints: ceilings per KYC level, transfers must complete in under 2 seconds p95, 99.9% availability, data stays in Morocco (CNDP). Target: 500k users in year 1. Out of scope: credit, international transfers.",
+  "expect": { "requirements": ["FR1", "FR2", "FR3", "NFR1"] }
+}
