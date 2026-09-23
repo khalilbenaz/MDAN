@@ -1,6 +1,6 @@
 {
   "name": "mdan-method",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "MDAN — AI-driven development methodology: agents, step-by-step wizards, multi-agent debate and a context graph, as IDE commands and an MCP server",
   "type": "module",
   "license": "MIT",
@@ -41,6 +41,7 @@
     "tools/**",
     "LICENSE",
     "README.md",
+    "README.en.md",
     "CHANGELOG.md",
     "!tools/eval/**"
   ],

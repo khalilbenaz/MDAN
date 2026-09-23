@@ -1,5 +1,7 @@
 # MDAN — Multi-Agent Development Agentic Network
 
+🇫🇷 Français · 🇬🇧 [English](README.en.md)
+
 ![MDAN](https://i.imgur.com/YwfB0Gx.jpeg)
 
 [![npm](https://img.shields.io/npm/v/mdan-method.svg)](https://www.npmjs.com/package/mdan-method)
@@ -355,6 +357,15 @@ tools/
 
 ---
 
+## Documentation
+
+- [Carte de la documentation](docs/index.md)
+- [Tutoriel : ton premier projet](docs/tutorials/first-project.md)
+- [Référence : CLI](docs/reference/cli.md) · [Serveur MCP](docs/reference/mcp.md) · [Modules](docs/reference/modules.md) · [Config](docs/reference/config.md)
+- [Explication : concepts](docs/explanation/concepts.md) · [MDAN vs BMAD-METHOD](docs/explanation/mdan-vs-bmad.md)
+
+---
+
 ## Contribuer
 
 ```bash
@@ -365,7 +376,7 @@ npm run check      # lint + build à jour + références valides + tests
 ANTHROPIC_API_KEY=... npm run eval   # banc d'évaluation : un LLM déroule les wizards, le livrable passe mdan check
 ```
 
-Pour ajouter un agent ou un workflow, crée le fichier source dans `_mdan/<module>/agents/` ou `_mdan/<module>/workflows/` (frontmatter `name` + `description`), puis lance `npm run build`. Il n'y a rien d'autre à maintenir à la main. La CI vérifie que les fichiers générés sont à jour.
+Pour ajouter un agent ou un workflow, crée le fichier source dans `_mdan/<module>/agents/` ou `_mdan/<module>/workflows/` (frontmatter `name` + `description`), puis lance `npm run build`. Il n'y a rien d'autre à maintenir à la main. La CI vérifie que les fichiers générés sont à jour. Voir [Écrire un module](docs/how-to/write-a-module.md).
 
 ---
 
