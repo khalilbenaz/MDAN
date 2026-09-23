@@ -6,7 +6,9 @@ Starts the MDAN MCP server. Default transport is stdio.
   --http        Streamable HTTP transport on /mcp (health check on /health)
   --sse         Deprecated alias of --http
   --port <n>    HTTP port (default 3100, or $PORT)
-  --host <h>    HTTP bind address (default 127.0.0.1, or $HOST)`;
+  --host <h>    HTTP bind address (default 127.0.0.1, or $HOST)
+  --token <t>   Require "Authorization: Bearer <t>" (or $MDAN_HTTP_TOKEN); mandatory off loopback
+  --insecure    Allow a non-loopback bind without a token`;
 
 export default async function serve(argv) {
   const { values } = parseArgs({
@@ -16,6 +18,8 @@ export default async function serve(argv) {
       sse: { type: 'boolean' },
       port: { type: 'string' },
       host: { type: 'string' },
+      token: { type: 'string' },
+      insecure: { type: 'boolean' },
       help: { type: 'boolean', short: 'h' },
     },
   });
@@ -37,5 +41,7 @@ export default async function serve(argv) {
     transport: values.http || values.sse ? 'http' : 'stdio',
     port,
     host: values.host ?? process.env.HOST ?? '127.0.0.1',
+    token: values.token ?? process.env.MDAN_HTTP_TOKEN,
+    insecure: Boolean(values.insecure),
   });
 }

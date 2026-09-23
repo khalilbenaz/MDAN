@@ -3,6 +3,7 @@ import { existsSync, readFileSync, mkdirSync, writeFileSync, readdirSync, rmSync
 import { join, resolve, relative, sep, dirname, basename } from 'node:path';
 import { createInterface } from 'node:readline/promises';
 import { userInfo } from 'node:os';
+import { spawnSync } from 'node:child_process';
 import { PACKAGE_ROOT, VERSION } from '../../lib/paths.js';
 import { readSources, modulesOf } from '../../lib/sources.js';
 import { buildCommands, IDE_TARGETS } from '../../lib/commands.js';
@@ -24,7 +25,8 @@ const WORKFLOW_HEADERS = ['name', 'description', 'module', 'path'];
 const TASK_HEADERS = ['name', 'displayName', 'description', 'module', 'path', 'standalone'];
 
 export const help = `Usage: mdan install [dir] [options]
-       mdan update [dir]          Re-install with the options of the existing install
+       mdan update [dir] [--channel latest|next|<version>]
+                                  Re-install with the options of the existing install (optionally from another release channel)
 
 Installs MDAN (agents, wizards, IDE commands) into a project (default: current directory).
   --lang <l>        ${Object.keys(LANGUAGES).join(' | ')} (default fr-darija)
@@ -279,10 +281,21 @@ export default async function installCommand(argv, { update = false } = {}) {
       mcp: { type: 'boolean' },
       force: { type: 'boolean' },
       yes: { type: 'boolean', short: 'y' },
+      channel: { type: 'string' },
       help: { type: 'boolean', short: 'h' },
     },
   });
   if (values.help) return console.log(help);
+
+  // Delegate to another published version of the installer (npm dist-tag or exact version).
+  if (values.channel) {
+    if (!/^(latest|next|beta|\d+\.\d+\.\d+(-[\w.]+)?)$/.test(values.channel)) throw new Error(`Invalid channel '${values.channel}'`);
+    const rest = argv.filter((a, i) => a !== '--channel' && argv[i - 1] !== '--channel' && !a.startsWith('--channel='));
+    const r = spawnSync('npx', ['-y', `mdan-method@${values.channel}`, update ? 'update' : 'install', ...rest],
+      { stdio: 'inherit', shell: process.platform === 'win32' });
+    if (r.status) process.exitCode = r.status;
+    return;
+  }
 
   const target = resolve(positionals[0] || process.cwd());
   const existing = readExisting(target);
