@@ -1,6 +1,8 @@
 # Changelog
 
-## [Unreleased]
+## [4.1.0] - 2026-09-23
+
+MDAN vs MDAN-METHOD v6: see `docs/explanation/mdan-vs-mdan.md`.
 
 ### Added
 - Project state for real: `mdan_state_update` (start / step / complete), `mdan_status` and `mdan status` with the recommended next step; interrupted wizards are offered a resume point by `mdan_run_workflow`; completed artifacts are registered in the context graph; decision records are recorded in the state.
@@ -25,6 +27,9 @@
 - `mdan export --to csv|github|ado|jira` / `mdan_export_backlog`: epics and stories to CSV, GitHub Issues (with "Part of #N"), Azure DevOps (Epic / User Story with parent links) or Jira (ADF, parent keys); dry run by default, idempotent re-runs update instead of duplicating.
 - Web bundles: `mdan bundle [agent…] [--all]` builds `<agent>.instructions.md` (fits the ~8k GPT limit) + `<agent>.knowledge.md` (persona, rules and every workflow the agent's menu references) for ChatGPT GPTs, Gemini Gems and Claude Projects.
 - Wizard evaluation harness `npm run eval` (tools/eval): an LLM runs a wizard end to end against a scripted user persona, the document goes through `mdan check` and expected-content assertions; three scenarios included.
+
+- Documentation: English README (`README.en.md`, generated sections included), docs reorganised by purpose (tutorial, how-to guides, CLI/MCP/modules/config reference, concepts) and an honest MDAN vs MDAN comparison.
+- Dependencies: MCP SDK 1.30, zod 4, ESLint 10 (rethrown errors keep their `cause`), actions/checkout and setup-node v7.
 
 ### Fixed
 - MDAN leftovers: party team and help tables referenced agents and `mdan` files that do not exist; duplicate persona names across modules renamed; hardcoded French-Darija mandates removed from ecosystem agents.
