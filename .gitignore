@@ -9,3 +9,4 @@ _mdan/state/MDAN-STATE.json
 _mdan/state/sidecars/
 .claude/session-state.md
 .claude/settings.local.json
+.claude/worktrees/
