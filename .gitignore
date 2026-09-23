@@ -1,6 +1,11 @@
 node_modules/
 .DS_Store
 *.log
+*.tmp
+*.lock/
+*.mdan-new
 mdan_output/
 _mdan/state/MDAN-STATE.json
 _mdan/state/sidecars/
+.claude/session-state.md
+.claude/settings.local.json

@@ -1,71 +1,62 @@
-import { ContextGraph } from '../../cli/lib/context-graph.js';
-import { join } from 'node:path';
+import { z } from 'zod';
+import { ContextGraph, graphPathFor, RELATIONS, NODE_TYPES } from '../../cli/lib/context-graph.js';
+import { safeJoin } from '../../lib/paths.js';
+import { safe, text } from '../util.js';
 
 export function registerGraphTools(server, projectRoot) {
-  const graphPath = join(projectRoot, '_mdan/state/context-graph.json');
+  const graphPath = graphPathFor(projectRoot);
 
-  server.tool(
-    'mdan_graph_add-node',
-    'Add an artifact node to the MDAN context graph',
-    {
-      id: { type: 'string', description: 'Unique node ID (e.g., prd-001)' },
-      type: { type: 'string', description: 'Node type: artifact, decision, or debate' },
-      path: { type: 'string', description: 'Path to the artifact file' },
-      workflow: { type: 'string', description: 'Workflow that created this artifact' },
-      agent: { type: 'string', description: 'Agent that created this artifact' },
+  server.registerTool('mdan_graph_add_node', {
+    description: 'Add or update an artifact node in the MDAN context graph (records the file hash for staleness checks)',
+    inputSchema: {
+      id: z.string().describe('Unique node ID (e.g., prd-001)'),
+      type: z.enum(NODE_TYPES).default('artifact').describe('Node type'),
+      path: z.string().optional().describe('Artifact path relative to the project root'),
+      workflow: z.string().optional().describe('Workflow that created this artifact'),
+      agent: z.string().optional().describe('Agent that created this artifact'),
     },
-    async ({ id, type, path, workflow, agent }) => {
-      const graph = ContextGraph.load(graphPath);
-      graph.addNode({ id, type: type || 'artifact', path, created_by: { workflow, agent } });
-      graph.save(graphPath);
-      return { content: [{ type: 'text', text: `Node '${id}' added to context graph.` }] };
-    }
-  );
+  }, safe(async ({ id, type, path, workflow, agent }) => {
+    if (path) safeJoin(projectRoot, path);
+    const node = ContextGraph.update(graphPath, g =>
+      g.addNode({ id, type, path: path || '', created_by: { workflow, agent } }, projectRoot));
+    return text(`Node '${node.id}' saved${node.hash ? ' (hash recorded)' : ''}.`);
+  }));
 
-  server.tool(
-    'mdan_graph_add-edge',
-    'Add a relationship edge between two nodes in the context graph',
-    {
-      source: { type: 'string', description: 'Source node ID' },
-      target: { type: 'string', description: 'Target node ID' },
-      relation: { type: 'string', description: 'Relation type: input_to, derived_from, impacts, references' },
+  server.registerTool('mdan_graph_add_edge', {
+    description: 'Add a relationship between two nodes of the context graph (cycles are rejected)',
+    inputSchema: {
+      source: z.string().describe('Source node ID'),
+      target: z.string().describe('Target node ID'),
+      relation: z.enum(RELATIONS).default('input_to').describe('Relation type'),
     },
-    async ({ source, target, relation }) => {
-      const graph = ContextGraph.load(graphPath);
-      graph.addEdge({ source, target, relation });
-      graph.save(graphPath);
-      return { content: [{ type: 'text', text: `Edge ${source} --${relation}--> ${target} added.` }] };
-    }
-  );
+  }, safe(async ({ source, target, relation }) => {
+    ContextGraph.update(graphPath, g => g.addEdge({ source, target, relation }));
+    return text(`Edge ${source} --${relation}--> ${target} added.`);
+  }));
 
-  server.tool(
-    'mdan_graph_impact',
-    'Analyze downstream impact of an artifact in the context graph',
-    {
-      nodeId: { type: 'string', description: 'Node ID to analyze impact for' },
-    },
-    async ({ nodeId }) => {
-      const graph = ContextGraph.load(graphPath);
-      const downstream = graph.getDownstream(nodeId);
-      return {
-        content: [{
-          type: 'text',
-          text: `# Impact Analysis: ${nodeId}\n\n` +
-            `**Downstream artifacts (${downstream.length}):**\n` +
-            downstream.map(n => `- ${n.id} (${n.type}) → ${n.path || 'N/A'}`).join('\n') +
-            (downstream.length === 0 ? '(no downstream dependencies)' : ''),
-        }],
-      };
-    }
-  );
+  server.registerTool('mdan_graph_impact', {
+    description: 'Upstream dependencies and downstream impact of an artifact in the context graph',
+    inputSchema: { nodeId: z.string().describe('Node ID to analyze') },
+    annotations: { readOnlyHint: true },
+  }, safe(async ({ nodeId }) => {
+    const graph = ContextGraph.load(graphPath);
+    if (!graph.getNode(nodeId)) throw new Error(`Node '${nodeId}' not found. Known: ${Object.keys(graph.nodes).join(', ') || '(empty graph)'}`);
+    const fmt = list => list.length ? list.map(n => `- ${n.id} (${n.type}) → ${n.path || 'N/A'}`).join('\n') : '(none)';
+    return text(`# Impact Analysis: ${nodeId}\n\n## Upstream\n${fmt(graph.getUpstream(nodeId))}\n\n## Downstream\n${fmt(graph.getDownstream(nodeId))}`);
+  }));
 
-  server.tool(
-    'mdan_graph_visualize',
-    'Generate a Mermaid diagram of the context graph',
-    {},
-    async () => {
-      const graph = ContextGraph.load(graphPath);
-      return { content: [{ type: 'text', text: graph.toMermaid() }] };
-    }
-  );
+  server.registerTool('mdan_graph_stale', {
+    description: 'List artifacts modified since registration and the downstream artifacts that must be reviewed',
+    annotations: { readOnlyHint: true },
+  }, safe(async () => {
+    const { changed, stale } = ContextGraph.load(graphPath).getStale(projectRoot);
+    if (!changed.length) return text('No artifact changed since registration.');
+    return text(`## Changed\n${changed.map(n => `- ${n.id} → ${n.path}`).join('\n')}\n\n## To review\n` +
+      (stale.map(s => `- ${s.node.id} (because ${s.because} changed)`).join('\n') || '(none)'));
+  }));
+
+  server.registerTool('mdan_graph_visualize', {
+    description: 'Mermaid diagram of the context graph',
+    annotations: { readOnlyHint: true },
+  }, safe(async () => text(ContextGraph.load(graphPath).toMermaid())));
 }
