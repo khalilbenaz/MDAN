@@ -6,6 +6,8 @@ import { ContextGraph, graphPathFor } from '../../cli/lib/context-graph.js';
 import { assertId, safeJoin } from '../../lib/paths.js';
 import { writeFileAtomic, withLock } from '../../lib/fs-atomic.js';
 import { safe, text } from '../util.js';
+import { updateState, recordDecision } from '../../lib/state.js';
+import { memoryBriefing } from '../../lib/memory.js';
 
 const PARTY = '_mdan/mdan/workflows/special/party-mode';
 const MODE_STEPS = { debate: 'steps/step-02a-debate-mode.md', consensus: 'steps/step-02b-consensus-mode.md' };
@@ -44,6 +46,8 @@ export function registerOrchestrationTools(server, discovery, projectRoot, conte
       `**Agents:** ${agents?.length ? agents.join(', ') : 'all installed'}`,
       '', '---', '', wizard,
       modeStep ? `\n---\n\n## Mode-Specific Protocol\n\n${modeStep}` : '',
+      ...(agents || []).map(a => [a, memoryBriefing(projectRoot, a)]).filter(([, b]) => b).map(([a, b]) => `\n### ${a}\n${b}`),
+      '\n---\n\nOn exit: store new memories with `mdan_memory_remember`, then call `mdan_memory_end_session` for every participant.',
       mode === 'debate' || mode === 'consensus'
         ? '\n---\n\nAt the end, call `mdan_create_decision_record` with the outcome (and `impacts` = artifact node ids affected).'
         : '',
@@ -87,6 +91,8 @@ export function registerOrchestrationTools(server, discovery, projectRoot, conte
         else missing.push(target);
       }
     });
+
+    updateState(projectRoot, state => recordDecision(state, { id: record.id, topic, decision }));
 
     return text(`Decision record ${record.id} saved to ${relPath} and registered in the context graph.` +
       (missing.length ? `\nWarning: unknown impacted node(s) skipped: ${missing.join(', ')}` : ''));
