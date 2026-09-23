@@ -362,7 +362,7 @@ tools/
 - [Carte de la documentation](docs/index.md)
 - [Tutoriel : ton premier projet](docs/tutorials/first-project.md)
 - [Référence : CLI](docs/reference/cli.md) · [Serveur MCP](docs/reference/mcp.md) · [Modules](docs/reference/modules.md) · [Config](docs/reference/config.md)
-- [Explication : concepts](docs/explanation/concepts.md) · [MDAN vs MDAN-METHOD](docs/explanation/mdan-vs-mdan.md)
+- [Explication : concepts](docs/explanation/concepts.md)
 
 ---
 

@@ -26,7 +26,6 @@ Docs are organized by what you're trying to do ([Diátaxis](https://diataxis.fr/
 ## Explanation — understanding the design
 
 - [Concepts](explanation/concepts.md) — wizards, agents, context graph, state/resume, memory sidecars, scale-adaptive routing, quality gates, decision records.
-- [MDAN vs MDAN-METHOD](explanation/mdan-vs-mdan.md) — an honest comparison with MDAN-METHOD v6.12.
 
 ---
 
