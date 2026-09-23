@@ -1,4 +1,4 @@
-# MCP server image (used by Glama and for remote hosting).
+# MCP server image for self-hosting (Glama builds from the spec in glama.json).
 FROM node:22-alpine
 WORKDIR /app
 COPY package.json package-lock.json ./
