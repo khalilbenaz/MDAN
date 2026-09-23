@@ -11,6 +11,8 @@ import { registerAgentTools } from './tools/agent-tools.js';
 import { registerGraphTools } from './tools/graph-tools.js';
 import { registerOrchestrationTools } from './tools/orchestration-tools.js';
 import { registerEcosystemTools } from './tools/ecosystem-tools.js';
+import { registerStateTools } from './tools/state-tools.js';
+import { registerMemoryTools } from './tools/memory-tools.js';
 import { registerResources } from './resources.js';
 
 const log = msg => console.error(`[mdan] ${msg}`);
@@ -26,14 +28,16 @@ export async function createMcpServer({ projectRoot, contentRoot }) {
   const discovery = await discoverMdan(contentRoot);
   const server = new McpServer(
     { name: 'mdan', version: VERSION },
-    { instructions: 'MDAN: AI-driven development methodology. Use mdan_list_workflows / mdan_run_workflow to run a wizard, mdan_consult_agent for an expert persona, mdan_party_mode for multi-agent debate, and the mdan_graph_* tools to track artifacts.' },
+    { instructions: 'MDAN: AI-driven development methodology. Start with mdan_status (where the project is, what to do next). Use mdan_run_workflow to run or resume a wizard and mdan_state_update to record progress, mdan_consult_agent for an expert persona (with its memories), mdan_party_mode for multi-agent debate, mdan_memory_* for agent memory and mdan_graph_* to track artifacts.' },
   );
 
-  registerWorkflowTools(server, discovery, contentRoot);
-  registerAgentTools(server, discovery, contentRoot);
+  registerWorkflowTools(server, discovery, contentRoot, projectRoot);
+  registerAgentTools(server, discovery, contentRoot, projectRoot);
   registerGraphTools(server, projectRoot);
   registerOrchestrationTools(server, discovery, projectRoot, contentRoot);
   registerEcosystemTools(server, contentRoot);
+  registerStateTools(server, discovery, projectRoot);
+  registerMemoryTools(server, projectRoot);
   registerResources(server, discovery, projectRoot);
   return server;
 }
