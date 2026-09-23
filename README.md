@@ -12,7 +12,7 @@
 [![Agents](https://img.shields.io/badge/agents-31-blue)](#les-agents)
 [![Packs](https://img.shields.io/badge/packs-6-orange)](#les-agents)
 <!-- /generated:badges -->
-[![MCP](https://img.shields.io/badge/MCP-server-black)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
+[![Glama MCP server](https://glama.ai/mcp/servers/khalilbenaz/MDAN/badges/score.svg)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
 
 **MDAN** est un framework de développement piloté par l'IA : des agents spécialisés, des wizards interactifs pas-à-pas, une mémoire de projet persistante, un protocole de débat structuré et un graphe de contexte qui trace chaque artifact. Il s'utilise via des slash commands dans ton IDE **ou** comme serveur MCP.
 
@@ -64,6 +64,10 @@ Chaque fichier installé est tracé par son hash (`_mdan/_config/files-manifest.
 
 ## Serveur MCP
 
+<a href="https://glama.ai/mcp/servers/khalilbenaz/MDAN"><img width="380" height="200" src="https://glama.ai/mcp/servers/khalilbenaz/MDAN/badges/card.svg" alt="MDAN MCP server on Glama" /></a>
+
+Référencé sur [Glama](https://glama.ai/mcp/servers/khalilbenaz/MDAN) : fiche, note de qualité et test des outils dans le navigateur.
+
 Tout client [MCP](https://modelcontextprotocol.io/) (Claude Code, Claude Desktop, Cursor, …) peut utiliser MDAN directement.
 
 ```json
@@ -86,6 +90,12 @@ docker build -t mdan-mcp . && docker run -i --rm -v "$PWD:/workspace" mdan-mcp
 ```
 
 Sans installation dans le projet, le serveur sert le contenu embarqué dans le package. Le graphe et les decision records sont quand même écrits dans le projet.
+
+### Essayer MDAN sans installation
+
+Depuis la [fiche Glama](https://glama.ai/mcp/servers/khalilbenaz/MDAN), tu peux appeler les outils de MDAN dans le navigateur ou te connecter à l'instance hébergée : parfait pour découvrir les wizards, les agents et le mode Party.
+
+> L'instance hébergée n'a pas accès à ton projet. L'état et la reprise, la mémoire des agents, le graphe de contexte, `mdan check` / `mdan trace` et l'export lisent et écrivent les fichiers du projet : pour ce suivi, installe MDAN en local (`npx mdan-method install`) ou lance `npx mdan-method serve` dans ton projet.
 
 **Outils**
 
