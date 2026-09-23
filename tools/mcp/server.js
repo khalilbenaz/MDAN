@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { createServer as createHttpServer } from 'node:http';
+import { timingSafeEqual, createHash } from 'node:crypto';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import { StreamableHTTPServerTransport } from '@modelcontextprotocol/sdk/server/streamableHttp.js';
@@ -40,11 +41,24 @@ export async function createMcpServer({ projectRoot, contentRoot }) {
   registerStateTools(server, discovery, projectRoot);
   registerMemoryTools(server, projectRoot);
   registerQualityTools(server, projectRoot);
-  registerResources(server, discovery, projectRoot);
+  registerResources(server, discovery, projectRoot, contentRoot);
   return server;
 }
 
-async function startHttp(roots, { port, host }) {
+const LOOPBACK = new Set(['127.0.0.1', '::1', 'localhost']);
+
+// Constant-time comparison of the bearer token (hashed so lengths never leak).
+function tokenMatches(header, token) {
+  const given = /^Bearer\s+(.+)$/i.exec(header || '')?.[1] ?? '';
+  const a = createHash('sha256').update(given).digest();
+  const b = createHash('sha256').update(token).digest();
+  return timingSafeEqual(a, b);
+}
+
+async function startHttp(roots, { port, host, token, insecure }) {
+  if (!LOOPBACK.has(host) && !token && !insecure) {
+    throw new Error(`Refusing to expose the MCP server on ${host} without authentication: set --token (or MDAN_HTTP_TOKEN), or pass --insecure.`);
+  }
   const http = createHttpServer(async (req, res) => {
     const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
     if (url.pathname === '/health') {
@@ -53,6 +67,10 @@ async function startHttp(roots, { port, host }) {
     }
     if (url.pathname !== '/mcp') {
       res.writeHead(404).end('Not found. MCP endpoint: /mcp');
+      return;
+    }
+    if (token && !tokenMatches(req.headers.authorization, token)) {
+      res.writeHead(401, { 'www-authenticate': 'Bearer' }).end(JSON.stringify({ jsonrpc: '2.0', error: { code: -32001, message: 'Unauthorized' }, id: null }));
       return;
     }
     if (req.method !== 'POST') {
@@ -72,15 +90,15 @@ async function startHttp(roots, { port, host }) {
     }
   });
   await new Promise((resolve, reject) => http.once('error', reject).listen(port, host, resolve));
-  log(`MCP server on http://${host}:${http.address().port}/mcp`);
+  log(`MCP server on http://${host}:${http.address().port}/mcp${token ? ' (bearer token required)' : ''}`);
   return http;
 }
 
-export async function startServer({ transport = 'stdio', port = 3100, host = '127.0.0.1', projectRoot } = {}) {
+export async function startServer({ transport = 'stdio', port = 3100, host = '127.0.0.1', projectRoot, token = process.env.MDAN_HTTP_TOKEN, insecure = false } = {}) {
   const roots = await resolveRoots(projectRoot);
   if (!roots.installed) log(`No MDAN install in ${roots.projectRoot} — serving bundled content (run \`mdan install\` to customize).`);
 
-  if (transport === 'http') return startHttp(roots, { port, host });
+  if (transport === 'http') return startHttp(roots, { port, host, token, insecure });
 
   const server = await createMcpServer(roots);
   await server.connect(new StdioServerTransport());
