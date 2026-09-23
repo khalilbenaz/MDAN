@@ -41,7 +41,8 @@
     "tools/**",
     "LICENSE",
     "README.md",
-    "CHANGELOG.md"
+    "CHANGELOG.md",
+    "!tools/eval/**"
   ],
   "scripts": {
     "build": "node tools/build/build.js",
@@ -51,7 +52,8 @@
     "test": "node --test",
     "check": "npm run lint && npm run build:check && npm run validate && npm test",
     "serve": "node tools/cli/index.js serve",
-    "prepublishOnly": "npm run check"
+    "prepublishOnly": "npm run check",
+    "eval": "node tools/eval/run.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.29.0",
