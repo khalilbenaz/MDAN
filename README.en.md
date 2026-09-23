@@ -364,7 +364,7 @@ tools/
 - [Documentation map](docs/index.md)
 - [Tutorial: your first project](docs/tutorials/first-project.md)
 - [Reference: CLI](docs/reference/cli.md) · [MCP server](docs/reference/mcp.md) · [Modules](docs/reference/modules.md) · [Config](docs/reference/config.md)
-- [Explanation: concepts](docs/explanation/concepts.md) · [MDAN vs BMAD-METHOD](docs/explanation/mdan-vs-bmad.md)
+- [Explanation: concepts](docs/explanation/concepts.md)
 
 ---
 

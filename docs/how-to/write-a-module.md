@@ -67,7 +67,7 @@ Standalone tasks (`/mdan-shard-doc`, `/mdan-help`, …) live in `_mdan/<module>/
 npm run build       # regenerate manifests, .claude/commands/, README generated sections
 npm run validate     # every {project-root}/... reference in _mdan resolves to a real file
 npm run lint
-npm test             # unique names, party team validity, no BMAD leftovers, generated files up to date
+npm test             # unique names, party team validity, generated files up to date
 ```
 
 or all at once: `npm run check` (what CI runs). If you only want to know whether generated output is stale without writing it, `npm run build:check`.

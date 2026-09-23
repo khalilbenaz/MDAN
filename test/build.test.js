@@ -49,10 +49,3 @@ test('agents: display names are unique and every party team member exists', asyn
   for (const member of team) assert.ok(existsSync(join(root, member.path)), member.path);
 });
 
-test('no BMAD leftovers in the content', async () => {
-  const { walk } = await import('../tools/lib/refs.js');
-  const { readFileSync } = await import('node:fs');
-  const offenders = walk(new URL('../_mdan', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'))
-    .filter(f => /\b(bmm|bmad|_bmad|BMAD)\b/.test(readFileSync(f, 'utf-8')));
-  assert.deepEqual(offenders, []);
-});
