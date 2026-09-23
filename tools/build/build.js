@@ -19,7 +19,10 @@ const TASK_HEADERS = ['name', 'displayName', 'description', 'module', 'path', 's
 // Not shipped as package content: generated at install time or at runtime.
 const UNHASHED = [/^_mdan\/_config\/files-manifest\.csv$/, /^_mdan\/_config\/manifest\.yaml$/, /^_mdan\/state\/(?!.*\.template\.json$)/];
 
-export const sha256 = data => createHash('sha256').update(data).digest('hex');
+// Line endings are normalized so a CRLF checkout (Windows autocrlf) hashes like the LF original.
+export const sha256 = data => createHash('sha256')
+  .update(Buffer.isBuffer(data) && data.includes(0) ? data : String(data).replace(/\r\n/g, '\n'))
+  .digest('hex');
 
 const MODULE_LABELS = {
   core: 'Cœur',
