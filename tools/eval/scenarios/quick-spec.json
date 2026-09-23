@@ -1,0 +1,8 @@
+{
+  "workflow": "quick-spec",
+  "kind": "tech-spec",
+  "scale": "team",
+  "topic": "Ajouter l'export CSV des transactions dans le back-office",
+  "persona": "You are a tech lead. The back-office is a .NET 8 API + React app. Admins need to export filtered transactions (date range, status, agent) to CSV, up to 200k rows, streamed, with an audit log entry per export. Must not block the API: use a background job and a download link valid 24h.",
+  "expect": {}
+}

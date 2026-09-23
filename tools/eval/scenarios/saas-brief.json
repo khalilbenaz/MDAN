@@ -1,0 +1,8 @@
+{
+  "workflow": "create-product-brief",
+  "kind": "brief",
+  "scale": "solo",
+  "topic": "Outil SaaS de prise de rendez-vous pour cabinets médicaux",
+  "persona": "You are a solo developer building a SaaS for Moroccan medical practices: online booking, SMS reminders (to reduce no-shows by 30%), a simple agenda for the secretary. Users: patients, secretaries, doctors. MVP in 3 months, pricing 199 MAD/month per practice. Success: 50 paying practices in 6 months. Risk: doctors reluctant to change habits.",
+  "expect": {}
+}
