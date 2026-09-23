@@ -61,7 +61,7 @@ For each selected agent:
 
 **Example Farewells:**
 
-- **Architect/Winston**: "It's been a pleasure architecting solutions with you today! Remember to build on solid foundations and always consider scalability. Until next time! 🏗️"
+- **Architect/Reda**: "Kan farhan njarrb l-architecture m3akom lyoum! 3endkom des fondations solides, dima khodo b3in l3itibar la scalabilité. Nchoufokom nchoufokom! 🏗️"
 - **Innovator/Creative Agent**: "What an inspiring creative journey! Don't let those innovative ideas fade - nurture them and watch them grow. Keep thinking outside the box! 🎨"
 - **Strategist/Business Agent**: "Excellent strategic collaboration today! The insights we've developed will serve you well. Keep analyzing, keep optimizing, and keep winning! 📈"
 

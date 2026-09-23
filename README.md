@@ -6,8 +6,8 @@
 [![CI](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml/badge.svg)](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- generated:badges -->
-[![Wizards](https://img.shields.io/badge/wizards-17-purple)](#commandes-disponibles)
-[![Agents](https://img.shields.io/badge/agents-19-blue)](#les-agents)
+[![Wizards](https://img.shields.io/badge/wizards-19-purple)](#commandes-disponibles)
+[![Agents](https://img.shields.io/badge/agents-27-blue)](#les-agents)
 [![Packs](https://img.shields.io/badge/packs-4-orange)](#les-agents)
 <!-- /generated:badges -->
 [![MCP](https://img.shields.io/badge/MCP-server-black)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
@@ -227,7 +227,15 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
+| `/mdan-agent-analyst` | 📊 Amina | **Business Analyst** — Business Analyst + Requirements Discovery Lead |
+| `/mdan-agent-architect` | 🏗️ Reda | **System Architect** — System Architect + Technical Design Leader |
+| `/mdan-agent-dev` | 💻 Haytame | **Senior Developer** — Senior Implementation Engineer + TDD Practitioner |
 | `/mdan-agent-mdan-master` | 🧙 MDAN Master | **Orchestrateur Principal, Gardien du Contexte, Directeur des Wizards** — Master Orchestrator + MDAN Expert + Context Guardian |
+| `/mdan-agent-pm` | 📋 Khadija | **Product Manager** — Product Manager + Scope Guardian |
+| `/mdan-agent-scrum-master` | 🏃 Nadia | **Scrum Master** — Technical Scrum Master + Delivery Guardian |
+| `/mdan-agent-security` | 🛡️ Yassir | **Security Engineer** — Application Security Engineer + Threat Modeling Lead |
+| `/mdan-agent-tech-writer` | 📚 Youssef | **Technical Writer** — Technical Documentation Specialist + Knowledge Curator |
+| `/mdan-agent-ux-designer` | 🎨 Jihane | **UX Designer** — User Experience Designer + Interaction Specialist |
 
 ### Pack Database Optimization
 
@@ -241,7 +249,7 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
-| `/mdan-agent-devops-azure-azure-specialist` | ☁️ Reda | **Azure Specialist** — Azure Cloud Architecture Expert |
+| `/mdan-agent-devops-azure-azure-specialist` | ☁️ Hamza | **Azure Specialist** — Azure Cloud Architecture Expert |
 | `/mdan-agent-devops-azure-cicd-architect` | 🔄 Yassine | **CI/CD Architect** — CI/CD Pipeline Architecture Expert |
 | `/mdan-agent-devops-azure-devops-engineer` | ⚙️ Omar | **DevOps Engineer** — DevOps Engineering and Operations Expert |
 
@@ -251,20 +259,20 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 |----------|-------|------|
 | `/mdan-agent-ecosystem-ia-master` | 🧠 Fayçal | **IA Master** — IA Master — Chief AI Strategist, owns all AI/ML architecture, orchestrates 130+ AI skills and 48 AI agents. Reports to Khalil (MDAN Master) for project-level decisions. |
 | `/mdan-agent-ecosystem-data-scientist` | 📊 Saad | **Data Scientist** — Data Scientist — orchestrates data analysis, visualization, and ML skills |
-| `/mdan-agent-ecosystem-devops-commander` | 🚀 Youssef | **DevOps Commander** — DevOps Commander — orchestrates 30+ DevOps skills, 39 infra agents, 11 deployment commands |
+| `/mdan-agent-ecosystem-devops-commander` | 🚀 Anas | **DevOps Commander** — DevOps Commander — orchestrates 30+ DevOps skills, 39 infra agents, 11 deployment commands |
 | `/mdan-agent-ecosystem-fullstack-architect` | 🏗️ Amine | **Fullstack Architect** — Fullstack Architecture Expert — routes to 200+ development skills and 100+ dev agents |
 | `/mdan-agent-ecosystem-marketing-strategist` | 📈 Imane | **Marketing Strategist** — Marketing Strategist — orchestrates 25+ marketing skills and publishing commands |
 | `/mdan-agent-ecosystem-product-lead` | 💡 Adnane | **Product Lead** — Product Lead — orchestrates product, project management, and team skills |
 | `/mdan-agent-ecosystem-research-team-lead` | 🔬 Leila | **Deep Research Team Lead** — Deep Research Orchestrator — coordinates research teams using ecosystem agents and scientific skills |
 | `/mdan-agent-ecosystem-security-specialist` | 🛡️ Samir | **Security Specialist** — Security Expert — orchestrates 40+ security skills and 21 security agents |
-| `/mdan-agent-ecosystem-skill-dispatcher` | 🎯 Nadia | **Ecosystem Skill Dispatcher** — Ecosystem Orchestrator — Routes requests to the right specialist from 1,053 skills, 418 agents, 340 commands |
+| `/mdan-agent-ecosystem-skill-dispatcher` | 🎯 Zineb | **Ecosystem Skill Dispatcher** — Ecosystem Orchestrator — Routes requests to the right specialist from 1,053 skills, 418 agents, 340 commands |
 
 ### Pack FinTech
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
 | `/mdan-agent-fintech-compliance-officer` | ⚖️ Rachid | **Compliance Officer** — Regulatory Compliance and Risk Assessment Expert |
-| `/mdan-agent-fintech-financial-analyst` | 📊 Amina | **Financial Analyst** — Financial Analysis and Modeling Expert |
+| `/mdan-agent-fintech-financial-analyst` | 📊 Sanae | **Financial Analyst** — Financial Analysis and Modeling Expert |
 | `/mdan-agent-fintech-risk-manager` | 🛡️ Karim | **Risk Manager** — Financial Risk Management Expert |
 <!-- /generated:agents -->
 
@@ -320,7 +328,7 @@ MIT
 
 <p align="center">
 <!-- generated:footer -->
-  <strong>17 wizards · 19 agents · 4 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
+  <strong>19 wizards · 27 agents · 4 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
 <!-- /generated:footer -->
   Conçu au Maroc par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
