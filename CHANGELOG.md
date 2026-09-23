@@ -1,5 +1,10 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+- `mdan` launched without a command by a program (non-interactive stdin: MCP clients, `mcp-proxy`, Docker) now starts the MCP server instead of printing the usage and exiting — registries that infer `node tools/cli/index.js` can introspect the server.
+
 ## [4.1.1] - 2026-09-23
 
 ### Removed

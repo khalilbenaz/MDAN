@@ -161,3 +161,11 @@ test('quality tools: check, trace and scope are exposed', async () => {
   assert.equal(scope.route, 'oneshot');
   assert.equal((await call('mdan_check', { paths: ['../../etc/passwd'] })).error, true);
 });
+
+test('`mdan` without a command, launched by a program, serves MCP (Glama / mcp-proxy)', async () => {
+  const cli = fileURLToPath(new URL('../tools/cli/index.js', import.meta.url));
+  const c = new Client({ name: 'test', version: '1' });
+  await c.connect(new StdioClientTransport({ command: process.execPath, args: [cli], env: { ...process.env, MDAN_PROJECT_ROOT: project }, stderr: 'ignore' }));
+  assert.ok((await c.listTools()).tools.some(t => t.name === 'mdan_run_workflow'));
+  await c.close();
+});

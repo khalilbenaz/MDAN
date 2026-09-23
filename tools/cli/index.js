@@ -29,6 +29,10 @@ const [command, ...rest] = process.argv.slice(2);
 
 if (command === '--version' || command === '-v') {
   console.log(VERSION);
+} else if (!command && !process.stdin.isTTY) {
+  // Launched without a command by a program (MCP client, mcp-proxy, Docker): act as the MCP server.
+  const mod = await commands.serve.load();
+  await mod.default([]);
 } else if (!command || command === '--help' || command === '-h' || command === 'help') {
   usage();
 } else if (!commands[command]) {
