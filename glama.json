@@ -1,4 +1,9 @@
 {
   "$schema": "https://glama.ai/mcp/schemas/server.json",
-  "maintainers": ["khalilbenaz"]
+  "maintainers": ["khalilbenaz"],
+  "baseImage": "debian:trixie-slim",
+  "nodeVersion": "22",
+  "buildSteps": ["npm ci --omit=dev --ignore-scripts"],
+  "cmdArguments": ["mcp-proxy", "--", "node", "tools/mcp/bin.js"],
+  "placeholderArguments": {}
 }
