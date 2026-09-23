@@ -12,7 +12,7 @@
 [![Agents](https://img.shields.io/badge/agents-31-blue)](#the-agents)
 [![Packs](https://img.shields.io/badge/packs-6-orange)](#the-agents)
 <!-- /generated:badges -->
-[![MCP](https://img.shields.io/badge/MCP-server-black)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
+[![Glama MCP server](https://glama.ai/mcp/servers/khalilbenaz/MDAN/badges/score.svg)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
 
 **MDAN** is an AI-driven development framework: specialized agents, interactive step-by-step wizards, persistent project memory, a structured debate protocol and a context graph that traces every artifact. Use it through slash commands in your IDE **or** as an MCP server.
 
@@ -64,6 +64,10 @@ Every installed file is tracked by its hash (`_mdan/_config/files-manifest.csv`)
 
 ## MCP Server
 
+<a href="https://glama.ai/mcp/servers/khalilbenaz/MDAN"><img width="380" height="200" src="https://glama.ai/mcp/servers/khalilbenaz/MDAN/badges/card.svg" alt="MDAN MCP server on Glama" /></a>
+
+Listed on [Glama](https://glama.ai/mcp/servers/khalilbenaz/MDAN): listing, quality score and in-browser tool testing.
+
 Any [MCP](https://modelcontextprotocol.io/) client (Claude Code, Claude Desktop, Cursor, …) can use MDAN directly.
 
 ```json
@@ -86,6 +90,12 @@ docker build -t mdan-mcp . && docker run -i --rm -v "$PWD:/workspace" mdan-mcp
 ```
 
 Without an install in the project, the server serves the content bundled in the package. The graph and decision records are still written into the project.
+
+### Try MDAN without installing
+
+From the [Glama listing](https://glama.ai/mcp/servers/khalilbenaz/MDAN) you can call MDAN's tools in the browser or connect to the hosted instance — ideal to discover the wizards, the agents and party mode.
+
+> The hosted instance has no access to your project. State and resume, agent memory, the context graph, `mdan check` / `mdan trace` and the export read and write project files: for that tracking, install MDAN locally (`npx mdan-method install`) or run `npx mdan-method serve` in your project.
 
 **Tools**
 
