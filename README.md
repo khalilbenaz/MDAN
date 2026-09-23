@@ -43,7 +43,8 @@ npx mdan-method install --yes --lang fr --ide claude-code,cursor --modules finte
 |--------|---------|
 | `--lang` | `fr-darija` (défaut) · `fr` · `en` · `darija` |
 | `--ide` | `claude-code` (défaut) · `cursor` · `opencode` · `gemini` · `qwen` (plusieurs séparés par des virgules) |
-| `--modules` | `fintech` · `devops-azure` · `db-optimization` · `ecosystem` · `all` · `none` |
+| `--modules` | `qa` · `payments-ma` · `fintech` · `devops-azure` · `db-optimization` · `ecosystem` · `all` · `none` |
+| `--scale` | `auto` (défaut) · `solo` · `team` · `enterprise` : sévérité des contrôles qualité |
 | `--user` | Ton nom, utilisé par les agents |
 | `--mcp` | Ajoute le serveur MCP MDAN à `.mcp.json` |
 | `--force` | Écrase les fichiers que tu as modifiés |
@@ -170,7 +171,9 @@ Toutes les commandes commencent par `/mdan-`.
 |----------|-------------|
 | `/mdan-sprint-planning` | Sprint plan depuis les epics, avec estimation. |
 | `/mdan-dev-story` | Implémente une story depuis sa spec : TDD, tests, documentation. |
-| `/mdan-code-review` | Review de code adversariale : bugs, sécurité, violations de patterns. |
+| `/mdan-code-review` | Review de code adversariale : bugs, sécurité, violations de patterns, et revalidation de ce qui dépend du changement (graphe). |
+| `/mdan-correct-course` | Changement important en cours de sprint : analyse d'impact (graphe), options, mise à jour PRD/architecture/epics, Sprint Change Proposal. |
+| `/mdan-retrospective` | Rétrospective d'epic ou de sprint : constats, causes, actions ; les leçons deviennent des souvenirs des agents. |
 
 ### Wizards — Phase 5 : Livraison
 
@@ -192,6 +195,34 @@ Toutes les commandes commencent par `/mdan-`.
 | `/mdan-party-mode` | Multi-agents en 3 modes : discussion, débat, consensus. |
 | `/mdan-debate` | Débat structuré (Partisan 🟢 vs Opposant 🔴 + Arbitre ⚖️), 3 rounds, arbitrage, puis decision record. |
 | `/mdan-brainstorming` | Brainstorming avec plus de 12 techniques (SCAMPER, Six Thinking Hats, Mind Mapping…). |
+
+### Pack Test Architect — `--modules qa`
+
+Tous les livrables de test sont reliés au graphe : « quels tests relancer si cette story change ? » a une réponse.
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-qa-test-design` | Stratégie de test par le risque : priorités P0-P3 (probabilité × impact), niveaux de test par story/epic. |
+| `/mdan-qa-atdd` | Tests d'acceptation en échec (Given/When/Then) générés depuis les critères, avant l'implémentation. |
+| `/mdan-qa-traceability` | Matrice exigence → story → test, trous de couverture, décision PASS/CONCERNS/FAIL. |
+| `/mdan-qa-nfr-assessment` | Performance, sécurité, fiabilité, maintenabilité : seuils et preuves. |
+| `/mdan-qa-test-review` | Qualité des tests existants (flakiness, isolation, assertions) avec grille notée. |
+| `/mdan-qa-ci-gates` | Pipeline de test et quality gates en CI (exemples GitHub Actions et Azure DevOps). |
+| `/mdan-qa-release-gate` | Go/no-go : agrège tout, bloque si des artifacts aval d'une spec modifiée n'ont pas été revérifiés. |
+
+### Pack Paiements Maroc — `--modules payments-ma`
+
+Wallets, établissements de paiement, banques : exigences BAM, ISO 8583/20022, rapprochement. Les plafonds réglementaires sont indiqués comme « à vérifier dans la circulaire BAM en vigueur ».
+
+| Commande | Description |
+|----------|-------------|
+| `/mdan-pay-kyc-limits` | Niveaux KYC du wallet, plafonds (solde, flux mensuels, par opération), montée/descente de niveau, points de contrôle. |
+| `/mdan-pay-txn-flow` | Flux de mouvement d'argent : états, écritures en partie double, idempotence, timeouts, extournes, frais, outbox. |
+| `/mdan-pay-iso8583` | Spécification d'interface ISO 8583 : MTI, mapping des DE, codes réponse, reversals/advices, vecteurs de test. |
+| `/mdan-pay-recon` | Rapprochement de fin de journée : sources, règles de matching, catégories d'écarts, résolution automatique. |
+| `/mdan-pay-compliance-review` | Revue d'une fonctionnalité face à BAM / LCB-FT / CNDP / PCI DSS, avec rapport d'écarts. |
+
+Fiches de référence incluses : structure RIB/IBAN MA avec calcul de clé (`_mdan/payments-ma/data/rib-iban.md`) et aide-mémoire ISO 8583.
 
 ### Tâches
 
@@ -259,7 +290,7 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 |----------|-------|------|
 | `/mdan-agent-ecosystem-ia-master` | 🧠 Fayçal | **IA Master** — IA Master — Chief AI Strategist, owns all AI/ML architecture, orchestrates 130+ AI skills and 48 AI agents. Reports to Khalil (MDAN Master) for project-level decisions. |
 | `/mdan-agent-ecosystem-data-scientist` | 📊 Saad | **Data Scientist** — Data Scientist — orchestrates data analysis, visualization, and ML skills |
-| `/mdan-agent-ecosystem-devops-commander` | 🚀 Anas | **DevOps Commander** — DevOps Commander — orchestrates 30+ DevOps skills, 39 infra agents, 11 deployment commands |
+| `/mdan-agent-ecosystem-devops-commander` | 🚀 Ilyas | **DevOps Commander** — DevOps Commander — orchestrates 30+ DevOps skills, 39 infra agents, 11 deployment commands |
 | `/mdan-agent-ecosystem-fullstack-architect` | 🏗️ Amine | **Fullstack Architect** — Fullstack Architecture Expert — routes to 200+ development skills and 100+ dev agents |
 | `/mdan-agent-ecosystem-marketing-strategist` | 📈 Imane | **Marketing Strategist** — Marketing Strategist — orchestrates 25+ marketing skills and publishing commands |
 | `/mdan-agent-ecosystem-product-lead` | 💡 Adnane | **Product Lead** — Product Lead — orchestrates product, project management, and team skills |
@@ -275,7 +306,7 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 | `/mdan-agent-fintech-financial-analyst` | 📊 Sanae | **Financial Analyst** — Financial Analysis and Modeling Expert |
 | `/mdan-agent-fintech-risk-manager` | 🛡️ Karim | **Risk Manager** — Financial Risk Management Expert |
 
-### payments-ma
+### Pack Paiements Maroc
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
@@ -283,14 +314,14 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 | `/mdan-agent-payments-ma-payments-architect` | 💳 Anas | **Payments Systems Architect** — Architecte Systèmes de Paiement (switch, wallet, core banking) |
 | `/mdan-agent-payments-ma-recon-lead` | 🧾 Samira | **Reconciliation & Settlement Lead** — Responsable Rapprochement (EOD) & Règlement |
 
-### qa
+### Pack Test Architect (QA)
 
 | Commande | Agent | Rôle |
 |----------|-------|------|
 | `/mdan-agent-qa-test-architect` | 🧪 Fatima | **Test Architect** — Test Architecture & Quality Gate Expert |
 <!-- /generated:agents -->
 
-Le mode Party utilise en plus l'équipe de personas définie dans `_mdan/mdan/teams/default-party.csv`.
+L'équipe du mode Party (`_mdan/mdan/teams/default-party.csv`) référence uniquement des agents réels ; la CI le vérifie, ainsi que l'unicité des noms.
 
 ---
 

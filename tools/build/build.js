@@ -31,6 +31,8 @@ const MODULE_LABELS = {
   'devops-azure': 'Pack DevOps & Azure',
   'db-optimization': 'Pack Database Optimization',
   ecosystem: 'Pack Ecosystem',
+  qa: 'Pack Test Architect (QA)',
+  'payments-ma': 'Pack Paiements Maroc',
 };
 
 const cell = s => String(s || '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
