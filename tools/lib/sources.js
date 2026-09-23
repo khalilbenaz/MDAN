@@ -11,7 +11,7 @@ function listDir(dir) {
 }
 
 export function modulesOf(root) {
-  return listDir(join(root, '_mdan')).filter(d => !d.startsWith('_') && d !== 'state'
+  return listDir(join(root, '_mdan')).filter(d => !d.startsWith('_') && d !== 'state' && d !== 'custom'
     && statSync(join(root, '_mdan', d)).isDirectory());
 }
 

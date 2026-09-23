@@ -9,5 +9,5 @@ COPY LICENSE README.md ./
 ENV NODE_ENV=production MDAN_PROJECT_ROOT=/workspace
 RUN mkdir -p /workspace && chown node:node /workspace
 USER node
-# stdio by default; `docker run -p 3100:3100 image --http --host 0.0.0.0` for Streamable HTTP.
+# stdio by default; `docker run -p 3100:3100 -e MDAN_HTTP_TOKEN=... image --http --host 0.0.0.0` for Streamable HTTP.
 ENTRYPOINT ["node", "tools/mcp/bin.js"]
