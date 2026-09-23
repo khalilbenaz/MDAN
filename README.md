@@ -6,9 +6,9 @@
 [![CI](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml/badge.svg)](https://github.com/khalilbenaz/MDAN/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 <!-- generated:badges -->
-[![Wizards](https://img.shields.io/badge/wizards-17-purple)](#commandes-disponibles)
-[![Agents](https://img.shields.io/badge/agents-19-blue)](#les-agents)
-[![Packs](https://img.shields.io/badge/packs-4-orange)](#les-agents)
+[![Wizards](https://img.shields.io/badge/wizards-22-purple)](#commandes-disponibles)
+[![Agents](https://img.shields.io/badge/agents-22-blue)](#les-agents)
+[![Packs](https://img.shields.io/badge/packs-5-orange)](#les-agents)
 <!-- /generated:badges -->
 [![MCP](https://img.shields.io/badge/MCP-server-black)](https://glama.ai/mcp/servers/khalilbenaz/MDAN)
 
@@ -252,6 +252,14 @@ Les agents sont des personas IA spécialisés, invocables directement. Cette tab
 | `/mdan-agent-fintech-compliance-officer` | ⚖️ Rachid | **Compliance Officer** — Regulatory Compliance and Risk Assessment Expert |
 | `/mdan-agent-fintech-financial-analyst` | 📊 Amina | **Financial Analyst** — Financial Analysis and Modeling Expert |
 | `/mdan-agent-fintech-risk-manager` | 🛡️ Karim | **Risk Manager** — Financial Risk Management Expert |
+
+### payments-ma
+
+| Commande | Agent | Rôle |
+|----------|-------|------|
+| `/mdan-agent-payments-ma-bam-compliance` | ⚖️ Houda | **BAM Compliance Officer** — Officier de Conformité Bank Al-Maghrib (BAM) pour établissements de paiement |
+| `/mdan-agent-payments-ma-payments-architect` | 💳 Anas | **Payments Systems Architect** — Architecte Systèmes de Paiement (switch, wallet, core banking) |
+| `/mdan-agent-payments-ma-recon-lead` | 🧾 Samira | **Reconciliation & Settlement Lead** — Responsable Rapprochement (EOD) & Règlement |
 <!-- /generated:agents -->
 
 Le mode Party utilise en plus l'équipe de personas définie dans `_mdan/mdan/teams/default-party.csv`.
@@ -306,7 +314,7 @@ MIT
 
 <p align="center">
 <!-- generated:footer -->
-  <strong>17 wizards · 19 agents · 4 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
+  <strong>22 wizards · 22 agents · 5 packs · Serveur MCP · Context Graph · Débat/Consensus</strong><br>
 <!-- /generated:footer -->
   Conçu au Maroc par <a href="https://github.com/khalilbenaz">@khalilbenaz</a>
 </p>
